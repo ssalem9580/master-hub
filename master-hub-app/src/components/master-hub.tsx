@@ -5,6 +5,7 @@ import {
   AlertTriangle,
   Calculator,
   CheckCircle2,
+  ChevronDown,
   ChevronRight,
   CircleDollarSign,
   Command,
@@ -108,6 +109,7 @@ export function MasterHub() {
   const [ready, setReady] = useState(false);
   const [menu, setMenu] = useState(false);
   const [capture, setCapture] = useState(false);
+  const [setupFolderOpen, setSetupFolderOpen] = useState(true);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState<"Dashboard" | "Hub Directory" | "Action Center">("Dashboard");
   const [toast, setToast] = useState("");
@@ -150,7 +152,8 @@ export function MasterHub() {
   const openTasks = state.tasks.filter(t => !t.complete);
   const importantTasks = openTasks.filter(t => t.important);
   const liveCount = hubs.filter(h => h.status === "Live").length;
-  const setupCount = hubs.filter(h => h.status === "Setup needed").length;
+  const setupHubs = hubs.filter(h => h.status === "Setup needed");
+  const setupCount = setupHubs.length;
   const hubGroups = statusOrder
     .map(status => ({ status, items: filteredHubs.filter(h => h.status === status) }))
     .filter(group => group.items.length > 0);
@@ -175,6 +178,14 @@ export function MasterHub() {
     setActive(view);
     setMenu(false);
   };
+  const openSetupHub = (hub: HubItem) => {
+    if (hub.url) {
+      window.open(hub.url, "_blank", "noopener");
+      return;
+    }
+    setQuery(hub.name);
+    go("Hub Directory");
+  };
 
   return <div className="app-shell">
     <button className={`scrim ${menu ? "visible" : ""}`} aria-label="Close navigation" onClick={() => setMenu(false)} />
@@ -191,10 +202,23 @@ export function MasterHub() {
           <button className={`nav-item ${active === "Hub Directory" ? "active" : ""}`} onClick={() => go("Hub Directory")}><span className="nav-icon"><FolderKanban size={16} /></span><strong>Hub Directory</strong></button>
           <button className={`nav-item ${active === "Action Center" ? "active" : ""}`} onClick={() => go("Action Center")}><span className="nav-icon"><Target size={16} /></span><strong>Action Center</strong>{openTasks.length > 0 && <em>{openTasks.length}</em>}</button>
         </div>
+
         <div className="nav-group">
-          <p>Status</p>
-          <button className="nav-item" onClick={() => { setQuery("Setup needed"); go("Hub Directory"); }}><span className="nav-icon"><AlertTriangle size={16} /></span><strong>Setup needed</strong>{setupCount > 0 && <em>{setupCount}</em>}</button>
-          <button className="nav-item" onClick={() => { setQuery("Live"); go("Hub Directory"); }}><span className="nav-icon"><CheckCircle2 size={16} /></span><strong>Live</strong><em>{liveCount}</em></button>
+          <p>Life Areas</p>
+          <button className="nav-item" onClick={() => setSetupFolderOpen(open => !open)} aria-expanded={setupFolderOpen}>
+            <span className="nav-icon"><FolderKanban size={16} /></span>
+            <strong>Setup needed</strong>
+            {setupCount > 0 && <em>{setupCount}</em>}
+            <ChevronDown size={14} style={{ marginLeft: 4, transform: setupFolderOpen ? "rotate(0deg)" : "rotate(-90deg)", transition: "transform .15s ease" }} />
+          </button>
+          {setupFolderOpen && <div style={{ display: "grid", gap: 3, padding: "3px 0 3px 18px" }}>
+            {setupHubs.map(hub => <button key={hub.name} className="nav-item" onClick={() => openSetupHub(hub)} style={{ minHeight: 34 }}>
+              <span className="nav-icon">{hub.icon}</span>
+              <strong style={{ fontSize: 11 }}>{hub.name}</strong>
+              <AlertTriangle size={12} />
+            </button>)}
+            {setupHubs.length === 0 && <div style={{ padding: "8px 10px", color: "#6d7687", fontSize: 11 }}>Nothing needs setup</div>}
+          </div>}
         </div>
       </nav>
       <div className="sidebar-footer">
@@ -226,7 +250,7 @@ export function MasterHub() {
             <div className="panel">
               <div className="panel-heading"><div><span className="overline">NEEDS ATTENTION</span><h2>Setup needed</h2></div><button className="text-button" onClick={() => { setQuery("Setup needed"); go("Hub Directory"); }}>View all <ChevronRight size={13} /></button></div>
               <div className="tool-grid">
-                {hubs.filter(h => h.status === "Setup needed").map(h => <HubButton key={h.name} hub={h} />)}
+                {setupHubs.map(h => <HubButton key={h.name} hub={h} />)}
                 {setupCount === 0 && <div className="empty-state"><CheckCircle2 size={20} /><strong>Nothing needs setup</strong></div>}
               </div>
             </div>
