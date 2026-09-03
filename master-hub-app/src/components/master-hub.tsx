@@ -8,6 +8,11 @@ const groups = [
  { label: "Life areas", items: [["Work", BriefcaseBusiness], ["Personal", UserRound], ["Financial", CircleDollarSign], ["Health", Stethoscope], ["Relationships", HeartHandshake], ["Knowledge", Lightbulb]] }
 ] as const;
 const folderData = [{name:"Projects", children:["Studio refresh","Fall travel"]},{name:"Resources",children:["Reading list"]}];
+
+type HubStatus = "Live" | "Setup needed" | "Development" | "Offline" | "Archived";
+type ExternalHub = { name:string; url:string; icon:React.ReactNode; status:HubStatus; area:string };
+const statusOrder:HubStatus[] = ["Setup needed", "Live", "Development", "Offline", "Archived"];
+
 function IconButton({label,children,onClick,className=""}:{label:string;children:React.ReactNode;onClick?:()=>void;className?:string}) {
  return <button className={"icon-button "+className} aria-label={label} title={label} onClick={onClick}>{children}</button>;
 }
@@ -28,15 +33,15 @@ export function MasterHub() {
  const add=(title:string,lane:TaskLane,star:boolean)=>{setState(s=>({...s,tasks:[{id:crypto.randomUUID(),title,lane,important:star,complete:false,due:"Today"},...s.tasks]}));setCapture(false);notify("Task added")};
  const choose=(name:string)=>{setActive(name);setMenu(false);notify(name+" selected")};
 
- // External hubs to show on the dashboard
- const externalHubs = [
-  { name: "Field Diagnostic Hub", url: "https://field-diagnostic-hub.vercel.app", icon: <Activity/> },
-  { name: "Sam Hub", url: "https://sam-hub-six.vercel.app/?utm_source=chatgpt.com", icon: <LayoutDashboard/> },
-  { name: "Private Client", url: "https://privateclient.samsalem0319.chatgpt.site/", icon: <Folder/> },
-  { name: "Billed Work Tracker", url: "https://billed-work-tracker-live.vercel.app", icon: <Calculator/> },
-  { name: "Recovery Value Calculator", url: "https://recovery-value-calculator.vercel.app", icon: <CircleDollarSign/> },
-  { name: "Job Quote Calculator", url: "https://job-quote-calculator-tau.vercel.app", icon: <Calculator/> }
+ const externalHubs:ExternalHub[] = [
+  { name: "Field Diagnostic Hub", url: "https://field-diagnostic-hub.vercel.app", icon: <Activity/>, status: "Setup needed", area: "Work · Diagnostics" },
+  { name: "Sam Hub", url: "https://sam-hub-six.vercel.app", icon: <LayoutDashboard/>, status: "Live", area: "Admin · App Registry" },
+  { name: "Private Client", url: "https://privateclient.samsalem0319.chatgpt.site/", icon: <Folder/>, status: "Live", area: "Personal" },
+  { name: "Billed Work Tracker", url: "https://billed-work-tracker-live.vercel.app", icon: <Calculator/>, status: "Live", area: "Work · Administrative" },
+  { name: "Recovery Value Calculator", url: "https://recovery-value-calculator.vercel.app", icon: <CircleDollarSign/>, status: "Live", area: "Business · Recovery" },
+  { name: "Job Quote Calculator", url: "https://job-quote-calculator-tau.vercel.app", icon: <Calculator/>, status: "Live", area: "Work · Quoting" }
  ];
+ const hubGroups = statusOrder.map(status=>({status,items:externalHubs.filter(h=>h.status===status)})).filter(group=>group.items.length>0);
 
  return <div className="app-shell">
   <button className={"scrim "+(menu?"visible":"")} aria-label="Close navigation" onClick={()=>setMenu(false)}/>
@@ -58,10 +63,22 @@ export function MasterHub() {
     </section>
     <section className="lower-grid"><div className="panel projects-panel"><div className="panel-heading"><div><span className="overline">IN MOTION</span><h2>Projects</h2></div><button className="text-button">View all</button></div><div className="panel-body"><p>Projects in progress</p></div></div>
 
-    {/* New panel added: External hubs / tools */}
-    <div className="panel links-panel"><div className="panel-heading"><div><span className="overline">EXTERNAL TOOLS</span><h2>Hubs & Calculators</h2></div><button className="text-button" onClick={()=>notify("Opening external hub list")} >Open</button></div>
-     <div className="panel-body links-grid">
-      {externalHubs.map(h=> <button key={h.name} className="tool-button" onClick={()=>window.open(h.url, '_blank', 'noopener')}><span className="tool-icon">{h.icon}</span><strong>{h.name}</strong><ChevronRight size={14}/></button>)}
+    <div className="panel links-panel">
+     <div className="panel-heading"><div><span className="overline">HUB DIRECTORY</span><h2>Apps by readiness</h2></div></div>
+     <div className="panel-body" style={{padding:"14px",display:"grid",gap:"14px"}}>
+      {hubGroups.map(group=><section key={group.status} aria-label={group.status} style={{display:"grid",gap:"8px"}}>
+       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"10px",padding:"0 2px"}}>
+        <strong style={{fontSize:"11px",letterSpacing:".08em",textTransform:"uppercase",color:group.status==="Live"?"#4ccbb2":group.status==="Setup needed"?"#dfad60":"#8c94a5"}}>{group.status}</strong>
+        <span style={{fontSize:"10px",color:"#687185"}}>{group.items.length}</span>
+       </div>
+       <div style={{display:"grid",gridTemplateColumns:"repeat(2,minmax(0,1fr))",gap:"8px"}}>
+        {group.items.map(h=><button key={h.name} className="tool-button" onClick={()=>window.open(h.url,'_blank','noopener')} style={{height:"auto",minHeight:"54px"}}>
+         <span className="tool-icon">{h.icon}</span>
+         <span style={{display:"flex",minWidth:0,flex:1,flexDirection:"column",alignItems:"flex-start",gap:"2px"}}><strong>{h.name}</strong><small style={{fontSize:"9px",color:"#687185",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",maxWidth:"100%"}}>{h.area}</small></span>
+         <ChevronRight size={14}/>
+        </button>)}
+       </div>
+      </section>)}
      </div>
     </div>
 
