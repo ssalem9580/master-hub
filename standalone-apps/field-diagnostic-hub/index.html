@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Field Diagnostic Hub</title>
+<style>
+:root{
+  --bg:#0a0f14;--panel:#111821;--panel2:#161f2a;--panel3:#1a2633;--text:#eef4fb;--muted:#98aabd;
+  --line:#263444;--accent:#57a6ff;--good:#4fd18b;--warn:#ffca5c;--bad:#ff6b6b;--radius:18px;
+}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}.shell{min-height:100vh;display:grid;grid-template-columns:270px 1fr}
+.sidebar{background:#0d131a;border-right:1px solid var(--line);padding:20px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{font-size:19px;font-weight:900;margin-bottom:4px}.subbrand{font-size:12px;color:var(--muted);margin-bottom:22px}
+.navlabel{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#74879a;margin:18px 8px 8px}
+.navbtn{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--muted);padding:11px 12px;border-radius:10px;cursor:pointer}
+.navbtn:hover,.navbtn.active{background:var(--panel2);color:var(--text)}
+.main{min-width:0}.topbar{position:sticky;top:0;z-index:10;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--line);background:rgba(10,15,20,.92);backdrop-filter:blur(10px)}
+.titlebar{font-weight:800}.topactions{display:flex;gap:8px}.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 13px;border-radius:10px;cursor:pointer}
+.btn.primary{border-color:#315d88;background:#173351;color:#cfe8ff}.content{max-width:1180px;margin:0 auto;padding:28px 22px 80px}
+.hero{display:flex;gap:18px;justify-content:space-between;align-items:center;margin-bottom:16px}.hero h1{font-size:clamp(28px,3vw,40px);margin:0 0 6px}.hero p{margin:0;color:var(--muted);max-width:760px;line-height:1.55}
+.search{margin:22px 0;position:relative}.search input{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);padding:15px 16px 15px 44px;border-radius:14px;outline:none;font-size:16px}.search span{position:absolute;left:16px;top:15px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:linear-gradient(180deg,var(--panel),#0f161e);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.card.click{cursor:pointer;transition:.15s transform,.15s border-color}.card.click:hover{transform:translateY(-2px);border-color:#3b5e7d}
+.eyebrow{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#7e93a7}.card h3{margin:8px 0 6px;font-size:20px}.card p{margin:0;color:var(--muted);line-height:1.45;font-size:14px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.badge{border:1px solid var(--line);border-radius:999px;padding:5px 8px;font-size:11px;color:#b8c8d8;background:#121b24}
+.sectiontitle{display:flex;justify-content:space-between;align-items:center;margin:28px 0 12px}.sectiontitle h2{margin:0;font-size:20px}.muted{color:var(--muted)}
+.path{font-size:13px;color:var(--muted);margin-bottom:14px}.path b{color:var(--text)}
+.list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.rowmain{min-width:0}.rowtitle{font-weight:800}.rowsub{font-size:13px;color:var(--muted);margin-top:3px}
+.status{font-size:11px;border-radius:999px;padding:5px 8px;border:1px solid var(--line)}.status.live{color:#9ef0c2;border-color:#315f49}.status.planned{color:#f2d48b;border-color:#65552c}
+.hidden{display:none!important}
+#wizardShell .card{margin-top:14px}.wizardQ{font-size:27px;line-height:1.25;font-weight:900;margin:10px 0}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.choice{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:14px;padding:17px;text-align:left;cursor:pointer}.choice:hover{border-color:#456983;background:var(--panel3)}.choice strong{display:block;font-size:17px}.choice small{color:var(--muted)}
+.tool{border:1px solid #65562d;background:#201c11;border-radius:12px;padding:13px;margin-top:14px}.tool b{color:var(--warn)}.tool div{margin-top:5px;color:#e2d5aa;font-size:13px}
+.result{border-left:4px solid var(--good)}.result h2{margin:7px 0 14px}.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.resultbox{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:14px}.resultbox h4{margin:0 0 7px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.resultbox p{margin:0;line-height:1.5}
+.checks{list-style:none;padding:0;margin:0}.checks li{padding:8px 0;border-bottom:1px solid #22303d}.checks input{margin-right:9px}
+
+.modebar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+.modebtn{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer}
+.modebtn.active{border-color:#4aa8ff;background:#13283b}
+.quickgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:14px 0}
+.quickbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:14px;border-radius:14px;cursor:pointer;text-align:left}
+.quickbtn b{display:block;margin-bottom:4px}.quickbtn span{font-size:12px;color:var(--muted)}
+.testcard{border:1px solid #31506b;background:#0e1822;border-radius:16px;padding:18px;margin-top:14px}
+.testgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.testitem{border:1px solid var(--line);background:var(--panel2);border-radius:12px;padding:12px}
+.testitem .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.testitem .v{font-size:16px;font-weight:800;margin-top:4px}
+.livewarn{border:2px solid #c64646;background:#2a1313;color:#ffd3d3;padding:12px;border-radius:12px;font-weight:800;margin-top:12px}
+.offwarn{border:2px solid #d8a938;background:#2a2413;color:#ffe7a8;padding:12px;border-radius:12px;font-weight:800;margin-top:12px}
+.readingrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.readingrow input{min-width:160px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:12px;border-radius:10px}
+.evidence{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px;margin-top:14px}
+.evidence ul{margin:8px 0 0;padding-left:20px}
+.confidence{display:inline-flex;align-items:center;border:1px solid var(--line);padding:5px 8px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.05em}
+.confidence.proven{border-color:#3f9f73;background:#143025}
+.confidence.strong{border-color:#c79534;background:#332811}
+.confidence.notproven{border-color:#66788a;background:#1b232c}
+.sourcebadge{display:inline-flex;align-items:center;border:1px solid #4c6f8f;background:#122337;padding:5px 8px;border-radius:999px;font-size:11px;font-weight:800}
+.partprofile{border:1px solid #3a5872;background:#101b27;border-radius:16px;padding:16px;margin-top:14px}
+.partprofile h3{margin:0 0 8px}
+.adminpanel{border:1px dashed #526273;border-radius:16px;padding:16px;margin-top:14px}
+.sessionbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dashquick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:16px 0}.dashquick .quickbtn{min-height:78px}.statgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.statcard{border:1px solid var(--line);background:linear-gradient(180deg,#14202c,#101821);border-radius:14px;padding:14px}.statcard .k{font-size:12px;color:var(--muted);font-weight:800}.statcard .v{font-size:28px;font-weight:900;margin-top:3px}.statcard .meta{font-size:12px;color:#7f93a6;margin-top:2px}.dashcolumns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}.dashpanel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px}.dashpanelhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}.dashpanelhead h2{font-size:17px;margin:0}.minilist{display:grid;gap:7px}.minirow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px;border:1px solid #223242;background:#0d151e;border-radius:10px}.minirow b{display:block}.minirow small{display:block;color:var(--muted);margin-top:2px}.emptydash{padding:15px 4px;color:var(--muted);font-size:13px}.favoritebtn{position:absolute;right:12px;top:12px;border:1px solid var(--line);background:#101923;color:#d7e2ec;width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:18px}.favoritebtn.on{color:#ffd56b;border-color:#7a642d;background:#2a2413}.card.click{position:relative}.card.click h3{padding-right:35px}
+.builderform{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.builderfield{display:flex;flex-direction:column;gap:6px}.builderfield.full{grid-column:1/-1}.builderfield label{font-size:12px;font-weight:800;color:#b9c9d8}.builderfield input,.builderfield select,.builderfield textarea{width:100%;border:1px solid var(--line);background:#0d151e;color:var(--text);padding:11px 12px;border-radius:10px;outline:none}.builderfield textarea{min-height:180px;resize:vertical;line-height:1.45}.builderfield input:focus,.builderfield select:focus,.builderfield textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(87,166,255,.14)}
+.importgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}.importcard{border:1px solid var(--line);background:var(--panel);border-radius:15px;padding:14px}.importcard h3{margin:4px 0 4px}.importcard p{font-size:12px;color:var(--muted);min-height:34px}.importcard input[type=file]{width:100%;font-size:12px;margin:8px 0}.importcard textarea{width:100%;min-height:190px;border:1px solid var(--line);background:#0c131b;color:var(--text);padding:10px;border-radius:10px;resize:vertical}.fileok{font-size:11px;color:var(--good);min-height:17px}.builderactions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.previewlist{margin:8px 0 0;padding-left:22px}.previewlist li{margin:7px 0}.sourcecolumn{border:1px solid var(--line);background:var(--panel2);padding:14px;border-radius:13px}.sourcecolumn pre{white-space:pre-wrap;word-break:break-word;max-height:330px;overflow:auto;color:#d8e3ed;font:12px/1.5 ui-monospace,Consolas,monospace}.emptycopy{color:var(--muted);padding:16px 0}.notice{border:1px solid #39698f;background:#10253a;color:#cfe8ff;padding:11px 13px;border-radius:11px;margin:12px 0}.notice.error{border-color:#8d4040;background:#2a1515;color:#ffd0d0}.custommeta{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 18px}
+@media(max-width:900px){.quickgrid,.dashquick,.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashcolumns{grid-template-columns:1fr}}
+@media(max-width:900px){.importgrid{grid-template-columns:1fr}.builderform{grid-template-columns:1fr}.builderfield.full{grid-column:auto}}
+@media(max-width:640px){.quickgrid,.testgrid,.dashquick,.statgrid{grid-template-columns:1fr}}
+
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.shell{grid-template-columns:220px 1fr}}
+@media(max-width:720px){.shell{display:block}.sidebar{display:none}.grid{grid-template-columns:1fr}.topbar{height:auto;min-height:62px;padding:12px 14px}.content{padding:22px 14px 70px}.hero{display:block}.choices,.resultgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand">Field Diagnostic Hub</div>
+  <div class="subbrand">Department → Unit → Subsystem → Diagnostic</div>
+  <div class="navlabel">Home</div>
+  <button class="navbtn active" onclick="showHome()">Dashboard</button>
+  <div class="navlabel">Departments</div>
+  <button class="navbtn" onclick="openDepartment('VAT')">VAT</button>
+  <button class="navbtn" onclick="openDepartment('VLT')">VLT</button>
+  <div class="navlabel">Tools</div>
+  <button class="navbtn" onclick="showBuilder()">＋ New Diagnostic</button>
+  <button class="navbtn" onclick="showFavorites()">Favorites</button>
+  <button class="navbtn" onclick="showRecent()">Recent diagnostics</button>
+</aside>
+
+<main class="main">
+<div class="topbar">
+  <div class="titlebar" id="topTitle">Dashboard</div>
+  <div class="topactions">
+    <button class="btn" onclick="window.location.href='https://master-hub-live.vercel.app/'">Main Page</button>
+    <button class="btn" onclick="goBack()">← Back</button>
+    <button class="btn primary" onclick="showHome()">Home</button>
+  </div>
+</div>
+
+<div class="content">
+<section id="homeView">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">MASTER TROUBLESHOOTING LIBRARY</div>
+      <h1>Field Diagnostic Hub</h1>
+      <p>Open a proven diagnostic, continue recent work, search the library, or build a new procedure from source documents.</p>
+    </div>
+  </div>
+
+  <div class="dashquick">
+    <button class="quickbtn" onclick="showBuilder()"><b>＋ New Diagnostic</b><span>Import troubleshooting, parts, and manual</span></button>
+    <button class="quickbtn" onclick="focusHomeSearch()"><b>⌕ Search Library</b><span>Find a symptom, unit, part, or procedure</span></button>
+    <button class="quickbtn" onclick="openMostRecent()"><b>↻ Continue Recent</b><span>Resume the last diagnostic you opened</span></button>
+    <button class="quickbtn" onclick="openBuilderMode()"><b>Builder Controls</b><span>Manage sources and diagnostic content</span></button>
+  </div>
+
+  <div class="statgrid" aria-label="Diagnostic library summary">
+    <div class="statcard"><div class="k">Live Diagnostics</div><div id="dashLive" class="v">0</div><div class="meta">Ready for technicians</div></div>
+    <div class="statcard"><div class="k">Custom Diagnostics</div><div id="dashCustom" class="v">0</div><div class="meta">Built from your imports</div></div>
+    <div class="statcard"><div class="k">Favorites</div><div id="dashFavorites" class="v">0</div><div class="meta">Pinned for fast access</div></div>
+    <div class="statcard"><div class="k">Build Queue</div><div id="dashPlanned" class="v">0</div><div class="meta">Planned procedures</div></div>
+  </div>
+
+  <div class="search"><span>⌕</span><input id="searchBox" placeholder="Search unit, symptom, component, or diagnostic…" oninput="renderSearch(this.value)"/></div>
+  <div id="searchResults" class="list hidden"></div>
+
+  <div class="dashcolumns">
+    <div class="dashpanel">
+      <div class="dashpanelhead"><h2>Recent Diagnostics</h2><button class="btn" onclick="showRecent()">View all</button></div>
+      <div id="dashboardRecent" class="minilist"></div>
+    </div>
+    <div class="dashpanel">
+      <div class="dashpanelhead"><h2>Favorites</h2><button class="btn" onclick="showFavorites()">View all</button></div>
+      <div id="dashboardFavorites" class="minilist"></div>
+    </div>
+  </div>
+
+  <div class="sectiontitle"><h2>Ready to use</h2><span class="muted">Completed interactive diagnostics</span></div>
+  <div class="grid" id="readyGrid"></div>
+  <!-- V3 MODE CONTROL -->
+  <div class="sectiontitle">
+    <h2>Operating Mode</h2>
+    <span class="muted">Technician or Builder / Admin</span>
+  </div>
+
+  <div class="modebar">
+    <button id="techModeBtn"
+            class="modebtn active"
+            onclick="setAppMode('tech')">
+      Technician Mode
+    </button>
+
+    <button id="adminModeBtn"
+            class="modebtn"
+            onclick="setAppMode('admin')">
+      Admin / Builder Mode
+    </button>
+  </div>
+
+  <!-- ADMIN / BUILDER PANEL -->
+  <div id="adminHomePanel" class="adminpanel hidden">
+
+    <div class="eyebrow">ADMIN / BUILDER MODE</div>
+    <h2 style="margin:8px 0 4px">Diagnostic Library Builder</h2>
+
+    <p class="muted">
+      Manage diagnostic content, source material, parts intelligence,
+      and future troubleshooting modules.
+    </p>
+
+    <div class="quickgrid">
+
+      <button class="quickbtn" onclick="focusGlobalSearch('part')">
+        <b>Part Lookup</b>
+        <span>Search by part number</span>
+      </button>
+
+      <button class="quickbtn" onclick="openDepartment('VAT')">
+        <b>Diagnostic Library</b>
+        <span>Browse existing modules</span>
+      </button>
+
+      <button class="quickbtn" onclick="launchDiagnostic('cca816')">
+        <b>816 Audio</b>
+        <span>Open CCA Mic/Speaker module</span>
+      </button>
+
+      <button class="quickbtn" onclick="launchDiagnostic('drawer12250')">
+        <b>122-50</b>
+        <span>Open drawer diagnostic</span>
+      </button>
+
+      <button class="quickbtn" onclick="showBuilder()">
+        <b>New Diagnostic</b>
+        <span>Import troubleshooting, parts, and manual</span>
+      </button>
+
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div class="eyebrow">BUILDER WORKFLOW</div>
+      <h3>Source → Review → Validate → Publish</h3>
+      <p>
+        Future diagnostic modules will be created from approved service
+        documentation, reviewed before publication, and stored in the
+        persistent diagnostic database.
+      </p>
+
+      <div class="badges">
+        <span class="badge">Parts PDF</span>
+        <span class="badge">Troubleshooting PDF</span>
+        <span class="badge">Source Verification</span>
+        <span class="badge">Revision History</span>
+        <span class="badge">Publish Control</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="builderView" class="hidden">
+  <div class="eyebrow">DIAGNOSTIC GENERATOR</div>
+  <div class="sectiontitle" style="margin-top:8px"><h2>Create a New Field Diagnostic</h2><span class="muted">Import 3 sources, review, then publish</span></div>
+  <div class="notice">Upload or paste all three sources. PDF, DOCX, TXT, CSV, MD, and JSON are supported. Nothing is published until you review and save it.</div>
+  <div id="builderNotice" class="notice hidden" role="status"></div>
+  <div class="card">
+    <div class="builderform">
+      <div class="builderfield full"><label for="builderTitle">Diagnostic name *</label><input id="builderTitle" placeholder="Example: VAT 21 Blower Will Not Start"></div>
+      <div class="builderfield"><label for="builderDepartment">Department *</label><select id="builderDepartment" onchange="updateUnitFamilies()"><option>VAT</option><option>VLT</option></select></div>
+      <div class="builderfield"><label for="builderGroup">Unit family *</label><select id="builderGroup" onchange="handleBuilderSelectAdd('family',this)"></select></div>
+      <div class="builderfield"><label for="builderUnit">Unit / model *</label><select id="builderUnit" onchange="handleBuilderSelectAdd('unit',this)"></select></div>
+      <div class="builderfield"><label for="builderSubsystem">Subsystem *</label><select id="builderSubsystem" onchange="handleBuilderSelectAdd('subsystem',this)"></select></div>
+      <div class="builderfield full"><label for="builderSymptoms">Search symptoms (comma separated)</label><input id="builderSymptoms" placeholder="weak vacuum, blower not running, carrier stuck"></div>
+    </div>
+  </div>
+
+  <div class="importgrid">
+    <div class="importcard">
+      <div class="eyebrow">IMPORT 1</div><h3>Troubleshooting</h3><p>Steps, decision logic, symptoms, checks, and remedies.</p>
+      <input id="troubleshootingFile" type="file" accept=".pdf,.docx,.txt,.csv,.md,.json" onchange="importBuilderFile('troubleshooting',event)">
+      <div id="troubleshootingFileName" class="fileok">No file selected</div>
+      <textarea id="builderTroubleshooting" placeholder="Or paste troubleshooting steps here…" oninput="updateBuilderPreview()"></textarea>
+    </div>
+    <div class="importcard">
+      <div class="eyebrow">IMPORT 2</div><h3>Parts List</h3><p>Part numbers, descriptions, quantities, and substitutions.</p>
+      <input id="partsFile" type="file" accept=".pdf,.docx,.txt,.csv,.md,.json" onchange="importBuilderFile('parts',event)">
+      <div id="partsFileName" class="fileok">No file selected</div>
+      <textarea id="builderParts" placeholder="Or paste the parts list here…" oninput="updateBuilderPreview()"></textarea>
+    </div>
+    <div class="importcard">
+      <div class="eyebrow">IMPORT 3</div><h3>Manual</h3><p>Service manual, specifications, safety notes, and reference data.</p>
+      <input id="manualFile" type="file" accept=".pdf,.docx,.txt,.csv,.md,.json" onchange="importBuilderFile('manual',event)">
+      <div id="manualFileName" class="fileok">No file selected</div>
+      <textarea id="builderManual" placeholder="Or paste manual content here…" oninput="updateBuilderPreview()"></textarea>
+    </div>
+  </div>
+
+  <div class="builderactions">
+    <button class="btn primary" onclick="generateBuilderPreview()">Generate Preview</button>
+    <button class="btn" onclick="saveGeneratedDiagnostic()">Save &amp; Publish to Hub</button>
+    <button class="btn" onclick="resetBuilder()">Clear</button>
+  </div>
+  <div id="builderPreview" class="card hidden" style="margin-top:16px"></div>
+</section>
+
+<section id="customView" class="hidden">
+  <div id="customDiagnosticShell"></div>
+</section>
+
+<section id="browserView" class="hidden">
+  <div class="path" id="browserPath"></div>
+  <div class="sectiontitle"><h2 id="browserTitle"></h2><span class="muted" id="browserHint"></span></div>
+  <div class="grid" id="browserGrid"></div>
+</section>
+
+<section id="wizardView" class="hidden">
+  <div class="path">VAT › Lane Audio › General VAT › Audio › <b>816 CCA Mic/Speaker</b></div>
+  <div class="eyebrow">VAT AUDIO SUB-SEGMENT</div>
+  <h1 style="margin:8px 0">816 CCA Mic/Speaker Diagnostic</h1>
+  <p class="muted">Answer one question at a time. The next step appears only after you answer.</p>
+  <div id="wizardShell"></div>
+
+<div class="sessionbar">
+  <button class="btn" onclick="toggleEvidence()">Evidence</button>
+  <button class="btn" onclick="showPartProfileForActive()">Part Profile</button>
+</div>
+<div id="evidencePanel" class="evidence hidden">
+  <div class="eyebrow">DIAGNOSTIC SESSION EVIDENCE</div>
+  <ul id="evidenceList"></ul>
+</div>
+<div id="activePartProfile" class="partprofile hidden"></div>
+
+  <div id="diagPath" class="card" style="margin-top:14px"><div class="eyebrow">Diagnostic path</div><ol id="diagHistory"></ol></div>
+</section>
+</div>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.8.0/mammoth.browser.min.js"></script>
+<script>
+const library = {
+  departments:[
+    {name:"VAT",desc:"Pneumatic tubes, drawer audio, lane audio, and drawers",units:["Pneumatic Tubes","Drawer Audio","Lane Audio","Drawer"]},
+    {name:"VLT",desc:"Electronic and mechanical locks, SDB locks, safe/vault, night drop, and under-counter equipment",units:["Electric Lock","Mechanical Lock","SDB Lock","Safe/Vault","Night Drop","Under Counter"]}
+  ],
+  units:{
+    "Pneumatic Tubes":[
+      {name:"VAT 21",subs:["Audio","Blower / Vacuum","Carrier / Turntable","Sensors","Controls"]},
+      {name:"VAT 23",subs:["Audio","Blower / Vacuum","Carrier / Turntable","Sensors","Controls"]},
+      {name:"VAT 42",subs:["Audio","Blower / Vacuum","Carrier / Turntable","Sensors","Controls"]},
+      {name:"General VAT",subs:["Audio","Blower / Vacuum","Carrier / Turntable","Sensors","Controls"]}
+    ],
+    "Lane Audio":[{name:"General VAT",subs:["Audio","Call Function","Wiring / Harness"]}],
+    "Drawer Audio":[{name:"Manual Transaction Drawer",subs:["Audio","Call Function","Wiring / Harness"]}],
+    "Drawer":[
+      {name:"122-50",subs:["Drawer Drive / Motor Control","Electrical / Interlocks","Wiring / Harness"]},
+      {name:"Manual Transaction Drawer",subs:["Drawer Mechanics","Locks / Controls"]},
+      {name:"Automatic Transaction Drawer",subs:["Drawer Mechanics","Sensors","Controls"]}
+    ],
+    "Electric Lock":[{name:"General Electric Lock",subs:["Power","Keypad / Input","Boltwork","Programming"]}],
+    "Mechanical Lock":[{name:"General Mechanical Lock",subs:["Dial / Input","Combination","Boltwork","Relock"]}],
+    "SDB Lock":[{name:"Safe Deposit Box Lock",subs:["Guard Key","Customer Key","Boltwork","Door"]}],
+    "Safe/Vault":[{name:"Vault / Safe",subs:["Locks","Time Locks","Boltwork","Door / Hinge"]}],
+    "Night Drop":[{name:"Night Drop",subs:["Door / Chute","Locks","Sensors","Container"]}],
+    "Under Counter":[{name:"Under-Counter Equipment",subs:["Locks","Drawers","Controls","Hardware"]}]
+  },
+  diagnostics:[
+    {id:"cca816",department:"VAT",unitGroup:"Lane Audio",unit:"General VAT",subsystem:"Audio",title:"816 CCA Mic/Speaker",status:"live",tools:["Multimeter","Known-good CCA"],symptoms:["no audio","one-way audio","static","hum","feedback","intermittent","call issue"]},
+    {id:"vat21blower",department:"VAT",unitGroup:"Pneumatic Tubes",unit:"VAT 21",subsystem:"Blower / Vacuum",title:"VAT 21 Blower / Vacuum",status:"planned",tools:["Multimeter"],symptoms:["weak vacuum","blower","carrier not moving"]},
+    {id:"vatturn",department:"VAT",unitGroup:"Pneumatic Tubes",unit:"VAT 21",subsystem:"Carrier / Turntable",title:"VAT Turntable / Carrier Rotation",status:"planned",tools:["Multimeter"],symptoms:["turntable not rotating","carrier not rotating"]},
+    {id:"drawerAudio",department:"VAT",unitGroup:"Drawer Audio",unit:"Manual Transaction Drawer",subsystem:"Audio",title:"Manual Drawer Audio",status:"planned",tools:["Multimeter"],symptoms:["drawer audio"]},
+    {id:"drawer12250",department:"VAT",unitGroup:"Drawer",unit:"122-50",subsystem:"Drawer Drive / Motor Control",title:"122-50 Deal Drawer Troubleshooting",status:"live",tools:["Multimeter","Live AC/DC voltage testing"],symptoms:["122-50","deal drawer","drawer won't move","drawer in","drawer out","CR1","CR2","PB1","motor controller","31-019997-0-00-A","90VDC","L1 L2","A1 A2","relay","motor","gear motor"]}
+  ]
+};
+
+const CUSTOM_STORAGE_KEY="fieldDiagnosticCustomV1";
+const CUSTOM_TAXONOMY_KEY="fieldDiagnosticTaxonomyV1";
+const RECENT_STORAGE_KEY="fieldDiagnosticRecentV1";
+const FAVORITES_STORAGE_KEY="fieldDiagnosticFavoritesV1";
+const ADD_OPTION_VALUE="__add_new__";
+const FAMILY_OPTIONS={
+  VLT:["Electric Lock","Mechanical Lock","SDB Lock","Safe/Vault","Night Drop","Under Counter"],
+  VAT:["Pneumatic Tubes","Drawer Audio","Lane Audio","Drawer"]
+};
+let navStack=[];
+let builderEditingId=null;
+function setView(id){["homeView","builderView","customView","browserView","wizardView"].forEach(v=>document.getElementById(v).classList.toggle("hidden",v!==id))}
+function showHome(){navStack=[];setView("homeView");document.getElementById("topTitle").textContent="Dashboard";renderReady();renderDashboardOverview()}
+function goBack(){
+  if(!document.getElementById("wizardView").classList.contains("hidden") || !document.getElementById("builderView").classList.contains("hidden") || !document.getElementById("customView").classList.contains("hidden")){showHome();return;}
+  if(navStack.length>1){navStack.pop();renderBrowser()} else showHome();
+}
+
+function renderReady(){
+  const live=library.diagnostics.filter(d=>d.status==="live");
+  document.getElementById("readyGrid").innerHTML=live.map(diagCard).join("");
+}
+function diagCard(d){
+  const favorite=isFavorite(d.id);
+  return `<div class="card click" onclick="${d.status==="live"?"launchDiagnostic('"+d.id+"')":"void(0)"}">
+    ${d.status==="live"?`<button class="favoritebtn ${favorite?"on":""}" aria-label="${favorite?"Remove from":"Add to"} favorites: ${escapeHTML(d.title)}" title="${favorite?"Remove from favorites":"Add to favorites"}" onclick="event.stopPropagation();toggleFavorite('${d.id}')">${favorite?"★":"☆"}</button>`:""}
+    <div class="eyebrow">${escapeHTML(d.unitGroup)} › ${escapeHTML(d.subsystem)}</div><h3>${escapeHTML(d.title)}</h3>
+    <p>${d.custom?"Generated from troubleshooting, parts list, and service manual":(d.id==="drawer12250"?"Source-backed 122-50 motor-control diagnostic • Guide dated 8/1/2022":(d.status==="live"?"Interactive one-step-at-a-time diagnostic":"Module placeholder for future build"))}</p>
+    <div class="badges"><span class="status ${d.status}">${d.status==="live"?"LIVE":"PLANNED"}</span>${d.custom?'<span class="sourcebadge">3 SOURCES</span>':d.tools.map(t=>`<span class="badge">${escapeHTML(t)}</span>`).join("")}</div>
+  </div>`;
+}
+function openDepartment(name){navStack=[{type:"department",name}];renderBrowser()}
+function renderBrowser(){
+  setView("browserView");
+  const cur=navStack[navStack.length-1];
+  const grid=document.getElementById("browserGrid"), title=document.getElementById("browserTitle"), hint=document.getElementById("browserHint"), path=document.getElementById("browserPath");
+  if(cur.type==="department"){
+    document.getElementById("topTitle").textContent=cur.name;
+    title.textContent=cur.name;hint.textContent="Choose a unit family";path.innerHTML=`<b>${cur.name}</b>`;
+    const dep=library.departments.find(d=>d.name===cur.name);
+    grid.innerHTML=(dep?.units||[]).map(u=>`<div class="card click" onclick='openUnitGroup(${JSON.stringify(u)})'><div class="eyebrow">Unit family</div><h3>${u}</h3><p>Browse actual unit types and subsystems.</p></div>`).join("");
+  }else if(cur.type==="unitGroup"){
+    document.getElementById("topTitle").textContent=cur.name;
+    title.textContent=cur.name;hint.textContent="Choose an actual unit type";path.innerHTML=`${navStack[0].name} › <b>${cur.name}</b>`;
+    const units=library.units[cur.name]||[];
+    grid.innerHTML=units.map(u=>`<div class="card click" onclick='openUnit(${JSON.stringify(cur.name)},${JSON.stringify(u.name)})'><div class="eyebrow">Unit type</div><h3>${u.name}</h3><p>${u.subs.join(" • ")}</p></div>`).join("") || `<div class="card"><h3>Coming soon</h3><p>No unit modules have been added yet.</p></div>`;
+  }else if(cur.type==="unit"){
+    document.getElementById("topTitle").textContent=cur.name;
+    title.textContent=cur.name;hint.textContent="Choose a subsystem";path.innerHTML=`${navStack[0].name} › ${cur.group} › <b>${cur.name}</b>`;
+    const u=(library.units[cur.group]||[]).find(x=>x.name===cur.name);
+    grid.innerHTML=(u?.subs||[]).map(s=>`<div class="card click" onclick='openSubsystem(${JSON.stringify(cur.group)},${JSON.stringify(cur.name)},${JSON.stringify(s)})'><div class="eyebrow">Subsystem</div><h3>${s}</h3><p>Open diagnostics for this subsystem.</p></div>`).join("");
+  }else if(cur.type==="subsystem"){
+    document.getElementById("topTitle").textContent=cur.sub;
+    title.textContent=cur.sub;hint.textContent="Choose a diagnostic";path.innerHTML=`${navStack[0].name} › ${cur.group} › ${cur.unit} › <b>${cur.sub}</b>`;
+    let ds=library.diagnostics.filter(d=>d.unitGroup===cur.group && d.subsystem===cur.sub && (d.unit===cur.unit || d.unit==="General VAT"));
+    grid.innerHTML=ds.length?ds.map(diagCard).join(""):`<div class="card"><div class="eyebrow">No module yet</div><h3>Ready for a new chart</h3><p>This slot is already organized and ready for the next troubleshooting wizard.</p></div>`;
+  }
+}
+function openUnitGroup(name){navStack.push({type:"unitGroup",name});renderBrowser()}
+function openUnit(group,name){navStack.push({type:"unit",group,name});renderBrowser()}
+function openSubsystem(group,unit,sub){navStack.push({type:"subsystem",group,unit,sub});renderBrowser()}
+function renderSearch(q){maybeShowPartProfileFromSearch(q||"");
+  const box=document.getElementById("searchResults");q=q.trim().toLowerCase();
+  if(!q){box.classList.add("hidden");box.innerHTML="";return}
+  const ds=library.diagnostics.filter(d=>[d.title,d.department,d.unitGroup,d.unit,d.subsystem,...d.symptoms,...d.tools].join(" ").toLowerCase().includes(q));
+  box.classList.remove("hidden");
+  box.innerHTML=ds.length?ds.map(d=>`<div class="row">
+    <div class="rowmain"><div class="rowtitle">${d.title}</div><div class="rowsub">${d.department} › ${d.unitGroup} › ${d.unit} › ${d.subsystem}</div></div>
+    <button class="btn" ${d.status==="live"?`onclick="launchDiagnostic('${d.id}')"`:"disabled"}>${d.status==="live"?"Open":"Planned"}</button>
+  </div>`).join(""):`<div class="row"><div class="rowmain"><div class="rowtitle">No matching diagnostic</div><div class="rowsub">Add this as a future module.</div></div></div>`;
+}
+function readIdList(key){try{return JSON.parse(localStorage.getItem(key)||"[]")}catch{return []}}
+function writeIdList(key,ids){localStorage.setItem(key,JSON.stringify(ids))}
+function isFavorite(id){return readIdList(FAVORITES_STORAGE_KEY).includes(id)}
+function toggleFavorite(id){
+  const ids=readIdList(FAVORITES_STORAGE_KEY);const next=ids.includes(id)?ids.filter(x=>x!==id):[id,...ids];writeIdList(FAVORITES_STORAGE_KEY,next);
+  renderReady();renderDashboardOverview();
+  if(!document.getElementById("browserView").classList.contains("hidden")&&document.getElementById("browserTitle").textContent==="Favorites")showFavorites();
+}
+function recordRecent(id){
+  const ids=readIdList(RECENT_STORAGE_KEY);writeIdList(RECENT_STORAGE_KEY,[id,...ids.filter(x=>x!==id)].slice(0,10));
+}
+function miniDiagnosticRow(d){
+  return `<div class="minirow"><div><b>${escapeHTML(d.title)}</b><small>${escapeHTML(d.department)} › ${escapeHTML(d.unitGroup)} › ${escapeHTML(d.unit)}</small></div><button class="btn" onclick="launchDiagnostic('${d.id}')">Open</button></div>`;
+}
+function renderDashboardOverview(){
+  const live=library.diagnostics.filter(d=>d.status==="live"),custom=live.filter(d=>d.custom),planned=library.diagnostics.filter(d=>d.status==="planned");
+  const favoriteIds=readIdList(FAVORITES_STORAGE_KEY),recentIds=readIdList(RECENT_STORAGE_KEY);
+  document.getElementById("dashLive").textContent=live.length;document.getElementById("dashCustom").textContent=custom.length;document.getElementById("dashFavorites").textContent=favoriteIds.filter(id=>library.diagnostics.some(d=>d.id===id)).length;document.getElementById("dashPlanned").textContent=planned.length;
+  const recent=recentIds.map(id=>library.diagnostics.find(d=>d.id===id&&d.status==="live")).filter(Boolean).slice(0,3);
+  const favorites=favoriteIds.map(id=>library.diagnostics.find(d=>d.id===id&&d.status==="live")).filter(Boolean).slice(0,3);
+  document.getElementById("dashboardRecent").innerHTML=recent.length?recent.map(miniDiagnosticRow).join(""):'<div class="emptydash">Open a diagnostic and it will appear here for quick access.</div>';
+  document.getElementById("dashboardFavorites").innerHTML=favorites.length?favorites.map(miniDiagnosticRow).join(""):'<div class="emptydash">Select ☆ on any live diagnostic to pin it here.</div>';
+}
+function renderDiagnosticCollection(title,subtitle,ids){
+  setView("browserView");document.getElementById("topTitle").textContent=title;document.getElementById("browserTitle").textContent=title;document.getElementById("browserHint").textContent=subtitle;document.getElementById("browserPath").innerHTML=`Dashboard › <b>${title}</b>`;
+  const items=ids.map(id=>library.diagnostics.find(d=>d.id===id&&d.status==="live")).filter(Boolean);
+  document.getElementById("browserGrid").innerHTML=items.length?items.map(diagCard).join(""):`<div class="card"><h3>Nothing here yet</h3><p>${subtitle}</p></div>`;
+}
+function showFavorites(){renderDiagnosticCollection("Favorites","Pin live diagnostics with the star button.",readIdList(FAVORITES_STORAGE_KEY))}
+function showRecent(){renderDiagnosticCollection("Recent Diagnostics","Diagnostics you opened most recently.",readIdList(RECENT_STORAGE_KEY))}
+function openMostRecent(){
+  const id=readIdList(RECENT_STORAGE_KEY).find(candidate=>library.diagnostics.some(d=>d.id===candidate&&d.status==="live"));
+  if(id)launchDiagnostic(id);else{focusHomeSearch();document.getElementById("searchBox").placeholder="Search for your first diagnostic…"}
+}
+function focusHomeSearch(){showHome();const box=document.getElementById("searchBox");box.focus();box.scrollIntoView({behavior:"smooth",block:"center"})}
+function openBuilderMode(){showHome();setAppMode("admin");document.getElementById("adminHomePanel").scrollIntoView({behavior:"smooth",block:"start"})}
+
+/* 816 CCA Mic/Speaker diagnostic */
+const nodes816={
+start:{type:"choice",badge:"Symptom",q:"What problem are you experiencing?",options:[
+["No audio either direction","dead_both","No usable audio in or out"],["Teller can't hear customer","mic_path","Customer → teller path"],["Customer can't hear teller","speaker_path","Teller → customer path"],["Low / weak audio","low_scope","Audio present but weak"],["Distorted / muffled audio","dist_scope","Poor audio quality"],["Static / crackling / popping","static_move","Intermittent noise"],["Hum / buzz","hum_scope","Steady electrical-type noise"],["Feedback / squeal","feedback_scope","Acoustic feedback"],["Intermittent / works sometimes","intermittent_move","Cuts in and out"],["Call works but audio doesn't","call_audio","Call function remains"],["Audio works but call doesn't","call_only","Conversation remains"],["Multiple / all drawers affected","common_scope","Shared-system problem"]]},
+dead_both:{type:"yn",badge:"No audio",q:"Does another comparable drawer have normal two-way audio?",yes:"dead_call",no:"common_scope"},
+dead_call:{type:"yn",badge:"Localize",q:"Does the CALL function work from the affected drawer?",yes:"conn_inspect",no:"common_local"},
+common_local:{type:"yn",badge:"Inspect",q:"Do you find a loose, damaged, backed-out, or contaminated local connector/harness?",yes:"r_connection",no:"conn_inspect"},
+conn_inspect:{type:"yn",badge:"Inspect",q:"Do you find a loose, damaged, backed-out, or contaminated CCA Mic/Speaker connection?",yes:"r_connection",no:"meter_cont"},
+meter_cont:{type:"yn",badge:"Multimeter",q:"With the applicable circuit de-energized, does the relevant field wiring pass continuity testing?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",info:"Isolate the conductor as appropriate before testing. A continuity beep alone does not prove the entire cable is healthy.",yes:"meter_short",no:"r_openwire"},
+meter_short:{type:"yn",badge:"Multimeter",q:"With power off, is there unintended continuity between conductors or to ground where there should not be?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",yes:"r_short",no:"swap_cca"},
+swap_cca:{type:"yn",badge:"Isolation",q:"After installing a compatible known-good CCA Mic/Speaker, does the symptom disappear?",yes:"r_cca_failed",no:"r_upstream"},
+mic_path:{type:"yn",badge:"Customer → teller",q:"Can the customer hear the teller clearly?",yes:"mic_otherlane",no:"dead_both"},
+mic_otherlane:{type:"yn",badge:"Localize",q:"Does another comparable drawer operate normally?",yes:"mic_visual",no:"common_scope"},
+mic_visual:{type:"yn",badge:"Inspect microphone path",q:"Is the microphone area obstructed, contaminated, physically damaged, or improperly mounted?",yes:"r_mic_physical",no:"mic_conn"},
+mic_conn:{type:"yn",badge:"Inspect",q:"Is there a visible microphone/CCA connection problem?",yes:"r_connection",no:"mic_move"},
+mic_move:{type:"yn",badge:"Movement test",q:"Does normal drawer/harness movement make customer-to-teller audio cut in or out?",yes:"meter_wiggle",no:"meter_cont_mic"},
+meter_cont_mic:{type:"yn",badge:"Multimeter",q:"With power off, does the relevant customer-to-teller field path pass continuity testing?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",yes:"swap_cca_mic",no:"r_openwire"},
+swap_cca_mic:{type:"yn",badge:"Isolation",q:"Does a compatible known-good CCA Mic/Speaker restore customer-to-teller audio?",yes:"r_cca_mic",no:"r_upstream_input"},
+speaker_path:{type:"yn",badge:"Teller → customer",q:"Can the teller hear the customer clearly?",yes:"speaker_visual",no:"dead_both"},
+speaker_visual:{type:"yn",badge:"Inspect speaker path",q:"Is the speaker visibly damaged, obstructed, loose, or physically compromised?",yes:"r_speaker_physical",no:"speaker_conn"},
+speaker_conn:{type:"yn",badge:"Inspect",q:"Is there a visible speaker/CCA connection problem?",yes:"r_connection",no:"speaker_open"},
+speaker_open:{type:"yn",badge:"Multimeter",q:"With power off and the speaker circuit isolated as appropriate, does the speaker circuit read electrically open?",tool:"MULTIMETER • Ω • POWER OFF",info:"A non-open resistance reading does not by itself prove the speaker sounds correctly.",yes:"r_speaker_open",no:"meter_cont_speaker"},
+meter_cont_speaker:{type:"yn",badge:"Multimeter",q:"Does the relevant teller-to-customer field wiring pass continuity testing?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",yes:"swap_cca_speaker",no:"r_openwire"},
+swap_cca_speaker:{type:"yn",badge:"Isolation",q:"Does a compatible known-good CCA Mic/Speaker restore teller-to-customer audio?",yes:"r_cca_speaker",no:"r_upstream_output"},
+low_scope:{type:"yn",badge:"Low audio",q:"Is the low audio limited to one drawer?",yes:"low_dir",no:"common_scope"},
+low_dir:{type:"choice",badge:"Direction",q:"Which direction is low?",options:[["Customer → teller","mic_visual","Microphone/input path"],["Teller → customer","speaker_visual","Speaker/output path"],["Both directions","swap_cca","Local common path / CCA isolation"]]},
+dist_scope:{type:"yn",badge:"Distortion",q:"Is the distortion limited to one drawer?",yes:"dist_dir",no:"common_scope"},
+dist_dir:{type:"choice",badge:"Direction",q:"Where is the distortion?",options:[["Customer → teller","mic_visual","Microphone/input path"],["Teller → customer","speaker_visual","Speaker/output path"],["Both directions","static_move","Connectors / harness / common local path"]]},
+static_move:{type:"yn",badge:"Static / crackling",q:"Does moving the drawer, harness, or a connector change the noise?",yes:"meter_wiggle",no:"static_scope"},
+static_scope:{type:"yn",badge:"Localize",q:"Is only one drawer affected?",yes:"swap_cca_static",no:"common_scope"},
+swap_cca_static:{type:"yn",badge:"Isolation",q:"Does the noise disappear with a compatible known-good CCA Mic/Speaker?",yes:"r_cca_noise",no:"r_external_noise"},
+hum_scope:{type:"yn",badge:"Hum / buzz",q:"Is only one drawer affected?",yes:"hum_cable",no:"common_scope"},
+hum_cable:{type:"yn",badge:"Inspect cabling",q:"Do you find damaged audio cabling, shielding, or termination?",yes:"r_shield",no:"meter_short_hum"},
+meter_short_hum:{type:"yn",badge:"Multimeter",q:"With power off, is there an unintended short between conductors or to ground where there should not be?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",yes:"r_short",no:"swap_cca_static"},
+feedback_scope:{type:"yn",badge:"Feedback",q:"Is only one drawer affected?",yes:"feedback_visual",no:"common_scope"},
+feedback_visual:{type:"yn",badge:"Inspect",q:"Is the microphone/speaker mounting, position, or opening altered, loose, blocked, or damaged?",yes:"r_feedback_physical",no:"swap_cca_feedback"},
+swap_cca_feedback:{type:"yn",badge:"Isolation",q:"Does feedback disappear with a compatible known-good CCA Mic/Speaker?",yes:"r_cca_feedback",no:"r_upstream"},
+intermittent_move:{type:"yn",badge:"Intermittent",q:"Can normal drawer movement reproduce the failure?",yes:"meter_wiggle",no:"connector_wiggle"},
+connector_wiggle:{type:"yn",badge:"Intermittent",q:"Does gently manipulating one connector at a time reproduce the failure?",yes:"r_connection",no:"swap_cca_inter"},
+meter_wiggle:{type:"yn",badge:"Multimeter",q:"With power off, does continuity drop or fluctuate when the suspect harness is gently moved through the problem area?",tool:"MULTIMETER • Continuity / Ω • POWER OFF • Movement test",yes:"r_harness",no:"swap_cca_inter"},
+swap_cca_inter:{type:"yn",badge:"Isolation",q:"Does the intermittent problem follow the original CCA Mic/Speaker when compared with a compatible known-good assembly?",yes:"r_cca_inter",no:"r_external_inter"},
+call_audio:{type:"yn",badge:"Call works / no audio",q:"Is audio absent in both directions?",yes:"dead_both",no:"call_audio_dir"},
+call_audio_dir:{type:"choice",badge:"Direction",q:"Which audio direction is missing?",options:[["Teller can't hear customer","mic_path","Customer → teller"],["Customer can't hear teller","speaker_path","Teller → customer"]]},
+call_only:{type:"yn",badge:"Call circuit",q:"Is two-way conversation completely normal?",yes:"call_physical",no:"start"},
+call_physical:{type:"yn",badge:"Inspect call control",q:"Is the physical call control damaged, stuck, or mechanically abnormal?",yes:"r_call_control",no:"call_wiring"},
+call_wiring:{type:"yn",badge:"Call circuit",q:"Is there a visible call wiring or connection fault?",yes:"r_call_wiring",no:"r_call_upstream"},
+common_scope:{type:"yn",badge:"Multiple / all drawers",q:"Are some drawers still completely normal?",yes:"shared_path",no:"all_power"},
+shared_path:{type:"yn",badge:"Shared path",q:"Do the affected drawers share a common upstream connection, port group, interface, or switcher path?",yes:"shared_fault",no:"r_individual"},
+shared_fault:{type:"yn",badge:"Inspect shared path",q:"Is a shared connection or cable fault found?",yes:"r_shared_connection",no:"r_common_component"},
+all_power:{type:"yn",badge:"All drawers",q:"Does the operator/816 equipment appear powered and otherwise functional?",yes:"r_common_component",no:"r_common_power"},
+
+r_connection:{type:"result",title:"Connection / terminal fault",why:"A loose, damaged, contaminated, or intermittent connector was identified in the affected path.",remedy:"Reseat or repair the connection. Correct backed-out or damaged terminals; replace the connector/harness if it cannot be reliably repaired. Secure routing so drawer movement does not stress it."},
+r_openwire:{type:"result",title:"Open field wiring / conductor",why:"The de-energized continuity test did not show a complete path.",remedy:"Locate the open conductor, terminal, or cable section. Repair or replace the affected wiring, then secure and route it correctly."},
+r_short:{type:"result",title:"Unintended wiring short",why:"The de-energized meter test found continuity where isolation should exist.",remedy:"Locate damaged, pinched, contaminated, or incorrectly terminated wiring. Repair or replace the affected cable/connector before reapplying power."},
+r_cca_failed:{type:"result",title:"CCA Mic/Speaker failure",why:"External wiring passed basic checks and the symptom disappeared when a compatible known-good CCA Mic/Speaker was installed.",remedy:"Replace the failed CCA Mic/Speaker with the correct compatible assembly."},
+r_cca_mic:{type:"result",title:"CCA Mic/Speaker — microphone/input path failure",why:"Customer-to-teller audio returned with a compatible known-good CCA Mic/Speaker.",remedy:"Replace the failed CCA Mic/Speaker with the correct compatible assembly."},
+r_cca_speaker:{type:"result",title:"CCA Mic/Speaker — speaker/output path failure",why:"Teller-to-customer audio returned with a compatible known-good CCA Mic/Speaker.",remedy:"Replace the failed CCA Mic/Speaker with the correct compatible assembly."},
+r_upstream:{type:"result",title:"CCA Mic/Speaker not proven — continue upstream",why:"A compatible known-good CCA Mic/Speaker did not remove the symptom.",remedy:"Do not replace the original CCA based on this symptom alone. Continue through the field cable, common interconnect, interface/switcher, ACM/operator-side path, and configuration as applicable."},
+r_upstream_input:{type:"result",title:"Upstream customer-to-teller path fault",why:"Local CCA substitution did not restore the input direction.",remedy:"Continue isolation through the field cable and upstream customer-to-teller interface/switching/operator path."},
+r_upstream_output:{type:"result",title:"Upstream teller-to-customer path fault",why:"Local CCA substitution did not restore the output direction.",remedy:"Continue isolation through the field cable and upstream teller-to-customer interface/switching/operator path."},
+r_mic_physical:{type:"result",title:"Microphone-side physical problem",why:"The microphone opening, mounting, or surrounding area is obstructed, contaminated, damaged, or improperly positioned.",remedy:"Clear the obstruction/contamination and restore proper mounting. Replace the applicable CCA Mic/Speaker if the microphone portion is not separately serviceable."},
+r_speaker_physical:{type:"result",title:"Speaker-side physical problem",why:"The speaker is visibly damaged, obstructed, loose, or mechanically compromised.",remedy:"Correct the obstruction/mounting. Replace the separately serviceable speaker if authorized; otherwise replace the applicable CCA Mic/Speaker assembly."},
+r_speaker_open:{type:"result",title:"Open speaker circuit",why:"The isolated speaker circuit reads electrically open with power off.",remedy:"Repair the speaker connection if the open is external to the speaker. If the speaker/assembly itself is open, replace the applicable speaker or CCA Mic/Speaker."},
+r_cca_noise:{type:"result",title:"CCA Mic/Speaker internal noise fault",why:"Static/crackling disappeared with a compatible known-good CCA Mic/Speaker.",remedy:"Replace the failed CCA Mic/Speaker."},
+r_external_noise:{type:"result",title:"External / upstream noise source",why:"The noise remained after a compatible known-good CCA Mic/Speaker was installed.",remedy:"Keep the original CCA unless another test proves it faulty. Isolate field cabling, shielding/termination, power/common paths, and upstream audio electronics."},
+r_shield:{type:"result",title:"Cable / shielding / termination fault",why:"Physical inspection found a defect consistent with the hum/buzz symptom.",remedy:"Repair or replace the affected audio cable/termination and restore shielding/grounding according to the applicable service wiring."},
+r_feedback_physical:{type:"result",title:"Acoustic / mounting feedback problem",why:"Mic/speaker positioning, mounting, or obstruction is abnormal on the affected drawer.",remedy:"Restore proper mounting and openings. Secure loose parts and retest before replacing electronics."},
+r_cca_feedback:{type:"result",title:"CCA Mic/Speaker feedback-related fault",why:"Feedback disappears with a compatible known-good CCA Mic/Speaker after physical causes were eliminated.",remedy:"Replace the failed CCA Mic/Speaker."},
+r_harness:{type:"result",title:"Intermittent harness / conductor / terminal",why:"Continuity drops or fluctuates as the harness is moved through the failure area.",remedy:"Repair or replace the affected harness, conductor, terminal, or connector. Route and secure it so normal drawer travel does not pull or pinch it."},
+r_cca_inter:{type:"result",title:"Intermittent CCA Mic/Speaker failure",why:"The intermittent symptom follows the original CCA Mic/Speaker rather than the drawer wiring/path.",remedy:"Replace the failed CCA Mic/Speaker, then perform repeated movement and warm-operation retests."},
+r_external_inter:{type:"result",title:"External intermittent fault",why:"The intermittent condition does not follow the CCA Mic/Speaker.",remedy:"Continue isolating harnesses, connectors, field cable, shared interfaces, and upstream equipment while reproducing the failure one variable at a time."},
+r_call_control:{type:"result",title:"Call control mechanical failure",why:"The physical call control is damaged, stuck, or not actuating normally while two-way audio remains functional.",remedy:"Repair or replace the applicable call control/button assembly, then retest call plus both audio directions."},
+r_call_wiring:{type:"result",title:"Call circuit wiring / connection fault",why:"The call-specific connection or wiring is visibly defective while audio remains functional.",remedy:"Repair the call circuit wiring/connection and retest call operation plus two-way audio."},
+r_call_upstream:{type:"result",title:"Upstream call/interface fault",why:"Two-way audio works and no local mechanical or wiring fault was found in the call circuit.",remedy:"Continue through the call interface/switching/control path using the applicable service information."},
+r_shared_connection:{type:"result",title:"Shared connection / common-path fault",why:"Multiple affected drawers share the same defective upstream connection or cable path.",remedy:"Repair/reseat/replace the proven shared connection or cable. Retest every affected lane."},
+r_common_component:{type:"result",title:"Common 816 path requires isolation",why:"Multiple/all drawers are affected and the fault is not localized to a single CCA Mic/Speaker.",remedy:"Do not replace multiple CCA Mic/Speaker assemblies. Isolate shared power, interconnects, interface/switcher, ACM/operator-side equipment, and common cabling. Replace only the component proven by substitution or documented electrical testing."},
+r_common_power:{type:"result",title:"Common power / system availability fault",why:"All drawers are affected and the operator/816 equipment is not showing normal powered operation.",remedy:"Restore the correct system power/feed and repair the upstream power path before continuing audio diagnosis."},
+r_individual:{type:"result",title:"No single shared path identified",why:"The affected drawers do not appear to share one obvious failed branch while some drawers remain normal.",remedy:"Troubleshoot each affected drawer individually beginning with symptom direction, CCA connectors, field wiring, then compatible CCA substitution."}
+};
+
+/* 122-50 Deal Drawer diagnostic — source: 122-50 Troubleshooting Guide, 8/1/2022 */
+const nodes12250={
+start:{type:"yn",badge:"122-50 • First check",q:"When commanding the drawer IN or OUT, do you hear a relay energizing?",info:"Before opening the circuit, note anything recently replaced, adjusted, unplugged, moved, flooded, or repaired. CR1 is the IN drawer control relay. CR2 is the OUT drawer control relay.",yes:"motor_voltage",no:"relay_no_swap"},
+relay_no_swap:{type:"yn",badge:"Relay isolation",q:"After swapping the two motor-controller relays and trying the command again, does a relay now energize?",info:"Swap CR1 and CR2 as the guide instructs, then retry the same drawer command.",yes:"motor_voltage",no:"line_voltage"},
+line_voltage:{type:"yn",badge:"LIVE AC VOLTAGE",q:"Is approximately 110 VAC present between L1 and L2 on the motor controller?",tool:"MULTIMETER • AC VOLTS • LIVE CIRCUIT",info:"DANGER: energized 110/115 VAC measurement. The source says check L1-L2 for 110 VAC. Controller reference lists 115/230 VAC input; this 122-50 application is set for 115.",yes:"control_common",no:"power_off_fuses"},
+power_off_fuses:{type:"yn",badge:"POWER OFF • Supply path",q:"With power removed, are F1 (line fuse) and F2 (neutral fuse), their holders, and the incoming feed/connections serviceable?",tool:"MULTIMETER • Continuity / Ω • POWER OFF",info:"Never use continuity/resistance on an energized circuit.",yes:"r_upstream_feed",no:"r_fuse_feed"},
+control_common:{type:"yn",badge:"Relay control circuit",q:"Has PB1 (operator drawer cover full closed) been verified in the control circuit against the schematic?",info:"PB1 is common to BOTH the CR1 IN and CR2 OUT relay circuits. Do not assume undocumented contact states.",yes:"control_interlocks",no:"r_pb1"},
+control_interlocks:{type:"yn",badge:"Relay control circuit",q:"Do the applicable control/interlock devices and wiring check correctly against the schematic for the commanded direction?",info:"Use the schematic to isolate SW1, SW2, SW3, PB1, LS1, LS2, LS3, and LS4 as applicable. Do not invent contact-state logic beyond the source.",yes:"r_control_upstream",no:"r_control_circuit"},
+motor_voltage:{type:"yn",badge:"LIVE DC VOLTAGE",q:"While motor activation is commanded, is 90 VDC ±3 V present at the motor plug or between A1 and A2?",tool:"MULTIMETER • DC VOLTS • LIVE CIRCUIT",info:"DANGER: live voltage test. The guide specifies A1-A2 motor voltage as 90 VDC ±3 V.",yes:"motor_mechanical",no:"controller_connections"},
+motor_mechanical:{type:"yn",badge:"Motor isolation",q:"With correct 90 VDC ±3 V reaching the motor, are the motor connections secure and is there no obvious mechanical binding?",info:"M1 is the gear motor.",yes:"r_motor",no:"r_motor_connection_or_bind"},
+controller_connections:{type:"yn",badge:"Motor controller",q:"Are all motor-controller board connections clean, fully seated, and making good contact?",info:"The guide says that if 90 VDC is absent, check all connections on the motor controller board for good contacts.",yes:"controller_reference",no:"r_controller_connection"},
+controller_reference:{type:"yn",badge:"Controller verification",q:"Do the motor-controller switch settings and visible indications match the 122-50 guide?",info:"SW501=115, SW502=115, SW503=ARM, SW504=90. Green LED indicates AC power. REV & FWD LEDs pulse once on motor activation. All POTs are factory set and sealed — DO NOT ADJUST.",yes:"r_motor_controller",no:"r_controller_setting"},
+
+r_fuse_feed:{type:"result",title:"AC supply / fuse circuit fault",why:"Line voltage is absent at L1-L2 and the de-energized fuse/feed check found a defective fuse, holder, connection, or incoming feed issue.",remedy:"Repair the proven AC supply/fuse fault. Correct any underlying cause before restoring power."},
+r_upstream_feed:{type:"result",title:"Upstream AC feed fault",why:"L1-L2 does not have the expected line voltage, but F1/F2 and immediate connections test serviceable with power off.",remedy:"Continue upstream through the incoming AC feed, power switch/interlock path, and wiring using the 122-50 schematic."},
+r_pb1:{type:"result",title:"PB1 common control-path fault",why:"Neither CR1 nor CR2 energizes and PB1, common to both relay circuits, did not prove correct in the schematic-guided check.",remedy:"Repair/adjust/replace PB1 or its wiring only if the schematic-guided test proves it faulty. Retest both IN and OUT."},
+r_control_circuit:{type:"result",title:"Relay energizing control-circuit fault",why:"L1-L2 supply is present, but the applicable command/interlock path does not satisfy the relay-energizing circuit.",remedy:"Repair the proven fault in SW1, SW2, SW3, PB1, LS1, LS2, LS3, LS4, or associated wiring as identified from the schematic."},
+r_control_upstream:{type:"result",title:"Relay control circuit requires deeper schematic isolation",why:"Line voltage is present and known common/interlock checkpoints appear correct, yet the commanded relay still does not energize.",remedy:"Continue point-by-point control-circuit isolation using the 122-50 electrical schematic and harness wiring."},
+r_motor:{type:"result",title:"Gear motor strongly suspected",why:"The relay energizes and 90 VDC ±3 V is present at the motor plug/A1-A2 during the command, while connections and obvious binding have been ruled out.",remedy:"Replace or further isolate M1 gear motor per applicable service procedure, then verify full travel."},
+r_motor_connection_or_bind:{type:"result",title:"Motor connection or mechanical binding fault",why:"Correct motor-drive voltage is present, but a poor motor connection or mechanical restriction is preventing movement.",remedy:"Repair the connection and/or correct binding, then cycle the drawer repeatedly through full travel."},
+r_controller_connection:{type:"result",title:"Motor-controller connection fault",why:"The relay energizes but 90 VDC output is absent, and a loose/damaged/poor-contact motor-controller connection was found.",remedy:"Repair/reseat the affected connection and retest commanded motor voltage and drawer travel."},
+r_controller_setting:{type:"result",title:"Motor-controller configuration / indication mismatch",why:"The controller does not match the source reference settings/indications.",remedy:"Correct only the documented switch setting or connection issue that is proven incorrect. DO NOT ADJUST factory-set/sealed POTs."},
+r_motor_controller:{type:"result",title:"Motor controller strongly suspected",why:"A relay energizes, 90 VDC motor output is absent, board connections are good, and documented controller settings/indications have been checked.",remedy:"The source states the motor controller may be bad. Replace with the correct compatible board; source P/N 31-019997-0-00-A, then retest both IN and OUT."}
+};
+
+let currentNode="start",diagHist=[];
+let activeNodes=nodes816;
+let activeDiagnostic="cca816";
+function launchDiagnostic(id){
+  recordRecent(id);
+  const custom=library.diagnostics.find(d=>d.id===id && d.custom);
+  if(custom){showCustomDiagnostic(id);return;}
+  if(!["cca816","drawer12250"].includes(id))return;
+  activeDiagnostic=id;
+  sessionEvidence=[];
+  activeNodes=id==="drawer12250"?nodes12250:nodes816;
+  currentNode="start";diagHist=[];setView("wizardView");
+  if(id==="drawer12250"){
+    document.getElementById("topTitle").textContent="122-50 Deal Drawer";
+    document.querySelector("#wizardView .path").innerHTML='VAT › Drawer › 122-50 › Drawer Drive / Motor Control › <b>122-50 Deal Drawer Troubleshooting</b>';
+    document.querySelector("#wizardView .eyebrow").textContent="122-50 DEAL DRAWER • MOTOR CONTROL";
+    document.querySelector("#wizardView h1").textContent="122-50 Deal Drawer Troubleshooting";
+    document.querySelector("#wizardView .eyebrow").insertAdjacentHTML("afterend",`<div id="source12250" class="sourcebadge" style="margin-top:8px">MANUAL VERIFIED • 122-50 Troubleshooting Guide • 8/1/2022 • Pg 1–5</div>`);
+  }else{
+    document.getElementById("source12250")?.remove();
+    document.getElementById("topTitle").textContent="816 CCA Mic/Speaker";
+    document.querySelector("#wizardView .path").innerHTML='VAT › Lane Audio › General VAT › Audio › <b>816 CCA Mic/Speaker</b>';
+    document.querySelector("#wizardView .eyebrow").textContent="VAT AUDIO SUB-SEGMENT";
+    document.querySelector("#wizardView h1").textContent="816 CCA Mic/Speaker Diagnostic";
+  }
+  renderWizard();
+}
+function renderWizard(){
+ const n=activeNodes[currentNode], shell=document.getElementById("wizardShell");
+ document.getElementById("diagHistory").innerHTML=diagHist.map(x=>`<li>${x.q} → <b>${x.a}</b></li>`).join("");
+ if(activeDiagnostic==="drawer12250"){
+   let existing=document.getElementById("ref12250");
+   if(!existing){
+     document.getElementById("diagPath").insertAdjacentHTML("beforebegin",`<div id="ref12250" class="card" style="margin-top:14px">
+       <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+         <div><div class="eyebrow">Source-backed reference</div><b>122-50 Controller Reference Data</b></div>
+         <button class="btn" onclick="toggle12250Ref()">Reference Data</button>
+       </div>
+       <div id="ref12250Body" class="hidden" style="margin-top:12px">
+         <div class="resultgrid">
+           <div class="resultbox"><h4>Controller Voltages</h4><p>L1-L2 input: 115/230 VAC<br>A1-A2 motor: 90 VDC ±3 V<br>S0-S1 open: +10 V<br>S0-S3 open: -10 V<br>RB1-RB4 open: +5 V</p></div>
+           <div class="resultbox"><h4>Switch Settings</h4><p>SW501 = 115<br>SW502 = 115<br>SW503 = ARM<br>SW504 = 90</p></div>
+           <div class="resultbox"><h4>Indicators / Control</h4><p>Green LED = AC power<br>REV & FWD LEDs pulse once on motor activation<br>RB1-RB4 closed = brake activated<br>RB1-RB2 jumper = motor enabled</p></div>
+           <div class="resultbox"><h4>Relays / Motor</h4><p>CR1 = IN relay<br>CR2 = OUT relay<br>M1 = gear motor<br>Motor controller P/N 31-019997-0-00-A</p></div>
+         </div>
+         <div class="tool" style="margin-top:12px"><b>DO NOT ADJUST FACTORY-SEALED POTs</b><div>The 122-50 guide states all POTs are factory set and sealed.</div></div>
+         <div class="resultbox" style="margin-top:12px"><h4>Schematic Legend</h4><p>SW1 countertop interlock • SW2 power switch • SW3 drawer IN/OUT operator switch • SW4 optional heater switch • PB1 operator drawer cover full closed • LS1 IN limit • LS2 OUT limit • LS3 outer door ready to open • LS4 outer door open • F1 line fuse • F2 neutral fuse • MCONT motor controller • HTR1 optional heater • CR1 IN relay • CR2 OUT relay.</p></div>
+       </div>
+     </div>`);
+   }
+ } else { document.getElementById("ref12250")?.remove(); }
+ if(n.type==="result"){
+   shell.innerHTML=`<div class="card result"><div class="eyebrow">Diagnosis reached</div><h2>${n.title}</h2>
+   <div class="resultgrid"><div class="resultbox"><h4>Why / Proof</h4><p>${n.why}</p></div><div class="resultbox"><h4>Remedy</h4><p>${n.remedy}</p></div></div>
+   <div class="resultbox" style="margin-top:12px"><h4>Return-to-service retest</h4><ul class="checks">${["Teller hears customer clearly","Customer hears teller clearly","Audio level acceptable","No static, hum, distortion, or feedback","Call function works","Cycle drawer through normal travel","Audio remains stable during movement","Failure does not return"].map((x,i)=>`<li><label><input type="checkbox">${x}</label></li>`).join("")}</ul></div>
+   <div style="display:flex;gap:10px;margin-top:14px"><button class="btn primary" onclick="restartDiag()">Start new diagnosis</button><button class="btn" onclick="diagBack()">Back one step</button></div></div>`;
+   return;
+ }
+ const tool=n.tool?`<div class="tool"><b>${n.tool}</b><div>${n.info||"Use the meter only as described."}</div><div><strong>Never use continuity or resistance mode on an energized circuit.</strong></div></div>`:"";
+ shell.innerHTML=`<div class="card"><div class="eyebrow">${n.badge||"Diagnostic"}</div><div class="wizardQ">${n.q}</div>${n.info&&!n.tool?`<p class="muted">${n.info}</p>`:""}${tool}
+ <div class="choices">${n.type==="yn"?`<button class="choice" onclick="diagAnswer('YES','${n.yes}')"><strong>YES</strong><small>Continue down this branch</small></button><button class="choice" onclick="diagAnswer('NO','${n.no}')"><strong>NO</strong><small>Continue down this branch</small></button>`:n.options.map(o=>`<button class="choice" onclick='diagAnswer(${JSON.stringify(o[0])},${JSON.stringify(o[1])})'><strong>${o[0]}</strong><small>${o[2]||""}</small></button>`).join("")}</div></div>`;
+}
+function diagAnswer(a,next){const q=activeNodes[currentNode].q||activeNodes[currentNode].title||currentNode;diagHist.push({node:currentNode,q,a});addEvidence(`${q} → ${a}`);currentNode=next;renderWizard();window.scrollTo({top:0,behavior:"smooth"})}
+function diagBack(){if(!diagHist.length)return;const p=diagHist.pop();currentNode=p.node;renderWizard()}
+function restartDiag(){currentNode="start";diagHist=[];renderWizard()}
+function toggle12250Ref(){document.getElementById("ref12250Body")?.classList.toggle("hidden")}
+
+let appMode="tech";
+let sessionEvidence=[];
+const PARTS_DB={
+  "31-019997-0-00-A":{
+    part_number:"31-019997-0-00-A",
+    component:"Motor Controller",
+    unit:"122-50 Deal Drawer",
+    subsystem:"Drawer Drive / Motor Control",
+    related:["CR1","CR2","M1","A1/A2","L1/L2"],
+    known_tests:["L1-L2 input voltage","A1-A2 motor output 90 VDC ±3 V"],
+    source:"122-50 Troubleshooting Guide • 8/1/2022 • Pages 1–5",
+    verification:"MANUAL VERIFIED"
+  }
+};
+
+function setAppMode(mode){
+  appMode=mode;
+  document.getElementById("techModeBtn")?.classList.toggle("active",mode==="tech");
+  document.getElementById("adminModeBtn")?.classList.toggle("active",mode==="admin");
+  document.getElementById("adminHomePanel")?.classList.toggle("hidden",mode!=="admin");
+  if(mode==="admin") document.getElementById("topTitle").textContent="Field Diagnostic Hub • Admin";
+  else document.getElementById("topTitle").textContent="Field Diagnostic Hub";
+}
+function focusGlobalSearch(kind){
+  const el=document.getElementById("globalSearch")||document.querySelector('input[type="search"]')||document.querySelector('input[placeholder*="Search"]');
+  if(el){el.focus(); if(kind==="part") el.placeholder="Enter part number…";}
+}
+function addEvidence(text){
+  if(!text)return;
+  sessionEvidence.push({time:new Date().toLocaleTimeString(),text});
+  renderEvidence();
+}
+function renderEvidence(){
+  const list=document.getElementById("evidenceList"); if(!list)return;
+  list.innerHTML=sessionEvidence.map(x=>`<li><b>${x.time}</b> — ${x.text}</li>`).join("") || "<li>No evidence recorded yet.</li>";
+}
+function toggleEvidence(){document.getElementById("evidencePanel")?.classList.toggle("hidden");renderEvidence()}
+function showPartProfileForActive(){
+  const box=document.getElementById("activePartProfile"); if(!box)return;
+  box.classList.toggle("hidden");
+  if(activeDiagnostic==="drawer12250"){
+    const p=PARTS_DB["31-019997-0-00-A"];
+    box.innerHTML=renderPartProfile(p);
+  } else {
+    box.innerHTML=`<div class="eyebrow">PART PROFILE</div><h3>816 CCA Mic/Speaker</h3><p class="muted">Exact photographed board part number/revision remains unconfirmed in the current source set.</p>`;
+  }
+}
+function renderPartProfile(p){
+  return `<div class="eyebrow">PART NUMBER INTELLIGENCE</div>
+  <h3>${p.part_number} — ${p.component}</h3>
+  <span class="sourcebadge">${p.verification}</span>
+  <p><b>Unit:</b> ${p.unit}<br><b>Subsystem:</b> ${p.subsystem}</p>
+  <p><b>Related:</b> ${p.related.join(" • ")}</p>
+  <p><b>Known tests:</b> ${p.known_tests.join(" • ")}</p>
+  <p class="muted"><b>Source:</b> ${p.source}</p>`;
+}
+function maybeShowPartProfileFromSearch(q){
+  const card=document.getElementById("partProfileCard"); if(!card)return;
+  const key=Object.keys(PARTS_DB).find(k=>q.toLowerCase().includes(k.toLowerCase()));
+  if(!key){card.classList.add("hidden");card.innerHTML="";return;}
+  card.classList.remove("hidden"); card.innerHTML=renderPartProfile(PARTS_DB[key]);
+}
+function interpret12250Reading(){
+  const input=document.getElementById("reading12250"); if(!input)return;
+  const val=parseFloat(input.value);
+  const out=document.getElementById("reading12250Result");
+  if(Number.isNaN(val)){out.textContent="Enter a numeric DC voltage reading.";return;}
+  let cls="",msg="";
+  if(val>=87 && val<=93){cls="IN RANGE";msg="IN RANGE — 90 VDC ±3 V. Continue toward motor/mechanical isolation."}
+  else if(val===0){cls="ZERO";msg="ZERO / NO OUTPUT — continue toward motor-controller connections and controller isolation."}
+  else if(val<87){cls="LOW";msg="LOW — outside the source-specified 90 VDC ±3 V range. Continue controller/output isolation."}
+  else {cls="HIGH";msg="HIGH — outside the source-specified 90 VDC ±3 V range. Stop and verify controller/configuration against the source before proceeding."}
+  out.textContent=msg;
+  addEvidence(`A1-A2 motor output measured ${val} VDC — ${cls}.`);
+}
+function confidenceBadge(type){
+  if(type==="proven") return '<span class="confidence proven">PROVEN</span>';
+  if(type==="strong") return '<span class="confidence strong">STRONGLY SUSPECTED</span>';
+  return '<span class="confidence notproven">NOT PROVEN / CONTINUE ISOLATION</span>';
+}
+
+function escapeHTML(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+}
+function getSavedCustomDiagnostics(){
+  try{return JSON.parse(localStorage.getItem(CUSTOM_STORAGE_KEY)||"[]")}catch{return []}
+}
+function saveCustomCollection(items){
+  localStorage.setItem(CUSTOM_STORAGE_KEY,JSON.stringify(items));
+}
+function ensureLibraryPlacement(d){
+  const legacyFamilies={"VAT":"Pneumatic Tubes","Transaction Drawers":"Drawer","Safe / Vault":"Safe/Vault","Drive-Up / Other":"Under Counter"};
+  d.unitGroup=legacyFamilies[d.unitGroup]||d.unitGroup;
+  const allFamilies=[...FAMILY_OPTIONS.VAT,...FAMILY_OPTIONS.VLT];
+  if(!allFamilies.includes(d.unitGroup))d.unitGroup=d.department==="VLT"?"Electric Lock":"Pneumatic Tubes";
+  d.department=FAMILY_OPTIONS.VAT.includes(d.unitGroup)?"VAT":"VLT";
+  let department=library.departments.find(x=>x.name===d.department);
+  if(!department.units.includes(d.unitGroup))department.units.push(d.unitGroup);
+  library.units[d.unitGroup]??=[];
+  let unit=library.units[d.unitGroup].find(x=>x.name===d.unit);
+  if(!unit){unit={name:d.unit,subs:[]};library.units[d.unitGroup].push(unit)}
+  if(!unit.subs.includes(d.subsystem))unit.subs.push(d.subsystem);
+}
+function loadCustomDiagnostics(){
+  const saved=getSavedCustomDiagnostics();
+  saved.forEach(d=>{
+    ensureLibraryPlacement(d);
+    if(!library.diagnostics.some(existing=>existing.id===d.id))library.diagnostics.push(d);
+  });
+}
+function showBuilder(){
+  setView("builderView");
+  document.getElementById("topTitle").textContent=builderEditingId?"Edit Diagnostic":"New Diagnostic";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function updateUnitFamilies(selectedValue){
+  const department=document.getElementById("builderDepartment").value;
+  const select=document.getElementById("builderGroup");
+  const options=FAMILY_OPTIONS[department]||[];
+  const requested=typeof selectedValue==="string"?selectedValue:"";
+  select.innerHTML=options.map(value=>`<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join("")+`<option value="${ADD_OPTION_VALUE}">＋ Add new unit family…</option>`;
+  if(options.includes(requested))select.value=requested;
+  updateUnitModels();
+}
+function updateUnitModels(selectedValue){
+  const family=document.getElementById("builderGroup").value;
+  const select=document.getElementById("builderUnit");
+  const options=(library.units[family]||[]).map(unit=>unit.name);
+  const requested=typeof selectedValue==="string"?selectedValue:"";
+  select.innerHTML=options.map(value=>`<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join("")+`<option value="${ADD_OPTION_VALUE}">＋ Add new unit / model…</option>`;
+  if(options.includes(requested))select.value=requested;
+  updateSubsystems();
+}
+function updateSubsystems(selectedValue){
+  const family=document.getElementById("builderGroup").value;
+  const unitName=document.getElementById("builderUnit").value;
+  const unit=(library.units[family]||[]).find(item=>item.name===unitName);
+  const options=unit?.subs||[];
+  const select=document.getElementById("builderSubsystem");
+  const requested=typeof selectedValue==="string"?selectedValue:"";
+  select.innerHTML=options.map(value=>`<option value="${escapeHTML(value)}">${escapeHTML(value)}</option>`).join("")+`<option value="${ADD_OPTION_VALUE}">＋ Add new subsystem…</option>`;
+  if(options.includes(requested))select.value=requested;
+}
+function saveCustomTaxonomy(){
+  try{localStorage.setItem(CUSTOM_TAXONOMY_KEY,JSON.stringify({families:FAMILY_OPTIONS,units:library.units}))}catch(error){setBuilderNotice("The new dropdown option could not be saved in this browser.",true)}
+}
+function loadCustomTaxonomy(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(CUSTOM_TAXONOMY_KEY)||"null");if(!saved)return;
+    ["VAT","VLT"].forEach(department=>{
+      (saved.families?.[department]||[]).forEach(value=>{if(!FAMILY_OPTIONS[department].includes(value))FAMILY_OPTIONS[department].push(value)});
+      const departmentRecord=library.departments.find(item=>item.name===department);
+      FAMILY_OPTIONS[department].forEach(value=>{if(!departmentRecord.units.includes(value))departmentRecord.units.push(value)});
+    });
+    Object.entries(saved.units||{}).forEach(([family,units])=>{
+      library.units[family]??=[];
+      (Array.isArray(units)?units:[]).forEach(savedUnit=>{
+        let unit=library.units[family].find(item=>item.name===savedUnit.name);
+        if(!unit){unit={name:savedUnit.name,subs:[]};library.units[family].push(unit)}
+        (savedUnit.subs||[]).forEach(sub=>{if(!unit.subs.includes(sub))unit.subs.push(sub)});
+      });
+    });
+  }catch{}
+}
+function handleBuilderSelectAdd(type,select){
+  if(select.value!==ADD_OPTION_VALUE){
+    if(type==="family")updateUnitModels();
+    if(type==="unit")updateSubsystems();
+    return;
+  }
+  const labels={family:"unit family",unit:"unit / model",subsystem:"subsystem"};
+  const value=(prompt(`Enter the new ${labels[type]} name:`)||"").trim();
+  if(!value){
+    if(type==="family")updateUnitFamilies();else if(type==="unit")updateUnitModels();else updateSubsystems();
+    return;
+  }
+  if(value.length>80){setBuilderNotice("Dropdown names must be 80 characters or fewer.",true);if(type==="family")updateUnitFamilies();else if(type==="unit")updateUnitModels();else updateSubsystems();return}
+  if(type==="family"){
+    const department=document.getElementById("builderDepartment").value;
+    if(!FAMILY_OPTIONS[department].includes(value))FAMILY_OPTIONS[department].push(value);
+    const departmentRecord=library.departments.find(item=>item.name===department);if(!departmentRecord.units.includes(value))departmentRecord.units.push(value);
+    library.units[value]??=[];saveCustomTaxonomy();updateUnitFamilies(value);
+  }else if(type==="unit"){
+    const family=document.getElementById("builderGroup").value;library.units[family]??=[];
+    if(!library.units[family].some(item=>item.name===value))library.units[family].push({name:value,subs:[]});
+    saveCustomTaxonomy();updateUnitModels(value);
+  }else{
+    const family=document.getElementById("builderGroup").value;const unitName=document.getElementById("builderUnit").value;
+    const unit=(library.units[family]||[]).find(item=>item.name===unitName);if(unit&&!unit.subs.includes(value))unit.subs.push(value);
+    saveCustomTaxonomy();updateSubsystems(value);
+  }
+  setBuilderNotice(`${value} was added and will remain in this dropdown.`);
+}
+function builderSource(kind){
+  return document.getElementById({troubleshooting:"builderTroubleshooting",parts:"builderParts",manual:"builderManual"}[kind]);
+}
+function builderFileLabel(kind){return document.getElementById(kind+"FileName")}
+async function importBuilderFile(kind,event){
+  const file=event.target.files?.[0];if(!file)return;
+  const label=builderFileLabel(kind);label.textContent=`Reading ${file.name}…`;
+  try{
+    let text="";const lower=file.name.toLowerCase();
+    if(lower.endsWith(".pdf")){
+      if(!window.pdfjsLib)throw new Error("PDF reader did not load. Paste the document text instead.");
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      const pdf=await window.pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise;
+      const pages=[];
+      for(let pageNumber=1;pageNumber<=pdf.numPages;pageNumber++){
+        const page=await pdf.getPage(pageNumber);const content=await page.getTextContent();
+        pages.push(content.items.map(item=>item.str).join(" "));
+      }
+      text=pages.join("\n\n");
+    }else if(lower.endsWith(".docx")){
+      if(!window.mammoth)throw new Error("DOCX reader did not load. Paste the document text instead.");
+      text=(await window.mammoth.extractRawText({arrayBuffer:await file.arrayBuffer()})).value;
+    }else{text=await file.text()}
+    builderSource(kind).value=text.trim();
+    label.textContent=`✓ ${file.name} • ${text.trim().length.toLocaleString()} characters`;
+    updateBuilderPreview();
+  }catch(error){label.textContent=`Could not read ${file.name}`;setBuilderNotice(error.message||"File import failed.",true)}
+}
+function meaningfulLines(text,limit=40){
+  return String(text||"").split(/\r?\n/).map(line=>line.replace(/^\s*(?:[-*•]+|\d+[.)])\s*/,"").trim()).filter(line=>line.length>2).filter((line,index,all)=>all.indexOf(line)===index).slice(0,limit);
+}
+function parsePartsSource(text){
+  return meaningfulLines(text,80).map(line=>{
+    const cells=line.split(/\t|\s{2,}|,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/).map(x=>x.replace(/^\"|\"$/g,"").trim()).filter(Boolean);
+    return {partNumber:cells[0]||line,description:cells.slice(1).join(" • ")||"Imported part reference"};
+  }).filter((part,index,all)=>all.findIndex(x=>x.partNumber===part.partNumber)===index);
+}
+function currentBuilderDraft(){
+  const troubleshooting=builderSource("troubleshooting").value.trim();
+  const parts=builderSource("parts").value.trim();
+  const manual=builderSource("manual").value.trim();
+  return {
+    title:document.getElementById("builderTitle").value.trim(),
+    department:document.getElementById("builderDepartment").value.trim(),
+    unitGroup:document.getElementById("builderGroup").value.trim(),
+    unit:document.getElementById("builderUnit").value.trim(),
+    subsystem:document.getElementById("builderSubsystem").value.trim(),
+    symptoms:document.getElementById("builderSymptoms").value.split(",").map(x=>x.trim()).filter(Boolean),
+    troubleshooting,partsText:parts,manual,
+    steps:meaningfulLines(troubleshooting,40),parts:parsePartsSource(parts)
+  };
+}
+function validateBuilderDraft(draft){
+  const missing=[];
+  [[draft.title,"Diagnostic name"],[draft.department,"Department"],[draft.unitGroup,"Unit family"],[draft.unit,"Unit / model"],[draft.subsystem,"Subsystem"],[draft.troubleshooting,"Troubleshooting"],[draft.partsText,"Parts List"],[draft.manual,"Manual"]].forEach(([value,label])=>{if(!value)missing.push(label)});
+  return missing;
+}
+function setBuilderNotice(message,isError=false){
+  const notice=document.getElementById("builderNotice");notice.textContent=message;notice.className="notice"+(isError?" error":"");
+}
+function updateBuilderPreview(){
+  const d=currentBuilderDraft();
+  const completed=[d.troubleshooting,d.partsText,d.manual].filter(Boolean).length;
+  setBuilderNotice(`${completed}/3 source imports ready • ${d.steps.length} troubleshooting steps • ${d.parts.length} parts rows`,false);
+}
+function generateBuilderPreview(){
+  const d=currentBuilderDraft();const missing=validateBuilderDraft(d);
+  if(missing.length){setBuilderNotice(`Complete: ${missing.join(", ")}.`,true);return false}
+  const preview=document.getElementById("builderPreview");preview.classList.remove("hidden");
+  preview.innerHTML=`<div class="eyebrow">GENERATED PREVIEW</div><h2>${escapeHTML(d.title)}</h2>
+    <div class="custommeta"><span class="badge">${escapeHTML(d.department)}</span><span class="badge">${escapeHTML(d.unitGroup)}</span><span class="badge">${escapeHTML(d.unit)}</span><span class="badge">${escapeHTML(d.subsystem)}</span><span class="sourcebadge">3 SOURCES READY</span></div>
+    <div class="resultgrid"><div class="sourcecolumn"><h3>Troubleshooting sequence</h3><ol class="previewlist">${d.steps.slice(0,15).map(step=>`<li>${escapeHTML(step)}</li>`).join("")}</ol>${d.steps.length>15?`<p class="muted">+ ${d.steps.length-15} additional steps</p>`:""}</div>
+    <div class="sourcecolumn"><h3>Parts intelligence</h3><ul class="previewlist">${d.parts.slice(0,15).map(part=>`<li><b>${escapeHTML(part.partNumber)}</b> — ${escapeHTML(part.description)}</li>`).join("")}</ul>${d.parts.length>15?`<p class="muted">+ ${d.parts.length-15} additional parts</p>`:""}</div></div>
+    <p class="muted" style="margin-top:14px">The complete manual remains attached inside the saved diagnostic as searchable reference material.</p>`;
+  setBuilderNotice("Preview generated. Review it, then choose Save & Publish to Hub.");preview.scrollIntoView({behavior:"smooth",block:"start"});return true;
+}
+function saveGeneratedDiagnostic(){
+  const d=currentBuilderDraft();const missing=validateBuilderDraft(d);
+  if(missing.length){setBuilderNotice(`Cannot publish yet. Complete: ${missing.join(", ")}.`,true);return}
+  const items=getSavedCustomDiagnostics();const now=new Date().toISOString();
+  const existing=items.find(x=>x.id===builderEditingId);
+  const record={...d,id:existing?.id||`custom-${Date.now()}`,status:"live",custom:true,tools:[],createdAt:existing?.createdAt||now,updatedAt:now};
+  const next=existing?items.map(x=>x.id===existing.id?record:x):[...items,record];
+  saveCustomCollection(next);
+  const index=library.diagnostics.findIndex(x=>x.id===record.id);
+  if(index>=0)library.diagnostics[index]=record;else library.diagnostics.push(record);
+  ensureLibraryPlacement(record);builderEditingId=null;
+  setBuilderNotice("Diagnostic saved and published to Ready to use.");renderReady();renderDashboardOverview();showCustomDiagnostic(record.id);
+}
+function showCustomDiagnostic(id){
+  const d=library.diagnostics.find(x=>x.id===id&&x.custom);if(!d)return;
+  recordRecent(id);
+  setView("customView");document.getElementById("topTitle").textContent=d.title;
+  const shell=document.getElementById("customDiagnosticShell");
+  shell.innerHTML=`<div class="path">${escapeHTML(d.department)} › ${escapeHTML(d.unitGroup)} › ${escapeHTML(d.unit)} › ${escapeHTML(d.subsystem)} › <b>${escapeHTML(d.title)}</b></div>
+    <div class="eyebrow">CUSTOM FIELD DIAGNOSTIC</div><h1>${escapeHTML(d.title)}</h1>
+    <div class="custommeta"><span class="status live">LIVE</span><span class="sourcebadge">TROUBLESHOOTING</span><span class="sourcebadge">PARTS LIST</span><span class="sourcebadge">MANUAL</span></div>
+    <div class="card"><div class="eyebrow">TECHNICIAN CHECKLIST</div><h2>Troubleshooting sequence</h2><ol class="checks">${d.steps.map(step=>`<li><label><input type="checkbox">${escapeHTML(step)}</label></li>`).join("")||'<li class="emptycopy">No parsed steps.</li>'}</ol></div>
+    <div class="sectiontitle"><h2>Parts List</h2><span class="muted">Imported source</span></div>
+    <div class="card"><div class="tablewrap" style="overflow:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px">Part Number / Item</th><th style="text-align:left;padding:8px">Description</th></tr></thead><tbody>${d.parts.map(part=>`<tr><td style="padding:8px;border-top:1px solid var(--line)"><b>${escapeHTML(part.partNumber)}</b></td><td style="padding:8px;border-top:1px solid var(--line)">${escapeHTML(part.description)}</td></tr>`).join("")}</tbody></table></div></div>
+    <div class="sectiontitle"><h2>Manual Reference</h2><span class="muted">Complete imported text</span></div><div class="sourcecolumn"><pre>${escapeHTML(d.manual)}</pre></div>
+    <div class="builderactions"><button class="btn primary" onclick="editGeneratedDiagnostic('${d.id}')">Edit Diagnostic</button><button class="btn" onclick="showHome()">Back to Library</button><button class="btn" onclick="deleteGeneratedDiagnostic('${d.id}')">Delete</button></div>`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function editGeneratedDiagnostic(id){
+  const d=getSavedCustomDiagnostics().find(x=>x.id===id);if(!d)return;builderEditingId=id;
+  document.getElementById("builderTitle").value=d.title;document.getElementById("builderDepartment").value=d.department;updateUnitFamilies(d.unitGroup);
+  updateUnitModels(d.unit);updateSubsystems(d.subsystem);
+  document.getElementById("builderSymptoms").value=(d.symptoms||[]).join(", ");builderSource("troubleshooting").value=d.troubleshooting;builderSource("parts").value=d.partsText;builderSource("manual").value=d.manual;
+  ["troubleshooting","parts","manual"].forEach(kind=>builderFileLabel(kind).textContent="Saved source loaded");showBuilder();updateBuilderPreview();generateBuilderPreview();
+}
+function deleteGeneratedDiagnostic(id){
+  const d=library.diagnostics.find(x=>x.id===id);if(!d||!confirm(`Delete ${d.title}? This cannot be undone.`))return;
+  saveCustomCollection(getSavedCustomDiagnostics().filter(x=>x.id!==id));writeIdList(FAVORITES_STORAGE_KEY,readIdList(FAVORITES_STORAGE_KEY).filter(x=>x!==id));writeIdList(RECENT_STORAGE_KEY,readIdList(RECENT_STORAGE_KEY).filter(x=>x!==id));library.diagnostics=library.diagnostics.filter(x=>x.id!==id);showHome();
+}
+function resetBuilder(){
+  if(!confirm("Clear the current diagnostic draft?"))return;builderEditingId=null;
+  ["builderTitle","builderSymptoms","builderTroubleshooting","builderParts","builderManual"].forEach(id=>document.getElementById(id).value="");document.getElementById("builderDepartment").value="VAT";updateUnitFamilies();
+  ["troubleshooting","parts","manual"].forEach(kind=>{document.getElementById(kind+"File").value="";builderFileLabel(kind).textContent="No file selected"});
+  document.getElementById("builderPreview").classList.add("hidden");setBuilderNotice("Draft cleared.");document.getElementById("topTitle").textContent="New Diagnostic";
+}
+
+loadCustomTaxonomy();
+loadCustomDiagnostics();
+updateUnitFamilies();
+showHome();
+</script>
+</body>
+</html>
+
