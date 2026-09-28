@@ -1,0 +1,7 @@
+{
+  "name": "master-hub-deploy-root",
+  "private": true,
+  "scripts": {
+    "vercel-build": "npm --prefix master-hub-app run build"
+  }
+}
