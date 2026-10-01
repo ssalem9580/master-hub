@@ -46,16 +46,16 @@ DEPENDENCIES:
 RESOLUTION: Project Owner approved permanent retention of DEF-### as the Master Hub canonical defect-ID convention. Adopt template defect schema without renaming historical IDs.
 
 
-## ISSUE-005 — Public field-service material classification unresolved
+## ISSUE-005 — Restricted field-service material is present in public repository/deployment
 TYPE: Security / Data Governance
-STATUS: OPEN
-DESCRIPTION: The GitHub repository is public and contains field-service diagnostic and repair-package material. The audit has not established whether all such material is approved for public distribution.
-WHY IT MATTERS: If any content is restricted, public repository visibility would create an unacceptable exposure boundary.
-EVIDENCE: Repository visibility + source inspection recorded in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
-POSSIBLE SOLUTIONS: Classify source content; separate public/private data; change visibility only after explicit owner approval and recovery planning.
-DECISION REQUIRED: YES before repository visibility change or destructive content removal.
-DEPENDENCIES: Content classification / owner decision.
-RESOLUTION:
+STATUS: OPEN — CRITICAL CONTAINMENT REQUIRED
+DESCRIPTION: Under DEC-016, all field-service diagnostic, repair, parts, procedural, and related operational material is RESTRICTED by default. The current GitHub repository and multiple public MasterHub routes/assets contain this material.
+WHY IT MATTERS: The approved distribution boundary now conflicts with the current public source/deployment boundary.
+EVIDENCE: DEC-016; public repository visibility; public route verification; source inspection in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
+POSSIBLE SOLUTIONS: Move restricted content into a private canonical store/repository; remove it from public HEAD/deployment; assess public Git history remediation; preserve recoverable backups; maintain public MasterHub shell without restricted content.
+DECISION REQUIRED: YES for repository visibility/history rewrite or private-repository migration; immediate classification itself is approved.
+DEPENDENCIES: Restricted-content inventory and recovery plan.
+RESOLUTION: Classification resolved by DEC-016. Containment/remediation remains open.
 
 ## ISSUE-006 — CI does not execute tests or lint
 TYPE: Technical / Quality
