@@ -41,7 +41,7 @@ Rule:
 No unmitigated Critical risk may remain at final release.
 Existing risk records remain authoritative historical entries and may be expanded when revisited.
 
-| RISK-007 | Public repository may expose restricted field-service material if any current diagnostic/repair content has distribution limits | Medium / UNKNOWN CLASSIFICATION | Critical | Classify content before visibility changes; separate restricted sources if needed | OPEN |
+| RISK-007 | Public repository/deployment exposes field-service material now classified RESTRICTED under DEC-016 | High / CONFIRMED | Critical | Quarantine restricted content into a private canonical store; remove public serving/source exposure with recovery safeguards | OPEN — CRITICAL |
 | RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | Canonical CI requires lint/test/build; post-merge run 36811990043 passed | MITIGATED |
 | RISK-009 | Static governance UI can diverge from canonical source-of-truth documents | High | Medium | Generate/read controlled canonical status rather than duplicating state text | OPEN |
 
@@ -52,3 +52,5 @@ Existing risk records remain authoritative historical entries and may be expande
 | RISK-013 | Recovery Value Calculator recovered source is not canonicalized and current Vercel linkage/root config is drifted | High | High | Validate recovered branch source, canonicalize it, correct Root Directory, and verify before promotion | OPEN |
 
 | RISK-014 | Canonical main/baseline branches are mutable because GitHub protection is not enabled | Medium-High | Critical | Add ruleset/branch protection and preserve exact release SHAs/tags | OPEN |
+
+| RISK-015 | Previously public Git history may retain restricted field-service material even after removal from current HEAD | High | Critical | Inventory affected history; preserve private backup; choose controlled history-remediation strategy before claiming containment complete | OPEN — CRITICAL |
