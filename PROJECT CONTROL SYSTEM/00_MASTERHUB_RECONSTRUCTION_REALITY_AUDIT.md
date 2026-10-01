@@ -83,7 +83,7 @@ REALITY:
 - no server database is evident in inspected route
 
 STATUS: IMPLEMENTED / SOURCE VERIFIED
-LIVE HTTP: NOT YET DIRECTLY VERIFIED during this audit
+LIVE HTTP: 200 VERIFIED
 
 ## Project-wide database
 STATUS: UNKNOWN / NEEDS CONFIRMATION for external/standalone tools.
@@ -194,10 +194,13 @@ Current hard-coded registry contains 9 entries:
 
 ## Evidence sweep
 
+All six internal canonical routes returned HTTP 200 during this audit: /, /project-control, /field-resource-hub, /field-diagnostic-hub, /finances-command-center, /repair-packages.
+
+
 | Registry item | UI label | Evidence | Reality classification |
 |---|---|---|---|
-| Project Control Center | Live | source route exists; build passes | IMPLEMENTED / LIVE ROUTE NOT DIRECTLY VERIFIED |
-| Field Diagnostic Hub (opens Field Resource Hub) | Setup needed | source routes/assets exist | IMPLEMENTED / SETUP STATUS OWNER-DEFINED |
+| Project Control Center | Live | source exists + HTTP 200 | VERIFIED LIVE |
+| Field Diagnostic Hub (opens Field Resource Hub) | Setup needed | /field-resource-hub and /field-diagnostic-hub both HTTP 200 | VERIFIED AVAILABLE / SETUP STATUS OWNER-DEFINED |
 | Finances Command Center | Live | HTTP 200 observed | VERIFIED LIVE |
 | NTE Exceed/Quote Generator | Live | HTTP 200 observed | VERIFIED LIVE |
 | Billed Work Tracker | Live | HTTP 200 observed | VERIFIED LIVE |
@@ -213,6 +216,8 @@ At least one "Live" item is currently proven broken.
 ---
 
 # 8. Project Control Center Reality
+
+LIVE HTTP: 200 VERIFIED
 
 The /project-control source is a static presentation of the control system.
 
@@ -241,7 +246,23 @@ ACTION: Correct current state during this audit branch; preserve history rather 
 
 ---
 
-# 10. Public Repository / Field-Service Material Review
+# 10. Public Repository / Access / Field-Service Material Review
+
+The canonical MasterHub production alias is publicly reachable without application authentication.
+Verified public HTTP 200 includes:
+- /
+- /project-control
+- /field-resource-hub
+- /field-diagnostic-hub
+- /field-diagnostic-hub.html
+- /finances-command-center
+- /repair-packages
+
+Repository tree inspection found no application auth middleware/proxy/session/auth route layer.
+
+This means "private command center" currently describes intended use or data locality, not access control.
+
+
 
 The GitHub repository is public.
 
@@ -264,6 +285,27 @@ DO NOT:
 
 ---
 
+# 10A. Runtime Health
+
+Connected Vercel runtime-error query for the canonical master-hub project found:
+- no runtime error clusters in the selected 7-day range
+- sampled production status grouping: HTTP 200 only
+
+STATUS: CURRENT RUNTIME ERROR SIGNAL CLEAN
+
+# 10B. Framework Security Baseline
+
+Current package:
+- Next.js 16.3.4
+
+Current official Next.js security guidance as of 2026-09-30:
+- upgrade Active LTS to 16.3.8 for the September 2026 security release
+- the 2026-09-22 critical upstream security update required at least 16.3.6
+
+Therefore current 16.3.4 is below the current security-patched baseline.
+
+STATUS: SECURITY PATCH REQUIRED
+
 # 11. Confirmed Defects / Gaps
 
 ### DEFECT — Registry says Recovery Value Calculator is Live while configured public URL returns HTTP 404.
@@ -276,6 +318,10 @@ Evidence: source inspection.
 Evidence: workflow + current component + test-source comparison.
 
 ### GOVERNANCE DRIFT — Current State contained a stale next action after baseline finalization.
+
+### SECURITY BASELINE GAP — Next.js 16.3.4 is below the current 16.3.8 security release and below the 16.3.6 critical upstream fix baseline.
+
+### ACCESS-CONTROL GAP — Canonical MasterHub routes are publicly reachable and no application authentication layer is present. Whether that violates intended product requirements requires owner/product-boundary confirmation.
 Evidence: canonical 06_CURRENT_STATE.md at audit start.
 
 ---
@@ -288,6 +334,8 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 4. Green CI can be over-interpreted because tests/lint are not part of the current CI workflow.
 5. Static Project Control UI can diverge from canonical records.
 6. Historical project decisions remain incompletely reconstructed.
+7. Next.js security patch level is behind the current patched Active LTS release.
+8. Public access may conflict with the product's "private command center" positioning and with any restricted field-service content.
 
 ---
 
@@ -298,7 +346,7 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 - Which duplicate Vercel projects should be retired versus intentionally preserved.
 - Whether any field-service source in the public repository has distribution restrictions.
 - Full external-backend/database inventory for standalone tools.
-- Full route-by-route interactive behavior on current production.
+- Full interaction-level behavior beyond HTTP/render availability on current production.
 - Current mobile behavior of all routes.
 - Authentication/authorization expectations for each standalone tool.
 - Whether the Recovery Value Calculator has a valid non-root route that should replace the broken configured URL.
@@ -315,10 +363,12 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 6. Repair/replace the broken Recovery Value Calculator registry target.
 7. Update Vitest tests to current UI and add test + lint to CI.
 8. Make Project Control Center derive current status from a canonical machine-readable source or generated snapshot.
-9. Verify every internal route interactively.
-10. Verify all external registry URLs.
-11. Complete historical reconstruction and MVP acceptance audit.
-12. Only then propose cleanup/deletion of legacy Vercel projects.
+9. Upgrade Next.js to the current security-patched 16.3.8 baseline under controlled implementation/testing.
+10. Define whether MasterHub requires authentication/access control; if yes, design before exposing restricted/private content.
+11. Verify every internal route interactively beyond HTTP/render availability.
+12. Verify all external registry URLs.
+13. Complete historical reconstruction and MVP acceptance audit.
+14. Only then propose cleanup/deletion of legacy Vercel projects.
 
 ---
 
@@ -327,11 +377,15 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 RECONSTRUCTION: IN PROGRESS
 REPOSITORY INVENTORY: VERIFIED
 CORE ROUTE INVENTORY: VERIFIED
+ALL SIX INTERNAL ROUTES HTTP 200: VERIFIED
 CI BUILD STATUS: VERIFIED
 TEST SUITE: DRIFT IDENTIFIED / EXECUTION NOT VERIFIED
 CANONICAL PRODUCTION ROOT: VERIFIED LIVE
 REGISTRY URL SWEEP: PARTIAL — ONE CONFIRMED FAILURE
 VERCEL OWNERSHIP: AMBIGUITY CONFIRMED
+RUNTIME ERROR SIGNAL: CLEAN FOR OBSERVED 7-DAY WINDOW
+NEXT.JS SECURITY PATCH: OUTDATED — UPGRADE REQUIRED
+ACCESS-CONTROL REQUIREMENT: OPEN
 SECURITY CLASSIFICATION: OPEN
 HISTORICAL RECONSTRUCTION: INCOMPLETE
 
