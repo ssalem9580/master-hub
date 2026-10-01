@@ -288,3 +288,32 @@ Restricted material is currently present in public source/public routes.
 
 NEXT SECURITY ACTION:
 Prepare and execute a controlled restricted-content quarantine plan after the required repository/storage decision.
+
+
+## SECURITY-BOUNDARY-1.0 Finalization Checkpoint — 2026-09-30
+STATUS: CLASSIFICATION FINALIZED / PHYSICAL CONTAINMENT OPEN
+AUTHORITY: DEC-016, DEC-017
+RELEASE: RELEASES/SECURITY-BOUNDARY-1.0.md
+FROZEN REFERENCE: baseline/security-boundary-1.0
+BACKUP: BACKUPS/SECURITY-BOUNDARY-1.0.md
+INVENTORY: PROJECT CONTROL SYSTEM/00_RESTRICTED_FIELD_SERVICE_EXPOSURE_INVENTORY.md
+QUARANTINE PLAN: PROJECT CONTROL SYSTEM/00_RESTRICTED_FIELD_SERVICE_QUARANTINE_PLAN.md
+
+FINALIZED:
+- restricted classification
+- scope definition
+- no-new-publication rule
+- public/no-login MasterHub distinction
+- exposure inventory
+- containment sequence
+- recovery-before-removal rule
+
+OPEN / BLOCKING:
+- private canonical destination
+- verified private preservation copy
+- public source/route removal
+- public deployment retirement
+- Git-history remediation review
+
+RULE:
+Do not mark containment complete until every blocking item above is resolved with evidence.

@@ -6,6 +6,7 @@ CURRENT PHASE: MASTERHUB RECONSTRUCTION & REALITY AUDIT — HARDENING WAVE 1 REL
 GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
 FROZEN GOVERNANCE REFERENCE: baseline/governance-control-1.0
 FROZEN HARDENING REFERENCE: baseline/security-quality-1.0
+FROZEN SECURITY-BOUNDARY REFERENCE: baseline/security-boundary-1.0
 CANONICAL REPOSITORY: ssalem9580/master-hub
 CANONICAL BRANCH: main
 AUDIT-START MAIN SHA: e8ca3dac4825cd8af0b3427678cd67b4854b61
@@ -14,10 +15,10 @@ ACTIVE HARDENING BRANCH: hardening/security-quality-20260930
 HARDENING PR: #2 — MERGED
 
 CURRENT STEP:
-SECURITY-QUALITY-1.0 is merged, production-deployed, and post-release verified.
+SECURITY-BOUNDARY-1.0 classification baseline is finalized. Physical containment remains open because no verified private canonical destination has been established yet.
 
 NEXT CONTROLLED ACTION:
-Contain restricted field-service material from public distribution while preserving recoverability and history, then continue repository-enforcement and Recovery Value remediation.
+Establish a verified private canonical destination for restricted field-service source, validate preservation completeness, then remove restricted material from the public MasterHub surface and related public deployments under controlled containment.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -186,3 +187,12 @@ HARDENING RELEASE:
 - Release record: RELEASES/SECURITY-QUALITY-1.0.md
 - Backup record: BACKUPS/SECURITY-QUALITY-1.0.md
 - Frozen recovery reference: baseline/security-quality-1.0
+
+
+SECURITY-BOUNDARY RELEASE:
+- Release: SECURITY-BOUNDARY-1.0
+- Classification: FINALIZED
+- Containment: OPEN / CRITICAL
+- Exposure inventory: VERIFIED
+- Private canonical destination: NOT YET ESTABLISHED
+- Destructive removal/history rewrite: NOT AUTHORIZED UNTIL PRIVATE PRESERVATION IS VERIFIED
