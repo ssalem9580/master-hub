@@ -37,14 +37,14 @@ export default function ProjectControlPage(){
     {items.map(([id,name,description])=><div key={id} style={{padding:15,border:"1px solid #283142",borderRadius:10,background:"#10151f",display:"grid",gap:6}}><span style={{fontSize:11,color:"#8c94a5",fontWeight:800}}>{id}</span><strong>{name}</strong><span style={{fontSize:12,color:"#8c94a5",lineHeight:1.45}}>{description}</span></div>)}
    </section>
    <section style={{padding:16,border:"1px solid #283142",borderRadius:12,background:"#10151f",display:"grid",gap:12}}>
-    <div><strong style={{fontSize:13}}>Live operations snapshot</strong><p style={{margin:"8px 0 0",fontSize:12,color:"#8c94a5",lineHeight:1.55}}>Latest main is ahead of production. Repair Package Part # auto-fill and the newest master-parts source are built but not yet verified in production because later Vercel builds are rate-limited.</p></div>
+    <div><strong style={{fontSize:13}}>Live operations snapshot</strong><p style={{margin:"8px 0 0",fontSize:12,color:"#8c94a5",lineHeight:1.55}}>Project Operations 1.0 is finalized and the finalization build is live in production. Repair Package Part # auto-fill is deployed, but its interactive end-to-end retest remains open. Restricted-data containment also remains independently open and critical.</p></div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:8}}>
      {[
       ["Queue","9 tracked items"],
-      ["Build","BLOCKED · rate limit"],
+      ["Build","READY · production"],
       ["Bugs","1 ready for retest"],
       ["Security","CRITICAL containment open"],
-      ["Release","READY FOR REVIEW"],
+      ["Release","FINALIZED · PROJECT-OPS-1.0"],
      ].map(([k,v])=><div key={k} style={{border:"1px solid #283142",borderRadius:9,padding:11,background:"#0c111a"}}><span style={{display:"block",fontSize:10,color:"#7d8596",letterSpacing:".08em",fontWeight:800}}>{k.toUpperCase()}</span><strong style={{display:"block",marginTop:5,fontSize:13}}>{v}</strong></div>)}
     </div>
    </section>
