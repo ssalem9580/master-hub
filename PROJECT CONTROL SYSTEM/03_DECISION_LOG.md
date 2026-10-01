@@ -50,3 +50,19 @@ SUPERSEDES:
 SUPERSEDED BY:
 REVIEW REQUIRED: YES — final activation/merge requires owner review after reconciliation and verification.
 APPROVED BY: Project Owner
+
+
+## DEC-005
+DATE: 2026-09-30
+TITLE: Authorize Stage C governance amendment drafting
+STATUS: APPROVED
+QUESTION: May the controlled template adoption proceed from reconciliation into drafting exact Master Hub governance amendments?
+DECISION: Yes. Draft proposed amendments on the protected adoption branch only. Do not activate the amendments, modify product code, merge to main, or resolve owner-decision conflicts silently.
+WHY: Project Owner explicitly approved proceeding to the next controlled stage.
+ALTERNATIVES CONSIDERED: Stop after reconciliation; directly activate changes without review.
+EVIDENCE: Project Owner instruction and 00_TEMPLATE_RECONCILIATION_MATRIX.md.
+AFFECTED AREAS: Governance proposal drafting only.
+SUPERSEDES:
+SUPERSEDED BY:
+REVIEW REQUIRED: YES — Stage D owner review required before activation.
+APPROVED BY: Project Owner
