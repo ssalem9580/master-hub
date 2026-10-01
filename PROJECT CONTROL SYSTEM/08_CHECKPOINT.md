@@ -244,3 +244,19 @@ RECOVERY:
 - Previous verified production deployment remains available in Vercel history.
 - Source rollback is available through Git history.
 - Release and backup records are stored in RELEASES/ and BACKUPS/.
+
+
+## Access Boundary Decision — DEC-015
+STATUS: APPROVED / ACTIVE
+DECISION: MasterHub remains publicly reachable with no login requirement.
+PRIVACY MEANING: private-use / local-data privacy, not access-controlled site visibility.
+
+REQUIRED GUARDRAILS:
+- Do not hard-code sensitive personal finance values into public source.
+- Do not expose credentials, tokens, passwords, secrets, or private identifiers.
+- Browser-local personal data remains local unless an explicit future architecture changes that boundary.
+- Any future server-side sensitive/personal-data feature requires a new security/privacy review.
+- Public field-service content classification remains independently OPEN and must not be assumed safe merely because login is not required.
+
+NEXT SECURITY DECISION:
+Classify public field-service diagnostic/repair material and determine whether any of it must be separated from the public repository/deployment.
