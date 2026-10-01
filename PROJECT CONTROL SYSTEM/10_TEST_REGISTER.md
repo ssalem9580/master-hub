@@ -68,3 +68,8 @@ Rules:
 | TEST-026 | REQ-014 | Run ESLint across MasterHub | PASS | GitHub Actions run 36810355612 | 2026-09-30 |
 | TEST-027 | REQ-014 | Run current Vitest suite | PASS | GitHub Actions run 36810355612; 5 tests passed | 2026-09-30 |
 | TEST-028 | REQ-013 / REQ-014 | Run Next.js production build under 16.3.8 | PASS | GitHub Actions run 36810355612 | 2026-09-30 |
+
+| TEST-029 | REQ-013 / REQ-014 | Verify post-merge main CI executes install, lint, tests, and build | PASS | GitHub Actions run 36811990043 on f81fd436a8df50ac0da93ec3c93ec26d09e0badf | 2026-09-30 |
+| TEST-030 | REQ-013 | Verify merged hardening commit reaches Vercel production READY | PASS | dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY for f81fd436a8df50ac0da93ec3c93ec26d09e0badf | 2026-09-30 |
+| TEST-031 | REQ-001 / REQ-002 / REQ-003 / REQ-004 / REQ-007 | Verify all six canonical production routes after hardening release | PASS | /, /project-control, /field-resource-hub, /field-diagnostic-hub, /finances-command-center, /repair-packages all HTTP 200 | 2026-09-30 |
+| TEST-032 | Security | Scan Vercel runtime errors after SECURITY-QUALITY-1.0 deployment | PASS | No runtime errors found in selected one-hour post-release window | 2026-09-30 |
