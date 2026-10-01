@@ -89,3 +89,26 @@ POSSIBLE SOLUTIONS: Identify correct route/alias, repair deployment, or change r
 DECISION REQUIRED: NO to correct false status; deployment repair may require implementation.
 DEPENDENCIES: Recovery Value Calculator deployment ownership.
 RESOLUTION:
+
+
+## ISSUE-009 — Next.js security patch level is outdated
+TYPE: Security / Dependency
+STATUS: OPEN — HIGH PRIORITY
+DESCRIPTION: MasterHub uses Next.js 16.3.4. Official Next.js security guidance on 2026-09-30 recommends 16.3.8, and the 2026-09-22 critical upstream security fix required at least 16.3.6.
+WHY IT MATTERS: The application is below the current patched security baseline.
+EVIDENCE: master-hub-app/package.json; official Next.js September 2026 security guidance.
+POSSIBLE SOLUTIONS: Upgrade Next.js to 16.3.8, run build/test/lint and route verification, then deploy.
+DECISION REQUIRED: NO for patch proposal; implementation follows controlled change process.
+DEPENDENCIES: Test-suite repair/verification recommended before release.
+RESOLUTION:
+
+## ISSUE-010 — "Private" positioning is not backed by application access control
+TYPE: Security / Product Boundary
+STATUS: OPEN
+DESCRIPTION: Canonical MasterHub production routes are publicly reachable without login, and repository inspection found no application auth middleware/proxy/session layer.
+WHY IT MATTERS: If "private command center" is intended to mean access-controlled, current implementation does not satisfy that meaning. Public field-service content increases the importance of resolving this boundary.
+EVIDENCE: public HTTP 200 on canonical routes; repository tree/package inspection.
+POSSIBLE SOLUTIONS: Clarify product privacy requirement; if access control is required, add authentication/authorization and separate public/private assets.
+DECISION REQUIRED: YES for the intended privacy/access-control boundary.
+DEPENDENCIES: Owner/product decision; field-service content classification.
+RESOLUTION:
