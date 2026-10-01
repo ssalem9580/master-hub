@@ -162,3 +162,19 @@ SUPERSEDES: Governance adoption release-candidate and in-progress baseline state
 SUPERSEDED BY:
 REVIEW REQUIRED: NO
 APPROVED BY: Project Owner
+
+
+## DEC-012
+DATE: 2026-09-30
+TITLE: Begin MasterHub Reconstruction & Reality Audit
+STATUS: APPROVED
+QUESTION: Should MasterHub enter a controlled reconstruction and reality-audit phase using CONTROL-BASELINE-1.0 as the authority?
+DECISION: Yes. Reconstruct and verify actual repository, route, test, deployment, registry, persistence, and security-boundary state before prioritizing new feature development.
+WHY: Project Owner explicitly issued BEGIN MASTERHUB RECONSTRUCTION & REALITY AUDIT and instructed analysis to continue.
+ALTERNATIVES CONSIDERED: Resume feature development without reconciling current reality.
+EVIDENCE: Project Owner instruction; CONTROL-BASELINE-1.0.
+AFFECTED AREAS: Governance records and audit evidence only during the current audit phase.
+SUPERSEDES:
+SUPERSEDED BY:
+REVIEW REQUIRED: YES before destructive cleanup, repository-visibility change, or retirement of deployments.
+APPROVED BY: Project Owner
