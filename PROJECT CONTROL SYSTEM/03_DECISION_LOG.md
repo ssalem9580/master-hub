@@ -146,3 +146,19 @@ SUPERSEDES: Branch-only governance release-candidate state.
 SUPERSEDED BY:
 REVIEW REQUIRED: NO
 APPROVED BY: Project Owner
+
+
+## DEC-011
+DATE: 2026-09-30
+TITLE: Freeze CONTROL-BASELINE-1.0 as finalized Master Hub governance baseline
+STATUS: APPROVED
+QUESTION: Has the AI Idea Master Template governance adoption completed its merge, backup, baseline freeze, and finalization requirements?
+DECISION: Yes. CONTROL-BASELINE-1.0 is the finalized canonical Master Hub governance baseline. The frozen recovery reference is baseline/governance-control-1.0.
+WHY: Stage H merge succeeded, canonical records were updated, release and backup records were created, and a dedicated baseline reference was established.
+ALTERNATIVES CONSIDERED: Leave baseline mutable or keep adoption marked in progress.
+EVIDENCE: PR #1, RELEASES/CONTROL-BASELINE-1.0.md, BACKUPS/CONTROL-BASELINE-1.0.md, baseline/governance-control-1.0.
+AFFECTED AREAS: Entire Master Hub governance operating system.
+SUPERSEDES: Governance adoption release-candidate and in-progress baseline states.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO
+APPROVED BY: Project Owner
