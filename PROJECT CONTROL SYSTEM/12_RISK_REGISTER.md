@@ -42,11 +42,11 @@ No unmitigated Critical risk may remain at final release.
 Existing risk records remain authoritative historical entries and may be expanded when revisited.
 
 | RISK-007 | Public repository may expose restricted field-service material if any current diagnostic/repair content has distribution limits | Medium / UNKNOWN CLASSIFICATION | Critical | Classify content before visibility changes; separate restricted sources if needed | OPEN |
-| RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | PR #2 repairs tests and requires lint/test/build; run 36810355612 passed | OPEN UNTIL MERGE |
+| RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | Canonical CI requires lint/test/build; post-merge run 36811990043 passed | MITIGATED |
 | RISK-009 | Static governance UI can diverge from canonical source-of-truth documents | High | Medium | Generate/read controlled canonical status rather than duplicating state text | OPEN |
 
 | RISK-010 | Public unauthenticated access may conflict with intended private-use boundary | High | High | Clarify access-control requirement; add auth if private means access-controlled | OPEN |
-| RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Next.js 16.3.8 implemented and verified on PR #2 | OPEN UNTIL MERGE/RELEASE |
+| RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Next.js 16.3.8 released to production and post-release verified | MITIGATED |
 
 | RISK-012 | Standalone active tools lack established canonical source/backup ownership | High | Critical | Recover and version source before destructive cleanup; document canonical repo/deployment/backup per tool | OPEN |
 | RISK-013 | Recovery Value Calculator recovered source is not canonicalized and current Vercel linkage/root config is drifted | High | High | Validate recovered branch source, canonicalize it, correct Root Directory, and verify before promotion | OPEN |
