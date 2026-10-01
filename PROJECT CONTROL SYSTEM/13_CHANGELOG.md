@@ -77,3 +77,16 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - FILES AFFECTED: master-hub-app package metadata/lock, current UI tests, CI workflow, lint-corrected application source, Project Control System evidence.
 - REASON: Resolve the P0/P1 dependency-security and false-confidence CI findings from the reconstruction audit.
 - RESULT: SECURITY-QUALITY-RC1 verified on branch. GitHub Actions run 36810355612 passed install, lint, tests, and production build. PR #2 remains unmerged and production unchanged.
+
+
+## 2026-09-30 — SECURITY-QUALITY-1.0 released
+- CHANGE ID: CHANGE-005
+- VERSION: SECURITY-QUALITY-1.0
+- DESCRIPTION: Merged SECURITY-QUALITY-RC1 through PR #2, activated Next.js 16.3.8 and enforced lint/test/build CI on main, then verified the resulting production deployment.
+- AUTHORIZED BY: Project Owner / DEC-014.
+- RELATED DECISION: DEC-013, DEC-014.
+- RELATED REQUIREMENT: REQ-013, REQ-014.
+- RELATED FEATURE: FEAT-001, FEAT-003, FEAT-004.
+- FILES AFFECTED: package metadata/lock, CI workflow, current UI tests, lint-corrected application source, Project Control System release records.
+- REASON: Resolve verified security-patch and verification-gate defects before new feature development.
+- RESULT: PR #2 merged as f81fd436a8df50ac0da93ec3c93ec26d09e0badf; post-merge CI 36811990043 passed; Vercel deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY; six canonical routes HTTP 200; post-release runtime error scan clean.
