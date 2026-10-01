@@ -43,3 +43,5 @@ Rules:
 | DEF-005 | Project Control Center displays static state that can drift from canonical records | Medium | OPEN | /project-control source contains static phase/current-task text | Bind/generate visible state from canonical source |
 | DEF-006 | Current MasterHub UI tests target older interface while CI does not run tests | Medium | OPEN | test-source/current-component comparison + CI workflow | Normalize tests, execute them, then add CI test gate |
 | DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | FIXING IN AUDIT | 06_CURRENT_STATE.md contradicted completed Stage H baseline freeze | Correct Current State on audit branch and preserve audit evidence |
+
+| DEF-008 | Next.js security patch level below current patched Active LTS | High | OPEN | package.json uses 16.3.4; current official security release is 16.3.8 | Upgrade to 16.3.8 and verify |
