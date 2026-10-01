@@ -166,3 +166,37 @@ Continue evidence gathering and owner-decision preparation. No destructive clean
 - Remediation priority matrix created: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md.
 - Audit branch remains governance/evidence only.
 - Recommended next implementation branch: security + quality hardening (Next.js security patch, test repair, CI test/lint gates).
+
+
+## Security + Quality Hardening Checkpoint — 2026-09-30
+BRANCH: hardening/security-quality-20260930
+PR: #2
+PACKAGE: SECURITY-QUALITY-RC1
+STATUS: VERIFIED ON BRANCH / NOT MERGED
+
+IMPLEMENTED:
+- Next.js 16.3.4 → 16.3.8
+- eslint-config-next 16.3.4 → 16.3.8
+- package-lock regenerated
+- current MasterHub UI tests normalized
+- CI expanded to npm ci → lint → test → build
+- verified lint corrections in Finances, Repair Packages, and MasterHub
+
+VERIFICATION EVIDENCE:
+- GitHub Actions run 36810355612
+- product commit 2062d470b3f200b490f139b8bff2bd64ab0b8221
+- Install PASS
+- Lint PASS
+- Tests PASS
+- Build PASS
+
+UNCHANGED / STILL OPEN:
+- production deployment
+- access-control decision
+- repository visibility
+- Vercel project cleanup
+- Recovery Value production restoration
+- public field-service material classification
+
+NEXT:
+Re-run the quality pipeline against the final governance-record head. If green, PR #2 is ready for explicit merge/release approval.
