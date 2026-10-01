@@ -2,10 +2,10 @@
 
 | Risk ID | Risk | Likelihood | Impact | Mitigation | Status |
 |---|---|---:|---:|---|---|
-| RISK-001 | Cross-linked/duplicate Vercel projects cause deployment confusion | Medium | High | Define canonical project/alias and disconnect unintended links only with owner approval | OPEN |
+| RISK-001 | Cross-linked/duplicate Vercel projects cause deployment confusion | High | High | Nine projects inventoried; define canonical project/alias and disconnect unintended links only with owner approval | OPEN |
 | RISK-002 | AI silently expands scope or rewrites history | Medium | High | Constitution + decision log + classifications | MITIGATED |
 | RISK-003 | Private data enters public repo | Low-Medium | Critical | Public-source privacy rule, source scans, secure/local storage | OPEN |
-| RISK-004 | "Live" labels become stale | Medium | Medium | Verification tests tied to release checklist | OPEN |
+| RISK-004 | "Live" labels become stale | High | Medium | Runtime verification tied to registry/release checks; Recovery Value Calculator is a confirmed example | OPEN |
 | RISK-005 | Legacy decisions remain unrecorded | High | Medium | Controlled reconstruction from git/source/user evidence | OPEN |
 | RISK-006 | Reorganization removes useful behavior | Medium | High | Preserve functionality; require test evidence before acceptance | OPEN |
 
@@ -40,3 +40,7 @@ OPEN / MITIGATED / ACCEPTED / CLOSED
 Rule:
 No unmitigated Critical risk may remain at final release.
 Existing risk records remain authoritative historical entries and may be expanded when revisited.
+
+| RISK-007 | Public repository may expose restricted field-service material if any current diagnostic/repair content has distribution limits | Medium / UNKNOWN CLASSIFICATION | Critical | Classify content before visibility changes; separate restricted sources if needed | OPEN |
+| RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | Repair tests and add npm test + lint to CI | OPEN |
+| RISK-009 | Static governance UI can diverge from canonical source-of-truth documents | High | Medium | Generate/read controlled canonical status rather than duplicating state text | OPEN |
