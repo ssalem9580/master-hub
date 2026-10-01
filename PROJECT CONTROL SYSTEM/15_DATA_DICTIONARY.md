@@ -38,3 +38,22 @@ Dependency IDs: DEP-###
 - Status: APPROVED by DEC-006
 - BUG-### from the generic AI Idea Master Template is not used in Master Hub.
 - Existing and future Master Hub defects retain DEF-### identifiers unless a later explicit Project Owner decision supersedes DEC-006.
+
+
+## Canonical Data Dictionary Requirements
+Document, where applicable:
+- tables
+- fields
+- record types
+- IDs
+- statuses
+- allowed values
+- data sources
+- units
+- ownership
+- retention
+- sensitivity
+- authoritative source
+
+Rule:
+Database schema and data structures must not become undocumented project logic.
