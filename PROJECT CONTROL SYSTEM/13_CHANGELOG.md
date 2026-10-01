@@ -39,3 +39,16 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - FILES AFFECTED: PROJECT CONTROL SYSTEM only.
 - REASON: Make the template Master Hub's project-management/governance operating system.
 - RESULT: Governance controls applied and repository-verified on adoption branch; main/product code unchanged; merge still pending explicit approval.
+
+
+## 2026-09-30 — AI Idea Master Template governance activated on main
+- CHANGE ID: CHANGE-002
+- VERSION: CONTROL-BASELINE-1.0
+- DESCRIPTION: Merged the verified governance adoption package into main through PR #1.
+- AUTHORIZED BY: Project Owner / DEC-009.
+- RELATED DECISION: DEC-009, DEC-010.
+- RELATED REQUIREMENT: REQ-009 through REQ-012.
+- RELATED FEATURE: FEAT-009.
+- FILES AFFECTED: PROJECT CONTROL SYSTEM only.
+- REASON: Establish the AI Idea Master Template as Master Hub's canonical governance operating system.
+- RESULT: Merge succeeded; canonical governance is active on main; frozen baseline reference pending final creation.
