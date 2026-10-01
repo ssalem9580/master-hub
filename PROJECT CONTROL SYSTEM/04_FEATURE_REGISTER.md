@@ -10,3 +10,5 @@
 | FEAT-006 | Project Control System | Canonical project documents | Owner/Developer/AI | APPROVED | YES | Repository | REQ-006 | Owner instruction | Added 2026-09-30 |
 | FEAT-007 | Project Control Center UI | Visible governance/current-state route | Owner | APPROVED | YES | FEAT-006 | REQ-007 | Owner instruction | Added 2026-09-30 |
 | FEAT-008 | Requirements traceability | Need→decision→requirement→feature→implementation→test→evidence→acceptance | Owner/Developer/AI | APPROVED | YES | Registers | REQ-008 | Supplied control prompt | Bidirectional traceability |
+
+| FEAT-009 | AI Idea Master Template governance operating system | Controlled lifecycle, classifications, Ready/Done gates, authority hierarchy, canonical register schemas and recovery/finalization controls | Owner/Developer/AI | APPROVED | YES | FEAT-006 / FEAT-008 | REQ-009–REQ-012 | DEC-007 + adoption branch verification | Governance-only; no product-code change |
