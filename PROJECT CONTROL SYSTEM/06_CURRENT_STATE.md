@@ -123,8 +123,20 @@ See 12_RISK_REGISTER.md.
 SOURCE OWNERSHIP:
 - Canonical MasterHub source: GitHub ssalem9580/master-hub.
 - Field Diagnostic current source: present inside MasterHub.
-- Recovery Value Calculator source: NOT FOUND in current MasterHub tree despite Vercel Git linkage.
+- Recovery Value Calculator source: RECOVERED on codex/recovered-standalone-apps at 751a73b17bef47c47a2a0b9467560a197fef8f0f; absent from current main.
 - NTE Quote, Billed Work Tracker, Sam Hub source: not present in MasterHub and no matching installed GitHub repos found; recovery location UNKNOWN.
+
+REPOSITORY ENFORCEMENT:
+- main protected: false
+- baseline/governance-control-1.0 protected: false
+- repository rulesets observed: none
+- baseline freeze is policy/SHA based, not technically enforced
+
+RECOVERY VALUE RECOVERY POINT:
+- branch: codex/recovered-standalone-apps
+- source commit: 751a73b17bef47c47a2a0b9467560a197fef8f0f
+- source path: standalone-apps/recovery-value-calculator/index.html
+- branch README documents standalone Vercel Root Directory mapping
 
 OPEN DECISIONS:
 - Which duplicate Vercel projects are canonical versus legacy.
@@ -136,6 +148,8 @@ OPEN DECISIONS:
 - Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
 - Security patch upgrade to Next.js 16.3.8.
 - Source recovery/canonical repository assignment for standalone external tools.
+- Production restoration of Recovery Value from recovered branch source.
+- GitHub branch/ruleset enforcement for main and governance baseline.
 
 AUDIT ARTIFACT:
 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
