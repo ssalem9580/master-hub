@@ -55,13 +55,13 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Stage B template reconciliation complete; preparing Stage C proposed governance amendments.
+Stage C proposed governance amendments complete; awaiting Stage D owner review.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-Draft additive governance amendments for Definition of Ready, Definition of Done, acceptance criteria, register schemas, Authority Order, and supplied Source-of-Truth mappings. Keep DEF-### versus BUG-### unresolved for owner decision.
+Owner reviews 00_PROPOSED_GOVERNANCE_AMENDMENTS.md and resolves material governance choices before activation.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -90,3 +90,6 @@ CONTROLLED TEMPLATE ADOPTION:
 - Stage B reconciliation: COMPLETE
 - Reconciliation artifact: PROJECT CONTROL SYSTEM/00_TEMPLATE_RECONCILIATION_MATRIX.md
 - Stage C amendments: NOT YET ACTIVE
+
+- Stage C proposal artifact: PROJECT CONTROL SYSTEM/00_PROPOSED_GOVERNANCE_AMENDMENTS.md
+- Stage C proposals active: NO
