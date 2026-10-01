@@ -120,6 +120,12 @@ See 11_DEFECT_REGISTER.md.
 KNOWN RISKS:
 See 12_RISK_REGISTER.md.
 
+SOURCE OWNERSHIP:
+- Canonical MasterHub source: GitHub ssalem9580/master-hub.
+- Field Diagnostic current source: present inside MasterHub.
+- Recovery Value Calculator source: NOT FOUND in current MasterHub tree despite Vercel Git linkage.
+- NTE Quote, Billed Work Tracker, Sam Hub source: not present in MasterHub and no matching installed GitHub repos found; recovery location UNKNOWN.
+
 OPEN DECISIONS:
 - Which duplicate Vercel projects are canonical versus legacy.
 - Whether any public field-service material has distribution restrictions.
@@ -129,6 +135,7 @@ OPEN DECISIONS:
 - Full MVP acceptance boundary.
 - Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
 - Security patch upgrade to Next.js 16.3.8.
+- Source recovery/canonical repository assignment for standalone external tools.
 
 AUDIT ARTIFACT:
 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
