@@ -66,3 +66,19 @@ SUPERSEDES:
 SUPERSEDED BY:
 REVIEW REQUIRED: YES — Stage D owner review required before activation.
 APPROVED BY: Project Owner
+
+
+## DEC-006
+DATE: 2026-09-30
+TITLE: Retain DEF-### as Master Hub defect identifier convention
+STATUS: APPROVED
+QUESTION: Should Master Hub replace its established DEF-### defect IDs with the AI Idea Master Template's BUG-### convention?
+DECISION: No. Master Hub will permanently retain DEF-### as its canonical defect-ID convention. The template's expanded defect schema and lifecycle may be adopted without renaming historical identifiers.
+WHY: Preserves historical traceability, avoids breaking existing references, and achieves the governance objective without unnecessary identifier migration.
+ALTERNATIVES CONSIDERED: Use BUG-### only for new defects; migrate all existing defects to BUG-###.
+EVIDENCE: Project Owner approval during Stage D controlled template adoption; existing 11_DEFECT_REGISTER.md and 15_DATA_DICTIONARY.md.
+AFFECTED AREAS: Defect Register, Data Dictionary, requirements traceability, governance schema.
+SUPERSEDES: OD-001 unresolved state in 00_TEMPLATE_RECONCILIATION_MATRIX.md and 00_PROPOSED_GOVERNANCE_AMENDMENTS.md.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO
+APPROVED BY: Project Owner
