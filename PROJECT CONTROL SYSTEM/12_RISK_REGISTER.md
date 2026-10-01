@@ -45,7 +45,7 @@ Existing risk records remain authoritative historical entries and may be expande
 | RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | Canonical CI requires lint/test/build; post-merge run 36811990043 passed | MITIGATED |
 | RISK-009 | Static governance UI can diverge from canonical source-of-truth documents | High | Medium | Generate/read controlled canonical status rather than duplicating state text | OPEN |
 
-| RISK-010 | Public unauthenticated access may conflict with intended private-use boundary | High | High | Clarify access-control requirement; add auth if private means access-controlled | OPEN |
+| RISK-010 | Public unauthenticated access may conflict with intended private-use boundary | High | High | DEC-015 explicitly defines public/no-login access as intended; preserve local/private sensitive-data rules | ACCEPTED / RESOLVED |
 | RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Next.js 16.3.8 released to production and post-release verified | MITIGATED |
 
 | RISK-012 | Standalone active tools lack established canonical source/backup ownership | High | Critical | Recover and version source before destructive cleanup; document canonical repo/deployment/backup per tool | OPEN |

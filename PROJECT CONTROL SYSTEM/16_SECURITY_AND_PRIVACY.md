@@ -46,9 +46,20 @@ Unknown controls remain UNKNOWN / NEEDS CONFIRMATION until verified.
 - No auth middleware/proxy/session/API layer was found in the current application tree.
 - Core personal-entry data in inspected routes is stored in browser localStorage rather than a server database.
 - Field-service diagnostic and repair-package material is publicly reachable; allowed distribution classification is still UNKNOWN / NEEDS CONFIRMATION.
-- Installed Next.js version is 16.3.4.
-- Official Next.js guidance on 2026-09-30 identifies 16.3.8 as the current security release; 16.3.6 was required for the September 22 critical upstream security update.
-- Dependency security patching is therefore OPEN / HIGH PRIORITY.
+- Historical audit finding: Next.js was 16.3.4 during initial reconstruction. SECURITY-QUALITY-1.0 subsequently upgraded canonical main/production to 16.3.8 and verified the release.
 - Vercel runtime error query found no runtime error clusters in the selected 7-day window.
 
 Do not change repository visibility or remove historical content without explicit owner authorization and a recovery plan.
+
+
+## Approved Access Boundary — DEC-015
+MasterHub is intentionally public and does **not** require application login.
+
+For this project:
+- "Private" means private-use and local/private handling of sensitive data.
+- "Private" does not mean the website itself is access-controlled.
+- Public reachability is an approved product property, not a defect.
+- Sensitive personal finance values, credentials, passwords, tokens, secrets, private account identifiers, or other restricted data must not be hard-coded into the public repository or exposed by public routes.
+- Current inspected personal-entry data remains browser-local through localStorage unless a later approved architecture changes that boundary.
+- Any future feature that stores sensitive/personal data server-side, syncs it across devices/accounts, or shares it with a third party requires a new explicit security/privacy review before implementation.
+- Field-service diagnostic/repair content has a separate unresolved distribution-classification issue. No-login approval does not classify that material as safe for public distribution.
