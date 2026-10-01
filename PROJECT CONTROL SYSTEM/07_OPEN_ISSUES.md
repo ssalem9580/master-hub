@@ -59,14 +59,14 @@ RESOLUTION:
 
 ## ISSUE-006 — CI does not execute tests or lint
 TYPE: Technical / Quality
-STATUS: OPEN
+STATUS: VERIFIED FIX ON HARDENING BRANCH — MERGE PENDING
 DESCRIPTION: GitHub Actions builds the app but does not run npm test or npm run lint.
 WHY IT MATTERS: A green CI build can coexist with stale or failing tests and lint defects.
 EVIDENCE: .github/workflows/master-hub-ci.yml.
 POSSIBLE SOLUTIONS: Repair current tests, then add test and lint gates to CI.
 DECISION REQUIRED: NO for proposal; implementation follows normal change control.
 DEPENDENCIES: Current test-suite normalization.
-RESOLUTION:
+RESOLUTION: PR #2 updates Master Hub CI to require lint, Vitest, and build. GitHub Actions run 36810355612 passed all gates on the verified hardening product commit. Canonical resolution awaits merge.
 
 ## ISSUE-007 — Project Control Center is not source-bound
 TYPE: Product / Governance
@@ -93,14 +93,14 @@ RESOLUTION:
 
 ## ISSUE-009 — Next.js security patch level is outdated
 TYPE: Security / Dependency
-STATUS: OPEN — HIGH PRIORITY
+STATUS: VERIFIED FIX ON HARDENING BRANCH — MERGE/RELEASE PENDING
 DESCRIPTION: MasterHub uses Next.js 16.3.4. Official Next.js security guidance on 2026-09-30 recommends 16.3.8, and the 2026-09-22 critical upstream security fix required at least 16.3.6.
 WHY IT MATTERS: The application is below the current patched security baseline.
 EVIDENCE: master-hub-app/package.json; official Next.js September 2026 security guidance.
 POSSIBLE SOLUTIONS: Upgrade Next.js to 16.3.8, run build/test/lint and route verification, then deploy.
 DECISION REQUIRED: NO for patch proposal; implementation follows controlled change process.
 DEPENDENCIES: Test-suite repair/verification recommended before release.
-RESOLUTION:
+RESOLUTION: Hardening branch updates Next.js and eslint-config-next to 16.3.8 with a regenerated lockfile. Lint, tests, and build pass in run 36810355612. Canonical main/production remain unchanged until merge/release approval.
 
 ## ISSUE-010 — "Private" positioning is not backed by application access control
 TYPE: Security / Product Boundary
