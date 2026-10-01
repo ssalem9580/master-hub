@@ -38,3 +38,17 @@ Document, where applicable:
 
 Never expose secrets or credentials in documentation intended for broad distribution.
 Unknown controls remain UNKNOWN / NEEDS CONFIRMATION until verified.
+
+
+## Reconstruction Audit Security Findings — 2026-09-30
+- Repository visibility: PUBLIC.
+- Canonical MasterHub production routes are publicly reachable without application authentication.
+- No auth middleware/proxy/session/API layer was found in the current application tree.
+- Core personal-entry data in inspected routes is stored in browser localStorage rather than a server database.
+- Field-service diagnostic and repair-package material is publicly reachable; allowed distribution classification is still UNKNOWN / NEEDS CONFIRMATION.
+- Installed Next.js version is 16.3.4.
+- Official Next.js guidance on 2026-09-30 identifies 16.3.8 as the current security release; 16.3.6 was required for the September 22 critical upstream security update.
+- Dependency security patching is therefore OPEN / HIGH PRIORITY.
+- Vercel runtime error query found no runtime error clusters in the selected 7-day window.
+
+Do not change repository visibility or remove historical content without explicit owner authorization and a recovery plan.
