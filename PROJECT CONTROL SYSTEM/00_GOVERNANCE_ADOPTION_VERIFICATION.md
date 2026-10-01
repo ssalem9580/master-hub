@@ -1,6 +1,6 @@
 # 00 — Governance Adoption Verification Report
 
-Status: VERIFIED RELEASE CANDIDATE
+Status: MERGED / FINALIZATION VERIFIED
 Package: GOVERNANCE-ADOPTION-RC1
 Date: 2026-09-30
 Branch: control/ai-idea-master-template-adoption
@@ -44,7 +44,14 @@ Stage D — COMPLETE
 Stage E — COMPLETE
 Stage F — COMPLETE
 Stage G — SATISFIED FOR THE VERIFIED ADOPTION PACKAGE UNDER DEC-007
-Stage H — NOT EXECUTED
+Stage H — MERGED; BASELINE FREEZE FINALIZATION IN PROGRESS
 
 ## Final Gate
-A merge to main and governance baseline freeze require explicit Project Owner authorization.
+PR #1 merged successfully into main under explicit Project Owner authorization. Final baseline freeze is completed by the dedicated baseline reference.
+
+## Merge Evidence
+- Pull request: #1
+- Merge commit: 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d
+- Merge result: SUCCESS
+- Runtime/product/config diff: NONE
+- Vercel PR checks: FAILURE due build-rate-limit status; not treated as runtime verification because this package changed governance documentation only.
