@@ -162,3 +162,7 @@ Continue evidence gathering and owner-decision preparation. No destructive clean
 - Do NOT rebuild Recovery Value from memory before validating recovered source.
 - main protected=false; governance baseline branch protected=false; no rulesets observed.
 - CONTROL-BASELINE-1.0 freeze is currently policy/SHA based, not GitHub-enforced.
+
+- Remediation priority matrix created: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md.
+- Audit branch remains governance/evidence only.
+- Recommended next implementation branch: security + quality hardening (Next.js security patch, test repair, CI test/lint gates).
