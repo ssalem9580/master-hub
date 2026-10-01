@@ -317,3 +317,41 @@ OPEN / BLOCKING:
 
 RULE:
 Do not mark containment complete until every blocking item above is resolved with evidence.
+
+
+## Operations Checkpoint — 2026-10-01 09:58 CDT
+STATUS: REVIEW CHECKPOINT / NOT FINALIZED
+
+VERIFIED LIVE:
+- Canonical production alias: https://master-hub-sigma.vercel.app — HTTP 200.
+- BW Dashboard: /bw-dashboard.html — HTTP 200; Scope Templates remain live.
+- Repair Packages: /repair-packages — HTTP 200; master-parts / Part # lookup functionality is present in production.
+- Project Control: /project-control — HTTP 200; operations/queue content is present.
+
+CURRENT PRODUCTION:
+- Deployment: dpl_8LG2LPLHUmbDjqaqe4N87tKDeo6R
+- Commit: 601b90def0eaa8935807f6fab200f68b9dc742c3
+- Message: Track repair package lookup retest
+- State: READY
+
+SOURCE DRIFT:
+- Latest main: 9ae344be59153103accfcaf030aeba06c07c584d
+- Production is 2 commits behind main.
+- Pending:
+  - e4b81c2b39826c724be92016ca2d1f4c5f917824 — Record project operations control activation
+  - 9ae344be59153103accfcaf030aeba06c07c584d — Extend Project Control Center with operations queue status
+- Latest main Vercel status: BLOCKED by build-rate limiting.
+
+TEST STATE:
+- Repair Package lookup source is deployed.
+- Route/content presence is verified.
+- End-to-end interactive Part # → name → cost auto-fill still requires live retest before finalization.
+
+DRIVE CHECKPOINT:
+- 05_CHECKPOINT — Master Hub — 2026-10-01 09-58 CDT
+
+NEXT:
+1. Retest Repair Package Part # auto-fill interactively in production.
+2. Deploy the two pending Project Control operations commits when Vercel capacity clears.
+3. Verify production again.
+4. Ask Project Owner whether to finalize this checkpoint/update.
