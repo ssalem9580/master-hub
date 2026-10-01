@@ -27,7 +27,8 @@ Before any restricted source is removed from public HEAD, any public deployment 
 5. only then perform containment.
 
 ## Baseline Reference
-A frozen baseline branch will be created from the finalized security-boundary closeout state:
 `baseline/security-boundary-1.0`
+
+Status: CREATED / FROZEN GOVERNANCE-SECURITY REFERENCE.
 
 This backup does not itself provide a private copy of restricted source. It preserves governance and exposure-state evidence.
