@@ -32,3 +32,6 @@ Temporary architecture must not silently become permanent architecture.
 | TD-008 | Project Control Center duplicates canonical state as static text | Governance UI drift | High | OPEN |
 | TD-009 | Multiple Git-linked Vercel projects trigger build/deployment fan-out | Rate-limit waste and confusing status checks | High | OPEN |
 | TD-010 | Current Next.js dependency is behind security-patched Active LTS | Security exposure | Critical | OPEN |
+
+| TD-011 | Standalone app source ownership is undocumented/incomplete | Recovery and maintenance risk | Critical | OPEN |
+| TD-012 | Recovery Value Calculator Vercel project is linked to a repo with no matching source | Broken deployment / source drift | Critical | OPEN |
