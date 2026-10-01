@@ -44,3 +44,6 @@ Existing risk records remain authoritative historical entries and may be expande
 | RISK-007 | Public repository may expose restricted field-service material if any current diagnostic/repair content has distribution limits | Medium / UNKNOWN CLASSIFICATION | Critical | Classify content before visibility changes; separate restricted sources if needed | OPEN |
 | RISK-008 | Build-only CI can mask broken/stale test coverage | High | High | Repair tests and add npm test + lint to CI | OPEN |
 | RISK-009 | Static governance UI can diverge from canonical source-of-truth documents | High | Medium | Generate/read controlled canonical status rather than duplicating state text | OPEN |
+
+| RISK-010 | Public unauthenticated access may conflict with intended private-use boundary | High | High | Clarify access-control requirement; add auth if private means access-controlled | OPEN |
+| RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Upgrade to current patched Active LTS and verify | OPEN |
