@@ -112,3 +112,26 @@ POSSIBLE SOLUTIONS: Clarify product privacy requirement; if access control is re
 DECISION REQUIRED: YES for the intended privacy/access-control boundary.
 DEPENDENCIES: Owner/product decision; field-service content classification.
 RESOLUTION:
+
+
+## ISSUE-011 — Standalone tool source ownership and recovery are incomplete
+TYPE: Architecture / Recovery
+STATUS: OPEN — HIGH PRIORITY
+DESCRIPTION: Active registry tools including NTE Quote, Billed Work Tracker, Recovery Value Calculator, and Sam Hub do not have source code in the current MasterHub repository, and no matching installed GitHub repositories were found by name. Some observed Vercel deployments were CLI-deployed or lacked Git source metadata.
+WHY IT MATTERS: A live deployment without a known canonical source/backup cannot be safely maintained, rebuilt, migrated, or recovered.
+EVIDENCE: MasterHub tree inventory, installed-repository search, Vercel deployment metadata.
+POSSIBLE SOLUTIONS: Locate original source archives/repositories; create canonical repositories/backups; document owner/version/deployment for each standalone tool.
+DECISION REQUIRED: YES before deleting/retiring deployments if source is not recovered.
+DEPENDENCIES: Historical source recovery.
+RESOLUTION:
+
+## ISSUE-012 — Recovery Value Calculator source not found in linked repository
+TYPE: Product / Deployment / Recovery
+STATUS: OPEN — HIGH PRIORITY
+DESCRIPTION: Vercel recovery-value-calculator is Git-linked to master-hub, but the current master-hub tree contains no Recovery Value Calculator source. Its configured public URL returns HTTP 404.
+WHY IT MATTERS: The current deployment cannot be confidently repaired from the linked repository as-is.
+EVIDENCE: Repository tree, Vercel project/deployment metadata, live HTTP 404.
+POSSIBLE SOLUTIONS: Recover original source from an external/local backup or prior deployment artifact; relink Vercel to the correct source; or formally rebuild after requirements reconstruction.
+DECISION REQUIRED: YES if source cannot be recovered and a rebuild is proposed.
+DEPENDENCIES: Source recovery / deployment ownership.
+RESOLUTION:
