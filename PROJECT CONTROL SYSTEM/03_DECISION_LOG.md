@@ -82,3 +82,19 @@ SUPERSEDES: OD-001 unresolved state in 00_TEMPLATE_RECONCILIATION_MATRIX.md and 
 SUPERSEDED BY:
 REVIEW REQUIRED: NO
 APPROVED BY: Project Owner
+
+
+## DEC-007
+DATE: 2026-09-30
+TITLE: Approve remaining AI Idea Master Template governance adoption
+STATUS: APPROVED
+QUESTION: May the remaining non-destructive governance amendments be approved and applied using Project Control judgment without separate approval for each item?
+DECISION: Yes. Project Owner approved all remaining governance choices as deemed best unless a separate approval is genuinely required. Apply non-destructive governance amendments on the protected adoption branch. Preserve DEF-###, adopt the supplied Authority Order, adopt only supported Source-of-Truth mappings, and do not invent the missing Part 29 remainder.
+WHY: Project Owner explicitly granted blanket approval to proceed while preserving escalation for genuinely approval-sensitive actions.
+ALTERNATIVES CONSIDERED: Require separate approval for every amendment.
+EVIDENCE: Project Owner instruction during Stage D.
+AFFECTED AREAS: Constitution, governance schemas, release/recovery rules, registers, adoption workflow.
+SUPERSEDES: OD-002 unresolved state and remaining Stage D item-by-item review.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO for branch-only governance application; YES for merge/production activation.
+APPROVED BY: Project Owner
