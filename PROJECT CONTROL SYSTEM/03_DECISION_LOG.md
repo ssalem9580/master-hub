@@ -114,3 +114,19 @@ SUPERSEDES:
 SUPERSEDED BY:
 REVIEW REQUIRED: YES for main merge/final baseline freeze.
 APPROVED BY: Project Owner under DEC-007 blanket branch-only approval
+
+
+## DEC-009
+DATE: 2026-09-30
+TITLE: Authorize Stage H merge and governance baseline freeze
+STATUS: APPROVED
+QUESTION: May the verified GOVERNANCE-ADOPTION-RC1 package be merged into main and established as Master Hub's canonical governance baseline?
+DECISION: Yes. Merge the protected adoption branch into main through an auditable pull request, verify the merged state, then establish a frozen baseline reference for the resulting governance state.
+WHY: Project Owner explicitly approved Stage H after the governance release candidate passed branch verification.
+ALTERNATIVES CONSIDERED: Leave the adoption package branch-only; delay canonical activation.
+EVIDENCE: Project Owner approval following GOVERNANCE-ADOPTION-RC1 verification.
+AFFECTED AREAS: Canonical Project Control System governance only.
+SUPERSEDES: Stage H NOT AUTHORIZED state.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO for the authorized merge/freeze operation; post-merge verification still required.
+APPROVED BY: Project Owner
