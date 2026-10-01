@@ -26,3 +26,9 @@ OPEN / PLANNED / RESOLVED / ACCEPTED
 ```
 
 Temporary architecture must not silently become permanent architecture.
+
+| TD-006 | CI build does not run existing tests or lint | False confidence in green build status | High | OPEN |
+| TD-007 | UI test suite and README describe older MasterHub behavior | Verification/documentation drift | High | OPEN |
+| TD-008 | Project Control Center duplicates canonical state as static text | Governance UI drift | High | OPEN |
+| TD-009 | Multiple Git-linked Vercel projects trigger build/deployment fan-out | Rate-limit waste and confusing status checks | High | OPEN |
+| TD-010 | Current Next.js dependency is behind security-patched Active LTS | Security exposure | Critical | OPEN |
