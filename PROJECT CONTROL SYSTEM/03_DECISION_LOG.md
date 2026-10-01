@@ -34,3 +34,19 @@ DECISION: Add an internal Project Control Center route and registry entry.
 WHY: Project control is now part of the Master Hub operating system.
 AFFECTED AREAS: Navigation, governance, current-state visibility.
 APPROVED BY: Project Owner
+
+
+## DEC-004
+DATE: 2026-09-30
+TITLE: Begin controlled adoption of AI Idea Master Template
+STATUS: APPROVED
+QUESTION: Should the AI Idea Master Template be incorporated into Master Hub as its project-management and governance operating system through a protected, non-destructive adoption process?
+DECISION: Yes. Begin controlled adoption on the dedicated adoption branch. Preserve existing Master Hub product content and canonical state. Template adoption governs project control and may not silently overwrite approved product decisions.
+WHY: Project Owner explicitly directed that the entire AI Idea Master Template be incorporated into MasterHub as its project-management/governance operating system and issued BEGIN CONTROLLED TEMPLATE ADOPTION.
+ALTERNATIVES CONSIDERED: Replace the current control system wholesale; continue without template adoption.
+EVIDENCE: Project Owner instruction and 00_AI_IDEA_MASTER_TEMPLATE.md.
+AFFECTED AREAS: Governance, control documents, requirements, testing, release, recovery, finalization.
+SUPERSEDES:
+SUPERSEDED BY:
+REVIEW REQUIRED: YES — final activation/merge requires owner review after reconciliation and verification.
+APPROVED BY: Project Owner
