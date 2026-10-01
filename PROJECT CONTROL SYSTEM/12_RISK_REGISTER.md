@@ -49,4 +49,6 @@ Existing risk records remain authoritative historical entries and may be expande
 | RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Upgrade to current patched Active LTS and verify | OPEN |
 
 | RISK-012 | Standalone active tools lack established canonical source/backup ownership | High | Critical | Recover and version source before destructive cleanup; document canonical repo/deployment/backup per tool | OPEN |
-| RISK-013 | Recovery Value Calculator may be orphaned from its actual source while linked to the wrong repository | High | High | Recover original source or rebuild under controlled requirements; correct Vercel linkage | OPEN |
+| RISK-013 | Recovery Value Calculator recovered source is not canonicalized and current Vercel linkage/root config is drifted | High | High | Validate recovered branch source, canonicalize it, correct Root Directory, and verify before promotion | OPEN |
+
+| RISK-014 | Canonical main/baseline branches are mutable because GitHub protection is not enabled | Medium-High | Critical | Add ruleset/branch protection and preserve exact release SHAs/tags | OPEN |
