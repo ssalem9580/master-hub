@@ -5,7 +5,7 @@ DATE: 2026-09-30
 CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
 LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
 CURRENT STEP: Stages E and F complete; governance adoption package verified on protected branch.
-NEXT CONTROLLED ACTION: Await explicit authorization to merge the verified governance adoption branch into main and establish the new governance baseline.
+NEXT CONTROLLED ACTION: Merge the verified governance adoption branch into main, verify the canonical merged state, and establish the frozen governance baseline.
 
 PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
 CURRENT MVP: Existing hub + key internal tools + Project Control System.
@@ -102,3 +102,5 @@ PRODUCT CODE DIFF VS MAIN: NONE.
 BUILD/TYPECHECK FOR THIS ADOPTION: NOT APPLICABLE; no product/runtime/config files changed.
 ADOPTION PACKAGE STATUS: GOVERNANCE-ADOPTION-RC1.
 NEXT APPROVAL GATE: explicit merge to main / baseline establishment.
+
+STAGE H AUTHORIZATION: APPROVED — DEC-009.
