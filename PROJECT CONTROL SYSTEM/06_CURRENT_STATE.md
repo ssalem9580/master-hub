@@ -4,8 +4,8 @@ DATE: 2026-09-30
 
 CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
 LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
-CURRENT STEP: Stage C proposed governance amendments drafted; Stage D owner review is next.
-NEXT CONTROLLED ACTION: Owner review of proposed amendments, especially defect-ID convention and Authority Order activation; no amendments are active yet.
+CURRENT STEP: Stage D owner review complete; Stage E approved governance amendments are being applied.
+NEXT CONTROLLED ACTION: Apply approved governance amendments to canonical control files on the protected adoption branch, then verify the complete governance state.
 
 PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
 CURRENT MVP: Existing hub + key internal tools + Project Control System.
@@ -89,3 +89,8 @@ STAGE C RESULT: COMPLETE — PROPOSALS ONLY
 
 STAGE D DECISION: OD-001 RESOLVED — retain DEF-### permanently (DEC-006).
 NEXT OWNER REVIEW ITEM: OD-002 — Authority Order activation.
+
+STAGE D RESULT: COMPLETE under DEC-007.
+AUTHORITY ORDER: APPROVED for adoption.
+PART 29 RULE: Adopt supplied mappings only; missing remainder remains UNKNOWN / NEEDS CONFIRMATION.
+MAIN-BRANCH MERGE: STILL REQUIRES SEPARATE EXPLICIT APPROVAL.
