@@ -62,3 +62,9 @@ Rules:
 | TEST-021 | Security | Query Vercel runtime error clusters for canonical MasterHub | PASS | No runtime errors found in selected 7-day range | 2026-09-30 |
 | TEST-022 | Security | Compare installed Next.js against current official security patch baseline | FAIL | Installed 16.3.4; current security guidance requires 16.3.8 and critical upstream fix was 16.3.6 | 2026-09-30 |
 | TEST-023 | Security / Product Boundary | Verify canonical MasterHub requires authentication | FAIL / REQUIREMENT BOUNDARY OPEN | Public routes return HTTP 200; no application auth layer found | 2026-09-30 |
+
+| TEST-024 | REQ-013 | Verify Next.js and eslint-config-next are pinned to 16.3.8 in package metadata/lockfile | PASS | package.json + regenerated package-lock.json | 2026-09-30 |
+| TEST-025 | REQ-013 / REQ-014 | Verify clean npm ci install from regenerated lockfile | PASS | GitHub Actions run 36810355612 | 2026-09-30 |
+| TEST-026 | REQ-014 | Run ESLint across MasterHub | PASS | GitHub Actions run 36810355612 | 2026-09-30 |
+| TEST-027 | REQ-014 | Run current Vitest suite | PASS | GitHub Actions run 36810355612; 5 tests passed | 2026-09-30 |
+| TEST-028 | REQ-013 / REQ-014 | Run Next.js production build under 16.3.8 | PASS | GitHub Actions run 36810355612 | 2026-09-30 |
