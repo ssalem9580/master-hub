@@ -32,3 +32,15 @@ POSSIBLE SOLUTIONS: Adopt only the supplied content; append the missing remainde
 DECISION REQUIRED: NO
 DEPENDENCIES: Additional owner-provided source if desired.
 RESOLUTION: Earlier Part-15 truncation concern is superseded; current incompleteness is at Part 29.
+
+
+## ISSUE-004 — Defect identifier convention conflict
+TYPE: Product / Governance
+STATUS: OPEN
+DESCRIPTION: The AI Idea Master Template specifies BUG-### defect IDs, while the established Master Hub Data Dictionary and Defect Register use DEF-###.
+WHY IT MATTERS: Silent renaming would break historical traceability and alter an established project convention.
+EVIDENCE: 00_AI_IDEA_MASTER_TEMPLATE.md; 11_DEFECT_REGISTER.md; 15_DATA_DICTIONARY.md.
+POSSIBLE SOLUTIONS: Preserve DEF-### as a Master Hub local convention, or explicitly authorize BUG-### for future records with a compatibility rule.
+DECISION REQUIRED: YES
+DEPENDENCIES: Project Owner governance decision.
+RESOLUTION:
