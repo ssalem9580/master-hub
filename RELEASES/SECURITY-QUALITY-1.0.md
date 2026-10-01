@@ -91,4 +91,5 @@ See PROJECT CONTROL SYSTEM/18_ROLLBACK_AND_RECOVERY.md.
 Recorded under DEC-014.
 
 ## Baseline Freeze
-A dedicated frozen recovery reference will be created after the release-closeout records are merged so the reference includes this complete release record.
+Frozen recovery reference: baseline/security-quality-1.0
+The reference is created from the completed release-closeout branch head and includes this release record.
