@@ -55,7 +55,7 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-AI Idea Master Template governance operating system is merged into main; baseline freeze finalization is in progress.
+CONTROL-BASELINE-1.0 is active and finalized.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
@@ -114,3 +114,7 @@ CONTROLLED TEMPLATE ADOPTION:
 - Merge commit: 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d.
 - Canonical governance location: main / PROJECT CONTROL SYSTEM.
 - Governance baseline version: CONTROL-BASELINE-1.0.
+
+- Frozen baseline reference: baseline/governance-control-1.0
+- Stage H: COMPLETE
+- Adoption status: FINALIZED VERSION
