@@ -40,3 +40,8 @@ Containment may be marked complete only after a private canonical destination ex
 ## Recovery
 Current public source/history and deployments remain intact until private preservation is verified.
 No destructive containment action was performed as part of SECURITY-BOUNDARY-1.0.
+
+## Frozen Governance/Security Reference
+`baseline/security-boundary-1.0`
+
+This frozen reference preserves the finalized classification, inventory, quarantine plan, release record, and recovery rules. It does **not** constitute a private backup of the restricted source itself.
