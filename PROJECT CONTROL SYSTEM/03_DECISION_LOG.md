@@ -194,3 +194,19 @@ SUPERSEDES:
 SUPERSEDED BY:
 REVIEW REQUIRED: YES before PR #2 merge and production release.
 APPROVED BY: Project Owner
+
+
+## DEC-014
+DATE: 2026-09-30
+TITLE: Activate SECURITY-QUALITY-1.0 on main and production
+STATUS: APPROVED
+QUESTION: Did the verified security and quality hardening package satisfy the merge, CI, deployment, route, runtime, and owner-acceptance gates for release?
+DECISION: Yes. PR #2 was approved by the Project Owner and merged into main as f81fd436a8df50ac0da93ec3c93ec26d09e0badf. The post-merge GitHub Actions pipeline passed install, lint, tests, and production build. Vercel production deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 reached READY for the same merge commit, all six canonical routes returned HTTP 200, and the one-hour runtime error scan was clean. SECURITY-QUALITY-1.0 is accepted as the released hardening baseline.
+WHY: The package resolves the verified security-patch and build-only CI defects without introducing new product scope.
+ALTERNATIVES CONSIDERED: Leave the verified package branch-only; merge without production verification; rebuild additional features in the same release.
+EVIDENCE: PR #2; merge commit f81fd436a8df50ac0da93ec3c93ec26d09e0badf; GitHub Actions run 36811990043; Vercel deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5; production route checks; runtime error scan.
+AFFECTED AREAS: Next.js dependency baseline, tests, lint compliance, CI gates, production release records.
+SUPERSEDES: SECURITY-QUALITY-RC1 release-candidate state.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO for this completed release; remaining audit issues retain their own decision gates.
+APPROVED BY: Project Owner
