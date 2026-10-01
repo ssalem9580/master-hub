@@ -98,8 +98,8 @@ This supersedes the older observation that the supplied prompt ended during Defi
 
 ## Adoption Stages
 - STAGE A — Protect baseline and capture source: COMPLETE.
-- STAGE B — Section-by-section reconciliation: IN PROGRESS.
-- STAGE C — Draft proposed governance amendments: NOT STARTED.
+- STAGE B — Section-by-section reconciliation: COMPLETE.
+- STAGE C — Draft proposed governance amendments: NEXT CONTROLLED STAGE.
 - STAGE D — Owner review of conflicts/material changes: NOT STARTED.
 - STAGE E — Apply approved governance amendments on adoption branch: NOT STARTED.
 - STAGE F — Verify repository, build/test impact, checkpoint and recovery state: NOT STARTED.
@@ -107,5 +107,4 @@ This supersedes the older observation that the supplied prompt ended during Defi
 - STAGE H — Merge/freeze new governance baseline: NOT AUTHORIZED.
 
 ## Current Next Controlled Action
-Perform the section-by-section Existing → Missing → Conflict → Adopt → Needs Owner Decision reconciliation.
-Do not modify product code or main.
+Draft proposed governance amendments from 00_TEMPLATE_RECONCILIATION_MATRIX.md. Keep conflicts and owner-decision items isolated. Do not modify product code or main.
