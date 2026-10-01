@@ -34,4 +34,6 @@ Temporary architecture must not silently become permanent architecture.
 | TD-010 | Current Next.js dependency is behind security-patched Active LTS | Security exposure | Critical | OPEN |
 
 | TD-011 | Standalone app source ownership is undocumented/incomplete | Recovery and maintenance risk | Critical | OPEN |
-| TD-012 | Recovery Value Calculator Vercel project is linked to a repo with no matching source | Broken deployment / source drift | Critical | OPEN |
+| TD-012 | Recovery Value recovered source remains stranded on a non-main branch and Vercel root mapping drifted | Broken deployment / source drift | Critical | OPEN |
+
+| TD-013 | Governance baseline is frozen by convention but not GitHub enforcement | Baseline can be mutated accidentally | Critical | OPEN |
