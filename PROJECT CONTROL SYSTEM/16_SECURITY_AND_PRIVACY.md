@@ -63,3 +63,33 @@ For this project:
 - Current inspected personal-entry data remains browser-local through localStorage unless a later approved architecture changes that boundary.
 - Any future feature that stores sensitive/personal data server-side, syncs it across devices/accounts, or shares it with a third party requires a new explicit security/privacy review before implementation.
 - Field-service diagnostic/repair content has a separate unresolved distribution-classification issue. No-login approval does not classify that material as safe for public distribution.
+
+
+## Restricted Field-Service Boundary — DEC-016
+Default classification: **RESTRICTED**.
+
+Applies to all field-service operational material unless the Project Owner explicitly reclassifies a specific item, including:
+- diagnostic workflows
+- repair procedures
+- repair packages
+- part numbers and operational parts data
+- equipment-specific troubleshooting
+- harness, terminal, board, component, and wiring references
+- field-service decision trees
+- related source documents
+- derived operational guidance
+
+### Distribution Rules
+- Do not publish restricted material to public repositories, public routes, or public artifacts.
+- Do not send restricted field-service material to external AI providers unless explicitly authorized for that specific use.
+- Previously public availability does not equal approval for continued public distribution.
+- Public MasterHub may remain no-login under DEC-015, but restricted field-service content must be separated from that public surface.
+- Removal from current HEAD alone does not remediate Git history; history exposure must be assessed separately.
+- Before deletion/migration, preserve a recoverable private copy and document source ownership.
+
+### Current Security State
+NONCOMPLIANT WITH DEC-016 UNTIL CONTAINMENT:
+- public repository contains restricted material
+- public MasterHub routes/assets expose restricted field-service material
+
+Containment is now the highest-priority open security task.
