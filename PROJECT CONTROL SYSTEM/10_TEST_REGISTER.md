@@ -49,3 +49,11 @@ Rules:
 | TEST-011 | REQ-011 | Verify 13-level Authority Order and supplied-only Source-of-Truth mappings exist | PASS | Constitution verified; incomplete Part 29 explicitly preserved | 2026-09-30 |
 | TEST-012 | REQ-012 | Verify canonical governance schemas exist across registers and DEF-### lock is preserved | PASS | 09–20 control files + Data Dictionary verified | 2026-09-30 |
 | TEST-013 | REQ-009–REQ-012 | Verify adoption branch contains no product-code/config changes versus main | PASS | GitHub compare shows changes only under PROJECT CONTROL SYSTEM/ | 2026-09-30 |
+
+
+| TEST-014 | REQ-001 | Verify current main GitHub Actions production build | PASS | Master Hub CI run 36806742233 succeeded for e8ca3dac4825cd8af0b3427678cd67b4854b61 | 2026-09-30 |
+| TEST-015 | REQ-005 | Verify registry Live URLs against actual HTTP/deployment evidence | FAIL / PARTIAL | Recovery Value Calculator returns HTTP 404; several others return 200; two chatgpt.site targets remain unverified | 2026-09-30 |
+| TEST-016 | REQ-001 | Verify canonical MasterHub production root | PASS | master-hub-sigma.vercel.app HTTP 200; dpl_EJF5Hh9sswrUTMKiPGcjy8fDdH3n READY | 2026-09-30 |
+| TEST-017 | REQ-001 | Compare current UI tests against current MasterHub component surface | FAIL | Test expects Quick Capture/Capture action/older controls absent from current component source | 2026-09-30 |
+| TEST-018 | REQ-007 | Verify Project Control Center displays canonical dynamic state | FAIL | page.tsx contains static phase/current-task text and does not read canonical control records | 2026-09-30 |
+| TEST-019 | REQ-004 / REQ-005 | Review public repository for unresolved field-service distribution classification | BLOCKED | Public repo contains field diagnostic/repair material; allowed distribution classification not yet established | 2026-09-30 |
