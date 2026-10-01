@@ -98,3 +98,19 @@ SUPERSEDES: OD-002 unresolved state and remaining Stage D item-by-item review.
 SUPERSEDED BY:
 REVIEW REQUIRED: NO for branch-only governance application; YES for merge/production activation.
 APPROVED BY: Project Owner
+
+
+## DEC-008
+DATE: 2026-09-30
+TITLE: Accept verified governance adoption package as release candidate
+STATUS: APPROVED
+QUESTION: Has the branch-only AI Idea Master Template governance adoption package satisfied the approved non-destructive adoption requirements?
+DECISION: Yes. GOVERNANCE-ADOPTION-RC1 is accepted as the verified governance release candidate on the protected adoption branch. Product code and runtime configuration are unchanged versus main. Main-branch merge remains a separate approval gate.
+WHY: Repository verification confirmed lifecycle, classifications, Ready/Done gates, acceptance criteria, Authority Order, Source-of-Truth rules, canonical register schemas, DEF-### preservation, and governance-only diff scope.
+ALTERNATIVES CONSIDERED: Continue branch changes without verification; merge before verification.
+EVIDENCE: TEST-009 through TEST-013 and repository compare.
+AFFECTED AREAS: Governance adoption package only.
+SUPERSEDES:
+SUPERSEDED BY:
+REVIEW REQUIRED: YES for main merge/final baseline freeze.
+APPROVED BY: Project Owner under DEC-007 blanket branch-only approval
