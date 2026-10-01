@@ -242,3 +242,19 @@ SUPERSEDES: ISSUE-005/related UNKNOWN distribution classification.
 SUPERSEDED BY:
 REVIEW REQUIRED: YES before any specific restricted material is reclassified as public.
 APPROVED BY: Project Owner
+
+
+## DEC-017
+DATE: 2026-09-30
+TITLE: Finalize restricted field-service security boundary baseline
+STATUS: APPROVED
+QUESTION: Should the restricted field-service classification, exposure inventory, quarantine plan, and recovery rules be finalized as a security baseline before physical containment begins?
+DECISION: Yes. Finalize SECURITY-BOUNDARY-1.0. The classification boundary is complete and enforceable now, while physical containment remains explicitly OPEN until a verified private canonical destination exists.
+WHY: Project Owner explicitly directed finalization. Marking classification final while keeping containment open preserves truth: the security decision is complete, but restricted public exposure has not yet been remediated.
+ALTERNATIVES CONSIDERED: Falsely mark containment complete; begin destructive removal without private preservation; leave classification in draft state.
+EVIDENCE: DEC-016; exposure inventory; quarantine plan; Project Owner finalization instruction.
+AFFECTED AREAS: Security/privacy, restricted data governance, release/recovery, field-service routes and deployments.
+SUPERSEDES: Proposed-only quarantine/classification state.
+SUPERSEDED BY:
+REVIEW REQUIRED: YES before moving canonical restricted source, changing repository visibility, rewriting public history, or retiring public deployments.
+APPROVED BY: Project Owner
