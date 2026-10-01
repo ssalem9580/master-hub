@@ -157,3 +157,8 @@ Continue evidence gathering and owner-decision preparation. No destructive clean
 - Standalone source ownership: INCOMPLETE.
 - Recovery Value Calculator source: NOT FOUND in canonical repo; Vercel project linkage appears inconsistent with repository tree.
 - Do not retire standalone deployments until source/backup ownership is recovered.
+
+- Recovery Value source recovered: codex/recovered-standalone-apps @ 751a73b17bef47c47a2a0b9467560a197fef8f0f, path standalone-apps/recovery-value-calculator/index.html.
+- Do NOT rebuild Recovery Value from memory before validating recovered source.
+- main protected=false; governance baseline branch protected=false; no rulesets observed.
+- CONTROL-BASELINE-1.0 freeze is currently policy/SHA based, not GitHub-enforced.
