@@ -10,3 +10,36 @@
 | TEST-006 | REQ-006 | Confirm all canonical control files are present | IMPLEMENTED; repository verification required after commit | Git tree | 2026-09-30 |
 | TEST-007 | REQ-007 | /project-control builds and renders | OPEN | — | — |
 | TEST-008 | REQ-008 | Every approved MVP requirement has traceability row | PARTIAL | 21_REQUIREMENTS_TRACEABILITY_MATRIX.md | 2026-09-30 |
+
+
+## Canonical Test Schema
+New or normalized tests use:
+
+```text
+TEST ID:
+RELATED REQUIREMENT:
+RELATED FEATURE:
+
+TYPE:
+Unit / Integration / End-to-End / Regression / Security / UX / Performance / Recovery
+
+PURPOSE:
+PRECONDITIONS:
+INPUT:
+STEPS:
+EXPECTED RESULT:
+ACTUAL RESULT:
+
+STATUS:
+PASS / FAIL / BLOCKED / NOT RUN
+
+EVIDENCE:
+DATE:
+NOTES:
+```
+
+Rules:
+- Never mark PASS because code merely appears logically correct.
+- Test actual behavior whenever possible.
+- Existing TEST-### identifiers and historical summaries are preserved.
+- Historical tests may be expanded to this schema when revisited; unknown historical fields remain UNKNOWN rather than fabricated.
