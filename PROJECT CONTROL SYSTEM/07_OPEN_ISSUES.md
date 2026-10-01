@@ -104,14 +104,14 @@ RESOLUTION: Next.js and eslint-config-next 16.3.8 are canonical on main. PR #2 m
 
 ## ISSUE-010 — "Private" positioning is not backed by application access control
 TYPE: Security / Product Boundary
-STATUS: OPEN
+STATUS: RESOLVED
 DESCRIPTION: Canonical MasterHub production routes are publicly reachable without login, and repository inspection found no application auth middleware/proxy/session layer.
-WHY IT MATTERS: If "private command center" is intended to mean access-controlled, current implementation does not satisfy that meaning. Public field-service content increases the importance of resolving this boundary.
-EVIDENCE: public HTTP 200 on canonical routes; repository tree/package inspection.
+WHY IT MATTERS: The access boundary needed an explicit product definition so public reachability would not be confused with a security defect.
+EVIDENCE: public HTTP 200 on canonical routes; repository tree/package inspection; DEC-015.
 POSSIBLE SOLUTIONS: Clarify product privacy requirement; if access control is required, add authentication/authorization and separate public/private assets.
-DECISION REQUIRED: YES for the intended privacy/access-control boundary.
-DEPENDENCIES: Owner/product decision; field-service content classification.
-RESOLUTION:
+DECISION REQUIRED: NO
+DEPENDENCIES: Field-service content classification remains a separate issue.
+RESOLUTION: Project Owner explicitly approved no login. MasterHub remains publicly reachable. "Private" means private-use/local-data privacy, not access-controlled visibility. Sensitive personal values and restricted content remain subject to separate data-boundary rules.
 
 
 ## ISSUE-011 — Standalone tool source ownership and recovery are incomplete
