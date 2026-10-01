@@ -1,7 +1,7 @@
 # SECURITY-QUALITY-1.0 Backup Record
 
 DATE: 2026-09-30
-STATUS: RECORDED — BASELINE REFERENCE PENDING CLOSEOUT MERGE
+STATUS: RECORDED / BASELINE FROZEN
 PROJECT: Master Hub
 
 ## Canonical Source
@@ -37,7 +37,6 @@ Production verification:
 SECURITY-QUALITY-1.0 introduced no database migration. Inspected MasterHub personal-entry persistence remains browser-local for the current internal tools.
 
 ## Frozen Reference
-To be created after release-closeout merge:
 baseline/security-quality-1.0
 
-The final frozen reference must point to the closeout-complete main commit rather than only the earlier product merge commit.
+This reference is created from the completed release-closeout branch head so it contains the full release, verification, rollback, backup, and governance records.
