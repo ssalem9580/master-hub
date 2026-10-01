@@ -18,7 +18,7 @@ CURRENT STEP:
 MASTER HUB — PROJECT OPERATIONS & QUEUE control mode is active. Current operational work is tracked in 22_PROJECT_OPERATIONS_QUEUE.md.
 
 NEXT CONTROLLED ACTION:
-Deploy and live-retest the pending Repair Package Part # auto-fill update when Vercel build capacity clears, while preserving the critical restricted-data containment gate.
+Live-retest the deployed Repair Package Part # auto-fill workflow, then deploy and verify the two pending Project Control operations commits when Vercel build capacity clears, while preserving the critical restricted-data containment gate.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -71,13 +71,14 @@ TEST REALITY:
 CANONICAL PRODUCTION:
 - Vercel project: master-hub
 - Canonical alias: master-hub-sigma.vercel.app
-- Current observed production deployment: dpl_AHvbXmgAsCqgubS51sU8UbzByFa7
-- Current observed production commit: 036ae44123f7f91c27fa7c01b7d0f29cbfb069aa
+- Current observed production deployment: dpl_8LG2LPLHUmbDjqaqe4N87tKDeo6R
+- Current observed production commit: 601b90def0eaa8935807f6fab200f68b9dc742c3
 - Production state: READY
-- Latest main commit: ecd09bc0c1e8137e6774c87e00397599da0ae721
-- Production is BEHIND main.
-- Pending application/control commits include remaining master-parts source segments, Repair Package Part # auto-fill, and Project Operations & Queue.
-- Later Vercel builds are currently blocked by build-rate limiting; pending changes are NOT VERIFIED IN PRODUCTION.
+- Latest main commit: 9ae344be59153103accfcaf030aeba06c07c584d
+- Production is BEHIND main by 2 commits.
+- Repair Package master-parts source and Part # lookup code are now present in production; interactive end-to-end retest remains open.
+- Pending main commits are limited to Project Operations / Project Control updates e4b81c2 and 9ae344b.
+- Vercel currently reports build-rate limiting for the newest main state; those two pending commits are NOT VERIFIED IN PRODUCTION.
 
 VERCEL PROJECT REALITY:
 Nine connected projects exist. Duplicate/legacy candidates include:
@@ -201,4 +202,4 @@ SECURITY-BOUNDARY RELEASE:
 PROJECT OPERATIONS & QUEUE:
 - Canonical operational queue: 22_PROJECT_OPERATIONS_QUEUE.md
 - Control areas: Queue; Build & Deployment; Bugs & Testing; Ideas & Improvements; Security & Restricted Data; Data & Integrations; UI / UX; Release History.
-- Current update state: READY FOR REVIEW, not finalized.
+- Current update state: PARTIALLY DEPLOYED / READY FOR REVIEW. Core operations queue is live; the latest Project Control status extension remains pending production deployment and finalization.
