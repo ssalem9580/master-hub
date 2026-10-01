@@ -12,3 +12,21 @@
 | REQ-008 | Owner supplied control framework | DEC-001 | FEAT-008 | This matrix + linked registers | TEST-008 | Repository documents | PARTIAL |
 
 Traceability must work both directions: every feature should answer why it exists, and every requirement should identify what breaks if removed.
+
+
+## Canonical Traceability Chain
+
+```text
+User Need
+→ Decision
+→ Requirement
+→ Feature
+→ Implementation
+→ Test
+→ Evidence
+→ Verification
+→ Acceptance
+```
+
+Traceability must work in both directions.
+Every feature should be able to answer **why it exists**, and every requirement should identify what approved behavior would be affected if it were removed.
