@@ -1,7 +1,7 @@
 # 08 — Checkpoint
 
 PROJECT: Master Hub
-VERSION: CONTROL-BASELINE-0.1
+VERSION: CONTROL-BASELINE-1.0
 DATE: 2026-09-30
 
 PRODUCT IDENTITY: Personal command center, operational app registry, and project operating system.
@@ -55,7 +55,7 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Governance adoption package GOVERNANCE-ADOPTION-RC1 is applied and verified on the protected branch.
+AI Idea Master Template governance operating system is merged into main; baseline freeze finalization is in progress.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
@@ -109,3 +109,8 @@ CONTROLLED TEMPLATE ADOPTION:
 - Merge to main: REQUIRES EXPLICIT APPROVAL.
 
 - Stage H authorization: APPROVED — DEC-009.
+
+- PR #1: MERGED.
+- Merge commit: 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d.
+- Canonical governance location: main / PROJECT CONTROL SYSTEM.
+- Governance baseline version: CONTROL-BASELINE-1.0.
