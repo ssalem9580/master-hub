@@ -38,3 +38,10 @@ Rules:
 - Never erase defect history.
 - Never rename existing DEF-### identifiers solely to match the generic template.
 - Historical defects may be expanded when revisited; unknown fields remain UNKNOWN rather than invented.
+
+| DEF-004 | Recovery Value Calculator configured Live URL returns HTTP 404 | High | OPEN | Live HTTP verification at configured registry URL | Identify correct route/deployment or downgrade status until restored |
+| DEF-005 | Project Control Center displays static state that can drift from canonical records | Medium | OPEN | /project-control source contains static phase/current-task text | Bind/generate visible state from canonical source |
+| DEF-006 | Current MasterHub UI tests target older interface while CI does not run tests | Medium | VERIFIED ON HARDENING BRANCH | Updated current-UI tests + CI run 36810355612 | Tests normalized; CI now requires lint/test/build; canonical closure awaits merge |
+| DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | FIXING IN AUDIT | 06_CURRENT_STATE.md contradicted completed Stage H baseline freeze | Correct Current State on audit branch and preserve audit evidence |
+
+| DEF-008 | Next.js security patch level below current patched Active LTS | High | VERIFIED ON HARDENING BRANCH | package/lock use 16.3.8; CI run 36810355612 passes lint/test/build | Merge/release PR #2 to make fix canonical |

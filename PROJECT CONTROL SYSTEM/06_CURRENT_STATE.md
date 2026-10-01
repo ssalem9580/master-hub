@@ -2,62 +2,122 @@
 
 DATE: 2026-09-30
 
-CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
-LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
-CURRENT STEP: AI Idea Master Template governance adoption finalized as CONTROL-BASELINE-1.0.
-NEXT CONTROLLED ACTION: Merge the verified governance adoption branch into main, verify the canonical merged state, and establish the frozen governance baseline.
+CURRENT PHASE: SECURITY + QUALITY HARDENING — VERIFIED RELEASE CANDIDATE
+GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
+FROZEN GOVERNANCE REFERENCE: baseline/governance-control-1.0
+CANONICAL REPOSITORY: ssalem9580/master-hub
+CANONICAL BRANCH: main
+AUDIT-START MAIN SHA: e8ca3dac4825cd8af0b3427678cd67b4854b61
+ACTIVE AUDIT BRANCH: audit/masterhub-reconstruction-reality-20260930
+ACTIVE HARDENING BRANCH: hardening/security-quality-20260930
+HARDENING PR: #2 — OPEN / NOT MERGED
 
-PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
-CURRENT MVP: Existing hub + key internal tools + Project Control System.
+CURRENT STEP:
+Security and quality hardening implemented and verified on the protected hardening branch.
+
+NEXT CONTROLLED ACTION:
+Verify the final PR head after governance evidence is committed. If lint, tests, and build remain green, request the explicit merge/release gate for PR #2. Production remains unchanged until that gate is approved.
+
+PRODUCT IDENTITY:
+Master Hub command center / application registry / project operating system.
+
+CURRENT MVP:
+Existing command center + key internal tools + external app registry + Project Control System.
 
 IMPLEMENTED:
 - Master Hub dashboard/directory/actions
-- Finances Command Center route
-- Field resource/diagnostic routes
+- Project Control Center
+- Field Resource Hub
+- Field Diagnostic Hub route + static diagnostic asset
+- Finances Command Center
 - Repair Packages
 - Vercel build bridge/configuration
-- Project Control System (this change)
+- Project Control System
+- AI Idea Master Template governance operating system
 
-TESTED:
-- Historical CI/build evidence exists; current control-system UI requires new build verification.
+SOURCE-VERIFIED ROUTES:
+- /
+- /project-control
+- /field-resource-hub
+- /field-diagnostic-hub
+- /finances-command-center
+- /repair-packages
 
-VERIFIED:
-- Vercel reports production deployment dpl_Hx5yyuZGP1oyRP1WxmvV8yYacJcg as READY for commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a.
+LIVE ROUTE AVAILABILITY:
+- All six internal canonical routes returned HTTP 200 on the canonical production alias.
 
-OWNER ACCEPTED:
-- Individual requested features have been accepted over time.
-- A frozen final Master Hub baseline has NOT been established.
+PERSISTENCE REALITY:
+- Master Hub actions: browser localStorage
+- Finances profile: browser localStorage
+- Repair Packages / Parts Library: browser localStorage
+- Project-wide server database: UNKNOWN / NEEDS CONFIRMATION for standalone/external tools
 
-BUILT BUT NOT VERIFIED:
-- Any change after the last READY deployment until a new deployment/build is checked.
+BUILD / CI:
+- Hardening branch uses Next.js 16.3.8 and eslint-config-next 16.3.8 with a regenerated lockfile.
+- GitHub Actions now requires npm ci → npm run lint → npm test → npm run build.
+- Verification run 36810355612 passed install, lint, tests, and production build on hardening product commit 2062d470b3f200b490f139b8bff2bd64ab0b8221.
+- PR #2 Vercel checks remain affected by the separately documented multi-project build-rate-limit fan-out.
 
-NOT STARTED:
-- Full historical decision reconstruction.
-- Complete requirements traceability for every legacy feature.
-- Finalization audit and baseline freeze.
+TEST REALITY:
+- Vitest suite is aligned to the current approved MasterHub UI.
+- hub-data tests pass.
+- current UI directory search, action capture, importance toggle, and delete flows pass.
+- Lint passes after correcting verified React/TypeScript violations in Finances, Repair Packages, and MasterHub.
+- Production build passes under Next.js 16.3.8.
 
-BLOCKED:
-- None for creating the control system.
-- Finalization is blocked by incomplete reconstruction/testing/owner acceptance.
-
-CURRENT TECH STACK:
-- Next.js application in master-hub-app
-- React/TypeScript
-- Vercel deployment
-- GitHub repository
-
-CURRENT DATABASE STATE:
-UNKNOWN / NEEDS CONFIRMATION at project-wide level. Some tools may use localStorage or external backends.
-
-ACTIVE INTEGRATIONS:
-- GitHub
-- Vercel
-- Other app-specific integrations: UNKNOWN / NEEDS CONFIRMATION
-
-CURRENT DEPLOYMENT:
+CANONICAL PRODUCTION:
 - Vercel project: master-hub
-- Last observed READY deployment: dpl_Hx5yyuZGP1oyRP1WxmvV8yYacJcg
-- Commit: 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a
+- Canonical alias: master-hub-sigma.vercel.app
+- Observed production deployment: dpl_EJF5Hh9sswrUTMKiPGcjy8fDdH3n
+- Production commit: ef13e706cfa678fc519802298944a5c45b12d7d2
+- Production root HTTP: 200 / READY
+- Current main is newer in governance documentation only.
+- Comparison from production commit to current main shows no application/runtime/configuration-file differences.
+- PRODUCT CODE PARITY: VERIFIED
+- DEPLOYMENT SHA PARITY: NOT CURRENT
+
+VERCEL PROJECT REALITY:
+Nine connected projects exist. Duplicate/legacy candidates include:
+- master-hub-live
+- field-diagnostic-hub and field-diagnostic-hub-live overlap
+- job-quote-calculator and job-quote-calculator-live overlap
+No duplicates have been deleted or disconnected.
+
+REGISTRY REALITY:
+- 9 hard-coded entries
+- 8 labeled Live
+- 1 labeled Setup needed
+- Live status is static metadata, not a runtime health check
+- Recovery Value Calculator configured URL currently returns HTTP 404
+- NTE Quote, Billed Work Tracker, Sam Hub, Finances Command Center, and MasterHub root have positive live evidence
+- Private Client and Illinois Locksmith Exam Prep remain UNKNOWN / NEEDS CONFIRMATION in this audit
+
+PROJECT CONTROL CENTER REALITY:
+- Route is implemented.
+- UI is static and does not read canonical Markdown at runtime.
+- Its current-phase text can drift from canonical records.
+
+REPOSITORY VISIBILITY:
+PUBLIC
+
+RUNTIME HEALTH:
+- No Vercel runtime error clusters observed in selected 7-day window.
+- Sampled production status grouping showed HTTP 200 only.
+
+DEPENDENCY SECURITY:
+- Hardening branch: Next.js 16.3.8 / eslint-config-next 16.3.8 — VERIFIED.
+- Canonical main/production remain on the prior package state until PR #2 is merged and released.
+- Official Next.js September 2026 security baseline requirement is satisfied by the hardening branch.
+
+ACCESS CONTROL:
+- Canonical app routes are publicly reachable.
+- No application authentication layer found.
+- Whether "private" requires access control is OPEN.
+
+SECURITY / DATA CLASSIFICATION:
+- Repository contains field-service diagnostic and repair-package content.
+- Audit has NOT classified that material as confidential or public.
+- Distribution classification remains OPEN and requires explicit review before any repository-visibility or deletion action.
 
 KNOWN DEFECTS:
 See 11_DEFECT_REGISTER.md.
@@ -65,51 +125,55 @@ See 11_DEFECT_REGISTER.md.
 KNOWN RISKS:
 See 12_RISK_REGISTER.md.
 
+SOURCE OWNERSHIP:
+- Canonical MasterHub source: GitHub ssalem9580/master-hub.
+- Field Diagnostic current source: present inside MasterHub.
+- Recovery Value Calculator source: RECOVERED on codex/recovered-standalone-apps at 751a73b17bef47c47a2a0b9467560a197fef8f0f; absent from current main.
+- NTE Quote, Billed Work Tracker, Sam Hub source: not present in MasterHub and no matching installed GitHub repos found; recovery location UNKNOWN.
+
+REPOSITORY ENFORCEMENT:
+- main protected: false
+- baseline/governance-control-1.0 protected: false
+- repository rulesets observed: none
+- baseline freeze is policy/SHA based, not technically enforced
+
+RECOVERY VALUE RECOVERY POINT:
+- branch: codex/recovered-standalone-apps
+- source commit: 751a73b17bef47c47a2a0b9467560a197fef8f0f
+- source path: standalone-apps/recovery-value-calculator/index.html
+- branch README documents standalone Vercel Root Directory mapping
+
 OPEN DECISIONS:
-- Which historical standalone deployments remain canonical versus legacy.
-- Full MVP acceptance boundary beyond already approved components.
-- Backup retention policy and final baseline naming/version policy.
+- Which duplicate Vercel projects are canonical versus legacy.
+- Whether any public field-service material has distribution restrictions.
+- Correct replacement/fix for Recovery Value Calculator public URL.
+- Whether Project Control Center should become source-bound to canonical records.
+- CI lint/test/build enforcement is implemented and verified on PR #2; canonical activation awaits merge.
+- Full MVP acceptance boundary.
+- Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
+- Merge and release of the verified Next.js 16.3.8 hardening package.
+- Source recovery/canonical repository assignment for standalone external tools.
+- Production restoration of Recovery Value from recovered branch source.
+- GitHub branch/ruleset enforcement for main and governance baseline.
+
+AUDIT ARTIFACT:
+00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
+
+AUDIT STATUS:
+IN PROGRESS
+
+AUDIT REMEDIATION MATRIX: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md
+INITIAL REALITY-AUDIT PASS: COMPLETE ENOUGH TO BEGIN CONTROLLED REMEDIATION PLANNING
+PRODUCT CODE CHANGED BY AUDIT: NO
 
 
-## Controlled Template Adoption
-STATUS: IN PROGRESS
-BRANCH: control/ai-idea-master-template-adoption
-BASELINE: main @ ef13e706cfa678fc519802298944a5c45b12d7d2
-PRODUCT DEVELOPMENT AUTHORIZED BY THIS STEP: NO
-MAIN-BRANCH MERGE AUTHORIZED: NO
-SOURCE: 00_AI_IDEA_MASTER_TEMPLATE.md
-PLAN: 00_TEMPLATE_ADOPTION_PLAN.md
-
-STAGE B ARTIFACT: 00_TEMPLATE_RECONCILIATION_MATRIX.md
-STAGE B RESULT: COMPLETE
-MATERIAL OWNER-DECISION ITEM: DEF-### versus template BUG-### identifier convention
-
-STAGE C ARTIFACT: 00_PROPOSED_GOVERNANCE_AMENDMENTS.md
-STAGE C RESULT: COMPLETE — PROPOSALS ONLY
-
-STAGE D DECISION: OD-001 RESOLVED — retain DEF-### permanently (DEC-006).
-NEXT OWNER REVIEW ITEM: OD-002 — Authority Order activation.
-
-STAGE D RESULT: COMPLETE under DEC-007.
-AUTHORITY ORDER: APPROVED for adoption.
-PART 29 RULE: Adopt supplied mappings only; missing remainder remains UNKNOWN / NEEDS CONFIRMATION.
-MAIN-BRANCH MERGE: STILL REQUIRES SEPARATE EXPLICIT APPROVAL.
-
-STAGE E RESULT: COMPLETE.
-STAGE F RESULT: COMPLETE.
-VERIFICATION: PASS — required governance controls present.
-PRODUCT CODE DIFF VS MAIN: NONE.
-BUILD/TYPECHECK FOR THIS ADOPTION: NOT APPLICABLE; no product/runtime/config files changed.
-ADOPTION PACKAGE STATUS: GOVERNANCE-ADOPTION-RC1.
-NEXT APPROVAL GATE: explicit merge to main / baseline establishment.
-
-STAGE H AUTHORIZATION: APPROVED — DEC-009.
-
-STAGE H MERGE: COMPLETE via PR #1.
-MERGE COMMIT: 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d.
-CANONICAL GOVERNANCE: ACTIVE ON main.
-VERCEL STATUS NOTE: PR checks reported build-rate-limit failures; no runtime/product/config files changed in the governance adoption.
-
-BASELINE FREEZE: COMPLETE.
-FROZEN REFERENCE: baseline/governance-control-1.0.
-ADOPTION LIFECYCLE STATUS: FINALIZED VERSION.
+HARDENING RELEASE CANDIDATE:
+- Package: SECURITY-QUALITY-RC1
+- PR: #2
+- Verified product commit: 2062d470b3f200b490f139b8bff2bd64ab0b8221
+- GitHub Actions run: 36810355612
+- Install: PASS
+- Lint: PASS
+- Vitest: PASS
+- Build: PASS
+- Production promotion: NOT AUTHORIZED YET

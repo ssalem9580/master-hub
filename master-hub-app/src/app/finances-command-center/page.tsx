@@ -12,7 +12,7 @@ const input:React.CSSProperties={width:"100%",background:"#0b0f16",border:"1px s
 
 export default function FinancesCommandCenter(){
   const [p,setP]=useState<Profile>(EMPTY),[saved,setSaved]=useState(false);
-  useEffect(()=>{try{const raw=localStorage.getItem(KEY);if(raw)setP({...EMPTY,...JSON.parse(raw)})}catch{}},[]);
+  useEffect(()=>{const id=window.setTimeout(()=>{try{const raw=localStorage.getItem(KEY);if(raw)setP({...EMPTY,...JSON.parse(raw)})}catch{}},0);return()=>window.clearTimeout(id)},[]);
   const n=(v:string)=>Number(v.replace(/[^0-9.]/g,""))||0;
   const monthlyGross=useMemo(()=>n(p.income)/12,[p.income]);
   const cap=n(p.housingCap),score=n(p.creditScore),target=n(p.targetScore)||640;

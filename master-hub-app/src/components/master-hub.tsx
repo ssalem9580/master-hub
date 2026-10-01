@@ -35,13 +35,13 @@ export function MasterHub(){
   const normalizedQuery=query.trim().toLowerCase();
   const filteredHubs=useMemo(()=>hubs.filter(h=>!normalizedQuery||`${h.name} ${h.area} ${h.status} ${h.purpose}`.toLowerCase().includes(normalizedQuery)),[normalizedQuery]);
   const filteredTasks=useMemo(()=>state.tasks.filter(t=>t.title.toLowerCase().includes(normalizedQuery)),[state.tasks,normalizedQuery]);
-  const openTasks=state.tasks.filter(t=>!t.complete),importantTasks=openTasks.filter(t=>t.important),setupHubs=hubs.filter(h=>h.status==="Setup needed"),liveHubs=hubs.filter(h=>h.status==="Live");
+  const openTasks=state.tasks.filter(t=>!t.complete),setupHubs=hubs.filter(h=>h.status==="Setup needed"),liveHubs=hubs.filter(h=>h.status==="Live");
   const liveCount=liveHubs.length,setupCount=setupHubs.length;
   const hubGroups=statusOrder.map(status=>({status,items:filteredHubs.filter(h=>h.status===status)})).filter(g=>g.items.length);
 
   const notify=(m:string)=>{setToast(m);window.setTimeout(()=>setToast(""),1800)};
   const go=(view:"Dashboard"|"Hub Directory"|"Action Center")=>{setActive(view);setMenu(false)};
-  const openHub=(hub:HubItem)=>{if(!hub.url){setQuery(hub.name);go("Hub Directory");return;} if(hub.internal){window.location.href=hub.url;return;} window.open(hub.url,"_blank","noopener")};
+  const openHub=(hub:HubItem)=>{if(!hub.url){setQuery(hub.name);go("Hub Directory");return;} if(hub.internal){window.location.assign(hub.url);return;} window.open(hub.url,"_blank","noopener")};
   const updateTask=(id:string,patch:Partial<HubTask>)=>setState(s=>({...s,tasks:s.tasks.map(t=>t.id===id?{...t,...patch}:t)}));
   const removeTask=(id:string)=>{if(window.confirm("Delete this action?")){setState(s=>({...s,tasks:s.tasks.filter(t=>t.id!==id)}));notify("Action deleted")}};
   const addTask=(title:string,lane:TaskLane,important:boolean)=>{setState(s=>({...s,tasks:[{id:crypto.randomUUID(),title,lane,important,complete:false,due:""},...s.tasks]}));setCapture(false);notify("Action added")};

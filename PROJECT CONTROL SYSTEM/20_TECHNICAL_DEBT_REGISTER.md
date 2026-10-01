@@ -26,3 +26,14 @@ OPEN / PLANNED / RESOLVED / ACCEPTED
 ```
 
 Temporary architecture must not silently become permanent architecture.
+
+| TD-006 | CI build does not run existing tests or lint | False confidence in green build status | High | VERIFIED FIX ON HARDENING BRANCH — MERGE PENDING |
+| TD-007 | UI test suite and README describe older MasterHub behavior | Verification/documentation drift | High | PARTIAL — TEST SUITE FIXED; README NORMALIZATION STILL OPEN |
+| TD-008 | Project Control Center duplicates canonical state as static text | Governance UI drift | High | OPEN |
+| TD-009 | Multiple Git-linked Vercel projects trigger build/deployment fan-out | Rate-limit waste and confusing status checks | High | OPEN |
+| TD-010 | Current Next.js dependency is behind security-patched Active LTS | Security exposure | Critical | VERIFIED PATCH ON HARDENING BRANCH — MERGE/RELEASE PENDING |
+
+| TD-011 | Standalone app source ownership is undocumented/incomplete | Recovery and maintenance risk | Critical | OPEN |
+| TD-012 | Recovery Value recovered source remains stranded on a non-main branch and Vercel root mapping drifted | Broken deployment / source drift | Critical | OPEN |
+
+| TD-013 | Governance baseline is frozen by convention but not GitHub enforcement | Baseline can be mutated accidentally | Critical | OPEN |

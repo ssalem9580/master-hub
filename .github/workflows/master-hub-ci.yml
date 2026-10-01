@@ -7,9 +7,9 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: master-hub-app
@@ -24,5 +24,9 @@ jobs:
           cache-dependency-path: master-hub-app/package-lock.json
       - name: Install
         run: npm ci --no-audit --no-fund
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
       - name: Build
         run: npm run build

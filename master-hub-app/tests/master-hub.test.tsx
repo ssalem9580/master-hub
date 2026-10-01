@@ -1,10 +1,54 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { MasterHub } from "@/components/master-hub";
-beforeEach(() => { localStorage.clear(); vi.stubGlobal("crypto", { randomUUID: () => "new-task" }); vi.stubGlobal("confirm", vi.fn(() => true)); });
+
+beforeEach(() => {
+  localStorage.clear();
+  vi.stubGlobal("crypto", { randomUUID: () => "new-task" });
+  vi.stubGlobal("confirm", vi.fn(() => true));
+});
+
 describe("Master Hub", () => {
- it("searches and exposes the empty state", async () => { render(<MasterHub />); const search = screen.getByRole("searchbox"); await userEvent.type(search, "zzzz"); expect(screen.getByText("No actions found")).toBeInTheDocument(); });
- it("validates and captures a personal action", async () => { render(<MasterHub />); await userEvent.click(screen.getByRole("button", { name: /quick capture/i })); fireEvent.submit(screen.getByRole("button", { name: "Capture action" }).closest("form")!); expect(screen.getByText(/at least 3 characters/i)).toBeInTheDocument(); await userEvent.type(screen.getByLabelText(/what needs/i), "Call the dentist"); await userEvent.click(screen.getByRole("radio", { name: /personal/i })); await userEvent.click(screen.getByRole("button", { name: "Capture action" })); expect(screen.getByText("Call the dentist")).toBeInTheDocument(); });
- it("toggles importance and confirms deletion", async () => { render(<MasterHub />); await userEvent.click(screen.getByLabelText(/remove importance from review/i)); expect(screen.getByLabelText(/mark important review/i)).toBeInTheDocument(); await userEvent.click(screen.getByLabelText(/delete review/i)); expect(confirm).toHaveBeenCalled(); });
+  it("searches the current hub directory and shows an empty state", async () => {
+    const user = userEvent.setup();
+    render(<MasterHub />);
+
+    await user.click(screen.getByRole("button", { name: "Directory" }));
+    await user.type(screen.getByPlaceholderText("Search apps or actions"), "zzzz");
+
+    expect(screen.getByText("No matching apps")).toBeInTheDocument();
+  });
+
+  it("captures a new action with the current Add action flow", async () => {
+    const user = userEvent.setup();
+    render(<MasterHub />);
+
+    await user.click(screen.getByRole("button", { name: "Add action" }));
+    await user.type(screen.getByLabelText("Action"), "Call the dentist");
+    await user.click(screen.getByLabelText("Important"));
+    const form = screen.getByLabelText("Action").closest("form")!;
+    await user.click(within(form).getByRole("button", { name: "Add action" }));
+
+    expect(screen.getByText("Call the dentist")).toBeInTheDocument();
+    expect(screen.getByText("1 actions")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "★" })).toBeInTheDocument();
+  });
+
+  it("toggles importance and confirms deletion for a current action", async () => {
+    const user = userEvent.setup();
+    render(<MasterHub />);
+
+    await user.click(screen.getByRole("button", { name: "Add action" }));
+    await user.type(screen.getByLabelText("Action"), "Review estimate");
+    const form = screen.getByLabelText("Action").closest("form")!;
+    await user.click(within(form).getByRole("button", { name: "Add action" }));
+
+    await user.click(screen.getByRole("button", { name: "☆" }));
+    expect(screen.getByRole("button", { name: "★" })).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Delete" }));
+    expect(confirm).toHaveBeenCalledWith("Delete this action?");
+    expect(screen.queryByText("Review estimate")).not.toBeInTheDocument();
+  });
 });

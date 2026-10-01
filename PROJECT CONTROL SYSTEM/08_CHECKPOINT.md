@@ -118,3 +118,85 @@ CONTROLLED TEMPLATE ADOPTION:
 - Frozen baseline reference: baseline/governance-control-1.0
 - Stage H: COMPLETE
 - Adoption status: FINALIZED VERSION
+
+
+## Reconstruction Audit Checkpoint — 2026-09-30
+CURRENT AUDIT: MasterHub Reconstruction & Reality Audit
+BRANCH: audit/masterhub-reconstruction-reality-20260930
+BASELINE: main @ e8ca3dac4825cd8af0b3427678cd67b4854b61
+ARTIFACT: 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
+
+VERIFIED:
+- repository and route inventory
+- public repository visibility
+- current main GitHub Actions build success
+- CI build-only behavior
+- canonical production root READY / HTTP 200
+- production commit is behind current main only in governance/release/backup files
+- Vercel project duplication/ambiguity
+- Recovery Value Calculator configured URL HTTP 404
+- several external registry URLs HTTP 200
+- Project Control Center static-state drift risk
+- test-source drift relative to current UI
+
+NOT VERIFIED:
+- full interactive route behavior
+- current Vitest execution result
+- private-client and exam-prep URL health
+- field-service material distribution classification
+- standalone-tool backend/database inventory
+
+NEXT:
+Continue evidence gathering and owner-decision preparation. No destructive cleanup.
+
+- All six internal canonical routes: HTTP 200 VERIFIED.
+- Canonical Vercel runtime error clusters: none observed in selected 7-day window.
+- Security dependency finding: Next.js 16.3.4 is below current security baseline 16.3.8.
+- Access boundary finding: canonical MasterHub is publicly reachable with no application auth layer.
+
+- Standalone source ownership: INCOMPLETE.
+- Recovery Value Calculator source: NOT FOUND in canonical repo; Vercel project linkage appears inconsistent with repository tree.
+- Do not retire standalone deployments until source/backup ownership is recovered.
+
+- Recovery Value source recovered: codex/recovered-standalone-apps @ 751a73b17bef47c47a2a0b9467560a197fef8f0f, path standalone-apps/recovery-value-calculator/index.html.
+- Do NOT rebuild Recovery Value from memory before validating recovered source.
+- main protected=false; governance baseline branch protected=false; no rulesets observed.
+- CONTROL-BASELINE-1.0 freeze is currently policy/SHA based, not GitHub-enforced.
+
+- Remediation priority matrix created: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md.
+- Audit branch remains governance/evidence only.
+- Recommended next implementation branch: security + quality hardening (Next.js security patch, test repair, CI test/lint gates).
+
+
+## Security + Quality Hardening Checkpoint — 2026-09-30
+BRANCH: hardening/security-quality-20260930
+PR: #2
+PACKAGE: SECURITY-QUALITY-RC1
+STATUS: VERIFIED ON BRANCH / NOT MERGED
+
+IMPLEMENTED:
+- Next.js 16.3.4 → 16.3.8
+- eslint-config-next 16.3.4 → 16.3.8
+- package-lock regenerated
+- current MasterHub UI tests normalized
+- CI expanded to npm ci → lint → test → build
+- verified lint corrections in Finances, Repair Packages, and MasterHub
+
+VERIFICATION EVIDENCE:
+- GitHub Actions run 36810355612
+- product commit 2062d470b3f200b490f139b8bff2bd64ab0b8221
+- Install PASS
+- Lint PASS
+- Tests PASS
+- Build PASS
+
+UNCHANGED / STILL OPEN:
+- production deployment
+- access-control decision
+- repository visibility
+- Vercel project cleanup
+- Recovery Value production restoration
+- public field-service material classification
+
+NEXT:
+Re-run the quality pipeline against the final governance-record head. If green, PR #2 is ready for explicit merge/release approval.

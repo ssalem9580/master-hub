@@ -213,3 +213,36 @@ IMPLEMENTATION STATUS: IMPLEMENTED ON ADOPTION BRANCH
 TEST STATUS: PASS
 VERIFICATION STATUS: VERIFIED ON ADOPTION BRANCH
 FINAL STATUS: VERIFIED
+
+
+## REQ-013 — Security-patched Next.js baseline
+SOURCE: User / DEC-013 / Official Next.js security release
+TYPE: Security / Technical
+PRIORITY: Critical
+MVP: YES
+DESCRIPTION: MasterHub must use the current approved Next.js security patch baseline rather than a known superseded patch level.
+ACCEPTANCE CRITERIA:
+- AC-013A GIVEN the hardening branch WHEN package metadata is inspected THEN next and eslint-config-next are both 16.3.8.
+- AC-013B GIVEN package.json and package-lock.json WHEN npm ci runs THEN dependency installation succeeds without lockfile mismatch.
+- AC-013C GIVEN the patched dependency set WHEN verification runs THEN lint, tests, and production build pass.
+DEPENDENCIES: package.json; package-lock.json; CI
+IMPLEMENTATION STATUS: IMPLEMENTED ON HARDENING BRANCH
+TEST STATUS: PASS
+VERIFICATION STATUS: VERIFIED ON HARDENING BRANCH
+FINAL STATUS: OPEN — MERGE/RELEASE PENDING
+
+## REQ-014 — Enforced lint, test, and build quality gates
+SOURCE: User / DEC-013 / Audit finding
+TYPE: Technical / Quality
+PRIORITY: High
+MVP: YES
+DESCRIPTION: Pull requests and main builds must not rely on build-only verification; the CI pipeline must run lint, automated tests, and production build.
+ACCEPTANCE CRITERIA:
+- AC-014A GIVEN a pull request to main WHEN Master Hub CI runs THEN npm ci, lint, tests, and build execute in sequence.
+- AC-014B GIVEN the current approved MasterHub UI WHEN Vitest runs THEN tests target current controls and pass.
+- AC-014C GIVEN a lint/test failure WHEN CI runs THEN later gates are blocked and the PR is not treated as verified.
+DEPENDENCIES: GitHub Actions; Vitest; ESLint
+IMPLEMENTATION STATUS: IMPLEMENTED ON HARDENING BRANCH
+TEST STATUS: PASS
+VERIFICATION STATUS: VERIFIED ON HARDENING BRANCH
+FINAL STATUS: OPEN — MERGE PENDING
