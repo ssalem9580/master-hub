@@ -9,6 +9,7 @@ type HubItem = { name:string; url?:string; internal?:boolean; status:HubStatus; 
 
 const statusOrder:HubStatus[]=["Setup needed","Live","Development","Offline","Archived"];
 const hubs:HubItem[]=[
+  {name:"Project Control Center",url:"/project-control",internal:true,status:"Live",area:"Admin · Governance",purpose:"Canonical project state, decisions, requirements, risks, tests, defects, releases and recovery.",icon:<FolderKanban size={17}/>},
   {name:"Field Diagnostic Hub",url:"/field-resource-hub",internal:true,status:"Setup needed",area:"Work · Field Service",purpose:"Diagnostics, VAT audio guidance, repair packages and field troubleshooting.",icon:<Activity size={17}/>},
   {name:"Finances Command Center",url:"/finances-command-center",internal:true,status:"Live",area:"Financial",purpose:"12-month rental stability, credit rebuilding, cash reserve protection and homeownership readiness.",icon:<CircleDollarSign size={17}/>},
   {name:"NTE Exceed/Quote Generator",url:"https://job-quote-calculator-tau.vercel.app",status:"Live",area:"Work · Quoting",purpose:"Create quotes and official NTE exceed forms.",icon:<Calculator size={17}/>},

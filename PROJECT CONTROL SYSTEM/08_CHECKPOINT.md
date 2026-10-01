@@ -1,0 +1,78 @@
+# 08 — Checkpoint
+
+PROJECT: Master Hub
+VERSION: CONTROL-BASELINE-0.1
+DATE: 2026-09-30
+
+PRODUCT IDENTITY: Personal command center, operational app registry, and project operating system.
+PRODUCT PROMISE: Evidence-backed state, direct execution, no silent scope drift.
+PRIMARY USER: Project Owner.
+CORE PRODUCT: Master Hub application + Project Control System.
+CORE WORKFLOW: Capture → classify → decide → require → implement → test → verify → release → accept → back up → freeze.
+
+APPROVED PRINCIPLES:
+- Evidence over assumption.
+- Reality over intended state.
+- Approval over silent change.
+- Verification over generated output.
+- Traceability over memory.
+- Functional/data-dense/logical UI.
+- No fake/demo data.
+
+MVP FEATURES:
+FEAT-001 through FEAT-008 in the Feature Register.
+
+POST-MVP FEATURES:
+UNKNOWN / NEEDS CONFIRMATION.
+
+REJECTED FEATURES:
+Historical rejected items not yet fully reconstructed.
+
+IMPORTANT DECISIONS:
+DEC-001 through DEC-003.
+
+CURRENT ARCHITECTURE:
+Next.js app under master-hub-app, deployed through Vercel from GitHub.
+CURRENT TECH STACK:
+React / TypeScript / Next.js / Vercel / GitHub.
+DATABASE STATE:
+UNKNOWN / NEEDS CONFIRMATION at project-wide level.
+
+IMPLEMENTED:
+Existing Master Hub, internal tools, control-system files.
+TESTED:
+Historical build tests exist; this checkpoint change requires fresh build/deploy verification.
+VERIFIED:
+Last observed READY production deployment predates this control-system change.
+
+CURRENT DEFECTS:
+See 11_DEFECT_REGISTER.md.
+CURRENT RISKS:
+See 12_RISK_REGISTER.md.
+OPEN QUESTIONS:
+See 07_OPEN_ISSUES.md.
+
+CURRENT PHASE:
+PHASE 0 — PROJECT CONTROL.
+CURRENT STEP:
+Install control layer around existing product.
+
+LAST APPROVED ACTION:
+Incorporate supplied master project-control framework around current Master Hub and add anything missing.
+
+NEXT PROPOSED ACTION:
+Reconstruct historical decisions and run a fresh requirement-to-route verification pass.
+
+DO NOT CHANGE:
+- Do not silently convert UNKNOWN/PROPOSED into APPROVED.
+- Do not hard-code private personal finance data into the public repo.
+- Do not claim LIVE/VERIFIED without evidence.
+- Do not remove existing functional workflows merely for visual cleanup.
+
+AUTHORITATIVE FILES:
+PROJECT CONTROL SYSTEM/*
+master-hub-app/src/*
+Git history for implementation evidence.
+
+RESTART INSTRUCTION:
+> Continue this project from this checkpoint. Do not reconstruct from memory when canonical project documents are available. Do not silently change approved decisions. Resolve conflicts using the Authority Order and Decision Log.
