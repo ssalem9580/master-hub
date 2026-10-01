@@ -13,10 +13,10 @@ RESOLUTION:
 
 ## ISSUE-002 — Multiple related Vercel projects
 TYPE: Technical
-STATUS: INVESTIGATING
-DESCRIPTION: Multiple Vercel projects exist for Master Hub and related standalone apps.
+STATUS: CONFIRMED / OWNER CLEANUP DECISION PENDING
+DESCRIPTION: Nine Vercel projects exist for Master Hub and related standalone apps, including overlapping master-hub, field-diagnostic, and job-quote variants.
 WHY IT MATTERS: Can cause confusing ownership, aliases, and deployment state.
-EVIDENCE: Vercel team project list.
+EVIDENCE: Connected Vercel team inventory captured in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
 POSSIBLE SOLUTIONS: Define canonical deployment per app and disconnect/retire unintended duplicate project links.
 DECISION REQUIRED: YES for destructive/disconnect actions.
 DEPENDENCIES: Vercel project configuration.
@@ -44,3 +44,48 @@ POSSIBLE SOLUTIONS: Preserve DEF-### as a Master Hub local convention, or explic
 DECISION REQUIRED: NO
 DEPENDENCIES:
 RESOLUTION: Project Owner approved permanent retention of DEF-### as the Master Hub canonical defect-ID convention. Adopt template defect schema without renaming historical IDs.
+
+
+## ISSUE-005 — Public field-service material classification unresolved
+TYPE: Security / Data Governance
+STATUS: OPEN
+DESCRIPTION: The GitHub repository is public and contains field-service diagnostic and repair-package material. The audit has not established whether all such material is approved for public distribution.
+WHY IT MATTERS: If any content is restricted, public repository visibility would create an unacceptable exposure boundary.
+EVIDENCE: Repository visibility + source inspection recorded in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
+POSSIBLE SOLUTIONS: Classify source content; separate public/private data; change visibility only after explicit owner approval and recovery planning.
+DECISION REQUIRED: YES before repository visibility change or destructive content removal.
+DEPENDENCIES: Content classification / owner decision.
+RESOLUTION:
+
+## ISSUE-006 — CI does not execute tests or lint
+TYPE: Technical / Quality
+STATUS: OPEN
+DESCRIPTION: GitHub Actions builds the app but does not run npm test or npm run lint.
+WHY IT MATTERS: A green CI build can coexist with stale or failing tests and lint defects.
+EVIDENCE: .github/workflows/master-hub-ci.yml.
+POSSIBLE SOLUTIONS: Repair current tests, then add test and lint gates to CI.
+DECISION REQUIRED: NO for proposal; implementation follows normal change control.
+DEPENDENCIES: Current test-suite normalization.
+RESOLUTION:
+
+## ISSUE-007 — Project Control Center is not source-bound
+TYPE: Product / Governance
+STATUS: OPEN
+DESCRIPTION: /project-control renders static control-state text instead of reading or generating from canonical project-control records.
+WHY IT MATTERS: The visible governance UI can drift from the repository source of truth.
+EVIDENCE: master-hub-app/src/app/project-control/page.tsx and audit comparison.
+POSSIBLE SOLUTIONS: Generate a machine-readable governance snapshot during build or load a controlled generated status artifact.
+DECISION REQUIRED: NO for analysis; architecture choice required before implementation.
+DEPENDENCIES: Governance source ownership and build architecture.
+RESOLUTION:
+
+## ISSUE-008 — Recovery Value Calculator registry target is broken
+TYPE: Product / Integration
+STATUS: OPEN
+DESCRIPTION: MasterHub labels Recovery Value Calculator as Live, but the configured public root returns HTTP 404.
+WHY IT MATTERS: Registry status is incorrect and the tool is unavailable from MasterHub as configured.
+EVIDENCE: Live HTTP verification during reconstruction audit.
+POSSIBLE SOLUTIONS: Identify correct route/alias, repair deployment, or change registry status until restored.
+DECISION REQUIRED: NO to correct false status; deployment repair may require implementation.
+DEPENDENCIES: Recovery Value Calculator deployment ownership.
+RESOLUTION:
