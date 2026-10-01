@@ -43,3 +43,9 @@ Rules:
 - Test actual behavior whenever possible.
 - Existing TEST-### identifiers and historical summaries are preserved.
 - Historical tests may be expanded to this schema when revisited; unknown historical fields remain UNKNOWN rather than fabricated.
+
+| TEST-009 | REQ-009 | Verify Constitution contains full lifecycle and information classifications | PASS | Repository content verified on adoption branch | 2026-09-30 |
+| TEST-010 | REQ-010 | Verify Definition of Ready, Definition of Done, and AC-### GIVEN/WHEN/THEN rules exist | PASS | Constitution + Requirements Register verified | 2026-09-30 |
+| TEST-011 | REQ-011 | Verify 13-level Authority Order and supplied-only Source-of-Truth mappings exist | PASS | Constitution verified; incomplete Part 29 explicitly preserved | 2026-09-30 |
+| TEST-012 | REQ-012 | Verify canonical governance schemas exist across registers and DEF-### lock is preserved | PASS | 09–20 control files + Data Dictionary verified | 2026-09-30 |
+| TEST-013 | REQ-009–REQ-012 | Verify adoption branch contains no product-code/config changes versus main | PASS | GitHub compare shows changes only under PROJECT CONTROL SYSTEM/ | 2026-09-30 |
