@@ -246,3 +246,21 @@ IMPLEMENTATION STATUS: IMPLEMENTED ON HARDENING BRANCH
 TEST STATUS: PASS
 VERIFICATION STATUS: VERIFIED ON HARDENING BRANCH
 FINAL STATUS: ACCEPTED — SECURITY-QUALITY-1.0
+
+
+## REQ-015 — Restricted field-service content boundary
+SOURCE: Project Owner / DEC-016 / DEC-017
+TYPE: Security / Data / Business
+PRIORITY: Critical
+MVP: YES
+DESCRIPTION: All field-service diagnostic, repair, parts, procedural, quoting/billing operational, and related source material must be treated as RESTRICTED unless explicitly reclassified by the Project Owner.
+ACCEPTANCE CRITERIA:
+- AC-015A GIVEN field-service operational content WHEN distribution status is evaluated THEN default classification is RESTRICTED.
+- AC-015B GIVEN a public repo/route/deployment WHEN restricted material is present THEN the state is an OPEN containment defect, not implicit approval.
+- AC-015C GIVEN removal/migration/history-cleanup work WHEN no verified private preservation copy exists THEN destructive containment must not proceed.
+- AC-015D GIVEN future restricted content WHEN no explicit public reclassification exists THEN it must not be newly published to public source/routes/deployments.
+DEPENDENCIES: DEC-016; Security & Privacy; Data Dictionary; Quarantine Plan; Exposure Inventory; private preservation destination.
+IMPLEMENTATION STATUS: CLASSIFICATION IMPLEMENTED
+TEST STATUS: EXPOSURE VERIFIED
+VERIFICATION STATUS: SECURITY BOUNDARY VERIFIED
+FINAL STATUS: ACCEPTED — SECURITY-BOUNDARY-1.0 / CONTAINMENT OPEN
