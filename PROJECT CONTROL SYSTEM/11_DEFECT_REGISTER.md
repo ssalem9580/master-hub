@@ -47,3 +47,5 @@ Rules:
 | DEF-008 | Next.js security patch level below current patched Active LTS | High | CLOSED | main/package lock use 16.3.8; CI 36811990043 PASS; production dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY | SECURITY-QUALITY-1.0 released and verified |
 
 | DEF-009 | Restricted field-service material remains publicly exposed | Critical | OPEN | DEC-016 classification + verified public source/routes/deployments documented in exposure inventory | Establish private canonical preservation, verify completeness, then remove public source/routes/deployments under controlled containment |
+
+| DEF-010 | Repair Package part-cost / Part # auto-fill not yet verified live | High | READY FOR RETEST | User reported cost update failure; source fix built on 83b46851f5bcd2c57f01457f5f88bb4b6ed5141c; production remains behind main due Vercel rate limiting | Deploy pending source, verify exact Part # → Part Name → Part Cost, add-to-package, persistence, and totals before marking VERIFIED FIXED |
