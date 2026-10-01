@@ -2,62 +2,101 @@
 
 DATE: 2026-09-30
 
-CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
-LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
-CURRENT STEP: AI Idea Master Template governance adoption finalized as CONTROL-BASELINE-1.0.
-NEXT CONTROLLED ACTION: Merge the verified governance adoption branch into main, verify the canonical merged state, and establish the frozen governance baseline.
+CURRENT PHASE: MASTERHUB RECONSTRUCTION & REALITY AUDIT
+GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
+FROZEN GOVERNANCE REFERENCE: baseline/governance-control-1.0
+CANONICAL REPOSITORY: ssalem9580/master-hub
+CANONICAL BRANCH: main
+AUDIT-START MAIN SHA: e8ca3dac4825cd8af0b3427678cd67b4854b61
+ACTIVE AUDIT BRANCH: audit/masterhub-reconstruction-reality-20260930
 
-PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
-CURRENT MVP: Existing hub + key internal tools + Project Control System.
+CURRENT STEP:
+Evidence-based reconstruction of actual source, tests, deployments, registry links, persistence, security boundaries, and operational state.
+
+NEXT CONTROLLED ACTION:
+Continue route/external-link verification, classify duplicate Vercel ownership, reconcile test/CI drift, and complete the security/public-data-boundary review before any cleanup or new feature build.
+
+PRODUCT IDENTITY:
+Master Hub command center / application registry / project operating system.
+
+CURRENT MVP:
+Existing command center + key internal tools + external app registry + Project Control System.
 
 IMPLEMENTED:
 - Master Hub dashboard/directory/actions
-- Finances Command Center route
-- Field resource/diagnostic routes
+- Project Control Center
+- Field Resource Hub
+- Field Diagnostic Hub route + static diagnostic asset
+- Finances Command Center
 - Repair Packages
 - Vercel build bridge/configuration
-- Project Control System (this change)
+- Project Control System
+- AI Idea Master Template governance operating system
 
-TESTED:
-- Historical CI/build evidence exists; current control-system UI requires new build verification.
+SOURCE-VERIFIED ROUTES:
+- /
+- /project-control
+- /field-resource-hub
+- /field-diagnostic-hub
+- /finances-command-center
+- /repair-packages
 
-VERIFIED:
-- Vercel reports production deployment dpl_Hx5yyuZGP1oyRP1WxmvV8yYacJcg as READY for commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a.
+PERSISTENCE REALITY:
+- Master Hub actions: browser localStorage
+- Finances profile: browser localStorage
+- Repair Packages / Parts Library: browser localStorage
+- Project-wide server database: UNKNOWN / NEEDS CONFIRMATION for standalone/external tools
 
-OWNER ACCEPTED:
-- Individual requested features have been accepted over time.
-- A frozen final Master Hub baseline has NOT been established.
+BUILD / CI:
+- GitHub Actions Master Hub CI passed on main commit e8ca3dac4825cd8af0b3427678cd67b4854b61.
+- CI currently runs npm run build only.
+- CI does not currently run npm test or npm run lint.
 
-BUILT BUT NOT VERIFIED:
-- Any change after the last READY deployment until a new deployment/build is checked.
+TEST REALITY:
+- Vitest suite exists.
+- Current UI test source targets older UI controls and is not aligned with current MasterHub component source.
+- Fresh test execution is NOT VERIFIED in the current audit.
+- Build success must not be treated as full test-suite success.
 
-NOT STARTED:
-- Full historical decision reconstruction.
-- Complete requirements traceability for every legacy feature.
-- Finalization audit and baseline freeze.
-
-BLOCKED:
-- None for creating the control system.
-- Finalization is blocked by incomplete reconstruction/testing/owner acceptance.
-
-CURRENT TECH STACK:
-- Next.js application in master-hub-app
-- React/TypeScript
-- Vercel deployment
-- GitHub repository
-
-CURRENT DATABASE STATE:
-UNKNOWN / NEEDS CONFIRMATION at project-wide level. Some tools may use localStorage or external backends.
-
-ACTIVE INTEGRATIONS:
-- GitHub
-- Vercel
-- Other app-specific integrations: UNKNOWN / NEEDS CONFIRMATION
-
-CURRENT DEPLOYMENT:
+CANONICAL PRODUCTION:
 - Vercel project: master-hub
-- Last observed READY deployment: dpl_Hx5yyuZGP1oyRP1WxmvV8yYacJcg
-- Commit: 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a
+- Canonical alias: master-hub-sigma.vercel.app
+- Observed production deployment: dpl_EJF5Hh9sswrUTMKiPGcjy8fDdH3n
+- Production commit: ef13e706cfa678fc519802298944a5c45b12d7d2
+- Production root HTTP: 200 / READY
+- Current main is newer in governance documentation only.
+- Comparison from production commit to current main shows no application/runtime/configuration-file differences.
+- PRODUCT CODE PARITY: VERIFIED
+- DEPLOYMENT SHA PARITY: NOT CURRENT
+
+VERCEL PROJECT REALITY:
+Nine connected projects exist. Duplicate/legacy candidates include:
+- master-hub-live
+- field-diagnostic-hub and field-diagnostic-hub-live overlap
+- job-quote-calculator and job-quote-calculator-live overlap
+No duplicates have been deleted or disconnected.
+
+REGISTRY REALITY:
+- 9 hard-coded entries
+- 8 labeled Live
+- 1 labeled Setup needed
+- Live status is static metadata, not a runtime health check
+- Recovery Value Calculator configured URL currently returns HTTP 404
+- NTE Quote, Billed Work Tracker, Sam Hub, Finances Command Center, and MasterHub root have positive live evidence
+- Private Client and Illinois Locksmith Exam Prep remain UNKNOWN / NEEDS CONFIRMATION in this audit
+
+PROJECT CONTROL CENTER REALITY:
+- Route is implemented.
+- UI is static and does not read canonical Markdown at runtime.
+- Its current-phase text can drift from canonical records.
+
+REPOSITORY VISIBILITY:
+PUBLIC
+
+SECURITY / DATA CLASSIFICATION:
+- Repository contains field-service diagnostic and repair-package content.
+- Audit has NOT classified that material as confidential or public.
+- Distribution classification remains OPEN and requires explicit review before any repository-visibility or deletion action.
 
 KNOWN DEFECTS:
 See 11_DEFECT_REGISTER.md.
@@ -66,50 +105,15 @@ KNOWN RISKS:
 See 12_RISK_REGISTER.md.
 
 OPEN DECISIONS:
-- Which historical standalone deployments remain canonical versus legacy.
-- Full MVP acceptance boundary beyond already approved components.
-- Backup retention policy and final baseline naming/version policy.
+- Which duplicate Vercel projects are canonical versus legacy.
+- Whether any public field-service material has distribution restrictions.
+- Correct replacement/fix for Recovery Value Calculator public URL.
+- Whether Project Control Center should become source-bound to canonical records.
+- CI enforcement policy for tests/lint.
+- Full MVP acceptance boundary.
 
+AUDIT ARTIFACT:
+00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
 
-## Controlled Template Adoption
-STATUS: IN PROGRESS
-BRANCH: control/ai-idea-master-template-adoption
-BASELINE: main @ ef13e706cfa678fc519802298944a5c45b12d7d2
-PRODUCT DEVELOPMENT AUTHORIZED BY THIS STEP: NO
-MAIN-BRANCH MERGE AUTHORIZED: NO
-SOURCE: 00_AI_IDEA_MASTER_TEMPLATE.md
-PLAN: 00_TEMPLATE_ADOPTION_PLAN.md
-
-STAGE B ARTIFACT: 00_TEMPLATE_RECONCILIATION_MATRIX.md
-STAGE B RESULT: COMPLETE
-MATERIAL OWNER-DECISION ITEM: DEF-### versus template BUG-### identifier convention
-
-STAGE C ARTIFACT: 00_PROPOSED_GOVERNANCE_AMENDMENTS.md
-STAGE C RESULT: COMPLETE — PROPOSALS ONLY
-
-STAGE D DECISION: OD-001 RESOLVED — retain DEF-### permanently (DEC-006).
-NEXT OWNER REVIEW ITEM: OD-002 — Authority Order activation.
-
-STAGE D RESULT: COMPLETE under DEC-007.
-AUTHORITY ORDER: APPROVED for adoption.
-PART 29 RULE: Adopt supplied mappings only; missing remainder remains UNKNOWN / NEEDS CONFIRMATION.
-MAIN-BRANCH MERGE: STILL REQUIRES SEPARATE EXPLICIT APPROVAL.
-
-STAGE E RESULT: COMPLETE.
-STAGE F RESULT: COMPLETE.
-VERIFICATION: PASS — required governance controls present.
-PRODUCT CODE DIFF VS MAIN: NONE.
-BUILD/TYPECHECK FOR THIS ADOPTION: NOT APPLICABLE; no product/runtime/config files changed.
-ADOPTION PACKAGE STATUS: GOVERNANCE-ADOPTION-RC1.
-NEXT APPROVAL GATE: explicit merge to main / baseline establishment.
-
-STAGE H AUTHORIZATION: APPROVED — DEC-009.
-
-STAGE H MERGE: COMPLETE via PR #1.
-MERGE COMMIT: 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d.
-CANONICAL GOVERNANCE: ACTIVE ON main.
-VERCEL STATUS NOTE: PR checks reported build-rate-limit failures; no runtime/product/config files changed in the governance adoption.
-
-BASELINE FREEZE: COMPLETE.
-FROZEN REFERENCE: baseline/governance-control-1.0.
-ADOPTION LIFECYCLE STATUS: FINALIZED VERSION.
+AUDIT STATUS:
+IN PROGRESS
