@@ -178,3 +178,19 @@ SUPERSEDES:
 SUPERSEDED BY:
 REVIEW REQUIRED: YES before destructive cleanup, repository-visibility change, or retirement of deployments.
 APPROVED BY: Project Owner
+
+
+## DEC-013
+DATE: 2026-09-30
+TITLE: Begin security and quality hardening
+STATUS: APPROVED
+QUESTION: Should MasterHub proceed from the reconstruction audit into a controlled security and quality hardening phase without adding new product features?
+DECISION: Yes. Patch Next.js to the current 16.3.8 security release, align tests with the current approved UI, require lint/test/build CI gates, and make only the code corrections required to satisfy those gates. Do not promote to production, alter access-control architecture, delete Vercel projects, change repository visibility, or restore Recovery Value production within this step.
+WHY: Project Owner approved the recommended BEGIN SECURITY + QUALITY HARDENING phase after the reality audit.
+ALTERNATIVES CONSIDERED: Continue feature development before addressing security/test debt; merge unverified changes directly to main.
+EVIDENCE: Project Owner approval; audit remediation matrix; official Next.js September 2026 security release; PR #2 verification.
+AFFECTED AREAS: Framework dependency, tests, lint compliance, CI quality gates.
+SUPERSEDES:
+SUPERSEDED BY:
+REVIEW REQUIRED: YES before PR #2 merge and production release.
+APPROVED BY: Project Owner
