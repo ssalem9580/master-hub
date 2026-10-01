@@ -7,3 +7,26 @@
 | FB-003 | Historical | Project Owner | Do not claim deployment/live state until verified | APPROVED | Release/verification | ACTIVE |
 
 Add new material feedback without deleting prior entries.
+
+
+## Canonical Feedback Schema
+New or normalized feedback records use:
+
+```text
+FEEDBACK ID:
+DATE:
+SOURCE:
+USER TYPE:
+OBSERVATION:
+REQUEST:
+PROBLEM REPORTED:
+EVIDENCE:
+RELATED FEATURE:
+CLASSIFICATION:
+BUG / UX / FEATURE REQUEST / CONFUSION / BUSINESS / OTHER
+ACTION:
+NONE / INVESTIGATE / PROPOSE / APPROVED / REJECTED / POSTPONED
+```
+
+User feedback does not automatically become product scope.
+Existing historical feedback entries are preserved.
