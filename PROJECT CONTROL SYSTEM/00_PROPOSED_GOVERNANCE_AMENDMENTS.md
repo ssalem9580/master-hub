@@ -322,23 +322,23 @@ Rules:
 - Existing defects are expanded when revisited; historical evidence is preserved.
 - No defect identifier is renamed by this proposal.
 
-### OWNER DECISION REQUIRED — Identifier convention
+### APPROVED LOCAL CONVENTION — Identifier convention
 
 Template source specifies:
 ```text
 BUG-###
 ```
 
-Master Hub currently specifies:
+Master Hub specifies:
 ```text
 DEF-###
 ```
 
-PROPOSED DEFAULT FOR REVIEW:
-Keep `DEF-###` as the Master Hub canonical defect-ID convention to preserve historical traceability, while adopting the template's defect schema and lifecycle.
+DECISION:
+Keep `DEF-###` as the permanent Master Hub canonical defect-ID convention while adopting the template's defect schema and lifecycle.
 
-STATUS: NEEDS OWNER APPROVAL.
-NO IDENTIFIER CHANGE HAS BEEN MADE.
+STATUS: APPROVED — DEC-006.
+HISTORICAL IDENTIFIERS: PRESERVED.
 
 ---
 
@@ -688,13 +688,9 @@ If approved, apply in this order:
 # OWNER-DECISION QUEUE
 
 ## OD-001 — Defect IDs
-Choose one before defect-schema activation:
+RESOLVED — DEC-006.
 
-A. Keep `DEF-###` permanently for Master Hub. **Recommended for continuity.**
-B. Keep historical `DEF-###`; use `BUG-###` for new defects.
-C. Migrate all defects to `BUG-###` with explicit cross-reference mapping.
-
-No choice is active yet.
+Master Hub permanently retains `DEF-###` for defect identifiers. The template defect schema may be adopted without identifier migration.
 
 ## OD-002 — Authority Order Activation
 Approve, modify, or reject the supplied 13-level Authority Order before it becomes constitutional.
