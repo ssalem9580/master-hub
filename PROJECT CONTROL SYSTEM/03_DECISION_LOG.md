@@ -130,3 +130,19 @@ SUPERSEDES: Stage H NOT AUTHORIZED state.
 SUPERSEDED BY:
 REVIEW REQUIRED: NO for the authorized merge/freeze operation; post-merge verification still required.
 APPROVED BY: Project Owner
+
+
+## DEC-010
+DATE: 2026-09-30
+TITLE: Activate AI Idea Master Template governance on main
+STATUS: APPROVED
+QUESTION: Was the authorized Stage H governance adoption merge completed successfully and may the merged control system become Master Hub's canonical governance operating system?
+DECISION: Yes. PR #1 merged GOVERNANCE-ADOPTION-RC1 into main. The merged Project Control System is now canonical. Finalization continues by recording the release/backup and creating the frozen baseline reference.
+WHY: Stage H was explicitly approved under DEC-009 and GitHub reported the pull request successfully merged.
+ALTERNATIVES CONSIDERED: Revert the merge; leave the governance package branch-only.
+EVIDENCE: PR #1 and merge commit 3a6a02446a5ff4b8a6abfe8da3f6be9c2e51d70d.
+AFFECTED AREAS: Canonical Master Hub governance.
+SUPERSEDES: Branch-only governance release-candidate state.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO
+APPROVED BY: Project Owner
