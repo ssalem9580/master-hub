@@ -200,3 +200,46 @@ UNCHANGED / STILL OPEN:
 
 NEXT:
 Re-run the quality pipeline against the final governance-record head. If green, PR #2 is ready for explicit merge/release approval.
+
+
+## SECURITY-QUALITY-1.0 Final Release Checkpoint — 2026-09-30
+STATUS: RELEASED / VERIFIED / OWNER ACCEPTED
+PR: #2 — MERGED
+MERGE COMMIT: f81fd436a8df50ac0da93ec3c93ec26d09e0badf
+POST-MERGE CI: 36811990043 — PASS
+PRODUCTION DEPLOYMENT: dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 — READY
+CANONICAL ALIAS: master-hub-sigma.vercel.app
+
+VERIFIED:
+- Next.js 16.3.8 is active in canonical source.
+- eslint-config-next 16.3.8 is active in canonical source.
+- npm ci passes.
+- lint passes.
+- Vitest passes.
+- production build passes.
+- / returns HTTP 200.
+- /project-control returns HTTP 200.
+- /field-resource-hub returns HTTP 200.
+- /field-diagnostic-hub returns HTTP 200.
+- /finances-command-center returns HTTP 200.
+- /repair-packages returns HTTP 200.
+- one-hour post-release Vercel runtime error scan is clean.
+
+CLOSED BY THIS RELEASE:
+- ISSUE-006 / DEF-006 / RISK-008 — build-only CI and stale UI tests.
+- ISSUE-009 / DEF-008 / RISK-011 — outdated Next.js security patch level.
+
+STILL OPEN:
+- access-control / private-use boundary
+- public field-service content classification
+- GitHub enforcement / branch protection
+- duplicate Vercel ownership and build fan-out
+- Recovery Value production restoration
+- standalone tool source ownership
+- Project Control Center source-binding
+- full historical reconstruction
+
+RECOVERY:
+- Previous verified production deployment remains available in Vercel history.
+- Source rollback is available through Git history.
+- Release and backup records are stored in RELEASES/ and BACKUPS/.
