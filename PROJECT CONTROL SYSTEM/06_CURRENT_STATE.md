@@ -17,7 +17,7 @@ CURRENT STEP:
 SECURITY-QUALITY-1.0 is merged, production-deployed, and post-release verified.
 
 NEXT CONTROLLED ACTION:
-Continue Wave 1 audit remediation by resolving public field-service content classification and repository-enforcement decisions, then validate Recovery Value recovered source before any production restoration or duplicate Vercel cleanup.
+Contain restricted field-service material from public distribution while preserving recoverability and history, then continue repository-enforcement and Recovery Value remediation.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -119,9 +119,11 @@ ACCESS CONTROL:
 - Any future server-side sensitive/personal-data architecture requires a new security review.
 
 SECURITY / DATA CLASSIFICATION:
-- Repository contains field-service diagnostic and repair-package content.
-- Audit has NOT classified that material as confidential or public.
-- Distribution classification remains OPEN and requires explicit review before any repository-visibility or deletion action.
+- Under DEC-016, all field-service diagnostic, repair, parts, procedural, and related operational material is RESTRICTED by default.
+- Current public repository/public routes therefore conflict with the approved distribution boundary.
+- Specific material may become public only through explicit Project Owner reclassification.
+- Restricted content must not be sent to external AI providers or newly published to public systems unless explicitly authorized.
+- Containment/remediation architecture is the next security priority.
 
 KNOWN DEFECTS:
 See 11_DEFECT_REGISTER.md.
@@ -149,7 +151,7 @@ RECOVERY VALUE RECOVERY POINT:
 
 OPEN DECISIONS:
 - Which duplicate Vercel projects are canonical versus legacy.
-- Whether any public field-service material has distribution restrictions.
+- Restricted field-service containment architecture and public-history remediation.
 - Correct replacement/fix for Recovery Value Calculator public URL.
 - Whether Project Control Center should become source-bound to canonical records.
 - Full MVP acceptance boundary.
