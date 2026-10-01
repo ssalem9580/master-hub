@@ -44,10 +44,10 @@ Stage D — COMPLETE
 Stage E — COMPLETE
 Stage F — COMPLETE
 Stage G — SATISFIED FOR THE VERIFIED ADOPTION PACKAGE UNDER DEC-007
-Stage H — MERGED; BASELINE FREEZE FINALIZATION IN PROGRESS
+Stage H — COMPLETE
 
 ## Final Gate
-PR #1 merged successfully into main under explicit Project Owner authorization. Final baseline freeze is completed by the dedicated baseline reference.
+PR #1 merged successfully into main under explicit Project Owner authorization. CONTROL-BASELINE-1.0 is finalized and frozen at baseline/governance-control-1.0.
 
 ## Merge Evidence
 - Pull request: #1
@@ -55,3 +55,9 @@ PR #1 merged successfully into main under explicit Project Owner authorization. 
 - Merge result: SUCCESS
 - Runtime/product/config diff: NONE
 - Vercel PR checks: FAILURE due build-rate-limit status; not treated as runtime verification because this package changed governance documentation only.
+
+## Finalization
+PASS — Release record created.
+PASS — Backup record created.
+PASS — Frozen baseline reference created.
+PASS — Canonical adoption lifecycle reached FINALIZED VERSION.
