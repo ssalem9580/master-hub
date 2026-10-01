@@ -95,3 +95,57 @@ IMPLEMENTATION STATUS: IMPLEMENTED FOUNDATION
 TEST STATUS: OPEN
 VERIFICATION STATUS: OPEN
 FINAL STATUS: OPEN
+
+
+## Canonical Requirements Governance
+Every requirement receives a stable REQ-### identifier and supports:
+
+```text
+REQUIREMENT ID:
+TITLE:
+SOURCE:
+User / Constitution / Decision / Feature / Regulation / Dependency
+
+DESCRIPTION:
+
+TYPE:
+Functional / UX / Data / AI / Security / Performance / Business / Legal / Integration
+
+PRIORITY:
+Critical / High / Medium / Low
+
+MVP:
+YES / NO
+
+ACCEPTANCE CRITERIA:
+
+DEPENDENCIES:
+
+IMPLEMENTATION STATUS:
+
+TEST STATUS:
+
+VERIFICATION STATUS:
+
+FINAL STATUS:
+OPEN / IMPLEMENTED / VERIFIED / ACCEPTED / DEFERRED / REJECTED
+```
+
+### Acceptance Criteria Standard
+Approved requirements must have objective acceptance criteria before final verification.
+
+Preferred form:
+
+```text
+AC-###
+GIVEN <precondition>
+WHEN <action>
+THEN <observable result>
+```
+
+Rules:
+- Each acceptance criterion receives a stable AC identifier when normalized.
+- Avoid vague criteria such as "works well", "looks good", or "should function".
+- Criteria must be observable or verifiable.
+- Existing requirements lacking normalized AC IDs remain valid historical records but are marked for criteria normalization when revisited.
+- No approved requirement may silently disappear.
