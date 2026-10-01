@@ -125,13 +125,25 @@ DECISION REQUIRED: YES before deleting/retiring deployments if source is not rec
 DEPENDENCIES: Historical source recovery.
 RESOLUTION:
 
-## ISSUE-012 — Recovery Value Calculator source not found in linked repository
+## ISSUE-012 — Recovery Value Calculator recovered source is stranded outside main
 TYPE: Product / Deployment / Recovery
 STATUS: OPEN — HIGH PRIORITY
-DESCRIPTION: Vercel recovery-value-calculator is Git-linked to master-hub, but the current master-hub tree contains no Recovery Value Calculator source. Its configured public URL returns HTTP 404.
-WHY IT MATTERS: The current deployment cannot be confidently repaired from the linked repository as-is.
-EVIDENCE: Repository tree, Vercel project/deployment metadata, live HTTP 404.
-POSSIBLE SOLUTIONS: Recover original source from an external/local backup or prior deployment artifact; relink Vercel to the correct source; or formally rebuild after requirements reconstruction.
-DECISION REQUIRED: YES if source cannot be recovered and a rebuild is proposed.
-DEPENDENCIES: Source recovery / deployment ownership.
+DESCRIPTION: The configured public URL returns HTTP 404. Recovery source exists on codex/recovered-standalone-apps at commit 751a73b17bef47c47a2a0b9467560a197fef8f0f under standalone-apps/recovery-value-calculator/index.html, but that source is not present in current main. The branch README documents the standalone Vercel Root Directory mapping.
+WHY IT MATTERS: The tool is recoverable, but current canonical/deployment linkage does not use the recovered source.
+EVIDENCE: Recovery branch, exact source commit/path, Vercel history, live HTTP 404.
+POSSIBLE SOLUTIONS: Validate recovered source, copy/cherry-pick only the standalone recovery directory into a controlled current branch, configure the Vercel recovery project Root Directory to that path, verify preview, then promote after approval.
+DECISION REQUIRED: YES before production Vercel configuration/promotion.
+DEPENDENCIES: Recovered-source validation.
+RESOLUTION:
+
+
+## ISSUE-013 — Canonical branches are not GitHub-protected
+TYPE: Governance / Repository Control
+STATUS: OPEN — HIGH PRIORITY
+DESCRIPTION: GitHub reports protected=false for main and baseline/governance-control-1.0, and no repository rulesets were returned.
+WHY IT MATTERS: The documented PR/change-control process and frozen baseline are not technically enforced; direct mutation remains possible.
+EVIDENCE: GitHub branch inventory and ruleset query.
+POSSIBLE SOLUTIONS: Add a repository ruleset/branch protection requiring PR review/status checks for main; protect or replace the baseline branch with a controlled immutable release/tag strategy.
+DECISION REQUIRED: YES because enforcement changes repository workflow.
+DEPENDENCIES: Owner preference for branch protection/merge workflow.
 RESOLUTION:
