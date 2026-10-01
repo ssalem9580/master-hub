@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { MasterHub } from "@/components/master-hub";
@@ -27,7 +27,8 @@ describe("Master Hub", () => {
     await user.click(screen.getByRole("button", { name: "Add action" }));
     await user.type(screen.getByLabelText("Action"), "Call the dentist");
     await user.click(screen.getByLabelText("Important"));
-    await user.click(screen.getByRole("button", { name: "Add action" }));
+    const form = screen.getByLabelText("Action").closest("form")!;
+    await user.click(within(form).getByRole("button", { name: "Add action" }));
 
     expect(screen.getByText("Call the dentist")).toBeInTheDocument();
     expect(screen.getByText("1 actions")).toBeInTheDocument();
@@ -40,7 +41,8 @@ describe("Master Hub", () => {
 
     await user.click(screen.getByRole("button", { name: "Add action" }));
     await user.type(screen.getByLabelText("Action"), "Review estimate");
-    await user.click(screen.getByRole("button", { name: "Add action" }));
+    const form = screen.getByLabelText("Action").closest("form")!;
+    await user.click(within(form).getByRole("button", { name: "Add action" }));
 
     await user.click(screen.getByRole("button", { name: "☆" }));
     expect(screen.getByRole("button", { name: "★" })).toBeInTheDocument();
