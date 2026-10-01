@@ -93,3 +93,6 @@ CONTROLLED TEMPLATE ADOPTION:
 
 - Stage C proposal artifact: PROJECT CONTROL SYSTEM/00_PROPOSED_GOVERNANCE_AMENDMENTS.md
 - Stage C proposals active: NO
+
+- Stage D OD-001: RESOLVED — DEF-### permanently retained under DEC-006.
+- Next Stage D review: OD-002 — Authority Order activation.
