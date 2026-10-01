@@ -118,3 +118,33 @@ CONTROLLED TEMPLATE ADOPTION:
 - Frozen baseline reference: baseline/governance-control-1.0
 - Stage H: COMPLETE
 - Adoption status: FINALIZED VERSION
+
+
+## Reconstruction Audit Checkpoint — 2026-09-30
+CURRENT AUDIT: MasterHub Reconstruction & Reality Audit
+BRANCH: audit/masterhub-reconstruction-reality-20260930
+BASELINE: main @ e8ca3dac4825cd8af0b3427678cd67b4854b61
+ARTIFACT: 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
+
+VERIFIED:
+- repository and route inventory
+- public repository visibility
+- current main GitHub Actions build success
+- CI build-only behavior
+- canonical production root READY / HTTP 200
+- production commit is behind current main only in governance/release/backup files
+- Vercel project duplication/ambiguity
+- Recovery Value Calculator configured URL HTTP 404
+- several external registry URLs HTTP 200
+- Project Control Center static-state drift risk
+- test-source drift relative to current UI
+
+NOT VERIFIED:
+- full interactive route behavior
+- current Vitest execution result
+- private-client and exam-prep URL health
+- field-service material distribution classification
+- standalone-tool backend/database inventory
+
+NEXT:
+Continue evidence gathering and owner-decision preparation. No destructive cleanup.
