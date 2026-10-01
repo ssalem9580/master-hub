@@ -116,3 +116,16 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - FILES AFFECTED: 22_PROJECT_OPERATIONS_QUEUE.md, 06_CURRENT_STATE.md, 11_DEFECT_REGISTER.md, 13_CHANGELOG.md, /project-control.
 - REASON: Make Master Hub itself the single project-management and live-view control center without creating a duplicate project system.
 - RESULT: Source updated and queued for live verification. Finalization remains pending explicit owner approval.
+
+
+## 2026-10-01 — Operational checkpoint and state refresh
+- CHANGE ID: CHANGE-008
+- VERSION: PROJECT-OPS-CHECKPOINT-20261001-0958
+- DESCRIPTION: Captured a new evidence-based checkpoint after Master Hub production advanced to the Repair Package lookup retest build and refreshed the operations queue/current-state records.
+- AUTHORIZED BY: Project Owner instruction — "Checkpoint and update".
+- RELATED DECISION: Existing Master Hub governance and security decisions remain authoritative.
+- RELATED REQUIREMENT: Operational continuity, live verification, queue accuracy, and no-silent-finalization controls.
+- RELATED FEATURE: Project Control Center; Repair Packages.
+- FILES AFFECTED: 08_CHECKPOINT.md, 06_CURRENT_STATE.md, 22_PROJECT_OPERATIONS_QUEUE.md, 13_CHANGELOG.md.
+- REASON: Bring canonical control records back into alignment with verified production and source reality.
+- RESULT: Production verified at 601b90d / dpl_8LG2LPLHUmbDjqaqe4N87tKDeo6R; Repair Package lookup code is deployed but still requires interactive retest; latest main 9ae344b is two commits ahead and remains blocked by Vercel build-rate limiting. This checkpoint is NOT FINALIZED pending owner review.
