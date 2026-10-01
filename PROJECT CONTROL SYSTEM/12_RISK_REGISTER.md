@@ -8,3 +8,35 @@
 | RISK-004 | "Live" labels become stale | Medium | Medium | Verification tests tied to release checklist | OPEN |
 | RISK-005 | Legacy decisions remain unrecorded | High | Medium | Controlled reconstruction from git/source/user evidence | OPEN |
 | RISK-006 | Reorganization removes useful behavior | Medium | High | Preserve functionality; require test evidence before acceptance | OPEN |
+
+
+## Canonical Risk Schema
+New or normalized risks use:
+
+```text
+RISK ID:
+TITLE:
+
+CATEGORY:
+Product / Technical / Data / AI / Security / Legal / Business / Vendor / Operational
+
+DESCRIPTION:
+
+PROBABILITY:
+Low / Medium / High
+
+IMPACT:
+Low / Medium / High / Critical
+
+TRIGGER:
+MITIGATION:
+CONTINGENCY:
+OWNER:
+
+STATUS:
+OPEN / MITIGATED / ACCEPTED / CLOSED
+```
+
+Rule:
+No unmitigated Critical risk may remain at final release.
+Existing risk records remain authoritative historical entries and may be expanded when revisited.
