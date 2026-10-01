@@ -1,6 +1,6 @@
 # 06 — Current State
 
-DATE: 2026-09-30
+DATE: 2026-10-01
 
 CURRENT PHASE: MASTERHUB RECONSTRUCTION & REALITY AUDIT — HARDENING WAVE 1 RELEASED
 GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
@@ -15,10 +15,10 @@ ACTIVE HARDENING BRANCH: hardening/security-quality-20260930
 HARDENING PR: #2 — MERGED
 
 CURRENT STEP:
-SECURITY-BOUNDARY-1.0 classification baseline is finalized. Physical containment remains open because no verified private canonical destination has been established yet.
+MASTER HUB — PROJECT OPERATIONS & QUEUE control mode is active. Current operational work is tracked in 22_PROJECT_OPERATIONS_QUEUE.md.
 
 NEXT CONTROLLED ACTION:
-Establish a verified private canonical destination for restricted field-service source, validate preservation completeness, then remove restricted material from the public MasterHub surface and related public deployments under controlled containment.
+Deploy and live-retest the pending Repair Package Part # auto-fill update when Vercel build capacity clears, while preserving the critical restricted-data containment gate.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -71,13 +71,13 @@ TEST REALITY:
 CANONICAL PRODUCTION:
 - Vercel project: master-hub
 - Canonical alias: master-hub-sigma.vercel.app
-- Production deployment: dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5
-- Production commit: f81fd436a8df50ac0da93ec3c93ec26d09e0badf
+- Current observed production deployment: dpl_AHvbXmgAsCqgubS51sU8UbzByFa7
+- Current observed production commit: 036ae44123f7f91c27fa7c01b7d0f29cbfb069aa
 - Production state: READY
-- All six canonical routes: HTTP 200 VERIFIED
-- One-hour post-release runtime error scan: CLEAN
-- PRODUCT CODE PARITY: VERIFIED
-- DEPLOYMENT SHA PARITY: VERIFIED
+- Latest main commit: ecd09bc0c1e8137e6774c87e00397599da0ae721
+- Production is BEHIND main.
+- Pending application/control commits include remaining master-parts source segments, Repair Package Part # auto-fill, and Project Operations & Queue.
+- Later Vercel builds are currently blocked by build-rate limiting; pending changes are NOT VERIFIED IN PRODUCTION.
 
 VERCEL PROJECT REALITY:
 Nine connected projects exist. Duplicate/legacy candidates include:
@@ -196,3 +196,9 @@ SECURITY-BOUNDARY RELEASE:
 - Exposure inventory: VERIFIED
 - Private canonical destination: NOT YET ESTABLISHED
 - Destructive removal/history rewrite: NOT AUTHORIZED UNTIL PRIVATE PRESERVATION IS VERIFIED
+
+
+PROJECT OPERATIONS & QUEUE:
+- Canonical operational queue: 22_PROJECT_OPERATIONS_QUEUE.md
+- Control areas: Queue; Build & Deployment; Bugs & Testing; Ideas & Improvements; Security & Restricted Data; Data & Integrations; UI / UX; Release History.
+- Current update state: READY FOR REVIEW, not finalized.
