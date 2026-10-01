@@ -47,3 +47,6 @@ Existing risk records remain authoritative historical entries and may be expande
 
 | RISK-010 | Public unauthenticated access may conflict with intended private-use boundary | High | High | Clarify access-control requirement; add auth if private means access-controlled | OPEN |
 | RISK-011 | Outdated Next.js patch level leaves known security fixes unapplied | High | High | Upgrade to current patched Active LTS and verify | OPEN |
+
+| RISK-012 | Standalone active tools lack established canonical source/backup ownership | High | Critical | Recover and version source before destructive cleanup; document canonical repo/deployment/backup per tool | OPEN |
+| RISK-013 | Recovery Value Calculator may be orphaned from its actual source while linked to the wrong repository | High | High | Recover original source or rebuild under controlled requirements; correct Vercel linkage | OPEN |
