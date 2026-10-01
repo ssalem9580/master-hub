@@ -62,3 +62,41 @@ UNKNOWN / NEEDS CONFIRMATION unless separately approved.
 - Public repository content must not contain private financial or secret data.
 - Some standalone tools and aliases can diverge from the canonical Master Hub source.
 - Historical conversation decisions may not yet be fully reconstructed into this control system.
+
+
+## Project Capture Completeness
+Before architecture, feature expansion, pricing, or implementation is treated as approved project scope, capture and classify the applicable project facts:
+
+- original idea
+- problem being solved
+- why the project exists
+- desired outcome
+- product category
+- intended users
+- primary / secondary / professional users
+- administrators
+- existing alternatives
+- pain points
+- product promise
+- core workflow
+- inputs and outputs
+- AI responsibilities
+- human responsibilities
+- automation opportunities
+- data requirements
+- integrations and APIs
+- reports and dashboards
+- mobile / desktop / accessibility requirements
+- security / privacy / legal considerations
+- monetization and business-model ideas
+- features discussed
+- approved / proposed / rejected / postponed ideas
+- unresolved questions
+- assumptions
+- contradictions
+- risks
+- technical limitations
+- external dependencies
+- future expansion ideas
+
+Missing information is **UNKNOWN / NEEDS CONFIRMATION**. It must not be filled by assumption.
