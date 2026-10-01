@@ -100,11 +100,11 @@ This supersedes the older observation that the supplied prompt ended during Defi
 - STAGE A — Protect baseline and capture source: COMPLETE.
 - STAGE B — Section-by-section reconciliation: COMPLETE.
 - STAGE C — Draft proposed governance amendments: COMPLETE.
-- STAGE D — Owner review of conflicts/material changes: NEXT CONTROLLED STAGE.
-- STAGE E — Apply approved governance amendments on adoption branch: NOT STARTED.
+- STAGE D — Owner review of conflicts/material changes: COMPLETE.
+- STAGE E — Apply approved governance amendments on adoption branch: IN PROGRESS.
 - STAGE F — Verify repository, build/test impact, checkpoint and recovery state: NOT STARTED.
 - STAGE G — Owner activation approval: NOT STARTED.
 - STAGE H — Merge/freeze new governance baseline: NOT AUTHORIZED.
 
 ## Current Next Controlled Action
-Review 00_PROPOSED_GOVERNANCE_AMENDMENTS.md. Resolve owner-decision items before any constitutional/schema activation. Do not modify product code or main.
+Apply approved governance amendments to canonical control files on the adoption branch. Preserve product code and main.
