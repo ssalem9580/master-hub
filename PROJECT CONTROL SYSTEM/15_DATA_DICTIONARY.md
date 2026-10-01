@@ -57,3 +57,24 @@ Document, where applicable:
 
 Rule:
 Database schema and data structures must not become undocumented project logic.
+
+
+## Restricted Field-Service Data
+CLASSIFICATION: RESTRICTED by default under DEC-016.
+
+Includes, without limitation:
+- field diagnostic content
+- repair-package content
+- parts/part-number operational data
+- equipment-specific procedures and troubleshooting
+- harness/terminal/component references
+- derived field-service operational guidance
+
+AUTHORITATIVE DISTRIBUTION RULE:
+Restricted field-service data must not be stored in or served from public systems unless a specific item is explicitly reclassified by the Project Owner.
+
+PUBLIC STATUS:
+Existing public presence is historical exposure, not approval.
+
+RETENTION / MIGRATION:
+Preserve recoverable private source before public removal or history remediation.
