@@ -41,6 +41,9 @@ SOURCE-VERIFIED ROUTES:
 - /finances-command-center
 - /repair-packages
 
+LIVE ROUTE AVAILABILITY:
+- All six internal canonical routes returned HTTP 200 on the canonical production alias.
+
 PERSISTENCE REALITY:
 - Master Hub actions: browser localStorage
 - Finances profile: browser localStorage
@@ -93,6 +96,19 @@ PROJECT CONTROL CENTER REALITY:
 REPOSITORY VISIBILITY:
 PUBLIC
 
+RUNTIME HEALTH:
+- No Vercel runtime error clusters observed in selected 7-day window.
+- Sampled production status grouping showed HTTP 200 only.
+
+DEPENDENCY SECURITY:
+- Next.js 16.3.4 installed.
+- Current official security-patched baseline is 16.3.8; upgrade required.
+
+ACCESS CONTROL:
+- Canonical app routes are publicly reachable.
+- No application authentication layer found.
+- Whether "private" requires access control is OPEN.
+
 SECURITY / DATA CLASSIFICATION:
 - Repository contains field-service diagnostic and repair-package content.
 - Audit has NOT classified that material as confidential or public.
@@ -111,6 +127,8 @@ OPEN DECISIONS:
 - Whether Project Control Center should become source-bound to canonical records.
 - CI enforcement policy for tests/lint.
 - Full MVP acceptance boundary.
+- Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
+- Security patch upgrade to Next.js 16.3.8.
 
 AUDIT ARTIFACT:
 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
