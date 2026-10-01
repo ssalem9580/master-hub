@@ -38,3 +38,8 @@ Rules:
 - Never erase defect history.
 - Never rename existing DEF-### identifiers solely to match the generic template.
 - Historical defects may be expanded when revisited; unknown fields remain UNKNOWN rather than invented.
+
+| DEF-004 | Recovery Value Calculator configured Live URL returns HTTP 404 | High | OPEN | Live HTTP verification at configured registry URL | Identify correct route/deployment or downgrade status until restored |
+| DEF-005 | Project Control Center displays static state that can drift from canonical records | Medium | OPEN | /project-control source contains static phase/current-task text | Bind/generate visible state from canonical source |
+| DEF-006 | Current MasterHub UI tests target older interface while CI does not run tests | Medium | OPEN | test-source/current-component comparison + CI workflow | Normalize tests, execute them, then add CI test gate |
+| DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | FIXING IN AUDIT | 06_CURRENT_STATE.md contradicted completed Stage H baseline freeze | Correct Current State on audit branch and preserve audit evidence |
