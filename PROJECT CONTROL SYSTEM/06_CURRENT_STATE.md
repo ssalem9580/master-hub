@@ -2,19 +2,21 @@
 
 DATE: 2026-09-30
 
-CURRENT PHASE: MASTERHUB RECONSTRUCTION & REALITY AUDIT
+CURRENT PHASE: SECURITY + QUALITY HARDENING — VERIFIED RELEASE CANDIDATE
 GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
 FROZEN GOVERNANCE REFERENCE: baseline/governance-control-1.0
 CANONICAL REPOSITORY: ssalem9580/master-hub
 CANONICAL BRANCH: main
 AUDIT-START MAIN SHA: e8ca3dac4825cd8af0b3427678cd67b4854b61
 ACTIVE AUDIT BRANCH: audit/masterhub-reconstruction-reality-20260930
+ACTIVE HARDENING BRANCH: hardening/security-quality-20260930
+HARDENING PR: #2 — OPEN / NOT MERGED
 
 CURRENT STEP:
-Evidence-based reconstruction of actual source, tests, deployments, registry links, persistence, security boundaries, and operational state.
+Security and quality hardening implemented and verified on the protected hardening branch.
 
 NEXT CONTROLLED ACTION:
-Continue route/external-link verification, classify duplicate Vercel ownership, reconcile test/CI drift, and complete the security/public-data-boundary review before any cleanup or new feature build.
+Verify the final PR head after governance evidence is committed. If lint, tests, and build remain green, request the explicit merge/release gate for PR #2. Production remains unchanged until that gate is approved.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -51,15 +53,17 @@ PERSISTENCE REALITY:
 - Project-wide server database: UNKNOWN / NEEDS CONFIRMATION for standalone/external tools
 
 BUILD / CI:
-- GitHub Actions Master Hub CI passed on main commit e8ca3dac4825cd8af0b3427678cd67b4854b61.
-- CI currently runs npm run build only.
-- CI does not currently run npm test or npm run lint.
+- Hardening branch uses Next.js 16.3.8 and eslint-config-next 16.3.8 with a regenerated lockfile.
+- GitHub Actions now requires npm ci → npm run lint → npm test → npm run build.
+- Verification run 36810355612 passed install, lint, tests, and production build on hardening product commit 2062d470b3f200b490f139b8bff2bd64ab0b8221.
+- PR #2 Vercel checks remain affected by the separately documented multi-project build-rate-limit fan-out.
 
 TEST REALITY:
-- Vitest suite exists.
-- Current UI test source targets older UI controls and is not aligned with current MasterHub component source.
-- Fresh test execution is NOT VERIFIED in the current audit.
-- Build success must not be treated as full test-suite success.
+- Vitest suite is aligned to the current approved MasterHub UI.
+- hub-data tests pass.
+- current UI directory search, action capture, importance toggle, and delete flows pass.
+- Lint passes after correcting verified React/TypeScript violations in Finances, Repair Packages, and MasterHub.
+- Production build passes under Next.js 16.3.8.
 
 CANONICAL PRODUCTION:
 - Vercel project: master-hub
@@ -101,8 +105,9 @@ RUNTIME HEALTH:
 - Sampled production status grouping showed HTTP 200 only.
 
 DEPENDENCY SECURITY:
-- Next.js 16.3.4 installed.
-- Current official security-patched baseline is 16.3.8; upgrade required.
+- Hardening branch: Next.js 16.3.8 / eslint-config-next 16.3.8 — VERIFIED.
+- Canonical main/production remain on the prior package state until PR #2 is merged and released.
+- Official Next.js September 2026 security baseline requirement is satisfied by the hardening branch.
 
 ACCESS CONTROL:
 - Canonical app routes are publicly reachable.
@@ -143,10 +148,10 @@ OPEN DECISIONS:
 - Whether any public field-service material has distribution restrictions.
 - Correct replacement/fix for Recovery Value Calculator public URL.
 - Whether Project Control Center should become source-bound to canonical records.
-- CI enforcement policy for tests/lint.
+- CI lint/test/build enforcement is implemented and verified on PR #2; canonical activation awaits merge.
 - Full MVP acceptance boundary.
 - Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
-- Security patch upgrade to Next.js 16.3.8.
+- Merge and release of the verified Next.js 16.3.8 hardening package.
 - Source recovery/canonical repository assignment for standalone external tools.
 - Production restoration of Recovery Value from recovered branch source.
 - GitHub branch/ruleset enforcement for main and governance baseline.
@@ -160,3 +165,15 @@ IN PROGRESS
 AUDIT REMEDIATION MATRIX: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md
 INITIAL REALITY-AUDIT PASS: COMPLETE ENOUGH TO BEGIN CONTROLLED REMEDIATION PLANNING
 PRODUCT CODE CHANGED BY AUDIT: NO
+
+
+HARDENING RELEASE CANDIDATE:
+- Package: SECURITY-QUALITY-RC1
+- PR: #2
+- Verified product commit: 2062d470b3f200b490f139b8bff2bd64ab0b8221
+- GitHub Actions run: 36810355612
+- Install: PASS
+- Lint: PASS
+- Vitest: PASS
+- Build: PASS
+- Production promotion: NOT AUTHORIZED YET
