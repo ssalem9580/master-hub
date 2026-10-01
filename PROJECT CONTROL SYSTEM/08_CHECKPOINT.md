@@ -55,13 +55,13 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Stage C proposed governance amendments complete; awaiting Stage D owner review.
+Stage D owner review complete; Stage E approved governance amendments are being applied.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-Owner reviews 00_PROPOSED_GOVERNANCE_AMENDMENTS.md and resolves material governance choices before activation.
+Apply and verify approved governance amendments on the protected adoption branch. Do not merge to main without separate explicit approval.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -96,3 +96,8 @@ CONTROLLED TEMPLATE ADOPTION:
 
 - Stage D OD-001: RESOLVED — DEF-### permanently retained under DEC-006.
 - Next Stage D review: OD-002 — Authority Order activation.
+
+- Stage D: COMPLETE under DEC-007.
+- Authority Order: APPROVED for branch adoption.
+- Part 29 source tail: remains incomplete; no invented mappings.
+- Main merge/production activation: NOT AUTHORIZED by automatic progression.
