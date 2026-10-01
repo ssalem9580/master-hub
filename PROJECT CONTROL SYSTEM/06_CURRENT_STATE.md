@@ -4,8 +4,8 @@ DATE: 2026-09-30
 
 CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
 LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
-CURRENT STEP: Stage B reconciliation complete; Stage C governance-amendment drafting is next.
-NEXT CONTROLLED ACTION: Draft additive governance amendments from the reconciliation matrix; isolate constitutional and identifier conflicts for owner review; do not modify product code or main.
+CURRENT STEP: Stage C proposed governance amendments drafted; Stage D owner review is next.
+NEXT CONTROLLED ACTION: Owner review of proposed amendments, especially defect-ID convention and Authority Order activation; no amendments are active yet.
 
 PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
 CURRENT MVP: Existing hub + key internal tools + Project Control System.
@@ -83,3 +83,6 @@ PLAN: 00_TEMPLATE_ADOPTION_PLAN.md
 STAGE B ARTIFACT: 00_TEMPLATE_RECONCILIATION_MATRIX.md
 STAGE B RESULT: COMPLETE
 MATERIAL OWNER-DECISION ITEM: DEF-### versus template BUG-### identifier convention
+
+STAGE C ARTIFACT: 00_PROPOSED_GOVERNANCE_AMENDMENTS.md
+STAGE C RESULT: COMPLETE — PROPOSALS ONLY
