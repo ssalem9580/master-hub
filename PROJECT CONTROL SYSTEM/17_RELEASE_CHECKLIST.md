@@ -65,6 +65,6 @@ Every release review must explicitly cover, as applicable:
 - [x] Owner acceptance recorded — DEC-014.
 - [x] Release record created — RELEASES/SECURITY-QUALITY-1.0.md.
 - [x] Backup record created — BACKUPS/SECURITY-QUALITY-1.0.md.
-- [ ] New frozen branch/tag created — to be created after closeout merge so it points to the complete release record.
+- [x] Frozen recovery branch defined — baseline/security-quality-1.0; branch created from the completed release-closeout head before canonical merge.
 
-RELEASE STATUS: VERIFIED / OWNER ACCEPTED / READY FOR BASELINE FREEZE
+RELEASE STATUS: VERIFIED / OWNER ACCEPTED / BASELINE FROZEN
