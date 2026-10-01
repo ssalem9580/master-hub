@@ -55,13 +55,13 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Install control layer around existing product.
+Controlled AI Idea Master Template adoption and reconciliation around the existing product.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-Reconstruct historical decisions and run a fresh requirement-to-route verification pass.
+Complete section-by-section template reconciliation, surface conflicts/material governance changes for owner decision, then verify approved adoption changes before any merge.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -76,3 +76,13 @@ Git history for implementation evidence.
 
 RESTART INSTRUCTION:
 > Continue this project from this checkpoint. Do not reconstruct from memory when canonical project documents are available. Do not silently change approved decisions. Resolve conflicts using the Authority Order and Decision Log.
+
+
+CONTROLLED TEMPLATE ADOPTION:
+- Status: IN PROGRESS
+- Adoption branch: control/ai-idea-master-template-adoption
+- Protected baseline: main @ ef13e706cfa678fc519802298944a5c45b12d7d2
+- Source: PROJECT CONTROL SYSTEM/00_AI_IDEA_MASTER_TEMPLATE.md
+- Plan: PROJECT CONTROL SYSTEM/00_TEMPLATE_ADOPTION_PLAN.md
+- Main merge: NOT AUTHORIZED
+- Product-code change under this adoption step: NOT AUTHORIZED
