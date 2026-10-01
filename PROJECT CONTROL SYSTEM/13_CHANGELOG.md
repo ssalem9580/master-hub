@@ -64,3 +64,16 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - FILES AFFECTED: PROJECT CONTROL SYSTEM only.
 - REASON: Reconcile documented state with actual system reality before new feature development.
 - RESULT: First audit snapshot recorded; no product/deployment/destructive changes made.
+
+
+## 2026-09-30 — Security + quality hardening release candidate
+- CHANGE ID: CHANGE-004
+- VERSION: SECURITY-QUALITY-RC1
+- DESCRIPTION: Patched Next.js to 16.3.8, regenerated the dependency lock, aligned automated UI tests to the current product, corrected verified lint violations, and upgraded CI from build-only to lint/test/build verification.
+- AUTHORIZED BY: Project Owner / DEC-013.
+- RELATED DECISION: DEC-013.
+- RELATED REQUIREMENT: REQ-013, REQ-014.
+- RELATED FEATURE: FEAT-001, FEAT-003, FEAT-004.
+- FILES AFFECTED: master-hub-app package metadata/lock, current UI tests, CI workflow, lint-corrected application source, Project Control System evidence.
+- REASON: Resolve the P0/P1 dependency-security and false-confidence CI findings from the reconstruction audit.
+- RESULT: SECURITY-QUALITY-RC1 verified on branch. GitHub Actions run 36810355612 passed install, lint, tests, and production build. PR #2 remains unmerged and production unchanged.
