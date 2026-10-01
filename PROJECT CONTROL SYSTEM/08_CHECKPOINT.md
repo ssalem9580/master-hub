@@ -55,13 +55,13 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Controlled AI Idea Master Template adoption and reconciliation around the existing product.
+Stage B template reconciliation complete; preparing Stage C proposed governance amendments.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-Complete section-by-section template reconciliation, surface conflicts/material governance changes for owner decision, then verify approved adoption changes before any merge.
+Draft additive governance amendments for Definition of Ready, Definition of Done, acceptance criteria, register schemas, Authority Order, and supplied Source-of-Truth mappings. Keep DEF-### versus BUG-### unresolved for owner decision.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -86,3 +86,7 @@ CONTROLLED TEMPLATE ADOPTION:
 - Plan: PROJECT CONTROL SYSTEM/00_TEMPLATE_ADOPTION_PLAN.md
 - Main merge: NOT AUTHORIZED
 - Product-code change under this adoption step: NOT AUTHORIZED
+
+- Stage B reconciliation: COMPLETE
+- Reconciliation artifact: PROJECT CONTROL SYSTEM/00_TEMPLATE_RECONCILIATION_MATRIX.md
+- Stage C amendments: NOT YET ACTIVE
