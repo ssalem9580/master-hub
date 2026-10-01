@@ -12,6 +12,7 @@ const PARTS_KEY="master-hub:parts-library:v2";
 const LEGACY_PARTS_KEY="master-hub:parts-library:v1";
 const PACKAGES_KEY="master-hub:repair-packages:v2";
 const LEGACY_PACKAGES_KEY="master-hub:repair-packages:v1";
+const DRAFT_KEY="master-hub:repair-package-draft:v1";
 const money=(v:number)=>v.toLocaleString("en-US",{style:"currency",currency:"USD"});
 const clean=(v:string)=>v.trim().replace(/^['\"]|['\"]$/g,"");
 const num=(v:string)=>Number(String(v||"").replace(/[$,()]/g,m=>m==="("?"-":m===")"?"":""))||0;
@@ -53,9 +54,10 @@ function isBeamGreenBox(model:string,jobType:string,symptom:string){const s=norm
 export default function RepairPackagesPage(){
   const[library,setLibrary]=useState<Part[]>([]),[selected,setSelected]=useState<Part[]>([]),[saved,setSaved]=useState<SavedPackage[]>([]),[hydrated,setHydrated]=useState(false);
   const[packageName,setPackageName]=useState(""),[model,setModel]=useState(""),[jobType,setJobType]=useState(""),[symptom,setSymptom]=useState(""),[search,setSearch]=useState(""),[paste,setPaste]=useState(""),[notice,setNotice]=useState(""),[assistOpen,setAssistOpen]=useState(false),[importing,setImporting]=useState(false);
-  useEffect(()=>{const id=window.setTimeout(()=>{const currentParts=readStoredArray(PARTS_KEY),legacyParts=readStoredArray(LEGACY_PARTS_KEY),currentPackages=readStoredArray(PACKAGES_KEY),legacyPackages=readStoredArray(LEGACY_PACKAGES_KEY);setLibrary(dedupeParts((currentParts.length?currentParts:legacyParts).map(normalizePart)));setSaved(dedupePackages(currentPackages.length?currentPackages:legacyPackages));setHydrated(true)},0);return()=>window.clearTimeout(id)},[]);
+  useEffect(()=>{const id=window.setTimeout(()=>{const currentParts=readStoredArray(PARTS_KEY),legacyParts=readStoredArray(LEGACY_PARTS_KEY),currentPackages=readStoredArray(PACKAGES_KEY),legacyPackages=readStoredArray(LEGACY_PACKAGES_KEY);setLibrary(dedupeParts((currentParts.length?currentParts:legacyParts).map(normalizePart)));setSaved(dedupePackages(currentPackages.length?currentPackages:legacyPackages));try{const raw=localStorage.getItem(DRAFT_KEY);if(raw){const d=asRecord(JSON.parse(raw));setPackageName(textValue(d.packageName));setModel(textValue(d.model));setJobType(textValue(d.jobType));setSymptom(textValue(d.symptom));setSearch(textValue(d.search));setPaste(textValue(d.paste));if(Array.isArray(d.selected))setSelected(dedupeParts(d.selected.map(normalizePart)))}}catch{}setHydrated(true)},0);return()=>window.clearTimeout(id)},[]);
   useEffect(()=>{if(hydrated)localStorage.setItem(PARTS_KEY,JSON.stringify(dedupeParts(library)))},[hydrated,library]);
   useEffect(()=>{if(hydrated)localStorage.setItem(PACKAGES_KEY,JSON.stringify(dedupePackages(saved)))},[hydrated,saved]);
+  useEffect(()=>{if(!hydrated)return;try{localStorage.setItem(DRAFT_KEY,JSON.stringify({packageName,model,jobType,symptom,search,paste,selected:dedupeParts(selected)}))}catch{}},[hydrated,packageName,model,jobType,symptom,search,paste,selected]);
 
   const totalCost=useMemo(()=>dedupeParts(selected).reduce((s,p)=>s+effectiveCost(p),0),[selected]);
   const totalList=useMemo(()=>dedupeParts(selected).reduce((s,p)=>s+p.listPrice,0),[selected]);
@@ -78,7 +80,7 @@ export default function RepairPackagesPage(){
   const copyTable=async()=>{const parts=dedupeParts(selected);const lines=["PART NAME\tPART #\tGLS\tCOMPATIBLE WITH\tCOST\tLIST PRICE",...parts.map(p=>`${p.name}\t${p.partNumber}\t${p.gls}\t${p.compatibleWith}\t${money(effectiveCost(p))}\t${money(p.listPrice)}`),`\t\t\tRUNNING TOTAL\t${money(totalCost)}\t${money(totalList)}`];await navigator.clipboard.writeText(lines.join("\n"));flash("Duplicate-free pricing table copied")};
 
   return <main style={{minHeight:"100vh",background:"#080b12",color:"#f4f4f7",fontFamily:"Arial,sans-serif",padding:24}}><div style={{maxWidth:1500,margin:"0 auto",display:"grid",gap:16}}>
-    <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>FIELD RESOURCE HUB</div><h1 style={{margin:"6px 0",fontSize:30}}>Repair Packages & Rebuild Kits</h1><p style={{margin:0,color:"#8c94a5"}}>Parts search and package pricing use the imported unique-parts database. COST is derived per part from GLS Cost when available, otherwise Standard/Part Cost. AI Assist removes duplicates and never invents pricing.</p></header>
+    <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>FIELD RESOURCE HUB</div><h1 style={{margin:"6px 0",fontSize:30}}>Repair Packages & Rebuild Kits</h1><p style={{margin:0,color:"#8c94a5"}}>Parts search and package pricing use the imported unique-parts database. COST is derived per part from GLS Cost when available, otherwise Standard/Part Cost. AI Assist removes duplicates and never invents pricing.</p><p style={{margin:"6px 0 0",color:"#67d6ba",fontSize:12}}>Draft fields, pasted import text, selected parts, parts library, and saved packages auto-save in this browser.</p></header>
     {notice&&<div style={{position:"fixed",right:24,bottom:24,zIndex:20,background:"#171d29",border:"1px solid #343d50",borderRadius:9,padding:"10px 14px",maxWidth:620}}>{notice}</div>}
 
     <section style={{display:"grid",gridTemplateColumns:"minmax(320px,.75fr) minmax(0,1.6fr)",gap:16}}>
