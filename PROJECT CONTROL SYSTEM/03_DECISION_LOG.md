@@ -210,3 +210,19 @@ SUPERSEDES: SECURITY-QUALITY-RC1 release-candidate state.
 SUPERSEDED BY:
 REVIEW REQUIRED: NO for this completed release; remaining audit issues retain their own decision gates.
 APPROVED BY: Project Owner
+
+
+## DEC-015
+DATE: 2026-09-30
+TITLE: Keep MasterHub publicly reachable without login
+STATUS: APPROVED
+QUESTION: Should MasterHub require authentication to access the application?
+DECISION: No. MasterHub will remain publicly reachable without an application login requirement. For MasterHub, "private" means private-use and local/private handling of sensitive data, not access-controlled site visibility.
+WHY: The Project Owner explicitly selected no login. Current core personal-entry data is stored locally in the browser, and approved policy already prohibits hard-coding sensitive personal finance values, credentials, and secrets into the public repository.
+ALTERNATIVES CONSIDERED: Require login for all MasterHub routes; selectively protect only certain routes.
+EVIDENCE: Project Owner instruction; current localStorage-based persistence; existing public deployment and privacy rules.
+AFFECTED AREAS: Product access boundary, security/privacy requirements, risk classification, future architecture.
+SUPERSEDES: ISSUE-010 unresolved access-control boundary and RISK-010 uncertainty.
+SUPERSEDED BY:
+REVIEW REQUIRED: YES only if future changes introduce server-side sensitive/personal data, restricted content, or a new access-control requirement.
+APPROVED BY: Project Owner
