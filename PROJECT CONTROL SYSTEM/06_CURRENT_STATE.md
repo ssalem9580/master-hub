@@ -17,7 +17,7 @@ CURRENT STEP:
 SECURITY-QUALITY-1.0 is merged, production-deployed, and post-release verified.
 
 NEXT CONTROLLED ACTION:
-Continue Wave 1 audit remediation by resolving the remaining access/data-classification and repository-enforcement decisions, then validate Recovery Value recovered source before any production restoration or duplicate Vercel cleanup.
+Continue Wave 1 audit remediation by resolving public field-service content classification and repository-enforcement decisions, then validate Recovery Value recovered source before any production restoration or duplicate Vercel cleanup.
 
 PRODUCT IDENTITY:
 Master Hub command center / application registry / project operating system.
@@ -112,9 +112,11 @@ DEPENDENCY SECURITY:
 - Release state: VERIFIED IN PRODUCTION.
 
 ACCESS CONTROL:
-- Canonical app routes are publicly reachable.
-- No application authentication layer found.
-- Whether "private" requires access control is OPEN.
+- Canonical app routes are intentionally publicly reachable.
+- Application login is NOT REQUIRED under DEC-015.
+- "Private" means private-use / local-data privacy, not access-controlled site visibility.
+- Sensitive personal values, credentials, secrets, or restricted data must not be exposed merely because the application is public.
+- Any future server-side sensitive/personal-data architecture requires a new security review.
 
 SECURITY / DATA CLASSIFICATION:
 - Repository contains field-service diagnostic and repair-package content.
@@ -151,7 +153,6 @@ OPEN DECISIONS:
 - Correct replacement/fix for Recovery Value Calculator public URL.
 - Whether Project Control Center should become source-bound to canonical records.
 - Full MVP acceptance boundary.
-- Whether MasterHub must be access-controlled rather than merely local-data/private-use oriented.
 - Source recovery/canonical repository assignment for standalone external tools.
 - Production restoration of Recovery Value from recovered branch source.
 - GitHub branch/ruleset enforcement for main and governance baseline.
