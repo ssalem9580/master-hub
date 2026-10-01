@@ -90,3 +90,16 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - FILES AFFECTED: package metadata/lock, CI workflow, current UI tests, lint-corrected application source, Project Control System release records.
 - REASON: Resolve verified security-patch and verification-gate defects before new feature development.
 - RESULT: PR #2 merged as f81fd436a8df50ac0da93ec3c93ec26d09e0badf; post-merge CI 36811990043 passed; Vercel deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY; six canonical routes HTTP 200; post-release runtime error scan clean.
+
+
+## 2026-09-30 — Restricted field-service security boundary finalized
+- CHANGE ID: CHANGE-006
+- VERSION: SECURITY-BOUNDARY-1.0
+- DESCRIPTION: Finalized the RESTRICTED default classification for field-service operational material, verified public exposure inventory, quarantine plan, recovery rules, and containment gates.
+- AUTHORIZED BY: Project Owner / DEC-016 / DEC-017.
+- RELATED DECISION: DEC-016, DEC-017.
+- RELATED REQUIREMENT: REQ-015.
+- RELATED FEATURE: FEAT-002, FEAT-003.
+- FILES AFFECTED: Project Control System, release, and backup records only.
+- REASON: Freeze the approved distribution/security boundary before migration or removal.
+- RESULT: Classification/security boundary finalized. Existing public exposure remains OPEN / CRITICAL until private preservation and physical containment are completed.
