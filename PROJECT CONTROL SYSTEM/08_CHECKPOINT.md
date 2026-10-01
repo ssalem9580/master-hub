@@ -61,7 +61,7 @@ LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-With explicit Project Owner authorization, merge the verified adoption branch into main, then verify the post-merge baseline and freeze the governance baseline.
+Execute the approved Stage H merge into main, verify post-merge governance state, and establish the frozen baseline reference.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -107,3 +107,5 @@ CONTROLLED TEMPLATE ADOPTION:
 - Product-code/config changes versus main: NONE.
 - Adoption package: GOVERNANCE-ADOPTION-RC1.
 - Merge to main: REQUIRES EXPLICIT APPROVAL.
+
+- Stage H authorization: APPROVED — DEC-009.
