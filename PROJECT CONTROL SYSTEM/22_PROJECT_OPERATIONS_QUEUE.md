@@ -47,7 +47,7 @@ Ideas remain separate from approved work. A code change is not DEPLOYED until pr
 | QUEUE-006 | Source-bind Project Control Center status | Project Control | NORMAL | QUEUED | NOT YET APPROVED FOR IMPLEMENTATION | Architecture choice needed | — | Design smallest safe generated-status approach; do not duplicate control systems | NOT FINALIZED |
 | QUEUE-007 | Recover canonical source for standalone tools | Recovery / Integrations | HIGH | QUEUED | APPROVED investigation | Historical source locations incomplete | — | Locate and document canonical source/backup for each standalone tool | NOT FINALIZED |
 | QUEUE-008 | Enforce main/baseline repository protection | Governance / GitHub | HIGH | WAITING / BLOCKED | OWNER APPROVAL REQUIRED | Workflow changes are governance-sensitive | — | Present proposed ruleset and required checks before enabling | NOT FINALIZED |
-| QUEUE-009 | Project Operations & Queue control layer | Project Control | HIGH | WAITING / BLOCKED | APPROVED by 2026-10-01 Project Owner instruction | Core layer is live; latest status extension is blocked by Vercel build-rate limit | e4b81c2 / 9ae344b | Deploy/verify latest Project Control extension, then ask owner to finalize | NOT FINALIZED |
+| QUEUE-009 | Project Operations & Queue control layer | Project Control | HIGH | FINALIZED | OWNER ACCEPTED 2026-10-01 | Accepted production deployment READY at 20fb4e5 / Vercel master-hub production | e4b81c2 / 9ae344b / ae61f5d / 20fb4e5 | Maintain as canonical operations control; future changes create new queue items | FINALIZED 2026-10-01 |
 
 ## Bugs & Testing
 
@@ -123,3 +123,7 @@ Finalization requires explicit Project Owner approval after live verification.
 ## Checkpoint Finalization — 2026-10-01
 The 2026-10-01 09:58 CDT operational checkpoint was explicitly FINALIZED / OWNER ACCEPTED.
 This finalization freezes the checkpoint record and its evidence; it does not close independently open queue items or mark unverified production changes as complete.
+
+
+## PROJECT-OPS-1.0 Finalization — 2026-10-01
+The Project Owner explicitly finalized the Project Operations & Queue update. This does not close DEF-010, restricted-data containment, Vercel cleanup, Recovery Value restoration, standalone-source recovery, or repository-protection decisions.

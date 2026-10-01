@@ -139,3 +139,10 @@ Existing historical changelog entries are preserved. Unknown historical fields m
 - RELATED FEATURE: Project Control / Operations Queue.
 - FILES AFFECTED: 08_CHECKPOINT.md, 06_CURRENT_STATE.md, 13_CHANGELOG.md, 22_PROJECT_OPERATIONS_QUEUE.md.
 - RESULT: Checkpoint record finalized. This does NOT finalize the still-open Repair Package interactive retest, restricted-data containment, Vercel cleanup, or pending Project Control production deployment.
+
+
+## 2026-10-01 — PROJECT-OPS-1.0 finalized
+- CHANGE ID: CHANGE-010
+- VERSION: PROJECT-OPS-1.0
+- AUTHORIZED BY: Project Owner — explicit "Finalize".
+- RESULT: Project Operations & Queue is owner-accepted and finalized. Independent open items remain open.
