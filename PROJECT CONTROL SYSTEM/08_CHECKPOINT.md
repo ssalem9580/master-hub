@@ -55,13 +55,13 @@ See 07_OPEN_ISSUES.md.
 CURRENT PHASE:
 PHASE 0 — PROJECT CONTROL.
 CURRENT STEP:
-Stage D owner review complete; Stage E approved governance amendments are being applied.
+Governance adoption package GOVERNANCE-ADOPTION-RC1 is applied and verified on the protected branch.
 
 LAST APPROVED ACTION:
 Incorporate supplied master project-control framework around current Master Hub and add anything missing.
 
 NEXT PROPOSED ACTION:
-Apply and verify approved governance amendments on the protected adoption branch. Do not merge to main without separate explicit approval.
+With explicit Project Owner authorization, merge the verified adoption branch into main, then verify the post-merge baseline and freeze the governance baseline.
 
 DO NOT CHANGE:
 - Do not silently convert UNKNOWN/PROPOSED into APPROVED.
@@ -101,3 +101,9 @@ CONTROLLED TEMPLATE ADOPTION:
 - Authority Order: APPROVED for branch adoption.
 - Part 29 source tail: remains incomplete; no invented mappings.
 - Main merge/production activation: NOT AUTHORIZED by automatic progression.
+
+- Stage E application: COMPLETE.
+- Stage F verification: PASS.
+- Product-code/config changes versus main: NONE.
+- Adoption package: GOVERNANCE-ADOPTION-RC1.
+- Merge to main: REQUIRES EXPLICIT APPROVAL.
