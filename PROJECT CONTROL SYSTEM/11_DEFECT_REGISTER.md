@@ -45,3 +45,5 @@ Rules:
 | DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | FIXING IN AUDIT | 06_CURRENT_STATE.md contradicted completed Stage H baseline freeze | Correct Current State on audit branch and preserve audit evidence |
 
 | DEF-008 | Next.js security patch level below current patched Active LTS | High | CLOSED | main/package lock use 16.3.8; CI 36811990043 PASS; production dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY | SECURITY-QUALITY-1.0 released and verified |
+
+| DEF-009 | Restricted field-service material remains publicly exposed | Critical | OPEN | DEC-016 classification + verified public source/routes/deployments documented in exposure inventory | Establish private canonical preservation, verify completeness, then remove public source/routes/deployments under controlled containment |
