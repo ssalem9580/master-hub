@@ -1011,3 +1011,215 @@ Each dependency records:
 ```text
 DEPENDENCY:
 PURPOSE:
+CRITICALITY:
+CURRENT VERSION:
+OWNER / PROVIDER:
+
+WHAT BREAKS IF UNAVAILABLE:
+
+FAILURE MODE:
+
+USER EXPERIENCE:
+
+FALLBACK:
+
+RECOVERY:
+
+ALTERNATIVE:
+
+LAST REVIEWED:
+```
+
+---
+
+# PART 22 — 15_DATA_DICTIONARY
+
+Define:
+
+- tables
+- fields
+- record types
+- IDs
+- statuses
+- allowed values
+- data sources
+- units
+- ownership
+- retention
+- sensitivity
+- authoritative source
+
+Do not allow the database schema to become undocumented project logic.
+
+---
+
+# PART 23 — 16_SECURITY_AND_PRIVACY
+
+Document:
+
+- authentication
+- authorization
+- user roles
+- permission boundaries
+- sensitive data classes
+- secrets handling
+- environment variables
+- encryption expectations
+- data retention
+- deletion behavior
+- audit/logging behavior
+- external AI-provider exposure
+- third-party data sharing
+- compliance obligations
+- incident response considerations
+
+Never expose secrets or credentials in documentation intended for broad distribution.
+
+---
+
+# PART 24 — 17_RELEASE_CHECKLIST
+
+Maintain a reusable release checklist covering:
+
+- product scope
+- requirements
+- testing
+- defects
+- data
+- security
+- UX
+- integrations
+- deployment
+- monitoring
+- recovery
+- documentation
+- backups
+- owner acceptance
+
+---
+
+# PART 25 — 18_ROLLBACK_AND_RECOVERY
+
+Before production release, define:
+
+**How do we undo this release?**
+
+Document:
+
+- previous stable release
+- source rollback
+- deployment rollback
+- configuration rollback
+- database rollback
+- migration limitations
+- backup location
+- restore procedure
+- recovery testing
+- recovery dependencies
+
+Never perform destructive production changes without a recovery strategy.
+
+---
+
+# PART 26 — 19_USER_FEEDBACK_REGISTER
+
+Once real users interact with the product, record feedback separately from assumptions.
+
+```text
+FEEDBACK ID:
+DATE:
+SOURCE:
+USER TYPE:
+
+OBSERVATION:
+
+REQUEST:
+
+PROBLEM REPORTED:
+
+EVIDENCE:
+
+RELATED FEATURE:
+
+CLASSIFICATION:
+BUG / UX / FEATURE REQUEST / CONFUSION / BUSINESS / OTHER
+
+ACTION:
+NONE / INVESTIGATE / PROPOSE / APPROVED / REJECTED / POSTPONED
+```
+
+User feedback does not automatically become product scope.
+
+---
+
+# PART 27 — 20_TECHNICAL_DEBT_REGISTER
+
+Track temporary compromises.
+
+```text
+DEBT ID:
+TITLE:
+
+WHY IT EXISTS:
+
+TEMPORARY IMPLEMENTATION:
+
+DESIRED IMPLEMENTATION:
+
+RISK:
+
+IMPACT:
+
+TRIGGER FOR REPAIR:
+
+STATUS:
+OPEN / PLANNED / RESOLVED / ACCEPTED
+```
+
+Never allow temporary architecture to silently become permanent.
+
+---
+
+# PART 28 — AUTHORITY ORDER
+
+When information conflicts, use this hierarchy unless explicitly changed:
+
+1. Latest explicit Project Owner decision
+2. Approved Project Constitution
+3. Approved Decision Log
+4. Approved Master Project Brief
+5. Approved Requirements Register
+6. Approved Feature Register
+7. Approved Current State
+8. Approved Build Roadmap
+9. Approved Checkpoint
+10. Verified source documents
+11. Earlier project conversation
+12. Assistant-generated proposals
+13. Assumptions
+
+Assistant-generated ideas may never override approved project decisions.
+
+If two authoritative sources conflict, identify the conflict.
+
+Do not silently choose unless the Authority Order clearly resolves it.
+
+---
+
+# PART 29 — SOURCE-OF-TRUTH OWNERSHIP
+
+Every concept should have one canonical owner.
+
+Examples:
+
+```text
+Product identity → PROJECT CONSTITUTION
+Requirements → REQUIREMENTS REGISTER
+Features → FEATURE REGISTER
+Historical decisions → DECISION LOG
+Current reality → CURRENT STATE
+Tests → TEST REGISTER
+Defects → DEFECT_REGISTER
+Risks → RISK_REGISTER
+Dependencies → DEPENDENCY_REGISTER
+Field definitions
