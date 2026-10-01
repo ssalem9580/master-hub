@@ -101,10 +101,10 @@ This supersedes the older observation that the supplied prompt ended during Defi
 - STAGE B — Section-by-section reconciliation: COMPLETE.
 - STAGE C — Draft proposed governance amendments: COMPLETE.
 - STAGE D — Owner review of conflicts/material changes: COMPLETE.
-- STAGE E — Apply approved governance amendments on adoption branch: IN PROGRESS.
-- STAGE F — Verify repository, build/test impact, checkpoint and recovery state: NOT STARTED.
-- STAGE G — Owner activation approval: NOT STARTED.
-- STAGE H — Merge/freeze new governance baseline: NOT AUTHORIZED.
+- STAGE E — Apply approved governance amendments on adoption branch: COMPLETE.
+- STAGE F — Verify repository, build/test impact, checkpoint and recovery state: COMPLETE.
+- STAGE G — Owner activation approval: SATISFIED FOR ADOPTION PACKAGE UNDER DEC-007.
+- STAGE H — Merge/freeze new governance baseline: REQUIRES EXPLICIT MAIN-BRANCH MERGE APPROVAL.
 
 ## Current Next Controlled Action
 Apply approved governance amendments to canonical control files on the adoption branch. Preserve product code and main.
