@@ -11,6 +11,7 @@ const LEGACY_PARTS_KEYS=["master-hub:parts-library:v2","master-hub:parts-library
 const PACKAGES_KEY="master-hub:repair-packages:v3";
 const LEGACY_PACKAGE_KEYS=["master-hub:repair-packages:v2","master-hub:repair-packages:v1"];
 const DRAFT_KEY="master-hub:repair-package-draft:v2";
+const PRELOAD_URLS=["/data/parts-master-1.tsv","/data/parts-master-2.tsv","/data/parts-master-3.tsv","/data/parts-master-4.tsv"];
 
 const money=(v:number)=>v.toLocaleString("en-US",{style:"currency",currency:"USD"});
 const clean=(v:string)=>v.trim().replace(/^['\"]|['\"]$/g,"");
@@ -67,15 +68,26 @@ function dedupePackages(pkgs:unknown[]):SavedPackage[]{const m=new Map<string,Sa
 
 export default function RepairPackagesPage(){
   const[library,setLibrary]=useState<Part[]>([]),[selected,setSelected]=useState<Part[]>([]),[saved,setSaved]=useState<SavedPackage[]>([]),[hydrated,setHydrated]=useState(false);
-  const[packageName,setPackageName]=useState(""),[task,setTask]=useState(""),[model,setModel]=useState(""),[symptom,setSymptom]=useState(""),[search,setSearch]=useState(""),[paste,setPaste]=useState(""),[notice,setNotice]=useState(""),[importing,setImporting]=useState(false);
+  const[packageName,setPackageName]=useState(""),[task,setTask]=useState(""),[model,setModel]=useState(""),[symptom,setSymptom]=useState(""),[search,setSearch]=useState(""),[paste,setPaste]=useState(""),[notice,setNotice]=useState(""),[importing,setImporting]=useState(false),[partNumberEntry,setPartNumberEntry]=useState(""),[sourceCount,setSourceCount]=useState(0),[sourceError,setSourceError]=useState("");
 
-  useEffect(()=>{const id=window.setTimeout(()=>{
+  useEffect(()=>{let cancelled=false;const id=window.setTimeout(async()=>{
     const currentParts=readStoredArray(PARTS_KEY),legacyParts=readFirstStoredArray(LEGACY_PARTS_KEYS),currentPackages=readStoredArray(PACKAGES_KEY),legacyPackages=readFirstStoredArray(LEGACY_PACKAGE_KEYS);
-    setLibrary(dedupeParts((currentParts.length?currentParts:legacyParts).map(normalizePart)));
+    const stored=dedupeParts((currentParts.length?currentParts:legacyParts).map(normalizePart));
+    let preloaded:Part[]=[];
+    try{
+      const texts=await Promise.all(PRELOAD_URLS.map(async url=>{const res=await fetch(url,{cache:"force-cache"});if(!res.ok)throw new Error(`Failed ${url}`);return res.text()}));
+      preloaded=dedupeParts(texts.flatMap((text,i)=>parseRows(text,`Master parts source ${i+1}`)));
+      if(!cancelled){setSourceCount(preloaded.length);setSourceError("")}
+    }catch{
+      if(!cancelled)setSourceError("Preloaded master parts source could not be loaded; using saved local parts.");
+    }
+    if(cancelled)return;
+    // Uploaded master source is authoritative for matching Part # / name / cost.
+    setLibrary(dedupeParts([...stored,...preloaded]));
     setSaved(dedupePackages(currentPackages.length?currentPackages:legacyPackages));
     try{const raw=localStorage.getItem(DRAFT_KEY);if(raw){const d=asRecord(JSON.parse(raw));setPackageName(textValue(d.packageName));setTask(textValue(d.task));setModel(textValue(d.model));setSymptom(textValue(d.symptom));setSearch(textValue(d.search));setPaste(textValue(d.paste));if(Array.isArray(d.selected))setSelected(dedupeParts(d.selected.map(normalizePart)))}}catch{}
     setHydrated(true)
-  },0);return()=>window.clearTimeout(id)},[]);
+  },0);return()=>{cancelled=true;window.clearTimeout(id)}},[]);
 
   useEffect(()=>{if(hydrated)localStorage.setItem(PARTS_KEY,JSON.stringify(dedupeParts(library)))},[hydrated,library]);
   useEffect(()=>{if(hydrated)localStorage.setItem(PACKAGES_KEY,JSON.stringify(dedupePackages(saved)))},[hydrated,saved]);
@@ -84,6 +96,7 @@ export default function RepairPackagesPage(){
   const filtered=useMemo(()=>{const q=norm(search);return library.filter(p=>!q||norm(`${p.name} ${p.partNumber} ${p.compatibleWith} ${p.source}`).includes(q))},[library,search]);
   const packageParts=useMemo(()=>dedupeParts(selected),[selected]);
   const totalCost=useMemo(()=>packageParts.reduce((s,p)=>s+effectiveCost(p),0),[packageParts]);
+  const lookupPart=useMemo(()=>{const q=norm(partNumberEntry);if(!q)return null;return library.find(p=>norm(p.partNumber)===q)||null},[library,partNumberEntry]);
 
   const flash=(m:string)=>{setNotice(m);setTimeout(()=>setNotice(""),2600)};
   const mergeImported=(rows:Part[],label:string)=>{if(!rows.length){flash("No parts detected");return}setLibrary(existing=>dedupeParts([...existing,...rows]));flash(`${rows.length} parts imported from ${label}`)};
@@ -92,17 +105,18 @@ export default function RepairPackagesPage(){
   const addToPackage=(part:Part)=>setSelected(x=>dedupeParts([...x,part]));
   const removeFromPackage=(part:Part)=>setSelected(x=>x.filter(q=>identity(q)!==identity(part)));
   const deleteLibraryPart=(part:Part)=>{const key=identity(part);setLibrary(items=>items.filter(p=>identity(p)!==key));setSelected(items=>items.filter(p=>identity(p)!==key));flash(`${part.partNumber||part.name} removed`)};
+  const addLookupPart=()=>{if(!lookupPart){flash("Part number not found in master source");return}addToPackage(lookupPart);flash(`${lookupPart.partNumber} added to package`)};
   const savePackage=()=>{const parts=dedupeParts(selected);if(!task.trim()||!parts.length){flash("Enter repair task and add at least one part");return}const pkg:SavedPackage={id:crypto.randomUUID(),name:packageName.trim()||task.trim(),task:task.trim(),model:model.trim(),symptom:symptom.trim(),parts,createdAt:new Date().toISOString()};setSaved(x=>dedupePackages([pkg,...x]));flash("Repair package saved")};
   const copyPackage=async()=>{const lines=[`TASK\t${task||"—"}`,"PART #\tPART NAME\tPART COST",...packageParts.map(p=>`${p.partNumber}\t${p.name}\t${money(effectiveCost(p))}`),`\tTOTAL\t${money(totalCost)}`];await navigator.clipboard.writeText(lines.join("\n"));flash("Package copied")};
   const newPackage=()=>{setPackageName("");setTask("");setModel("");setSymptom("");setSelected([]);flash("New package ready")};
   const loadPackage=(pkg:SavedPackage)=>{setPackageName(pkg.name);setTask(pkg.task);setModel(pkg.model);setSymptom(pkg.symptom);setSelected(dedupeParts(pkg.parts.map(normalizePart)));window.scrollTo({top:0,behavior:"smooth"})};
 
   return <main style={{minHeight:"100vh",background:"#080b12",color:"#f4f4f7",fontFamily:"Arial,sans-serif",padding:24}}><div style={{maxWidth:1450,margin:"0 auto",display:"grid",gap:16}}>
-    <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>FIELD RESOURCE HUB</div><h1 style={{margin:"6px 0",fontSize:30}}>Repair Package Builder</h1><p style={{margin:0,color:"#8c94a5",lineHeight:1.5}}>Build a reusable parts package for a specific repair task. Each package shows exactly what to bring: part number, part name, and part cost.</p><p style={{margin:"6px 0 0",color:"#67d6ba",fontSize:12}}>Drafts, imported parts, and saved packages auto-save in this browser.</p></header>
+    <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>FIELD RESOURCE HUB</div><h1 style={{margin:"6px 0",fontSize:30}}>Repair Package Builder</h1><p style={{margin:0,color:"#8c94a5",lineHeight:1.5}}>Build a reusable parts package for a specific repair task. Enter a Part # and the master source automatically fills the Part Name and Part Cost.</p><p style={{margin:"6px 0 0",color:"#67d6ba",fontSize:12}}>Drafts, imported parts, and saved packages auto-save in this browser.</p></header>
     {notice&&<div style={{position:"fixed",right:24,bottom:24,zIndex:20,background:"#171d29",border:"1px solid #343d50",borderRadius:9,padding:"10px 14px"}}>{notice}</div>}
 
     <section style={panel}>
-      <div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:12}}><div><h2 style={h2}>1. Define the repair</h2><p style={{...muted,margin:0}}>Repair task is required. Package name can be the same as the task.</p></div><button onClick={newPackage} style={secondary}>New package</button></div>
+      <div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:12}}><div><h2 style={h2}>1. Define the repair</h2><p style={{...muted,margin:0}}>Repair task is required. Package name can be the same as the task.</p></div><div style={{display:"flex",gap:8,alignItems:"center",flexWrap:"wrap"}}><span style={{fontSize:12,color:sourceError?"#e6b767":"#67d6ba"}}>{sourceError||`${sourceCount.toLocaleString()} master parts loaded`}</span><button onClick={newPackage} style={secondary}>New package</button></div></div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(210px,1fr))",gap:10}}>
         <label style={label}>REPAIR TASK<input value={task} onChange={e=>setTask(e.target.value)} placeholder="Example: Replace VAT 21 motor" style={input}/></label>
         <label style={label}>PACKAGE NAME<input value={packageName} onChange={e=>setPackageName(e.target.value)} placeholder="Optional display name" style={input}/></label>
@@ -111,14 +125,25 @@ export default function RepairPackagesPage(){
       </div>
     </section>
 
-    <section style={{display:"grid",gridTemplateColumns:"minmax(300px,.72fr) minmax(0,1.55fr)",gap:16}}>
-      <div style={panel}><h2 style={h2}>2. Import customer parts & pricing</h2><p style={muted}>Import or paste your parts list. Simple pipe-delimited rows like <strong>11066404000A|Spherical Block Tape|$102.74|</strong> are supported, as are standard CSV/TSV files with Part #, Part Name, and Part Cost columns.</p><label style={{...secondary,display:"inline-block",marginBottom:10,cursor:"pointer"}}>{importing?"Importing…":"Import documents"}<input type="file" multiple accept=".csv,.tsv,.txt,.md,.json,.html,.htm,text/csv,text/plain,application/json" onChange={importFiles} style={{display:"none"}} disabled={importing}/></label><textarea value={paste} onChange={e=>setPaste(e.target.value)} placeholder="Paste: Part # | Part Name | Part Cost" style={{...input,minHeight:170,resize:"vertical"}}/><button onClick={importText} style={{...primary,marginTop:10}}>Import parts</button></div>
+    <section style={panel}>
+      <div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:10}}><div><h2 style={h2}>2. Add a part by Part #</h2><p style={{...muted,margin:0}}>Type the exact Part #. Name and cost populate from the preloaded master source.</p></div></div>
+      <div style={{display:"grid",gridTemplateColumns:"minmax(220px,.8fr) minmax(260px,1.6fr) minmax(130px,.55fr) auto",gap:10,alignItems:"end"}}>
+        <label style={label}>PART #<input value={partNumberEntry} onChange={e=>setPartNumberEntry(e.target.value)} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();addLookupPart()}}} placeholder="11066404000A" autoComplete="off" style={input}/></label>
+        <label style={label}>PART NAME<input value={lookupPart?.name||""} readOnly placeholder="Auto-populates" style={{...input,color:lookupPart?"#f4f4f7":"#7d8596"}}/></label>
+        <label style={label}>PART COST<input value={lookupPart&&effectiveCost(lookupPart)>0?money(effectiveCost(lookupPart)):""} readOnly placeholder="Auto-populates" style={{...input,color:lookupPart?"#f4f4f7":"#7d8596"}}/></label>
+        <button onClick={addLookupPart} disabled={!lookupPart} style={{...primary,opacity:lookupPart?1:.45,cursor:lookupPart?"pointer":"not-allowed"}}>Add part</button>
+      </div>
+      {partNumberEntry&&!lookupPart&&<p style={{...muted,color:"#e6b767",margin:"9px 0 0"}}>No exact Part # match yet.</p>}
+    </section>
 
-      <div style={panel}><div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:10}}><div><h2 style={h2}>3. Add parts to this repair</h2><p style={{...muted,margin:0}}>Search by part number or part name, then add every part needed for the repair.</p></div><strong>{filtered.length} parts</strong></div><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search part number or part name" style={{...input,marginBottom:10}}/><div style={{overflow:"auto",maxHeight:420,border:"1px solid #252c39",borderRadius:10}}><table style={table}><thead><tr>{["PART #","PART NAME","PART COST","",""].map((x,i)=><th key={`${x}-${i}`} style={th}>{x}</th>)}</tr></thead><tbody>{filtered.map(p=><tr key={identity(p)}><td style={td}><strong>{p.partNumber||"—"}</strong></td><td style={td}>{p.name}</td><td style={{...td,textAlign:"right"}}>{effectiveCost(p)>0?money(effectiveCost(p)):"—"}</td><td style={td}><button onClick={()=>addToPackage(p)} style={mini}>Add</button></td><td style={td}><button onClick={()=>deleteLibraryPart(p)} style={trashButton} title="Delete part">🗑</button></td></tr>)}{filtered.length===0&&<tr><td colSpan={5} style={{...td,textAlign:"center",color:"#7d8596",padding:24}}>No matching parts</td></tr>}</tbody></table></div></div>
+    <section style={{display:"grid",gridTemplateColumns:"minmax(300px,.72fr) minmax(0,1.55fr)",gap:16}}>
+      <div style={panel}><h2 style={h2}>3. Optional: add/update source data</h2><p style={muted}>Import or paste your parts list. Simple pipe-delimited rows like <strong>11066404000A|Spherical Block Tape|$102.74|</strong> are supported, as are standard CSV/TSV files with Part #, Part Name, and Part Cost columns.</p><label style={{...secondary,display:"inline-block",marginBottom:10,cursor:"pointer"}}>{importing?"Importing…":"Import documents"}<input type="file" multiple accept=".csv,.tsv,.txt,.md,.json,.html,.htm,text/csv,text/plain,application/json" onChange={importFiles} style={{display:"none"}} disabled={importing}/></label><textarea value={paste} onChange={e=>setPaste(e.target.value)} placeholder="Paste: Part # | Part Name | Part Cost" style={{...input,minHeight:170,resize:"vertical"}}/><button onClick={importText} style={{...primary,marginTop:10}}>Import parts</button></div>
+
+      <div style={panel}><div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:10}}><div><h2 style={h2}>4. Browse master parts</h2><p style={{...muted,margin:0}}>Search by part number or part name, then add every part needed for the repair.</p></div><strong>{filtered.length} parts</strong></div><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search part number or part name" style={{...input,marginBottom:10}}/><div style={{overflow:"auto",maxHeight:420,border:"1px solid #252c39",borderRadius:10}}><table style={table}><thead><tr>{["PART #","PART NAME","PART COST","",""].map((x,i)=><th key={`${x}-${i}`} style={th}>{x}</th>)}</tr></thead><tbody>{filtered.map(p=><tr key={identity(p)}><td style={td}><strong>{p.partNumber||"—"}</strong></td><td style={td}>{p.name}</td><td style={{...td,textAlign:"right"}}>{effectiveCost(p)>0?money(effectiveCost(p)):"—"}</td><td style={td}><button onClick={()=>addToPackage(p)} style={mini}>Add</button></td><td style={td}><button onClick={()=>deleteLibraryPart(p)} style={trashButton} title="Delete part">🗑</button></td></tr>)}{filtered.length===0&&<tr><td colSpan={5} style={{...td,textAlign:"center",color:"#7d8596",padding:24}}>No matching parts</td></tr>}</tbody></table></div></div>
     </section>
 
     <section style={panel}>
-      <div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:10}}><div><h2 style={h2}>4. Package for the job</h2><p style={{...muted,margin:0}}>{task||"No repair task entered"}</p></div><div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button onClick={copyPackage} style={secondary} disabled={!packageParts.length}>Copy parts list</button><button onClick={savePackage} style={primary}>Save package</button></div></div>
+      <div style={{display:"flex",justifyContent:"space-between",gap:12,alignItems:"center",flexWrap:"wrap",marginBottom:10}}><div><h2 style={h2}>5. Package for the job</h2><p style={{...muted,margin:0}}>{task||"No repair task entered"}</p></div><div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button onClick={copyPackage} style={secondary} disabled={!packageParts.length}>Copy parts list</button><button onClick={savePackage} style={primary}>Save package</button></div></div>
       <div style={{overflow:"auto",border:"1px solid #252c39",borderRadius:10}}><table style={table}><thead><tr>{["PART #","PART NAME","PART COST",""].map(x=><th key={x} style={th}>{x}</th>)}</tr></thead><tbody>{packageParts.map(p=><tr key={identity(p)}><td style={td}><strong>{p.partNumber||"—"}</strong></td><td style={td}>{p.name}</td><td style={{...td,textAlign:"right",fontWeight:800}}>{effectiveCost(p)>0?money(effectiveCost(p)):"—"}</td><td style={td}><button onClick={()=>removeFromPackage(p)} style={mini}>Remove</button></td></tr>)}{!packageParts.length&&<tr><td colSpan={4} style={{...td,textAlign:"center",color:"#7d8596",padding:28}}>Add every part needed for this repair.</td></tr>}</tbody><tfoot><tr><td colSpan={2} style={{...td,textAlign:"right",fontWeight:800}}>PACKAGE TOTAL</td><td style={{...td,textAlign:"right",fontWeight:900,fontSize:14}}>{money(totalCost)}</td><td style={td}/></tr></tfoot></table></div>
     </section>
 
