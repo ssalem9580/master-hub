@@ -357,15 +357,45 @@ Deployment evidence:
 - field-diagnostic-hub-live is a standalone deployment, while a newer/current Field Diagnostic implementation now exists inside MasterHub.
 - recovery-value-calculator is linked to the master-hub Git repository, but the current master-hub tree contains no recovery calculator source.
 
-### Recovery Value likely root-cause finding
+### Recovery Value recovery-source finding
 The Recovery Value Calculator public URL returns 404.
-Its Vercel project is linked to master-hub, but no Recovery Value Calculator source exists in current master-hub.
-This is consistent with a mislinked/orphaned deployment and source-of-truth loss or relocation.
+Its current Vercel project is linked to master-hub, but the Recovery source was not merged into current main.
+
+Recovered evidence:
+- surviving branch: codex/recovered-standalone-apps
+- recovery-source commit: 751a73b17bef47c47a2a0b9467560a197fef8f0f
+- exact path: standalone-apps/recovery-value-calculator/index.html
+- branch head: ea79f6c843be5b47f756d5389b798337b75aaa44
+- branch README states each standalone Vercel project should use its matching standalone-apps directory as Root Directory
+
+Interpretation:
+Recovery Value is not lost. It is recoverable source that was never canonicalized into main and whose current Vercel linkage/root configuration drifted.
 
 STATUS:
 - Standalone tool source ownership: INCOMPLETE
-- Recovery Value source: NOT FOUND in canonical repository
-- Destructive cleanup: NOT AUTHORIZED until recovery/source ownership is established
+- Recovery Value source: RECOVERED / NOT CANONICALIZED
+- Recovery repair should prefer restoring verified recovered source over rebuilding from memory
+- Destructive cleanup: NOT AUTHORIZED until source/backup ownership is established
+
+# 12B. GitHub Enforcement Reality
+
+Observed branches:
+- main
+- baseline/governance-control-1.0
+- audit/masterhub-reconstruction-reality-20260930
+- control/ai-idea-master-template-adoption
+- codex/recovered-standalone-apps
+
+GitHub reports protected: false for main and baseline/governance-control-1.0.
+Repository rulesets collection is empty.
+Branch-protection details could not be read through the current integration, but the branch listing itself reports no protection.
+
+Interpretation:
+- CONTROL-BASELINE-1.0 is frozen by documented policy and SHA reference, not by GitHub enforcement.
+- main can accept direct changes unless another external policy prevents them.
+- recovered standalone source branch is also unprotected.
+
+STATUS: GOVERNANCE ENFORCEMENT GAP
 
 # 13. Unknown / Needs Confirmation
 
@@ -377,7 +407,7 @@ STATUS:
 - Full interaction-level behavior beyond HTTP/render availability on current production.
 - Current mobile behavior of all routes.
 - Authentication/authorization expectations for each standalone tool.
-- Whether the Recovery Value Calculator has a recoverable source copy outside the current MasterHub repository.
+- Recovery source is confirmed on codex/recovered-standalone-apps; remaining question is whether that exact recovered version is owner-accepted/current enough to restore.
 - Whether the Recovery Value Calculator has a valid non-root route that should replace the broken configured URL.
 - Canonical source/backup location for NTE Quote, Billed Work Tracker, and Sam Hub.
 
@@ -398,7 +428,8 @@ STATUS:
 11. Verify every internal route interactively beyond HTTP/render availability.
 12. Verify all external registry URLs.
 13. Complete historical reconstruction and MVP acceptance audit.
-14. Only then propose cleanup/deletion of legacy Vercel projects.
+14. Establish GitHub enforcement for main/baseline after owner review (PR/status requirements and immutable/recoverable baseline strategy).
+15. Only then propose cleanup/deletion of legacy Vercel projects.
 
 ---
 
