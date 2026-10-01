@@ -226,3 +226,19 @@ SUPERSEDES: ISSUE-010 unresolved access-control boundary and RISK-010 uncertaint
 SUPERSEDED BY:
 REVIEW REQUIRED: YES only if future changes introduce server-side sensitive/personal data, restricted content, or a new access-control requirement.
 APPROVED BY: Project Owner
+
+
+## DEC-016
+DATE: 2026-09-30
+TITLE: Classify all field-service operational material as restricted by default
+STATUS: APPROVED
+QUESTION: How should MasterHub classify field-service diagnostic, repair, parts, procedural, and related operational material?
+DECISION: Treat all such material as RESTRICTED by default until the Project Owner explicitly reclassifies specific content as approved for public distribution.
+WHY: The Project Owner explicitly instructed that all field-service material be treated as restricted for now.
+ALTERNATIVES CONSIDERED: Keep current UNKNOWN classification; classify only selected files as restricted; treat existing public material as implicitly public.
+EVIDENCE: Project Owner instruction.
+AFFECTED AREAS: Field Diagnostic Hub, Field Resource Hub, Repair Packages, static diagnostic assets, imported parts/repair data, repository/public deployment boundary, data classification, AI handling.
+SUPERSEDES: ISSUE-005/related UNKNOWN distribution classification.
+SUPERSEDED BY:
+REVIEW REQUIRED: YES before any specific restricted material is reclassified as public.
+APPROVED BY: Project Owner
