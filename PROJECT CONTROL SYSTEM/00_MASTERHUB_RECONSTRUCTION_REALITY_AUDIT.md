@@ -336,8 +336,36 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 6. Historical project decisions remain incompletely reconstructed.
 7. Next.js security patch level is behind the current patched Active LTS release.
 8. Public access may conflict with the product's "private command center" positioning and with any restricted field-service content.
+9. Standalone live tools may not have recoverable canonical source in GitHub; several were deployed from CLI or have no Git metadata.
 
 ---
+
+# 12A. Standalone Tool Source Ownership / Recovery
+
+Current MasterHub repository tree contains no source directories for:
+- Recovery Value Calculator
+- NTE / Job Quote Calculator
+- Billed Work Tracker
+- Sam Hub
+
+Connected GitHub repository discovery found no separately installed repositories matching those tool names.
+
+Deployment evidence:
+- job-quote-calculator production was deployed from CLI rather than Git metadata.
+- sam-hub production was deployed from CLI.
+- billed-work-tracker-live production has no repository metadata in the observed deployment record.
+- field-diagnostic-hub-live is a standalone deployment, while a newer/current Field Diagnostic implementation now exists inside MasterHub.
+- recovery-value-calculator is linked to the master-hub Git repository, but the current master-hub tree contains no recovery calculator source.
+
+### Recovery Value likely root-cause finding
+The Recovery Value Calculator public URL returns 404.
+Its Vercel project is linked to master-hub, but no Recovery Value Calculator source exists in current master-hub.
+This is consistent with a mislinked/orphaned deployment and source-of-truth loss or relocation.
+
+STATUS:
+- Standalone tool source ownership: INCOMPLETE
+- Recovery Value source: NOT FOUND in canonical repository
+- Destructive cleanup: NOT AUTHORIZED until recovery/source ownership is established
 
 # 13. Unknown / Needs Confirmation
 
@@ -349,7 +377,9 @@ Evidence: canonical 06_CURRENT_STATE.md at audit start.
 - Full interaction-level behavior beyond HTTP/render availability on current production.
 - Current mobile behavior of all routes.
 - Authentication/authorization expectations for each standalone tool.
+- Whether the Recovery Value Calculator has a recoverable source copy outside the current MasterHub repository.
 - Whether the Recovery Value Calculator has a valid non-root route that should replace the broken configured URL.
+- Canonical source/backup location for NTE Quote, Billed Work Tracker, and Sam Hub.
 
 ---
 
