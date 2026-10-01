@@ -22,13 +22,25 @@ DECISION REQUIRED: YES for destructive/disconnect actions.
 DEPENDENCIES: Vercel project configuration.
 RESOLUTION:
 
-## ISSUE-003 — Supplied control prompt ends mid Definition of Done
+## ISSUE-003 — Supplied AI Idea Master Template is incomplete at end of Part 29
 TYPE: Product / Governance
 STATUS: OPEN
-DESCRIPTION: The supplied source text ends at "Required progression" in Part 15.
-WHY IT MATTERS: Missing continuation must not be invented.
-EVIDENCE: User-supplied text file.
-POSSIBLE SOLUTIONS: Continue with the provided material as canonical and add later content only when supplied/approved.
+DESCRIPTION: The latest supplied source supersedes the earlier truncated copy and now extends through PART 29 — SOURCE-OF-TRUTH OWNERSHIP, but ends after "Field definitions".
+WHY IT MATTERS: The missing remainder cannot be invented or silently reconstructed.
+EVIDENCE: 00_AI_IDEA_MASTER_TEMPLATE.md captured from the latest Project Owner-supplied source.
+POSSIBLE SOLUTIONS: Adopt only the supplied content; append the missing remainder later if the Project Owner supplies or explicitly approves it.
 DECISION REQUIRED: NO
 DEPENDENCIES: Additional owner-provided source if desired.
-RESOLUTION:
+RESOLUTION: Earlier Part-15 truncation concern is superseded; current incompleteness is at Part 29.
+
+
+## ISSUE-004 — Defect identifier convention conflict
+TYPE: Product / Governance
+STATUS: RESOLVED
+DESCRIPTION: The AI Idea Master Template specifies BUG-### defect IDs, while the established Master Hub Data Dictionary and Defect Register use DEF-###.
+WHY IT MATTERS: Silent renaming would break historical traceability and alter an established project convention.
+EVIDENCE: 00_AI_IDEA_MASTER_TEMPLATE.md; 11_DEFECT_REGISTER.md; 15_DATA_DICTIONARY.md; DEC-006.
+POSSIBLE SOLUTIONS: Preserve DEF-### as a Master Hub local convention, or explicitly authorize BUG-### for future records with a compatibility rule.
+DECISION REQUIRED: NO
+DEPENDENCIES:
+RESOLUTION: Project Owner approved permanent retention of DEF-### as the Master Hub canonical defect-ID convention. Adopt template defect schema without renaming historical IDs.

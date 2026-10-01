@@ -16,3 +16,25 @@ Private-data retention policy: UNKNOWN / NEEDS CONFIRMATION per tool/integration
 
 ## Security Review Status
 Foundation established; full dependency/secret/security audit is OPEN.
+
+
+## Canonical Security and Privacy Coverage
+Document, where applicable:
+- authentication
+- authorization
+- user roles
+- permission boundaries
+- sensitive data classes
+- secrets handling
+- environment variables
+- encryption expectations
+- data retention
+- deletion behavior
+- audit/logging behavior
+- external AI-provider exposure
+- third-party data sharing
+- compliance obligations
+- incident response considerations
+
+Never expose secrets or credentials in documentation intended for broad distribution.
+Unknown controls remain UNKNOWN / NEEDS CONFIRMATION until verified.

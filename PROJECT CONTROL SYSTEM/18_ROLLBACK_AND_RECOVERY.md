@@ -22,3 +22,20 @@ Last observed READY Master Hub deployment before this control-system change:
 4. Retest.
 5. Update defect, changelog, current state, and checkpoint.
 6. Obtain owner acceptance if release boundary changed.
+
+
+## Canonical Rollback Coverage
+Before production release, identify as applicable:
+- previous stable release
+- source rollback
+- deployment rollback
+- configuration rollback
+- database rollback
+- migration limitations
+- backup location
+- restore procedure
+- recovery testing
+- recovery dependencies
+
+Rule:
+Never perform destructive production changes without a recovery strategy.
