@@ -260,3 +260,31 @@ REQUIRED GUARDRAILS:
 
 NEXT SECURITY DECISION:
 Classify public field-service diagnostic/repair material and determine whether any of it must be separated from the public repository/deployment.
+
+
+## Restricted Field-Service Classification — DEC-016
+STATUS: APPROVED / ACTIVE
+DEFAULT CLASSIFICATION: RESTRICTED
+
+IN SCOPE:
+- field diagnostic procedures
+- repair procedures and repair packages
+- parts and part-number-oriented operational data
+- equipment-specific troubleshooting
+- harness/terminal/component references
+- field-service decision trees
+- field-resource operational documentation
+- related imported source files and derived operational guidance
+
+RULES:
+- Treat as restricted unless a specific item is explicitly reclassified by the Project Owner.
+- Do not newly publish restricted material to public routes, public repositories, or external AI providers.
+- Do not assume previously public material is approved for continued public distribution.
+- Preserve evidence/recoverability before removal or migration.
+- No public-history rewrite or repository-visibility change occurs without an explicit containment/recovery plan.
+
+CURRENT CONFLICT:
+Restricted material is currently present in public source/public routes.
+
+NEXT SECURITY ACTION:
+Prepare and execute a controlled restricted-content quarantine plan after the required repository/storage decision.
