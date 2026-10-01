@@ -4,8 +4,8 @@ DATE: 2026-09-30
 
 CURRENT PHASE: PHASE 0 — PROJECT CONTROL, while an operational production app already exists.
 LAST COMPLETED STEP: Production deployment at commit 1beccb95eb5caa5769f26c4a6bc85ec0cb43752a reached Vercel READY.
-CURRENT STEP: Establish canonical governance and traceability around the existing system.
-NEXT CONTROLLED ACTION: Reconstruct older approved decisions/features into registers, then validate current routes against requirements.
+CURRENT STEP: Controlled adoption and reconciliation of the AI Idea Master Template into the existing Master Hub governance system.
+NEXT CONTROLLED ACTION: Perform section-by-section Existing → Missing → Conflict → Adopt → Needs Owner Decision reconciliation; do not modify product code or main.
 
 PRODUCT IDENTITY: Master Hub command center / application registry / project operating system.
 CURRENT MVP: Existing hub + key internal tools + Project Control System.
@@ -69,3 +69,13 @@ OPEN DECISIONS:
 - Which historical standalone deployments remain canonical versus legacy.
 - Full MVP acceptance boundary beyond already approved components.
 - Backup retention policy and final baseline naming/version policy.
+
+
+## Controlled Template Adoption
+STATUS: IN PROGRESS
+BRANCH: control/ai-idea-master-template-adoption
+BASELINE: main @ ef13e706cfa678fc519802298944a5c45b12d7d2
+PRODUCT DEVELOPMENT AUTHORIZED BY THIS STEP: NO
+MAIN-BRANCH MERGE AUTHORIZED: NO
+SOURCE: 00_AI_IDEA_MASTER_TEMPLATE.md
+PLAN: 00_TEMPLATE_ADOPTION_PLAN.md
