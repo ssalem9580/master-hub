@@ -153,3 +153,7 @@ Continue evidence gathering and owner-decision preparation. No destructive clean
 - Canonical Vercel runtime error clusters: none observed in selected 7-day window.
 - Security dependency finding: Next.js 16.3.4 is below current security baseline 16.3.8.
 - Access boundary finding: canonical MasterHub is publicly reachable with no application auth layer.
+
+- Standalone source ownership: INCOMPLETE.
+- Recovery Value Calculator source: NOT FOUND in canonical repo; Vercel project linkage appears inconsistent with repository tree.
+- Do not retire standalone deployments until source/backup ownership is recovered.
