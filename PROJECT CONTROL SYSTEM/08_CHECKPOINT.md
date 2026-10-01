@@ -209,6 +209,7 @@ MERGE COMMIT: f81fd436a8df50ac0da93ec3c93ec26d09e0badf
 POST-MERGE CI: 36811990043 — PASS
 PRODUCTION DEPLOYMENT: dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 — READY
 CANONICAL ALIAS: master-hub-sigma.vercel.app
+FROZEN RELEASE REFERENCE: baseline/security-quality-1.0
 
 VERIFIED:
 - Next.js 16.3.8 is active in canonical source.
