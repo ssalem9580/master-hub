@@ -357,7 +357,7 @@ NEXT:
 4. Checkpoint finalization approved by Project Owner on 2026-10-01. Open implementation/test items remain tracked separately and are not implicitly finalized.
 
 ## BW-LEAD-SCOPE-1.0 Owner Finalization Checkpoint — 2026-10-02
-STATUS: OWNER FINALIZED / SOURCE+AUTOMATED+READY-PREVIEW VERIFIED / CANONICAL PRODUCTION PROMOTION BLOCKED
+STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 DECISION: DEC-018
 REQUIREMENT: REQ-019 with REQ-018 preserved
 DEFECT: DEF-011
@@ -368,5 +368,5 @@ PR CI: `36981871706` PASS
 POST-MERGE CI: `36981972545` PASS
 READY PREVIEW: `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP`
 LIVE PREVIEW VERIFIED: `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` HTTP 200; dashboard loads centralized isolation script.
-PRODUCTION BLOCKER: Vercel `build-rate-limit`; existing production remains on prior commit. A no-rebuild promotion was attempted through GitHub Actions but no `VERCEL_TOKEN` secret is configured, so no production change occurred.
-RULE: Owner acceptance/finalized behavior is complete. Production must remain labeled PENDING/BLOCKED until canonical alias verification passes.
+PRODUCTION: `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` READY at `b6d075ed9656d52bec59059b3cf8e076933d8f7f`. Canonical `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` verified HTTP 200; runtime errors none in the selected post-release window.
+RULE: `BW-LEAD-SCOPE-1.0` is fully production verified and finalized. Future behavior changes require a new controlled change.

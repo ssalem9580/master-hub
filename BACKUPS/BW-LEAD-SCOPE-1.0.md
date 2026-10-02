@@ -16,5 +16,10 @@ STATUS: RECORDED
 ## Recovery Principle
 If the direct dashboard loader causes a regression, revert only the loader/API/test activation change while preserving `SCOPE-ISOLATION-1.0` and all Scope Templates, imported/reconciled records, lead associations, localStorage data, and Supabase data. No data migration was introduced.
 
-## Production Note
-The owner-finalized behavior is not yet active on the canonical production alias because Vercel production promotion is blocked by the account build-rate limit.
+## Production Verification
+- Deployment: `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` — READY
+- Commit: `b6d075ed9656d52bec59059b3cf8e076933d8f7f`
+- Canonical alias verification: PASS
+- `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates`: HTTP 200
+- Final main CI: `36983083671` PASS
+- Runtime error scan: clean

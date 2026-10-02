@@ -1,7 +1,7 @@
 # BW-LEAD-SCOPE-1.0
 
 DATE: 2026-10-02
-STATUS: OWNER FINALIZED / SOURCE+AUTOMATED+READY-PREVIEW VERIFIED / CANONICAL PRODUCTION PROMOTION BLOCKED
+STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 PROJECT: Master Hub
 
 ## Purpose
@@ -30,7 +30,17 @@ The direct BW dashboard and dedicated Scope Templates surface consume the same c
 No scope-template migration, imported-work-order rewrite, reconciled-data rewrite, lead-association migration, localStorage schema change, Supabase schema change, or Supabase operational-row modification was introduced.
 
 ## Production Status
-Canonical production is NOT yet verified on this release. Vercel rejected the merge deployment and one controlled redeploy trigger because of the account build-rate limit. A no-rebuild promotion attempt could not authenticate because the GitHub repository has no `VERCEL_TOKEN` Actions secret. No false deployment claim is made.
+- Deployment: `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps`
+- Commit: `b6d075ed9656d52bec59059b3cf8e076933d8f7f`
+- Target: production
+- State: READY
+- Canonical `/api/scope-isolation`: HTTP 200
+- Canonical `/bw-dashboard.html`: HTTP 200 with centralized loader present
+- Canonical `/scope-templates`: HTTP 200
+- Post-release runtime error scan: clean
+- Final main CI `36983083671`: PASS
+
+Production verification is complete.
 
 ## Relationship to SCOPE-ISOLATION-1.0
 This release does not replace, reopen, or downgrade `SCOPE-ISOLATION-1.0`; it finalizes activation of that same engine inside the direct BW Lead surface.

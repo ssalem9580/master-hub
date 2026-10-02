@@ -42,10 +42,10 @@ Built is not deployed. Deployed is not verified. Verified is not finalized until
 | QUEUE-009 | Project Operations & Queue control layer | Project Control | HIGH | FINALIZED | OWNER ACCEPTED 2026-10-01 | None | PROJECT-OPS-1.0 | Maintain as canonical operational system | FINALIZED 2026-10-01 |
 | QUEUE-010 | Strict Device → SubDevice → Scope isolation | Scope Templates | HIGH | FINALIZED | OWNER ACCEPTED | None | `de9d82b` strict enforcement; `d1b857d` regression; CI `36949404777` PASS; production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf`; live strict JS artifact verified | Maintain regression coverage; future behavior changes require new queue item | FINALIZED — `SCOPE-ISOLATION-1.0` |
 | QUEUE-011 | Controlled reconstruction / canonical truth pass | Project Control | HIGH | FINALIZED | OWNER ACCEPTED | None | Commit `cf1c79d`; reconciled Current State / queue; Wave-1 CI PASS; source-bound production verified | Maintain canonical truth during later remediation waves | FINALIZED |
-| QUEUE-012 | Finalize Scope inside direct BW Lead tool | Billed Work / Scope Templates | HIGH | WAITING / BLOCKED | OWNER FINALIZED / SOURCE+PREVIEW VERIFIED | Canonical production promotion blocked by Vercel account build-rate limit | DEC-018; REQ-019; DEF-011; PR #15; CI `36981871706` / `36981972545`; preview `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP` | Promote the already-verified artifact when Vercel production capacity is available, then verify canonical `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` | OWNER FINALIZED / PRODUCTION ACTIVATION PENDING — `BW-LEAD-SCOPE-1.0` |
+| QUEUE-012 | Finalize Scope inside direct BW Lead tool | Billed Work / Scope Templates | HIGH | FINALIZED | OWNER ACCEPTED / PRODUCTION VERIFIED | None for this release | DEC-018; REQ-019; DEF-011 CLOSED; PR #15; CI `36981871706` / `36981972545` / `36983083671`; production `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` | Maintain centralized isolation regression coverage; future behavior changes require a new queue item | VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED — `BW-LEAD-SCOPE-1.0` |
 
 ## Bugs & Testing
-- BW Lead direct Scope surface: owner-finalized as `BW-LEAD-SCOPE-1.0`; source/CI/READY-preview verified; canonical production promotion blocked by Vercel build-rate limit.
+- BW Lead direct Scope surface: `BW-LEAD-SCOPE-1.0` VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED; direct dashboard and dedicated Scope Templates both use the centralized isolation engine.
 - DEF-009 — restricted field-service public exposure: `OPEN / CRITICAL`; private preservation store is verified, but restricted source-byte/data preservation is not yet complete and physical containment has not occurred.
 - DEF-010 — Repair Package Part # / cost auto-fill: `VERIFIED`. Owner finalization remains separate.
 - Strict Device → SubDevice → Scope isolation: `VERIFIED / FINALIZED`; automated regression PASS and strict enforcement is present in verified production.
@@ -99,7 +99,7 @@ Finalized/accepted releases preserved:
 - SECURITY-BOUNDARY-1.0 classification baseline (containment still open)
 - PROJECT-OPS-1.0
 - SCOPE-ISOLATION-1.0
-- BW-LEAD-SCOPE-1.0 — owner-finalized behavior; production activation pending due Vercel build-rate limit
+- BW-LEAD-SCOPE-1.0 — VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 - SECURITY-CONTAINMENT-PREP-1.0
 - VERCEL-FANOUT-AUDIT-1.0
 - STANDALONE-SOURCE-OWNERSHIP-1.0
