@@ -1,149 +1,105 @@
 # 07 — Open Issues
 
+DATE: 2026-10-02
+STATUS: RECONCILED AFTER ALL-ISSUES REPAIR PASS
+
+Historical issue IDs are preserved. Resolved items remain in this register for traceability.
+
 ## ISSUE-001 — Historical reconstruction incomplete
 TYPE: Product / Governance
-STATUS: OPEN
-DESCRIPTION: Existing conversation/project history contains more decisions than are currently recorded in the canonical registers.
-WHY IT MATTERS: Traceability is incomplete until reconstructed.
-EVIDENCE: Existing repository history predates this control system.
-POSSIBLE SOLUTIONS: Reconstruct from commits, source files, and explicit owner instructions in controlled batches.
+STATUS: OPEN / PARTIAL
+DESCRIPTION: Existing repository/project history predates the canonical control system, so some historical decisions and requirements may still be absent from normalized registers.
+EVIDENCE: Reconstruction evidence ledger and repository history.
+REPAIR TO DATE: Controlled reconstruction passes completed; current operational truth is source-bound and reconciled.
+REMAINING: Continue evidence-backed reconstruction only when older decisions materially affect current work. Unknowns remain `UNKNOWN / NEEDS CONFIRMATION`.
 DECISION REQUIRED: NO
-DEPENDENCIES: Repository history and source evidence.
-RESOLUTION:
 
 ## ISSUE-002 — Multiple related Vercel projects
 TYPE: Technical
-STATUS: CONFIRMED / OWNER CLEANUP DECISION PENDING
-DESCRIPTION: Nine Vercel projects exist for Master Hub and related standalone apps, including overlapping master-hub, field-diagnostic, and job-quote variants.
-WHY IT MATTERS: Can cause confusing ownership, aliases, and deployment state.
-EVIDENCE: Connected Vercel team inventory captured in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
-POSSIBLE SOLUTIONS: Define canonical deployment per app and disconnect/retire unintended duplicate project links.
-DECISION REQUIRED: YES for destructive/disconnect actions.
-DEPENDENCIES: Vercel project configuration.
-RESOLUTION:
+STATUS: OPEN / AUDIT FINALIZED / CLEANUP GATED
+DESCRIPTION: Multiple Vercel projects remain related to Master Hub and several standalone tools, including cross-linked Git deployments.
+EVIDENCE: `33_VERCEL_BUILD_FANOUT_AUDIT.md`; Vercel project/deployment inventory.
+REPAIR TO DATE: Canonical project/alias and source ownership for Master Hub, Recovery Value, and Field Diagnostic are established; fan-out audit is finalized.
+REMAINING: Actual Git-integration disconnect/retirement remains separately approval-gated and is not exposed by the current Vercel connector.
+DECISION REQUIRED: YES for disconnect/retire actions.
 
 ## ISSUE-003 — Supplied AI Idea Master Template is incomplete at end of Part 29
 TYPE: Product / Governance
-STATUS: OPEN
-DESCRIPTION: The latest supplied source supersedes the earlier truncated copy and now extends through PART 29 — SOURCE-OF-TRUTH OWNERSHIP, but ends after "Field definitions".
-WHY IT MATTERS: The missing remainder cannot be invented or silently reconstructed.
-EVIDENCE: 00_AI_IDEA_MASTER_TEMPLATE.md captured from the latest Project Owner-supplied source.
-POSSIBLE SOLUTIONS: Adopt only the supplied content; append the missing remainder later if the Project Owner supplies or explicitly approves it.
+STATUS: OPEN / SOURCE BLOCKED
+DESCRIPTION: The supplied source ends in PART 29 after `Field definitions`.
+EVIDENCE: `00_AI_IDEA_MASTER_TEMPLATE.md`.
+REPAIR TO DATE: Incompleteness is explicitly preserved and no continuation has been fabricated.
+REMAINING: Append only if the Project Owner supplies or explicitly approves missing source content.
 DECISION REQUIRED: NO
-DEPENDENCIES: Additional owner-provided source if desired.
-RESOLUTION: Earlier Part-15 truncation concern is superseded; current incompleteness is at Part 29.
-
 
 ## ISSUE-004 — Defect identifier convention conflict
 TYPE: Product / Governance
 STATUS: RESOLVED
-DESCRIPTION: The AI Idea Master Template specifies BUG-### defect IDs, while the established Master Hub Data Dictionary and Defect Register use DEF-###.
-WHY IT MATTERS: Silent renaming would break historical traceability and alter an established project convention.
-EVIDENCE: 00_AI_IDEA_MASTER_TEMPLATE.md; 11_DEFECT_REGISTER.md; 15_DATA_DICTIONARY.md; DEC-006.
-POSSIBLE SOLUTIONS: Preserve DEF-### as a Master Hub local convention, or explicitly authorize BUG-### for future records with a compatibility rule.
-DECISION REQUIRED: NO
-DEPENDENCIES:
-RESOLUTION: Project Owner approved permanent retention of DEF-### as the Master Hub canonical defect-ID convention. Adopt template defect schema without renaming historical IDs.
-
+DESCRIPTION: Generic template uses BUG-### while Master Hub historically uses DEF-###.
+RESOLUTION: Owner approved permanent DEF-### convention; historical IDs preserved.
 
 ## ISSUE-005 — Restricted field-service material is present in public repository/deployment
 TYPE: Security / Data Governance
-STATUS: OPEN — CRITICAL CONTAINMENT REQUIRED
-DESCRIPTION: Under DEC-016, all field-service diagnostic, repair, parts, procedural, and related operational material is RESTRICTED by default. The current GitHub repository and multiple public MasterHub routes/assets contain this material.
-WHY IT MATTERS: The approved distribution boundary now conflicts with the current public source/deployment boundary.
-EVIDENCE: DEC-016; public repository visibility; public route verification; source inspection in 00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md.
-POSSIBLE SOLUTIONS: Move restricted content into a private canonical store/repository; remove it from public HEAD/deployment; assess public Git history remediation; preserve recoverable backups; maintain public MasterHub shell without restricted content.
-DECISION REQUIRED: YES for repository visibility/history rewrite or private-repository migration; immediate classification itself is approved.
-DEPENDENCIES: Restricted-content inventory and recovery plan.
-RESOLUTION: Classification resolved by DEC-016. Containment/remediation remains open.
+STATUS: OPEN — CRITICAL / PRESERVATION ADVANCED
+DESCRIPTION: Field-service diagnostics, repair, parts, scope, billed-work and related operational material classified RESTRICTED remains publicly exposed.
+EVIDENCE: DEC-016; DEF-009; exposure inventory; records 32, 35 and 39.
+REPAIR TO DATE: Private Drive preservation store verified owner-only; current restricted source lineage refreshed; exact in-project Supabase recovery snapshots created and fingerprint-verified; recovery metadata stored privately; public-source secret guard added.
+REMAINING: Independent exact-byte restricted-source archive, independent database export/recovery verification, remaining standalone-source preservation, then explicit approval for public removal. Git-history remediation remains a separate gate.
+DECISION REQUIRED: YES for destructive containment/history/visibility changes.
 
 ## ISSUE-006 — CI does not execute tests or lint
 TYPE: Technical / Quality
 STATUS: RESOLVED
-DESCRIPTION: GitHub Actions builds the app but does not run npm test or npm run lint.
-WHY IT MATTERS: A green CI build can coexist with stale or failing tests and lint defects.
-EVIDENCE: .github/workflows/master-hub-ci.yml.
-POSSIBLE SOLUTIONS: Repair current tests, then add test and lint gates to CI.
-DECISION REQUIRED: NO for proposal; implementation follows normal change control.
-DEPENDENCIES: Current test-suite normalization.
-RESOLUTION: PR #2 merged. Canonical main now requires lint, Vitest, and build. Post-merge GitHub Actions run 36811990043 passed all gates.
+RESOLUTION: Canonical CI runs lint, Vitest and build; verified releases use those gates.
 
 ## ISSUE-007 — Project Control Center is not source-bound
 TYPE: Product / Governance
-STATUS: OPEN
-DESCRIPTION: /project-control renders static control-state text instead of reading or generating from canonical project-control records.
-WHY IT MATTERS: The visible governance UI can drift from the repository source of truth.
-EVIDENCE: master-hub-app/src/app/project-control/page.tsx and audit comparison.
-POSSIBLE SOLUTIONS: Generate a machine-readable governance snapshot during build or load a controlled generated status artifact.
-DECISION REQUIRED: NO for analysis; architecture choice required before implementation.
-DEPENDENCIES: Governance source ownership and build architecture.
-RESOLUTION:
+STATUS: RESOLVED — PROJECT-CONTROL-LIVE-TRUTH-1.0
+DESCRIPTION: Historical UI duplicated project status and could drift.
+RESOLUTION: `/project-control` now discovers canonical control records at build time and separately reports repository head, served revision and last verified production evidence. Release is owner-finalized and production-verified.
 
 ## ISSUE-008 — Recovery Value Calculator registry target is broken
 TYPE: Product / Integration
-STATUS: OPEN
-DESCRIPTION: MasterHub labels Recovery Value Calculator as Live, but the configured public root returns HTTP 404.
-WHY IT MATTERS: Registry status is incorrect and the tool is unavailable from MasterHub as configured.
-EVIDENCE: Live HTTP verification during reconstruction audit.
-POSSIBLE SOLUTIONS: Identify correct route/alias, repair deployment, or change registry status until restored.
-DECISION REQUIRED: NO to correct false status; deployment repair may require implementation.
-DEPENDENCIES: Recovery Value Calculator deployment ownership.
-RESOLUTION:
-
+STATUS: OPEN / SOURCE VALIDATED
+DESCRIPTION: Configured public root remains unavailable while a validated recovered source serves successfully at its nested recovered path.
+EVIDENCE: `34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`; recovered commit `751a73b17bef47c47a2a0b9467560a197fef8f0f`; READY recovered deployment; fresh root 404 / nested-path 200 verification.
+REPAIR TO DATE: Recovered source and matching Vercel project ownership validated/finalized.
+REMAINING: Canonical private preservation and controlled root/deployment restoration; production promotion remains approval-gated because recovered content includes restricted field-service knowledge.
+DECISION REQUIRED: YES before production promotion/configuration that changes the canonical target.
 
 ## ISSUE-009 — Next.js security patch level is outdated
 TYPE: Security / Dependency
 STATUS: RESOLVED
-DESCRIPTION: MasterHub uses Next.js 16.3.4. Official Next.js security guidance on 2026-09-30 recommends 16.3.8, and the 2026-09-22 critical upstream security fix required at least 16.3.6.
-WHY IT MATTERS: The application is below the current patched security baseline.
-EVIDENCE: master-hub-app/package.json; official Next.js September 2026 security guidance.
-POSSIBLE SOLUTIONS: Upgrade Next.js to 16.3.8, run build/test/lint and route verification, then deploy.
-DECISION REQUIRED: NO for patch proposal; implementation follows controlled change process.
-DEPENDENCIES: Test-suite repair/verification recommended before release.
-RESOLUTION: Next.js and eslint-config-next 16.3.8 are canonical on main. PR #2 merged as f81fd436a8df50ac0da93ec3c93ec26d09e0badf; post-merge CI 36811990043 passed; production deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 reached READY.
+RESOLUTION: Next.js and eslint-config-next 16.3.8 released; CI and production verification passed.
 
 ## ISSUE-010 — "Private" positioning is not backed by application access control
 TYPE: Security / Product Boundary
-STATUS: RESOLVED
-DESCRIPTION: Canonical MasterHub production routes are publicly reachable without login, and repository inspection found no application auth middleware/proxy/session layer.
-WHY IT MATTERS: The access boundary needed an explicit product definition so public reachability would not be confused with a security defect.
-EVIDENCE: public HTTP 200 on canonical routes; repository tree/package inspection; DEC-015.
-POSSIBLE SOLUTIONS: Clarify product privacy requirement; if access control is required, add authentication/authorization and separate public/private assets.
-DECISION REQUIRED: NO
-DEPENDENCIES: Field-service content classification remains a separate issue.
-RESOLUTION: Project Owner explicitly approved no login. MasterHub remains publicly reachable. "Private" means private-use/local-data privacy, not access-controlled visibility. Sensitive personal values and restricted content remain subject to separate data-boundary rules.
-
+STATUS: RESOLVED / ACCEPTED
+RESOLUTION: DEC-015 explicitly defines public/no-login Master Hub access as intended. Restricted/sensitive data boundaries remain separate requirements.
 
 ## ISSUE-011 — Standalone tool source ownership and recovery are incomplete
 TYPE: Architecture / Recovery
-STATUS: OPEN — HIGH PRIORITY
-DESCRIPTION: Active registry tools including NTE Quote, Billed Work Tracker, Recovery Value Calculator, and Sam Hub do not have source code in the current MasterHub repository, and no matching installed GitHub repositories were found by name. Some observed Vercel deployments were CLI-deployed or lacked Git source metadata.
-WHY IT MATTERS: A live deployment without a known canonical source/backup cannot be safely maintained, rebuilt, migrated, or recovered.
-EVIDENCE: MasterHub tree inventory, installed-repository search, Vercel deployment metadata.
-POSSIBLE SOLUTIONS: Locate original source archives/repositories; create canonical repositories/backups; document owner/version/deployment for each standalone tool.
-DECISION REQUIRED: YES before deleting/retiring deployments if source is not recovered.
-DEPENDENCIES: Historical source recovery.
-RESOLUTION:
+STATUS: OPEN — PARTIAL
+DESCRIPTION: Some standalone Vercel apps still lack verified canonical source repositories/backups.
+EVIDENCE: `34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`; `38_INTEGRATION_AND_DATA_SOURCE_REGISTER.md`; Vercel deployment metadata.
+REPAIR TO DATE: Recovery Value and Field Diagnostic ownership finalized; active Billed Work source is integrated in Master Hub; NTE Quote, standalone Billed Work deployment history, and Sam Hub were inventoried, but their observed Vercel deployments expose no Git source metadata.
+REMAINING: Locate/archive original source where available before any retirement.
+DECISION REQUIRED: YES before deleting/retiring unrecovered deployments.
 
 ## ISSUE-012 — Recovery Value Calculator recovered source is stranded outside main
 TYPE: Product / Deployment / Recovery
-STATUS: OPEN — HIGH PRIORITY
-DESCRIPTION: The configured public URL returns HTTP 404. Recovery source exists on codex/recovered-standalone-apps at commit 751a73b17bef47c47a2a0b9467560a197fef8f0f under standalone-apps/recovery-value-calculator/index.html, but that source is not present in current main. The branch README documents the standalone Vercel Root Directory mapping.
-WHY IT MATTERS: The tool is recoverable, but current canonical/deployment linkage does not use the recovered source.
-EVIDENCE: Recovery branch, exact source commit/path, Vercel history, live HTTP 404.
-POSSIBLE SOLUTIONS: Validate recovered source, copy/cherry-pick only the standalone recovery directory into a controlled current branch, configure the Vercel recovery project Root Directory to that path, verify preview, then promote after approval.
-DECISION REQUIRED: YES before production Vercel configuration/promotion.
-DEPENDENCIES: Recovered-source validation.
-RESOLUTION:
-
+STATUS: OPEN — CONTROLLED RESTORE PENDING
+DESCRIPTION: Validated recovered source remains outside current public `main`, intentionally avoiding new public duplication while restricted-data containment is open.
+EVIDENCE: recovered commit/path and `34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`.
+REPAIR TO DATE: Exact recovery source/project mapping validated; nested recovered artifact returns HTTP 200.
+REMAINING: Preserve source privately/canonically, verify calculator workflow, then request production-promotion approval.
+DECISION REQUIRED: YES before production promotion.
 
 ## ISSUE-013 — Canonical branches are not GitHub-protected
 TYPE: Governance / Repository Control
-STATUS: OPEN — HIGH PRIORITY
-DESCRIPTION: GitHub reports protected=false for main and baseline/governance-control-1.0, and no repository rulesets were returned.
-WHY IT MATTERS: The documented PR/change-control process and frozen baseline are not technically enforced; direct mutation remains possible.
-EVIDENCE: GitHub branch inventory and ruleset query.
-POSSIBLE SOLUTIONS: Add a repository ruleset/branch protection requiring PR review/status checks for main; protect or replace the baseline branch with a controlled immutable release/tag strategy.
-DECISION REQUIRED: YES because enforcement changes repository workflow.
-DEPENDENCIES: Owner preference for branch protection/merge workflow.
-RESOLUTION:
+STATUS: OPEN — BLOCKED BY ADMIN CAPABILITY / OWNER WORKFLOW DECISION
+DESCRIPTION: GitHub ruleset inventory remains empty; documented PR/change control is not technically enforced.
+EVIDENCE: current GitHub rulesets query returned `[]`.
+REPAIR TO DATE: Exact release SHAs and recovery records are preserved; CI gates exist.
+REMAINING: Enable a ruleset requiring appropriate CI/PR controls when repository administration capability and owner workflow approval are available.
+DECISION REQUIRED: YES
