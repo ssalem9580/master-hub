@@ -1,7 +1,7 @@
 # 40 — All Issues Repair Pass
 
 DATE: 2026-10-02
-STATUS: TESTING / SAFE REPAIRS + RUNTIME HEALTH BUILT / APPROVAL-GATED AND SOURCE-BLOCKED ITEMS REMAIN OPEN
+STATUS: READY FOR REVIEW / SAFE REPAIRS PRODUCTION VERIFIED / APPROVAL-GATED AND SOURCE-BLOCKED ITEMS REMAIN OPEN
 VERSION: ALL-ISSUES-REPAIR-RC1
 AUTHORITY: Project Owner instruction `repair all issues`
 RELATED: QUEUE-013
@@ -24,15 +24,18 @@ Repair every currently identified issue that can be repaired safely with availab
 ### Security prevention
 - Added `master-hub-app/scripts/check-public-source-secrets.mjs`.
 - Added `.github/workflows/public-source-safety.yml` to scan public application source on push/PR for high-risk secret patterns.
-- Public Source Safety run `36985345296` completed SUCCESS on runtime-health source `1cfb14792c6bce7bf6133d9f9e6bb2d58ace6041`.
+- Public Source Safety passed on the repair/runtime-health source and the verification-state reconciliation.
 - This is a prevention layer only and does not falsely declare existing restricted operational exposure resolved.
 
 ### Runtime workspace health
 - Added `master-hub-app/src/app/api/hub-health/route.ts` with fixed workspace targets, no-store checks and bounded timeouts.
 - Updated the Master Hub directory/dashboard to merge runtime Live/Offline results into workspace status, grouping and live counts.
 - Changed Recovery Value fallback from false `Live` to `Offline`, matching its known root 404.
-- Master Hub CI run `36985345154` completed SUCCESS on source commit `1cfb14792c6bce7bf6133d9f9e6bb2d58ace6041`.
-- Current production still returns 404 for `/api/hub-health`, confirming the runtime-health source is not deployed yet. Vercel rejected the newer `master-hub`, `field-diagnostic-hub`, and `recovery-value-calculator` builds at the deployment-rate limit.
+- Master Hub CI `36985345154` and Public Source Safety `36985345296` completed SUCCESS on runtime-health source `1cfb14792c6bce7bf6133d9f9e6bb2d58ace6041`.
+- Reconciliation source `cfd122784b6f87fd381aba9cbff1eca546ebce08` also passed lint/test/build and Public Source Safety.
+- Canonical production deployment `dpl_8j889ueH7LAqQqU5TFQEef68uQLR` reached READY at `cfd122784b6f87fd381aba9cbff1eca546ebce08`.
+- Canonical `/api/hub-health` returned HTTP 200.
+- Health verification returned Live/200 for Project Control, Field Diagnostic, Scope Templates, Finances, NTE Exceed/Quote, Billed Work Tracker, Private Client, Illinois Locksmith Exam Prep and Sam Hub; Recovery Value returned Offline/404.
 
 ### Billed Work / Scope recovery
 Created a non-destructive Supabase recovery layer before any physical containment:
@@ -55,10 +58,11 @@ A metadata-only recovery checkpoint was stored in the owner-only Drive folder `M
 - Fresh GitHub ruleset inventory returned `[]`.
 - Branch-protection debt remains open because current connected GitHub capability does not expose an admin ruleset-write action and owner workflow impact remains approval-sensitive.
 
-## Current production vs source
-- Canonical production: `dpl_21gm6tzoRrSibaVgUm14yF7Xcf5d` READY at `5cbf758430d7b4ab5b15af210e6c698cd0e20e8f`.
-- Current runtime-health repair source is ahead of production.
-- Do not describe `/api/hub-health` or runtime directory health as live until a READY production deployment includes that source and is verified.
+## Current production evidence
+- Canonical deployment: `dpl_8j889ueH7LAqQqU5TFQEef68uQLR` — READY.
+- Verified deployed commit: `cfd122784b6f87fd381aba9cbff1eca546ebce08`.
+- Runtime health: HTTP 200 and expected workspace classification.
+- Project Control / Scope / BW Lead finalized production behavior remains preserved.
 
 ## Intentionally not performed
 This pass does not silently perform any of the following:
@@ -76,23 +80,18 @@ This pass does not silently perform any of the following:
 2. **Recovery Value / DEF-004:** root is still broken; recovered source is restricted and production restoration/configuration remains separately gated.
 3. **Standalone source ownership:** NTE Quote, standalone Billed Work and Sam Hub original source repositories/backups are still unknown.
 4. **Branch protection:** ruleset write requires repository admin capability not exposed by current connector.
-5. **Runtime workspace health:** source and CI verification are complete, but production verification is blocked by Vercel deployment quota.
-6. **Missing supplied template tail:** cannot be reconstructed without source evidence.
-7. **Mixed legacy UI architecture:** remains managed maintenance debt; no behavior-risking rewrite is justified solely to close the label.
+5. **Missing supplied template tail:** cannot be reconstructed without source evidence.
+6. **Mixed legacy UI architecture:** remains managed maintenance debt; no behavior-risking rewrite is justified solely to close the label.
 
 ## Verification evidence
-- Safe repair head before runtime health: Master Hub CI `36985034112` SUCCESS; Public Source Safety `36985034195` SUCCESS.
+- Safe repair pre-health head: Master Hub CI `36985034112` SUCCESS; Public Source Safety `36985034195` SUCCESS.
 - Runtime-health source: Master Hub CI `36985345154` SUCCESS; Public Source Safety `36985345296` SUCCESS.
-- Canonical production remains READY but predates runtime health.
-- Vercel status on runtime-health source: rate-limited for all three linked Vercel projects, not a code/build failure.
+- Verification-state reconciliation: Master Hub CI run `37056562881` passed install/lint/test/build; Public Source Safety `37056562820` SUCCESS.
+- Canonical production `dpl_8j889ueH7LAqQqU5TFQEef68uQLR` READY at `cfd122784b6f87fd381aba9cbff1eca546ebce08`.
+- `/api/hub-health` canonical response: HTTP 200; known broken Recovery Value target truthfully surfaced Offline/404.
 
-## Final verification gate
-Before owner finalization of this repair pass:
-1. Vercel accepts a production deployment containing the current runtime-health source.
-2. `/api/hub-health` returns HTTP 200 from the canonical alias.
-3. Health response correctly identifies the known broken Recovery Value root as Offline and reachable workspaces as Live.
-4. Dashboard/Directory status/count behavior is verified against runtime results.
-5. Canonical Current State and queue are updated with the final production evidence.
+## Review state
+Safe repairs are complete and production verified where technically possible. Remaining items are not ordinary coding defects that can be silently repaired: they require missing source, external/admin capability, or explicit destructive/configuration approval.
 
 ## Finalization boundary
-Finalizing `ALL-ISSUES-REPAIR-1.0` will accept the safe repairs and blocker classification. It will not authorize any separately gated destructive/configuration action listed above.
+Finalizing `ALL-ISSUES-REPAIR-1.0` accepts the safe repairs and blocker classification. It does not authorize any separately gated destructive/configuration action listed above.
