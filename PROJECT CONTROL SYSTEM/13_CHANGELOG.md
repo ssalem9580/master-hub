@@ -164,3 +164,14 @@ RELATED DEFECT: DEF-009
 FILES AFFECTED: `06_CURRENT_STATE.md`, `10_TEST_REGISTER.md`, `11_DEFECT_REGISTER.md`, `21_REQUIREMENTS_TRACEABILITY_MATRIX.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `35_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md`, this changelog
 REASON: Advance the Critical restricted-content remediation without changing finalized product behavior or destructively removing public source before recovery exists.
 RESULT: An owner-only, `shared=false` private Google Drive preservation store was created and verified. Private checkpoint/evidence metadata was stored there. The restricted repository-backed source lineage still matches the exact blob/byte preservation manifest after `SCOPE-ISOLATION-1.0`. Supabase Billed Work state was mapped non-destructively with RLS/policy verification and non-content recovery fingerprints. Exact restricted source-byte transfer and Supabase operational payload backup/recovery remain incomplete; DEF-009 stays OPEN / CRITICAL and no public source/routes/deployments were removed, rewritten, disconnected or retired. Status: READY FOR REVIEW / NOT FINALIZED.
+
+## CHANGE-022 — BW Lead Scope workflow owner-finalized
+DATE: 2026-10-02
+VERSION: BW-LEAD-SCOPE-1.0
+AUTHORIZED BY: Project Owner explicit `final`
+RELATED DECISION: DEC-018
+RELATED REQUIREMENT: REQ-018 / REQ-019
+RELATED DEFECT: DEF-011
+FILES AFFECTED: `master-hub-app/public/bw-dashboard.html`, `master-hub-app/src/app/api/scope-isolation/route.ts`, `master-hub-app/tests/bw-dashboard-scope-isolation.test.ts`, release/control records.
+REASON: Finalize Scope inside the BW Lead tool without weakening or duplicating SCOPE-ISOLATION-1.0.
+RESULT: Direct BW dashboard now consumes the same centralized finalized isolation engine as `/scope-templates`. PR #15 and post-merge CI passed install/lint/tests/build; READY preview live verification passed. Owner accepted/finalized the behavior. Canonical production promotion remains explicitly BLOCKED by Vercel build-rate limit; no false production-verification claim is made.
