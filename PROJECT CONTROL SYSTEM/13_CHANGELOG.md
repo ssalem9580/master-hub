@@ -134,3 +134,14 @@ RELATED ISSUE/RISK/DEBT: ISSUE-002 / RISK-001 / TD-009
 FILES AFFECTED: `PROJECT CONTROL SYSTEM/33_VERCEL_BUILD_FANOUT_AUDIT.md`, release and recovery-checkpoint records, this changelog
 REASON: Preserve the verified cross-project deployment evidence and accepted cleanup boundary before any Vercel configuration changes.
 RESULT: `VERCEL-FANOUT-AUDIT-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. The audit confirms `master-hub` is canonical while the same repository commits also trigger `field-diagnostic-hub` and `recovery-value-calculator`. CI `36964223310` passed install/lint/test/build and deployment `dpl_EHgESvVSgSZszHtgVt9fQy8Wa9PR` reached READY. No Git integration was disconnected and no Vercel project was retired or deleted; actual fan-out cleanup remains separately approval-gated.
+
+## CHANGE-019 — Restricted private preservation store established
+DATE: 2026-10-02
+VERSION: RESTRICTED-PRESERVATION-RC1
+AUTHORIZED BY: Existing DEC-016 / DEC-017 containment authority and approved private-destination establishment
+RELATED QUEUE: QUEUE-001
+RELATED REQUIREMENT: REQ-015
+RELATED DEFECT: DEF-009
+FILES AFFECTED: `06_CURRENT_STATE.md`, `10_TEST_REGISTER.md`, `11_DEFECT_REGISTER.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `34_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md`, this changelog
+REASON: Advance the Critical restricted-content remediation without changing finalized product behavior or destructively removing public source before recovery exists.
+RESULT: An owner-only, `shared=false` private Google Drive preservation store was created and verified. Private checkpoint/evidence metadata was stored there. Current `main` restricted repository objects still match the exact blob/byte preservation manifest, including finalized Scope Isolation source. Supabase Billed Work state was mapped non-destructively with RLS/policy verification and non-content recovery fingerprints. Exact restricted source-byte transfer and Supabase operational payload backup/recovery remain incomplete; DEF-009 stays OPEN / CRITICAL and no public source/routes/deployments were removed, rewritten, disconnected or retired.
