@@ -1,7 +1,7 @@
 # 06 — Current State
 
 DATE: 2026-10-02
-STATUS: REMEDIATION WAVE 1 — PROJECT TRUTH RECONCILED / SOURCE-BINDING BUILT
+STATUS: REMEDIATION WAVE 1 — OWNER ACCEPTED / FINALIZED; DEPLOYMENT VERIFICATION PENDING
 
 ## Authority
 - Canonical repository: `ssalem9580/master-hub`
@@ -18,13 +18,16 @@ BUILD_STATUS: READY — production healthy; newer main commits pending deploymen
 SECURITY_STATUS: CRITICAL — restricted field-service containment remains open; destructive cleanup is not authorized before verified private preservation
 SCOPE_ISOLATION_STATUS: PARTIALLY DEPLOYED — centralized isolation is live; strict enforcement and regression-test commits remain pending production verification
 REPAIR_PACKAGE_STATUS: VERIFIED — DEF-010 automated Part # → Name → Cost → Add → Total → Save → persistence regression is complete; owner finalization is separate
-PROJECT_CONTROL_STATUS: SOURCE-BOUND BUILT — live status is now generated from Current State, Operations Queue and Defect Register at build time; production verification pending
+PROJECT_CONTROL_STATUS: SOURCE-BOUND / CI VERIFIED / OWNER ACCEPTED — production verification pending
+WAVE1_STATUS: FINALIZED — canonical truth reconciliation and Project Control source-binding accepted by Project Owner; not yet a production release
 
 ## Source reality
 - Reconstructed product-code head before Wave 1: `d1b857dc5c6fb6cf9239d3d68557a43077b2c097` — strict scope grouping regression coverage.
 - Parent implementation commits: `de9d82be08daa1f20f7e95ba5583a5a59977340b` — strict Device/SubDevice boundary enforcement; `965a2b2e6ea15b053e2d60ca4c76802bcd3d5755` — centralized Device/SubDevice scope isolation.
-- Wave-1 source-binding commit: `92903383a1fb1daedab898b46663d648d8a7a24d`.
-- GitHub Actions run `36949404777` for `d1b857d` passed install, lint, tests and production build.
+- Wave-1 source-binding/reconciliation commits: `92903383a1fb1daedab898b46663d648d8a7a24d`, `4d5eda077ce57eda164b76a5ea3e0944a40af53a`, `31e1dffc1bcf8eaae04a308798eee4c91d1ed4ef`.
+- Wave-1 finalization record begins at `1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5`.
+- GitHub Actions run `36949404777` for strict scope source passed install, lint, tests and production build.
+- GitHub Actions run `36951330664` for Wave-1 reconciliation/source-binding passed install, lint, tests and production build.
 - Main/baseline branch protection remains absent and is still approval-gated.
 
 ## Production reality
@@ -61,9 +64,10 @@ Established Master Hub routes:
 
 ## Project Control source-binding
 - `/project-control` no longer owns duplicated hard-coded operational status.
-- The page reads `06_CURRENT_STATE.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, and `11_DEFECT_REGISTER.md` during build and renders the live operations snapshot from those canonical sources.
+- The page reads `06_CURRENT_STATE.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, and `11_DEFECT_REGISTER.md` during build and renders the operations snapshot from those canonical sources.
 - Vercel deployment commit is surfaced from `VERCEL_GIT_COMMIT_SHA` where available.
-- Source-binding is BUILT and awaits CI/deployment verification before finalization.
+- Source-binding is BUILT, CI VERIFIED, and OWNER ACCEPTED / FINALIZED as source/control work.
+- Production verification remains pending because the current main state has not deployed.
 
 ## Security / restricted data
 - Master Hub remains intentionally public/no-login under the established decision record.
@@ -71,7 +75,7 @@ Established Master Hub routes:
 - Existing restricted public exposure remains `OPEN / CRITICAL` under DEF-009.
 - Private canonical preservation has not been verified.
 - Public-history cleanup has not been completed.
-- No destructive containment, history rewrite, repository visibility change, or Vercel retirement is authorized by this Wave-1 work.
+- No destructive containment, history rewrite, repository visibility change, or Vercel retirement is authorized by this Wave-1 finalization.
 
 ## Deployment/source ownership gaps
 - Duplicate/cross-linked Vercel projects remain unresolved.
@@ -92,8 +96,15 @@ Established Master Hub routes:
 - `SECURITY-BOUNDARY-1.0` classification baseline; containment remains open
 - `PROJECT-OPS-1.0`
 
+## Wave-1 finalization
+- Project Owner explicitly approved finalization after the Wave-1 live-view/update recap.
+- Finalized scope: canonical truth reconciliation, DEF-010 state reconciliation, source-bound Project Control status, and the Wave-1 operations record.
+- CI evidence: `36951330664` PASS.
+- Production deployment: PENDING / BLOCKED by Vercel build-rate limiting.
+- This finalization is not a production-release claim.
+
 ## Current controlled next action
-1. Verify Wave-1 source-binding through CI/build.
+1. Begin Wave 2 from the finalized Wave-1 control state.
 2. Deploy the latest main state through canonical `master-hub` when build capacity permits.
 3. Live-verify strict Device → SubDevice → Scope isolation and source-bound Project Control.
 4. Continue security containment only after private preservation and explicit approval gates are satisfied.
