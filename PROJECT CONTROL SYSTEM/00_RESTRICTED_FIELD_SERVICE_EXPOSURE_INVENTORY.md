@@ -1,7 +1,7 @@
 # 00 — Restricted Field-Service Exposure Inventory
 
-Status: VERIFIED INVENTORY — CONTAINMENT PENDING
-Date: 2026-09-30
+Status: VERIFIED INVENTORY — PREPARATION ACTIVE / CONTAINMENT PENDING
+Date: 2026-10-02 UTC / 2026-10-01 CDT
 Authority: DEC-016
 Classification: RESTRICTED
 
@@ -12,8 +12,7 @@ Identify current public source, public routes, registry links, and deployment su
 
 ### Confirmed restricted-content source
 1. `master-hub-app/public/field-diagnostic-hub.html`
-   - large static diagnostic asset
-   - contains field diagnostic/troubleshooting operational material
+   - field diagnostic/troubleshooting operational material
    - publicly reachable through MasterHub
 
 2. `master-hub-app/src/app/field-diagnostic-hub/page.tsx`
@@ -25,13 +24,24 @@ Identify current public source, public routes, registry links, and deployment su
 
 4. `master-hub-app/src/app/repair-packages/page.tsx`
    - repair package / parts operational logic and data handling
-   - classified RESTRICTED under DEC-016
+
+5. `master-hub-app/public/data/parts-master-1.tsv`
+6. `master-hub-app/public/data/parts-master-2.tsv`
+7. `master-hub-app/public/data/parts-master-3.tsv`
+8. `master-hub-app/public/data/parts-master-4.tsv`
+   - public operational parts datasets used by Repair Packages
+
+9. `master-hub-app/public/bw-dashboard.html`
+10. `master-hub-app/src/app/scope-templates/page.tsx`
+11. `master-hub-app/src/lib/scope-isolation-script.ts`
+   - billed-work / Scope Templates operational source and workflow logic within the restricted field-service boundary
 
 ### Public registry/navigation exposure
-5. `master-hub-app/src/components/master-hub.tsx`
+12. `master-hub-app/src/components/master-hub.tsx`
    - exposes Field Diagnostic Hub navigation
    - exposes NTE Exceed/Quote Generator
    - exposes Billed Work Tracker
+   - exposes other field-service workspaces
 
 The registry/navigation file itself is not automatically restricted in full, but entries that expose restricted field-service tools must be handled as part of containment.
 
@@ -40,59 +50,61 @@ The registry/navigation file itself is not automatically restricted in full, but
 - `/field-diagnostic-hub`
 - `/field-diagnostic-hub.html`
 - `/repair-packages`
+- `/scope-templates`
+- `/bw-dashboard.html`
 
-## Related Public Vercel Surfaces
+## Related Vercel Project Map
+Fresh project inventory from the current Vercel team:
 
 ### MasterHub
-- project: master-hub
-- canonical alias: master-hub-sigma.vercel.app
-- restricted field-service routes currently served publicly
+- `master-hub` — `prj_TaNYVBn6sk81Q82yIJYLphj9YyZV`
+- `master-hub-live` — `prj_faJO9SG3vdax8edtpXaPFepLDhx8`
 
 ### Field Diagnostic
-- project: field-diagnostic-hub
-- current observed project state includes failed/duplicate deployment activity
-- ownership/role remains ambiguous
-
-- project: field-diagnostic-hub-live
-- public production deployment exists
-- classified within restricted field-service containment scope
+- `field-diagnostic-hub` — `prj_2zVf2Yk9BiaXvDb2W3OcyewIsfhx`
+- `field-diagnostic-hub-live` — `prj_mtmFlgCFytYKU4kYwFnWAbr2FAPh`
 
 ### NTE / Job Quote
-- project: job-quote-calculator
-- public production deployment exists
-
-- project: job-quote-calculator-live
-- duplicate public production deployment exists
-
-These quoting tools are treated as restricted field-service operational tools under DEC-016 unless explicitly reclassified.
+- `job-quote-calculator` — `prj_U39kxPVimHowAukErUvrMFc13RNp`
+- `job-quote-calculator-live` — `prj_7q0ALfMnhpp6xGmDzLHWAgmmg5wD`
 
 ### Billed Work Tracker
-- project: billed-work-tracker-live
-- public production deployment exists
-- treated as restricted field-service operational material under DEC-016 unless explicitly reclassified
+- `billed-work-tracker-live` — `prj_6mzZBKJOaYh2MJZ3QMDVOfHCFf42`
+
+### Other observed related projects
+- `recovery-value-calculator` — `prj_942h8vKuDMyde0K6iu5GF34hfByM`
+- `sam-hub` — `prj_S4OASJcwfx6ohACcf4pvAQFnqvxR`
+
+The presence of a project in this map does not by itself authorize retirement or prove that every project contains restricted content. It records deployment/source surfaces that must be resolved before cleanup.
 
 ## Registry Links
-Current MasterHub registry contains:
-- Field Diagnostic Hub → internal field-resource route
-- NTE Exceed/Quote Generator → public Vercel URL
-- Billed Work Tracker → public Vercel URL
+Current MasterHub registry includes restricted operational destinations such as:
+- Field Diagnostic Hub
+- NTE Exceed/Quote Generator
+- Billed Work Tracker
+- Repair Packages / Field Resource workflows
+- Scope Templates / billed-work workflows
 
 ## Classification Result
-All items above are RESTRICTED by default until the Project Owner explicitly reclassifies a specific item.
+Field-service operational material above remains RESTRICTED by default until the Project Owner explicitly reclassifies a specific item.
 
 ## Current Containment State
 - Classification: FINALIZED
 - New-publication freeze: ACTIVE
+- Preparation phase: ACTIVE
 - Existing public exposure: CONFIRMED
-- Private canonical destination: NOT YET ESTABLISHED
+- Source/deployment inventory: REFRESHED
+- Preservation manifest: CREATED
+- Private canonical destination: NOT YET APPROVED / NOT YET ESTABLISHED
 - Verified private preservation copy: NOT COMPLETE
-- Public route removal: NOT COMPLETE
-- Public repository HEAD cleanup: NOT COMPLETE
+- Recovery checkpoint for migrated restricted source: NOT COMPLETE
+- Public route removal: NOT AUTHORIZED / NOT COMPLETE
+- Public repository HEAD cleanup: NOT AUTHORIZED / NOT COMPLETE
 - Public Git-history remediation: NOT STARTED
-- Vercel restricted-deployment retirement: NOT STARTED
+- Vercel restricted-deployment retirement: NOT AUTHORIZED / NOT STARTED
 
 ## Non-Destructive Rule
-Do not delete, rewrite, retire, or remove a restricted source/deployment until a verified recoverable private copy exists.
+Do not delete, rewrite, retire, disconnect, or remove restricted source/deployments until a verified recoverable private copy exists and the applicable owner approval gate is satisfied.
 
 ## Required Next Gate
-Establish a private canonical destination for restricted field-service material, verify preservation completeness, then execute public-surface containment.
+Explicit Project Owner approval to establish/migrate to the private canonical restricted field-service destination. Then verify preservation completeness and recovery before requesting any destructive public-surface containment.
