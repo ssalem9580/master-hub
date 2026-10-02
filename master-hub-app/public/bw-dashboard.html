@@ -231,4 +231,5 @@ function downloadBackup(){const a=document.createElement('a');a.href=URL.createO
 function restoreBackup(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=function(){try{state=JSON.parse(rd.result);ensureState();persist();reconcile();refreshReferenceControls();renderScopeForm();renderScopeFilters();renderScopeLibrary();alert('Backup restored.')}catch(err){alert('Invalid backup file.')}};rd.readAsText(f)}
 refreshReferenceControls();reconcile();renderScopeForm();renderScopeFilters();renderScopeLibrary();initAuth();
 </script>
+<script src="/api/scope-isolation"></script>
 </body></html>
