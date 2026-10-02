@@ -2,23 +2,25 @@
 
 | Defect ID | Title | Severity | Status | Evidence | Resolution |
 |---|---|---|---|---|---|
-| DEF-001 | Historical Master Hub Vercel deployment failures | High | RESOLVED for latest observed production build | Multiple prior ERROR deployments; latest observed deployment READY | Build bridge/config + Repair Packages typecheck fix |
-| DEF-002 | Project governance previously existed only in conversation/history | High | FIXED IN THIS CHANGE | No canonical control directory previously at repo root | Added Project Control System |
-| DEF-003 | AI Idea Master Template source is incomplete at end of Part 29 | Medium | OPEN | Latest user-supplied file ends during Source-of-Truth Ownership after "Field definitions" | Do not invent missing continuation; adopt only supplied content |
-
+| DEF-001 | Historical Master Hub Vercel deployment failures | High | RESOLVED | Prior ERROR history; current canonical production has repeated READY releases | Build bridge/config and subsequent production verification |
+| DEF-002 | Project governance previously existed only in conversation/history | High | CLOSED | Canonical `PROJECT CONTROL SYSTEM/` exists on main and is source-bound to Project Control Center | Added permanent control system |
+| DEF-003 | AI Idea Master Template source is incomplete at end of Part 29 | Medium | OPEN / SOURCE BLOCKED | Supplied source ends after `Field definitions` | Preserve source exactly; do not fabricate missing continuation |
+| DEF-004 | Recovery Value Calculator configured root URL returns HTTP 404 | High | OPEN / SOURCE VALIDATED | Root target 404; exact recovered nested artifact returns HTTP 200; source/project ownership finalized | Canonical/private source preservation and controlled root restoration still required before production promotion |
+| DEF-005 | Project Control Center displays static state that can drift | Medium | CLOSED | `PROJECT-CONTROL-LIVE-TRUTH-1.0`; dynamic record discovery; live repository-head comparison; production route verified | Source-bound UI now separates repository head, served revision and last verified production evidence |
+| DEF-006 | Current MasterHub UI tests targeted older interface while CI did not run tests | Medium | CLOSED | Current UI tests and canonical lint/test/build CI pass | Tests normalized and CI gate enforced |
+| DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | CLOSED | Wave-1 truth reconciliation, later live-truth release and production evidence | Canonical Current State/queue were reconciled; later changes are tracked explicitly as source vs production state |
+| DEF-008 | Next.js security patch level below patched Active LTS | High | CLOSED | Next.js 16.3.8 on main; CI and production verification | `SECURITY-QUALITY-1.0` |
+| DEF-009 | Restricted field-service material remains publicly exposed | Critical | OPEN / PRESERVATION IN PROGRESS | DEC-016; public restricted routes/data; owner-only Drive preservation store; records 32/35/39; exact in-project Supabase snapshots fingerprint-match live state | Private recovery layer materially improved. Independent exact-byte restricted-source archive and independent database export/recovery verification must complete before any approved public source/route removal; Git-history remediation remains separate |
+| DEF-010 | Repair Package part-cost / Part # auto-fill | High | VERIFIED | Automated regression passes exact Part # → Name → Cost → Add → Total → Save → localStorage remount; CI PASS; production route HTTP 200 | Stabilized master-parts loading/indexing, totals and persistence; permanent regression coverage retained |
+| DEF-011 | Direct BW Lead Scope tab did not self-load finalized scope isolation | High | CLOSED | PR #15; CI PASS; production `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` READY; `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` all HTTP 200 | Direct dashboard loads the same centralized strict Device → SubDevice → Scope engine; production verified |
 
 ## Canonical Defect Schema
-Master Hub uses the permanent defect identifier convention **DEF-###** under DEC-006.
-
-New or normalized defects use:
+Master Hub permanently uses **DEF-###** under DEC-006.
 
 ```text
 DEFECT ID:
 TITLE:
-
-SEVERITY:
-Critical / High / Medium / Low
-
+SEVERITY: Critical / High / Medium / Low
 FEATURE:
 REQUIREMENT:
 ENVIRONMENT:
@@ -29,25 +31,10 @@ EVIDENCE:
 ROOT CAUSE:
 FIX:
 RETEST RESULT:
-
-STATUS:
-OPEN / FIXING / READY FOR RETEST / VERIFIED / CLOSED
+STATUS: OPEN / FIXING / READY FOR RETEST / VERIFIED / CLOSED
 ```
 
 Rules:
 - Never erase defect history.
-- Never rename existing DEF-### identifiers solely to match the generic template.
-- Historical defects may be expanded when revisited; unknown fields remain UNKNOWN rather than invented.
-
-| DEF-004 | Recovery Value Calculator configured Live URL returns HTTP 404 | High | OPEN | Live HTTP verification at configured registry URL | Identify correct route/deployment or downgrade status until restored |
-| DEF-005 | Project Control Center displays static state that can drift from canonical records | Medium | OPEN | /project-control source contains static phase/current-task text | Bind/generate visible state from canonical source |
-| DEF-006 | Current MasterHub UI tests target older interface while CI does not run tests | Medium | CLOSED | Current-UI tests + post-merge CI run 36947000535 PASS | Tests normalized and canonical CI requires lint/test/build |
-| DEF-007 | Canonical Current State retained stale post-adoption next-action text | Medium | FIXING IN AUDIT | 06_CURRENT_STATE.md contradicted completed Stage H baseline freeze | Correct Current State on audit branch and preserve audit evidence |
-
-| DEF-008 | Next.js security patch level below current patched Active LTS | High | CLOSED | main/package lock use 16.3.8; CI 36811990043 PASS; production dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY | SECURITY-QUALITY-1.0 released and verified |
-
-| DEF-009 | Restricted field-service material remains publicly exposed | Critical | OPEN / PRESERVATION IN PROGRESS | DEC-016 classification; `/field-resource-hub`, `/scope-templates`, `/bw-dashboard.html` still HTTP 200; private Drive preservation store verified owner-only; restricted repo lineage and Supabase recovery fingerprints recorded in `35_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md` | Exact restricted source-byte copy, Supabase operational backup/recovery verification and remaining restricted standalone source preservation must complete before any approved public source/route/deployment removal |
-
-| DEF-010 | Repair Package part-cost / Part # auto-fill | High | VERIFIED | Automated interactive regression test passes Part # 11066404000A → Spherical Block Tape → $102.74 → Add → $102.74 total → Save → localStorage persistence → remount restore; Master Hub CI run 36947000535 passed lint/test/build; production deployment dpl_FQ56GB4NKryTiPUQQj1kSdEb35qg contains the stabilized Repair Package component and canonical /repair-packages returned HTTP 200 with the exact lookup UI; production master data contains the tested part row | Stabilized large master-parts loading, exact Part # index, package addition/total behavior, draft + saved-package persistence, and added permanent DEF-010 regression coverage. Automated production-code verification complete; no claim of a separate manual human browser click-through. |
-
-| DEF-011 | Direct BW Lead Scope tab did not self-load finalized scope isolation | High | CLOSED | Finalization audit found `/scope-templates` injected the centralized isolation script while direct `/bw-dashboard.html` did not; PR #15 added the centralized loader/API/regression; CI PASS; production `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` READY; canonical routes verified | Direct BW dashboard now loads the same centralized `scopeIsolationScript`; no isolation rules/data/schema changed; canonical production verified. |
+- Never rename existing DEF-### identifiers solely to match a generic template.
+- Unknown historical fields remain UNKNOWN rather than invented.
