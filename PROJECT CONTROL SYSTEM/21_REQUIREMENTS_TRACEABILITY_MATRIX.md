@@ -8,7 +8,7 @@
 | REQ-004 | Owner / DEC-002 | DEC-002 | FEAT-004 | browser-local finance handling | Source/live route; privacy scan still open | /finances-command-center 200 | IMPLEMENTED / VERIFICATION PARTIAL |
 | REQ-005 | Constitution | Evidence-over-assumption rule | FEAT-005 | registry status fields | TEST-015 + fresh URL checks | Recovery Value configured URL 404 while root labels Live | OPEN / PARTIAL |
 | REQ-006 | Owner supplied control framework | DEC-001 | FEAT-006 | PROJECT CONTROL SYSTEM/* | Repository/release evidence | CONTROL-BASELINE-1.0 | IMPLEMENTED / FINALIZED FOUNDATION |
-| REQ-007 | Owner / DEC-003 | DEC-003 | FEAT-007 | /project-control | Live HTTP 200; source-binding test fails | ISSUE-007 / TEST-018 | IMPLEMENTED / SOURCE-BINDING OPEN |
+| REQ-007 | Owner / DEC-003 | DEC-003 + Wave-1 owner acceptance | FEAT-007 | /project-control source-bound to canonical records | CI `36951330664` PASS + live HTTP 200 + live source-bound output | production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` | VERIFIED / FINALIZED |
 | REQ-008 | Owner supplied framework | DEC-001 | FEAT-008 | Traceability Matrix + Reconstruction Evidence Ledger | Reconstruction pass 2026-10-02 | Canonical records | PARTIAL / ACTIVE |
 | REQ-009 | User / governance adoption | DEC-007 | FEAT-009 | Constitution/control lifecycle | TEST-009 | CONTROL-BASELINE-1.0 | VERIFIED / FINALIZED |
 | REQ-010 | User / governance adoption | DEC-007 | FEAT-009 | Ready/Done/acceptance gates | TEST-010 | CONTROL-BASELINE-1.0 | VERIFIED / FINALIZED |
@@ -19,7 +19,7 @@
 | REQ-015 | Project Owner | DEC-016/017 | FEAT-002 / FEAT-003 | restricted field-service boundary | Exposure inventory + DEF-009 | SECURITY-BOUNDARY-1.0 | ACCEPTED CLASSIFICATION / CONTAINMENT OPEN |
 | REQ-016 | Project Owner Project Operations prompt | PROJECT-OPS-1.0 owner acceptance | FEAT-010 | 22_PROJECT_OPERATIONS_QUEUE.md + Project Control operations view | Finalized release evidence | PROJECT-OPS-1.0 | FINALIZED / OWNER ACCEPTED |
 | REQ-017 | Project Owner Scope Templates direction | Approved implementation history | FEAT-011 | /scope-templates route reusing BW dashboard | Live HTTP 200 | 7bf2465 + current production | IMPLEMENTED / LIVE SECTION |
-| REQ-018 | Project Owner exact Device/SubDevice grouping instruction | Approved implementation request | FEAT-012 | centralized scope-isolation script + strict attachment boundary | CI 36949404777 PASS; live strict version pending | 965a2b2 / de9d82b / d1b857d | TESTED ON MAIN / PRODUCTION VERIFICATION PENDING |
+| REQ-018 | Project Owner exact Device/SubDevice grouping instruction | Owner explicit implementation request + explicit verified/finalized promotion | FEAT-012 | centralized scope-isolation script + strict selection/manual/attachment boundary | CI `36949404777` PASS; live `/scope-templates` and `/bw-dashboard.html` HTTP 200; production JS artifact contains exact grouping and cross-group blocking logic | `965a2b2` / `de9d82b` / `d1b857d`; production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf`; `RELEASES/SCOPE-ISOLATION-1.0.md` | VERIFIED / FINALIZED / OWNER ACCEPTED |
 
 ## Canonical Traceability Chain
 `User Need → Decision/Authority → Requirement → Feature → Implementation → Test → Evidence → Verification → Acceptance`
