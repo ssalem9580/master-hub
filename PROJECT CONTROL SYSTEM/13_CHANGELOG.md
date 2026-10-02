@@ -91,3 +91,12 @@ RELATED FEATURE: FEAT-001 through FEAT-012 as applicable
 FILES AFFECTED: Current State, Operations Queue, Feature Register, Traceability Matrix, Changelog, Reconstruction Evidence Ledger
 REASON: Reconcile Git history, finalized releases, decisions, queue items and live/current routes without inventing unknown state.
 RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health, restricted-data containment, and un-deployed strict scope changes remain explicitly open.
+
+## CHANGE-014 — Remediation Wave 1 finalized
+DATE: 2026-10-02
+VERSION: REMEDIATION-WAVE1-1.0
+AUTHORIZED BY: Project Owner — explicit `yes` after Wave-1 review
+RELATED FEATURE: Project Control Center / Operations Queue
+FILES AFFECTED: `06_CURRENT_STATE.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `/project-control`, this changelog
+REASON: Finalize the first remediation wave that reconciled canonical project truth, corrected DEF-010 state drift, and source-bound Project Control operational status.
+RESULT: Wave-1 source/control scope is OWNER ACCEPTED / FINALIZED. GitHub Actions run `36951330664` passed install, lint, tests and production build. Current Vercel production remains at `965a2b2` because newer automatic deployments are blocked by build-rate limiting, so this entry is not a production-release claim. Strict scope production verification, restricted-data containment, duplicate Vercel cleanup, Recovery Value restoration and standalone-source recovery remain open.
