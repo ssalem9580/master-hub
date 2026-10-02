@@ -153,3 +153,14 @@ RELATED QUEUE: QUEUE-004 / QUEUE-005 / QUEUE-007
 FILES AFFECTED: `PROJECT CONTROL SYSTEM/34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`, Current State, Operations Queue, release/recovery records, this changelog
 REASON: Finalize the accepted ownership mapping while preserving separate approval gates for Vercel configuration, Recovery Value production promotion and destructive cleanup.
 RESULT: PR #11 merged to `main` at `737b19deaebd692fa633673fc015b67f5fee463d`; validation CI `36968603081` passed install/lint/test/build. `STANDALONE-SOURCE-OWNERSHIP-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. Recovery Value canonicalization/restoration, actual Vercel Git-integration cleanup, restricted-data containment, remaining standalone-source mapping and project retirement remain open. Vercel checks for the validation/finalization commits were blocked by the account daily deployment limit, so no deployment claim is made for those commits.
+
+## CHANGE-021 — Restricted private preservation store established
+DATE: 2026-10-02
+VERSION: RESTRICTED-PRESERVATION-RC1
+AUTHORIZED BY: Existing DEC-016 / DEC-017 containment authority and approved private-destination establishment
+RELATED QUEUE: QUEUE-001
+RELATED REQUIREMENT: REQ-015
+RELATED DEFECT: DEF-009
+FILES AFFECTED: `06_CURRENT_STATE.md`, `10_TEST_REGISTER.md`, `11_DEFECT_REGISTER.md`, `21_REQUIREMENTS_TRACEABILITY_MATRIX.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `35_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md`, this changelog
+REASON: Advance the Critical restricted-content remediation without changing finalized product behavior or destructively removing public source before recovery exists.
+RESULT: An owner-only, `shared=false` private Google Drive preservation store was created and verified. Private checkpoint/evidence metadata was stored there. The restricted repository-backed source lineage still matches the exact blob/byte preservation manifest after `SCOPE-ISOLATION-1.0`. Supabase Billed Work state was mapped non-destructively with RLS/policy verification and non-content recovery fingerprints. Exact restricted source-byte transfer and Supabase operational payload backup/recovery remain incomplete; DEF-009 stays OPEN / CRITICAL and no public source/routes/deployments were removed, rewritten, disconnected or retired. Status: READY FOR REVIEW / NOT FINALIZED.
