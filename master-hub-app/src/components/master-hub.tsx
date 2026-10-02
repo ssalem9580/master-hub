@@ -6,16 +6,17 @@ import { defaultHubState, HubState, HubTask, loadHubState, saveHubState, TaskLan
 
 type HubStatus = "Setup needed" | "Live" | "Development" | "Offline" | "Archived";
 type HubItem = { name:string; url?:string; internal?:boolean; status:HubStatus; area:string; purpose:string; icon:React.ReactNode };
+type HealthResult = { name:string; status:"Live"|"Offline"; httpStatus:number|null; checkedAt:string };
 
 const statusOrder:HubStatus[]=["Live","Development","Setup needed","Offline","Archived"];
-const hubs:HubItem[]=[
+const hubDefinitions:HubItem[]=[
   {name:"Project Control Center",url:"/project-control",internal:true,status:"Live",area:"Admin · Governance",purpose:"Canonical project state, queue, decisions, requirements, risks, tests, releases and recovery.",icon:<FolderKanban size={18}/>},
   {name:"Field Diagnostic Hub",url:"/field-resource-hub",internal:true,status:"Live",area:"Work · Field Service",purpose:"Diagnostics, VAT audio guidance, repair packages and field troubleshooting.",icon:<Activity size={18}/>},
   {name:"Scope Templates",url:"/scope-templates",internal:true,status:"Live",area:"Work · Billing",purpose:"Reusable scope templates tied to device families, SubDevices and billed-work records.",icon:<FolderKanban size={18}/>},
   {name:"Finances Command Center",url:"/finances-command-center",internal:true,status:"Live",area:"Financial",purpose:"12-month rental stability, credit rebuilding, cash reserve protection and homeownership readiness.",icon:<CircleDollarSign size={18}/>},
   {name:"NTE Exceed/Quote Generator",url:"https://job-quote-calculator-tau.vercel.app",status:"Live",area:"Work · Quoting",purpose:"Create quotes and official NTE exceed forms.",icon:<Calculator size={18}/>},
   {name:"Billed Work Tracker",url:"https://billed-work-tracker-live.vercel.app",status:"Live",area:"Work · Billing",purpose:"Track billed work, payment status and reconciliation.",icon:<FolderKanban size={18}/>},
-  {name:"Recovery Value Calculator",url:"https://recovery-value-calculator.vercel.app",status:"Live",area:"Business · Recovery",purpose:"Calculate recovery values and deal economics.",icon:<CircleDollarSign size={18}/>},
+  {name:"Recovery Value Calculator",url:"https://recovery-value-calculator.vercel.app",status:"Offline",area:"Business · Recovery",purpose:"Calculate recovery values and deal economics.",icon:<CircleDollarSign size={18}/>},
   {name:"Private Client",url:"https://privateclient.samsalem0319.chatgpt.site/",status:"Live",area:"Personal",purpose:"Private-client workspace.",icon:<FolderKanban size={18}/>},
   {name:"Illinois Locksmith Exam Prep",url:"https://illinois-locksmith-exam-tutor.samsalem0319.chatgpt.site/",status:"Live",area:"Knowledge · Exam Prep",purpose:"Illinois locksmith licensing exam study and practice.",icon:<Target size={18}/>},
   {name:"Sam Hub",url:"https://sam-hub-six.vercel.app",status:"Live",area:"Admin · Registry",purpose:"Legacy app registry and management workspace.",icon:<LayoutDashboard size={18}/>},
@@ -27,13 +28,16 @@ export function MasterHub(){
   const [state,setState]=useState<HubState>(defaultHubState);
   const [ready,setReady]=useState(false),[menu,setMenu]=useState(false),[capture,setCapture]=useState(false);
   const [query,setQuery]=useState(""),[active,setActive]=useState<"Dashboard"|"Hub Directory"|"Action Center">("Dashboard"),[toast,setToast]=useState("");
+  const [health,setHealth]=useState<Record<string,HubStatus>>({});
   const searchRef=useRef<HTMLInputElement>(null);
   useEffect(()=>{const id=window.setTimeout(()=>{setState(loadHubState(window.localStorage));setReady(true)},0);return()=>window.clearTimeout(id)},[]);
   useEffect(()=>{if(ready)saveHubState(state,window.localStorage)},[ready,state]);
   useEffect(()=>{const fn=(e:KeyboardEvent)=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){e.preventDefault();searchRef.current?.focus()}if(e.key==="Escape"){setCapture(false);setMenu(false)}};window.addEventListener("keydown",fn);return()=>window.removeEventListener("keydown",fn)},[]);
+  useEffect(()=>{let cancelled=false;fetch("/api/hub-health",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error(`Health ${response.status}`);return response.json() as Promise<{results?:HealthResult[]}>}).then(payload=>{if(cancelled||!Array.isArray(payload.results))return;const next:Record<string,HubStatus>={};for(const result of payload.results){if(result?.name&&(result.status==="Live"||result.status==="Offline"))next[result.name]=result.status}setHealth(next)}).catch(()=>{});return()=>{cancelled=true}},[]);
 
+  const hubs=useMemo(()=>hubDefinitions.map(h=>health[h.name]?{...h,status:health[h.name]}:h),[health]);
   const normalizedQuery=query.trim().toLowerCase();
-  const filteredHubs=useMemo(()=>hubs.filter(h=>!normalizedQuery||`${h.name} ${h.area} ${h.status} ${h.purpose}`.toLowerCase().includes(normalizedQuery)),[normalizedQuery]);
+  const filteredHubs=useMemo(()=>hubs.filter(h=>!normalizedQuery||`${h.name} ${h.area} ${h.status} ${h.purpose}`.toLowerCase().includes(normalizedQuery)),[hubs,normalizedQuery]);
   const filteredTasks=useMemo(()=>state.tasks.filter(t=>t.title.toLowerCase().includes(normalizedQuery)),[state.tasks,normalizedQuery]);
   const openTasks=state.tasks.filter(t=>!t.complete),setupHubs=hubs.filter(h=>h.status==="Setup needed"),liveHubs=hubs.filter(h=>h.status==="Live");
   const liveCount=liveHubs.length,setupCount=setupHubs.length;
