@@ -13,7 +13,7 @@ const input:React.CSSProperties={width:"100%",background:"#0b0f16",border:"1px s
 export default function FinancesCommandCenter(){
   const [p,setP]=useState<Profile>(EMPTY),[saved,setSaved]=useState(false),[hydrated,setHydrated]=useState(false);
   useEffect(()=>{const id=window.setTimeout(()=>{try{const raw=localStorage.getItem(KEY);if(raw)setP({...EMPTY,...JSON.parse(raw)})}catch{}finally{setHydrated(true)}},0);return()=>window.clearTimeout(id)},[]);
-  useEffect(()=>{if(!hydrated)return;try{localStorage.setItem(KEY,JSON.stringify(p));setSaved(true);const id=window.setTimeout(()=>setSaved(false),1000);return()=>window.clearTimeout(id)}catch{}},[hydrated,p]);
+  useEffect(()=>{if(!hydrated)return;try{localStorage.setItem(KEY,JSON.stringify(p))}catch{}},[hydrated,p]);
   const n=(v:string)=>Number(v.replace(/[^0-9.]/g,""))||0;
   const monthlyGross=useMemo(()=>n(p.income)/12,[p.income]);
   const cap=n(p.housingCap),score=n(p.creditScore),target=n(p.targetScore)||640;
@@ -26,7 +26,7 @@ export default function FinancesCommandCenter(){
     <div style={{maxWidth:1160,margin:"0 auto",display:"grid",gap:16}}>
       <header style={{display:"flex",justifyContent:"space-between",gap:16,alignItems:"end",flexWrap:"wrap"}}>
         <div><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>MASTER HUB · FINANCIAL</div><h1 style={{margin:"7px 0",fontSize:30}}>Finances Command Center</h1><p style={{margin:0,color:"#8c94a5"}}>12-month rental stability + credit rebuild toward homeownership.</p></div>
-        <button onClick={save} style={{border:0,borderRadius:8,padding:"10px 14px",fontWeight:800,cursor:"pointer"}}>{saved?"Saved automatically":"Save now"}</button>
+        <button onClick={save} style={{border:0,borderRadius:8,padding:"10px 14px",fontWeight:800,cursor:"pointer"}}>{saved?"Saved":"Save now"}</button>
       </header>
 
       <section style={{...box,borderColor:"#594d28"}}><strong style={{fontSize:13}}>Privacy</strong><p style={{margin:"7px 0 0",fontSize:12,color:"#aab1bf",lineHeight:1.5}}>Your entries auto-save in this browser as you type and restore after refresh/reopen. They are not hard-coded into the public repository.</p></section>
