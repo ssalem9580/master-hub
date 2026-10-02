@@ -88,25 +88,29 @@ VERSION: RECONSTRUCTION-SNAPSHOT-20261002
 AUTHORIZED BY: Project Owner explicit reconstruction request
 RELATED DECISION: DEC-012 and finalized governance authority
 RELATED FEATURE: FEAT-001 through FEAT-012 as applicable
-FILES AFFECTED: Current State, Operations Queue, Feature Register, Traceability Matrix, Changelog, Reconstruction Evidence Ledger
-REASON: Reconcile Git history, finalized releases, decisions, queue items and live/current routes without inventing unknown state.
-RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health, restricted-data containment, and then-un-deployed strict scope changes remained explicitly open.
+RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health and restricted-data containment remained explicitly open.
 
 ## CHANGE-014 — Remediation Wave 1 finalized
 DATE: 2026-10-02
 VERSION: REMEDIATION-WAVE1-1.0
 AUTHORIZED BY: Project Owner — explicit `yes` after Wave-1 review
 RELATED FEATURE: Project Control Center / Operations Queue
-FILES AFFECTED: `06_CURRENT_STATE.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `/project-control`, this changelog
-REASON: Finalize the first remediation wave that reconciled canonical project truth, corrected DEF-010 state drift, and source-bound Project Control operational status.
-RESULT: Wave-1 source/control scope is OWNER ACCEPTED / FINALIZED. GitHub Actions run `36951330664` passed install, lint, tests and production build. Subsequent production deployment `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` verified the source-bound Project Control output live.
+RESULT: Canonical project truth reconciled, DEF-010 state drift corrected and Project Control source-binding finalized. CI `36951330664` PASS; production deployment `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` verified the source-bound control output.
 
 ## CHANGE-015 — Scope Isolation 1.0 verified and finalized
 DATE: 2026-10-02 UTC / 2026-10-01 CDT
 VERSION: SCOPE-ISOLATION-1.0
-AUTHORIZED BY: Project Owner — explicit `promote to verified/finalized`
+AUTHORIZED BY: Project Owner
 RELATED REQUIREMENT: REQ-018
 RELATED FEATURE: FEAT-012
-FILES AFFECTED: Scope Templates isolation implementation/test lineage, Feature Register, Current State, Operations Queue, Traceability Matrix, Release record, this changelog
-REASON: Promote strict Device → SubDevice → Scope grouping from tested/pending-production to verified/finalized after production evidence became available.
-RESULT: GitHub Actions `36949404777` passed install/lint/tests/build; Vercel production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` is READY at `1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5`; live `/scope-templates` and `/bw-dashboard.html` return HTTP 200; the production JavaScript artifact contains exact Device/SubDevice filtering and explicit cross-group attachment blocking logic. `SCOPE-ISOLATION-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. Restricted-data containment and other independent open items remain open.
+RESULT: CI `36949404777` passed install/lint/tests/build; production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` is READY at `1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5`; live `/scope-templates` and `/bw-dashboard.html` return HTTP 200; production client code contains strict Device/SubDevice filtering and explicit cross-group attachment blocking. `SCOPE-ISOLATION-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED.
+
+## CHANGE-016 — Restricted field-service containment preparation started
+DATE: 2026-10-02 UTC / 2026-10-01 CDT
+VERSION: SECURITY-CONTAINMENT-PREP-RC1
+AUTHORIZED BY: Project Owner instruction to move into controlled security-containment preparation
+RELATED DECISION: DEC-016 / DEC-017
+RELATED DEFECT: DEF-009
+FILES AFFECTED: Restricted exposure inventory, quarantine plan, preservation manifest, Current State, Operations Queue, this changelog
+REASON: Begin the safe non-destructive preparation stage required before any public route/source removal, history rewrite, repository visibility change, or Vercel retirement.
+RESULT: Exposure inventory refreshed, Vercel project ownership map recorded, private-preservation checklist created, QUEUE-001 moved into active preparation, and all destructive gates remain closed. No restricted source/routes, Git history, repositories, projects or deployments were deleted, disconnected, rewritten or retired.
