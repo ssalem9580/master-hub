@@ -124,3 +124,13 @@ RELATED DEFECT: DEF-009
 FILES AFFECTED: Quarantine Plan, Preservation Manifest, source-hash preservation record, Current State, Operations Queue, release/backup/finalization records, this changelog
 REASON: Finalize the non-destructive containment-preparation architecture and authorize the next preservation gate without authorizing physical cleanup.
 RESULT: `SECURITY-CONTAINMENT-PREP-1.0` is OWNER ACCEPTED / FINALIZED. Private canonical destination establishment/migration is APPROVED. Exact current-main repository-backed restricted source blob IDs and byte counts are recorded for preservation. The connected GitHub control surface exposes only the public `ssalem9580/master-hub` repository and has no repository-creation action, so the approved private destination is not yet created or privacy-verified. Physical containment, public route/source removal, Git-history rewrite, visibility changes and Vercel retirement/disconnection remain separately gated; DEF-009 remains OPEN / CRITICAL.
+
+## CHANGE-018 — Vercel build fan-out audit finalized
+DATE: 2026-10-02 UTC / 2026-10-01 CDT
+VERSION: VERCEL-FANOUT-AUDIT-1.0
+AUTHORIZED BY: Project Owner explicit `finalize`
+RELATED QUEUE: QUEUE-004
+RELATED ISSUE/RISK/DEBT: ISSUE-002 / RISK-001 / TD-009
+FILES AFFECTED: `PROJECT CONTROL SYSTEM/33_VERCEL_BUILD_FANOUT_AUDIT.md`, release and recovery-checkpoint records, this changelog
+REASON: Preserve the verified cross-project deployment evidence and accepted cleanup boundary before any Vercel configuration changes.
+RESULT: `VERCEL-FANOUT-AUDIT-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. The audit confirms `master-hub` is canonical while the same repository commits also trigger `field-diagnostic-hub` and `recovery-value-calculator`. CI `36964223310` passed install/lint/test/build and deployment `dpl_EHgESvVSgSZszHtgVt9fQy8Wa9PR` reached READY. No Git integration was disconnected and no Vercel project was retired or deleted; actual fan-out cleanup remains separately approval-gated.
