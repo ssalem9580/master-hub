@@ -3,73 +3,131 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const scopeCatalog = {
-  "Locks & Electronic Locks":["ELECTRONIC LOCK","ELECTRONIC LOCK, MECHANICAL LOCK","ELECTRONIC LOCK, SAFE","ELECTRONIC LOCK, SAFE, OTHER","MECHANICAL LOCK","MECHANICAL LOCK, OTHER","OTHER, ELECTRONIC LOCK","ELECTRONIC LOCK, ELECTRONIC LOCK","SAFE, ELECTRONIC LOCK","ATM - SAFE, OTHER","LOCKS, VAULT/CA"],
-  "Safe / Vault / Night Depository":["SAFE","VAULT","NIGHT DEPOSITORY","SAFE DEPOSIT BOX","SAFE, OTHER","VAULT, SAFE","CASH GUARD","CASH DRAWER"],
-  "ATM / Banking Equipment":["ATM","ATM - SAFE","ATM - SAFE, OTHER","ATM, SAFE","ATM, SAFE, OTHER","CENCON","ATM - CASH","ATM - CARD READER"],
-  "Drive-Up / VAT / Pneumatic":["VAT","VAT (21)","VAT (23)","VAT30","VAT30GX","PNEUMATIC","PNEUMATIC, OTHER","DRIVE-UP","CARRIER","BLOWER"],
-  "Audio / Communications":["AUDIO","AUDIO SYSTEM","INTERCOM","SPEAKER","MICROPHONE","CAR CALL","CALL SYSTEM"],
-  "Monitor / Display / Computer":["MONITOR","DISPLAY","TOUCH SCREEN","PC","PRINTER","TOUCH SCREEN, PRINTER, MONITOR","MONITOR, OTHER"],
-  "Cash Handling / Teller":["CASH DISPENSER","CASH RECYCLER","CASH GUARD","CASH DRAWER","TELLER EQUIPMENT"],
-  "Printer / Receipt / Journal":["PRINTER","RECEIPT PRINTER","JOURNAL PRINTER","PRINTER, OTHER"],
-  "Card / Reader Equipment":["CARD READER","CARD READER, OTHER","MAG READER","BARCODE READER"],
-  "Door / Access / Physical Security":["DOOR","DOOR, OTHER","ACCESS CONTROL","ALARM","SECURITY EQUIPMENT"],
-  "Electrical / Power":["POWER SUPPLY","UPS","BATTERY","ELECTRICAL","POWER"],
-  "Other / General":["OTHER","MISC","UNKNOWN"]
-} as const;
-
 export default function ScopeTemplatesPage() {
   const [status,setStatus]=useState("Opening Scope Templates…");
 
-  const installCatalog=(frame:HTMLIFrameElement)=>{
+  const installHierarchy=(frame:HTMLIFrameElement)=>{
     try{
       const doc=frame.contentDocument;
       if(!doc)return;
       const script=doc.createElement("script");
-      const catalog=JSON.stringify(scopeCatalog);
       script.textContent=`(function(){
-        const CATALOG=${catalog};
-        const GROUPS=Object.keys(CATALOG);
-        const ALL_SUBS=[...new Set(Object.values(CATALOG).flat())];
-        function addUnique(arr,v){ if(!arr.some(x=>String(x).trim().toLowerCase()===String(v).trim().toLowerCase())) arr.push(v); }
-        function applyCatalog(){
-          try{
-            ensureState();
-            state.scopeConfig=state.scopeConfig||{};
-            state.scopeConfig.devices=Array.isArray(state.scopeConfig.devices)?state.scopeConfig.devices:[];
-            state.scopeConfig.subDevices=Array.isArray(state.scopeConfig.subDevices)?state.scopeConfig.subDevices:[];
-            state.scopeConfig.subDeviceGroups=Object.assign({},state.scopeConfig.subDeviceGroups||{},CATALOG);
-            GROUPS.forEach(v=>addUnique(state.scopeConfig.devices,v));
-            ALL_SUBS.forEach(v=>addUnique(state.scopeConfig.subDevices,v));
-            state.scopeConfig.equipmentTypes=state.scopeConfig.devices.slice();
-            if(typeof persist==='function') persist();
-          }catch(e){}
+        function text(v){return String(v==null?'':v).trim()}
+        function n(v){return text(v).toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\\s+/g,' ').trim()}
+        function uniquePush(arr,value){value=text(value);if(!value)return;if(!arr.some(function(v){return n(v)===n(value)}))arr.push(value)}
+        function sorted(values){return values.slice().sort(function(a,b){return a.localeCompare(b,undefined,{numeric:true,sensitivity:'base'})})}
+        function importedHierarchy(){
+          var out={};
+          function add(device,subdevice,scope){
+            device=text(device);subdevice=text(subdevice);scope=text(scope);
+            if(!device||!subdevice)return;
+            var deviceKey=Object.keys(out).find(function(k){return n(k)===n(device)})||device;
+            if(!out[deviceKey])out[deviceKey]={};
+            var subKey=Object.keys(out[deviceKey]).find(function(k){return n(k)===n(subdevice)})||subdevice;
+            if(!out[deviceKey][subKey])out[deviceKey][subKey]=[];
+            if(scope)uniquePush(out[deviceKey][subKey],scope);
+          }
+          (state.workOrders||[]).forEach(function(r){add(r.device,r.subdevice,r.scope||r.description)});
+          (state.scopeTemplates||[]).forEach(function(t){add(t.equipment_type,t.subcomponent,t.scope_phrase)});
+          return out;
         }
-        function groupedSubDevices(){
-          try{
-            const device=document.getElementById('scopeEquipment');
-            const sub=document.getElementById('scopeSubcomponent');
-            if(!device||!sub)return;
-            const list=CATALOG[device.value];
-            if(!list)return;
-            const current=sub.value;
-            sub.innerHTML=customOptionsHtml(list,current,'Select SubDevice');
-            if(current&&list.includes(current))sub.value=current;
-          }catch(e){}
+        function importedCustomers(){
+          var values=[];
+          (state.workOrders||[]).forEach(function(r){uniquePush(values,r.customer||r.client)});
+          (state.scopeTemplates||[]).forEach(function(t){uniquePush(values,t.customer)});
+          (state.scopeConfig&&state.scopeConfig.customers||[]).forEach(function(v){uniquePush(values,v)});
+          return sorted(values);
         }
-        applyCatalog();
-        const originalRender=renderScopeForm;
-        renderScopeForm=function(){ originalRender(); groupedSubDevices(); };
-        const originalField=scopeFieldChanged;
-        scopeFieldChanged=function(which){ originalField(which); if(which==='device')groupedSubDevices(); };
-        const originalLoad=loadCloud;
-        loadCloud=async function(){ await originalLoad(); applyCatalog(); originalRender(); groupedSubDevices(); renderScopeFilters(); };
-        renderScopeForm(); renderScopeFilters();
+        function deviceNames(){return sorted(Object.keys(importedHierarchy()))}
+        function subDeviceNames(device){var h=importedHierarchy();return device&&h[device]?sorted(Object.keys(h[device])):[]}
+        function scopeNames(device,subdevice){var h=importedHierarchy();return device&&subdevice&&h[device]&&h[device][subdevice]?sorted(h[device][subdevice]):[]}
+        function keepValue(select,value){if(value&&Array.from(select.options).some(function(o){return o.value===value}))select.value=value}
+
+        var baseFieldChanged=scopeFieldChanged;
+        renderScopeForm=function(){
+          ensureState();
+          var customerEl=document.getElementById('scopeCustomer'),deviceEl=document.getElementById('scopeEquipment'),subEl=document.getElementById('scopeSubcomponent'),scopeEl=document.getElementById('scopeSavedScope');
+          if(!customerEl||!deviceEl||!subEl||!scopeEl)return;
+          var cv=customerEl.value,dv=deviceEl.value,sv=subEl.value,pv=scopeEl.value;
+          customerEl.innerHTML=customOptionsHtml(importedCustomers(),cv,'Select customer');keepValue(customerEl,cv);
+          deviceEl.innerHTML=customOptionsHtml(deviceNames(),dv,'Select device');keepValue(deviceEl,dv);
+          var selectedDevice=deviceEl.value;
+          var subs=selectedDevice&&selectedDevice!=='__custom__'?subDeviceNames(selectedDevice):[];
+          subEl.innerHTML=customOptionsHtml(subs,sv,'Select SubDevice');keepValue(subEl,sv);
+          var selectedSub=subEl.value;
+          var scopes=selectedDevice&&selectedSub&&selectedDevice!=='__custom__'&&selectedSub!=='__custom__'?scopeNames(selectedDevice,selectedSub):[];
+          scopeEl.innerHTML=scopeOptionHtml(scopes,pv);keepValue(scopeEl,pv);
+          baseFieldChanged('customer');baseFieldChanged('device');baseFieldChanged('subdevice');baseFieldChanged('scope');
+        };
+        scopeFieldChanged=function(which){
+          baseFieldChanged(which);
+          if(which==='device'){
+            document.getElementById('scopeSubcomponent').value='';
+            document.getElementById('scopeSavedScope').value='';
+            renderScopeForm();
+          }else if(which==='subdevice'){
+            document.getElementById('scopeSavedScope').value='';
+            renderScopeForm();
+          }
+        };
+
+        editScopeTemplate=function(id){
+          var t=(state.scopeTemplates||[]).find(function(x){return x.id===id});if(!t)return;
+          setTab('scope');renderScopeForm();
+          document.getElementById('scopeCustomer').value=t.customer||'';
+          document.getElementById('scopeEquipment').value=t.equipment_type||'';
+          renderScopeForm();
+          document.getElementById('scopeSubcomponent').value=t.subcomponent||'';
+          renderScopeForm();
+          document.getElementById('scopeSavedScope').value=t.scope_phrase||'';
+          document.getElementById('scopeComments').value=t.comments||'';
+          document.getElementById('scopeEditingId').value=t.id;
+          baseFieldChanged('customer');baseFieldChanged('device');baseFieldChanged('subdevice');baseFieldChanged('scope');
+          window.scrollTo({top:0,behavior:'smooth'});
+        };
+
+        renderScopeFilters=function(){
+          var fc=document.getElementById('scopeFilterCustomer'),fd=document.getElementById('scopeFilterEquipment'),fs=document.getElementById('scopeFilterSubcomponent');if(!fc||!fd||!fs)return;
+          var cv=fc.value,dv=fd.value,sv=fs.value;
+          fc.innerHTML='<option value="">All customers</option>'+importedCustomers().map(function(x){return '<option value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>'}).join('');keepValue(fc,cv);
+          fd.innerHTML='<option value="">All devices</option>'+deviceNames().map(function(x){return '<option value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>'}).join('');keepValue(fd,dv);
+          var activeDevice=fd.value;
+          var subs=activeDevice?subDeviceNames(activeDevice):[];
+          fs.innerHTML='<option value="">All SubDevices</option>'+subs.map(function(x){return '<option value="'+escapeHtml(x)+'">'+escapeHtml(x)+'</option>'}).join('');keepValue(fs,sv);
+          fc.onchange=function(){renderScopeLibrary()};
+          fd.onchange=function(){fs.value='';renderScopeFilters();renderScopeLibrary()};
+          fs.onchange=function(){renderScopeLibrary()};
+        };
+
+        function renderManualReferences(){
+          var device=document.getElementById('fDevice'),sub=document.getElementById('fSubDevice');if(!device||!sub)return;
+          var dv=device.value,sv=sub.value;
+          device.innerHTML=optionsHtml(deviceNames(),dv,'Select device');keepValue(device,dv);
+          sub.innerHTML=optionsHtml(device.value?subDeviceNames(device.value):[],sv,'Select subdevice');keepValue(sub,sv);
+          device.onchange=function(){sub.innerHTML=optionsHtml(subDeviceNames(device.value),'','Select subdevice')};
+        }
+        refreshReferenceControls=renderManualReferences;
+
+        var baseManualTemplateList=renderManualTemplateList;
+        renderManualTemplateList=function(){
+          var device=document.getElementById('fDevice')&&document.getElementById('fDevice').value||'';
+          var sub=document.getElementById('fSubDevice')&&document.getElementById('fSubDevice').value||'';
+          if(!device&&!sub)return baseManualTemplateList();
+          var q=(document.getElementById('manualTemplateSearch').value||'').toLowerCase();
+          var list=(state.scopeTemplates||[]).filter(function(t){return (!device||t.equipment_type===device)&&(!sub||t.subcomponent===sub)&&(!q||[t.customer,t.equipment_type,t.subcomponent,t.scope_phrase,t.comments].join(' ').toLowerCase().includes(q))});
+          document.getElementById('manualTemplateList').innerHTML=list.length?list.map(function(t){return '<div class="lead-row"><div><b>'+escapeHtml(t.subcomponent||'Scope')+'</b><small>'+escapeHtml(t.customer)+' → '+escapeHtml(t.equipment_type)+' → '+escapeHtml(t.subcomponent)+'</small><small>'+escapeHtml(t.scope_phrase)+'</small>'+(t.comments?'<small>Comments: '+escapeHtml(t.comments)+'</small>':'')+'</div><button class="btn small primary" onclick="addTemplateToManualById(\\''+t.id+'\\')">Use</button></div>'}).join(''):'<div class="action">No scope templates match this Device / SubDevice.</div>';
+        };
+
+        var baseLoadCloud=loadCloud;
+        loadCloud=async function(){await baseLoadCloud();renderScopeForm();renderScopeFilters();renderManualReferences()};
+        var hint=document.querySelector('#scopeView .panel .hint');
+        if(hint)hint.innerHTML='Customer → Device → SubDevice → Scope. Device, SubDevice, and Scope choices come from the exact combinations already imported or saved. A scope observed under one SubDevice is not offered under another.';
+        renderScopeForm();renderScopeFilters();renderManualReferences();renderScopeLibrary();
       })();`;
       doc.body.appendChild(script);
       const controls=Array.from(doc.querySelectorAll<HTMLElement>("button,[role='tab'],a"));
       const target=controls.find(el=>el.textContent?.trim()==="Scope Templates");
-      if(target){target.click();setStatus("Scope Templates · grouped device catalog loaded")}else setStatus("BW Dashboard loaded — choose Scope Templates");
+      if(target){target.click();setStatus("Scope Templates · imported Device → SubDevice → Scope mapping active")}else setStatus("BW Dashboard loaded — choose Scope Templates");
     }catch{setStatus("BW Dashboard loaded")}
   };
 
@@ -78,6 +136,6 @@ export default function ScopeTemplatesPage() {
       <div><div style={{fontSize:10,letterSpacing:".12em",color:"#707987",fontWeight:800}}>MASTER HUB · BILLED WORK</div><strong style={{fontSize:18}}>Scope Templates</strong><div style={{fontSize:11,color:"#8b94a3",marginTop:2}}>{status}</div></div>
       <Link href="/" style={{color:"#aaa0f3",textDecoration:"none",fontWeight:800,whiteSpace:"nowrap",fontSize:12}}>← Master Hub</Link>
     </header>
-    <iframe title="Master Hub Scope Templates" src="/bw-dashboard.html" onLoad={e=>installCatalog(e.currentTarget)} style={{display:"block",width:"100%",height:"100%",minHeight:"calc(100vh - 72px)",border:0,background:"#0a0f14"}}/>
+    <iframe title="Master Hub Scope Templates" src="/bw-dashboard.html" onLoad={e=>installHierarchy(e.currentTarget)} style={{display:"block",width:"100%",height:"100%",minHeight:"calc(100vh - 72px)",border:0,background:"#0a0f14"}}/>
   </main>
 }
