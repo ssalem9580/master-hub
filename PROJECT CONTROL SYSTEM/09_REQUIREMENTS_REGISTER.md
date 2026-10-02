@@ -79,10 +79,10 @@ PRIORITY: Medium
 MVP: YES
 DESCRIPTION: Master Hub provides direct access to project-control status.
 ACCEPTANCE CRITERIA: /project-control route exists and is registered in Master Hub.
-IMPLEMENTATION STATUS: IMPLEMENTED IN THIS CHANGE
-TEST STATUS: OPEN
-VERIFICATION STATUS: OPEN
-FINAL STATUS: OPEN
+IMPLEMENTATION STATUS: IMPLEMENTED / SOURCE-BOUND
+TEST STATUS: PASS
+VERIFICATION STATUS: VERIFIED IN PRODUCTION
+FINAL STATUS: FINALIZED / OWNER ACCEPTED
 
 ## REQ-008 — Bidirectional traceability
 SOURCE: User
@@ -264,3 +264,53 @@ IMPLEMENTATION STATUS: CLASSIFICATION IMPLEMENTED
 TEST STATUS: EXPOSURE VERIFIED
 VERIFICATION STATUS: SECURITY BOUNDARY VERIFIED
 FINAL STATUS: ACCEPTED — SECURITY-BOUNDARY-1.0 / CONTAINMENT OPEN
+
+## REQ-016 — Project Operations & Queue control
+SOURCE: Project Owner Project Operations prompt
+TYPE: Business / Documentation / Operational Control
+PRIORITY: High
+MVP: YES
+DESCRIPTION: Maintain one Master Hub operations-control system for queue, build/deployment, bugs/testing, ideas, security/restricted data, data/integrations, UI/UX, and release history.
+ACCEPTANCE CRITERIA:
+- AC-016A GIVEN active project work WHEN status is reviewed THEN one canonical operational queue distinguishes queued, active, blocked, review, finalized, rejected and deferred work.
+- AC-016B GIVEN an implementation or release WHEN status is reported THEN built, deployed, verified and finalized remain distinct states.
+- AC-016C GIVEN owner finalization WHEN recorded THEN the queue/release state preserves independent open issues rather than silently closing them.
+DEPENDENCIES: Project Control System; Current State; Queue; Changelog; releases.
+IMPLEMENTATION STATUS: IMPLEMENTED
+TEST STATUS: VERIFIED BY CANONICAL OPERATIONS RECORDS
+VERIFICATION STATUS: VERIFIED / OWNER ACCEPTED
+FINAL STATUS: FINALIZED — PROJECT-OPS-1.0
+
+## REQ-017 — Scope Templates as Master Hub section
+SOURCE: Project Owner Scope Templates direction
+TYPE: Functional / Integration / UX
+PRIORITY: High
+MVP: YES
+DESCRIPTION: Surface reusable Scope Templates from the existing Billed Work workflow as a Master Hub section without creating a duplicate standalone tool or losing existing data behavior.
+ACCEPTANCE CRITERIA:
+- AC-017A GIVEN Master Hub WHEN Scope Templates is opened THEN the canonical `/scope-templates` route loads successfully.
+- AC-017B GIVEN the existing Billed Work data path WHEN Scope Templates loads THEN it continues to use the existing dashboard/auth/data behavior rather than a duplicate store.
+DEPENDENCIES: BW dashboard; existing Billed Work data/auth behavior.
+IMPLEMENTATION STATUS: IMPLEMENTED
+TEST STATUS: LIVE ROUTE VERIFIED
+VERIFICATION STATUS: VERIFIED LIVE SECTION
+FINAL STATUS: IMPLEMENTED / LIVE
+
+## REQ-018 — Exact Device → SubDevice → Scope isolation
+SOURCE: Project Owner exact grouping instruction and explicit `promote to verified/finalized`
+TYPE: Functional / Data Integrity / UX
+PRIORITY: High
+MVP: YES
+DESCRIPTION: Every imported or saved scope must remain inside the exact Device and SubDevice grouping where it was found; incompatible scopes must not be offered, selected, manually used, or attached across groups.
+ACCEPTANCE CRITERIA:
+- AC-018A GIVEN imported/saved records across multiple Devices and SubDevices WHEN a Device is selected THEN only SubDevices belonging to that Device are selectable.
+- AC-018B GIVEN a Device and SubDevice selection WHEN scope choices are rendered THEN only scopes found/saved under that exact pair are offered.
+- AC-018C GIVEN manual scope-template selection WHEN a Device/SubDevice is selected THEN only templates compatible with that exact pair are available.
+- AC-018D GIVEN a scope template WHEN attach-to-lead candidates are shown THEN only leads with the same Device/SubDevice are offered.
+- AC-018E GIVEN an incompatible direct attachment attempt WHEN attachment is executed THEN it is blocked.
+- AC-018F GIVEN normalized case/spacing variants WHEN grouping is built THEN equivalent Device/SubDevice names resolve to one logical grouping.
+DEPENDENCIES: FEAT-011 Scope Templates; Billed Work imported/reconciled data; scope templates; CI; canonical Vercel production.
+IMPLEMENTATION STATUS: IMPLEMENTED
+TEST STATUS: PASS — CI `36949404777` regression coverage
+VERIFICATION STATUS: VERIFIED IN PRODUCTION — `/scope-templates` and `/bw-dashboard.html` HTTP 200; production JS artifact contains exact grouping and cross-group blocking logic
+FINAL STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED — SCOPE-ISOLATION-1.0
