@@ -355,3 +355,18 @@ NEXT:
 2. Deploy the two pending Project Control operations commits when Vercel capacity clears.
 3. Verify production again.
 4. Checkpoint finalization approved by Project Owner on 2026-10-01. Open implementation/test items remain tracked separately and are not implicitly finalized.
+
+## BW-LEAD-SCOPE-1.0 Owner Finalization Checkpoint — 2026-10-02
+STATUS: OWNER FINALIZED / SOURCE+AUTOMATED+READY-PREVIEW VERIFIED / CANONICAL PRODUCTION PROMOTION BLOCKED
+DECISION: DEC-018
+REQUIREMENT: REQ-019 with REQ-018 preserved
+DEFECT: DEF-011
+PR: #15
+SOURCE MERGE: `1af17aae26d43309fbf913c6878b0fc52278295b`
+REDEPLOY TRIGGER: `ad01245bb5864eec6869d7028e5f9ab6056e524a`
+PR CI: `36981871706` PASS
+POST-MERGE CI: `36981972545` PASS
+READY PREVIEW: `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP`
+LIVE PREVIEW VERIFIED: `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` HTTP 200; dashboard loads centralized isolation script.
+PRODUCTION BLOCKER: Vercel `build-rate-limit`; existing production remains on prior commit. A no-rebuild promotion was attempted through GitHub Actions but no `VERCEL_TOKEN` secret is configured, so no production change occurred.
+RULE: Owner acceptance/finalized behavior is complete. Production must remain labeled PENDING/BLOCKED until canonical alias verification passes.

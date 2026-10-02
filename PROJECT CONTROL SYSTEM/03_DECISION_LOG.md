@@ -258,3 +258,18 @@ SUPERSEDES: Proposed-only quarantine/classification state.
 SUPERSEDED BY:
 REVIEW REQUIRED: YES before moving canonical restricted source, changing repository visibility, rewriting public history, or retiring public deployments.
 APPROVED BY: Project Owner
+
+## DEC-018
+DATE: 2026-10-02
+TITLE: Finalize Scope workflow within the BW Lead tool
+STATUS: APPROVED
+QUESTION: Should the Scope workflow inside the direct BW Lead dashboard be owner-finalized using the already-finalized SCOPE-ISOLATION-1.0 rules?
+DECISION: Yes. BW-LEAD-SCOPE-1.0 is owner-finalized as the direct BW Lead application of SCOPE-ISOLATION-1.0. The direct dashboard must load the same centralized Device → SubDevice → Scope isolation engine used by `/scope-templates`; no second matching system is created. Source, automated regression and a READY live preview are verified. Canonical production promotion remains BLOCKED by the Vercel account build-rate limit and must not be represented as production-verified until the canonical alias serves this release.
+WHY: Owner explicitly requested `finilize scope within BW Lead tool` and then gave final approval. Finalization review found a real surface gap: `/scope-templates` injected the central isolation layer, but direct `/bw-dashboard.html` did not self-load it. The gap was repaired centrally and verified before acceptance.
+ALTERNATIVES CONSIDERED: Falsely finalize without fixing the direct dashboard; duplicate the scope-isolation logic inside the static dashboard; redesign the BW tool.
+EVIDENCE: PR #15; product commit `3e58cd05cc5c401b7599a7bec190366c80585ed1`; merge commit `1af17aae26d43309fbf913c6878b0fc52278295b`; PR CI `36981871706` PASS; post-merge CI `36981972545` PASS; READY preview `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP`; preview `/api/scope-isolation`, `/bw-dashboard.html`, `/scope-templates` HTTP 200; canonical production deployment remains on earlier commit because Vercel rejected production builds at build-rate limit.
+AFFECTED AREAS: BW Lead Scope tab, Scope Templates, Manual Entry template picker, Attach to BW Lead, scope records, direct BW dashboard bootstrap.
+SUPERSEDES: Direct-BW-dashboard activation gap only. Does NOT supersede SCOPE-ISOLATION-1.0.
+SUPERSEDED BY:
+REVIEW REQUIRED: NO for owner acceptance/finalized behavior. YES only for future behavior changes. Production promotion remains an operational deployment task, not a new product decision.
+APPROVED BY: Project Owner

@@ -314,3 +314,20 @@ IMPLEMENTATION STATUS: IMPLEMENTED
 TEST STATUS: PASS — CI `36949404777` regression coverage
 VERIFICATION STATUS: VERIFIED IN PRODUCTION — `/scope-templates` and `/bw-dashboard.html` HTTP 200; production JS artifact contains exact grouping and cross-group blocking logic
 FINAL STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED — SCOPE-ISOLATION-1.0
+
+## REQ-019 — Direct BW Lead Scope isolation activation
+SOURCE: Project Owner / DEC-018 / SCOPE-ISOLATION-1.0
+TYPE: Functional / Data Integrity / Integration
+PRIORITY: High
+MVP: YES
+DESCRIPTION: The direct BW Lead dashboard Scope workflow must load and enforce the same centralized Device → SubDevice → Scope isolation engine as the dedicated `/scope-templates` route.
+ACCEPTANCE CRITERIA:
+- AC-019A GIVEN direct `/bw-dashboard.html` WHEN it loads THEN the centralized `scopeIsolationScript` is loaded without duplicating its matching logic.
+- AC-019B GIVEN the direct BW Scope tab WHEN Device/SubDevice/Scope workflows are used THEN finalized REQ-018 selection, manual-picker and attachment isolation rules remain active.
+- AC-019C GIVEN a future change to SCOPE-ISOLATION-1.0 logic WHEN either BW Scope surface loads THEN both consume the same centralized implementation rather than divergent copies.
+- AC-019D GIVEN release verification WHEN owner finalization is recorded THEN source/CI/preview verification and canonical-production status are reported separately.
+DEPENDENCIES: REQ-018; `scope-isolation-script.ts`; BW dashboard; Next.js API route; Vercel.
+IMPLEMENTATION STATUS: IMPLEMENTED ON MAIN
+TEST STATUS: PASS — source/CI/READY preview
+VERIFICATION STATUS: VERIFIED SOURCE + AUTOMATED + LIVE PREVIEW; CANONICAL PRODUCTION PROMOTION BLOCKED
+FINAL STATUS: OWNER ACCEPTED / FINALIZED BEHAVIOR — BW-LEAD-SCOPE-1.0; PRODUCTION ACTIVATION PENDING

@@ -21,6 +21,8 @@
 | REQ-017 | Project Owner Scope Templates direction | Approved implementation history | FEAT-011 | /scope-templates route reusing BW dashboard | Live HTTP 200 | 7bf2465 + current production | IMPLEMENTED / LIVE SECTION |
 | REQ-018 | Project Owner exact Device/SubDevice grouping instruction | Owner explicit implementation request + explicit verified/finalized promotion | FEAT-012 | centralized scope-isolation script + strict selection/manual/attachment boundary | CI `36949404777` PASS; live `/scope-templates` and `/bw-dashboard.html` HTTP 200; production JS artifact contains exact grouping and cross-group blocking logic | `965a2b2` / `de9d82b` / `d1b857d`; production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf`; `RELEASES/SCOPE-ISOLATION-1.0.md` | VERIFIED / FINALIZED / OWNER ACCEPTED |
 
+| REQ-019 | Project Owner BW Lead Scope finalization | DEC-018 + SCOPE-ISOLATION-1.0 | FEAT-012 / direct BW Scope surface | direct BW dashboard loads centralized `/api/scope-isolation` engine | TEST-038/039/040 PASS; TEST-041 BLOCKED | PR #15; `1af17aa`; CI `36981871706` + `36981972545`; READY preview `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP` | OWNER FINALIZED / SOURCE+PREVIEW VERIFIED / PRODUCTION PROMOTION BLOCKED |
+
 ## Canonical Traceability Chain
 `User Need → Decision/Authority → Requirement → Feature → Implementation → Test → Evidence → Verification → Acceptance`
 
