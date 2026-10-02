@@ -68,11 +68,16 @@ describe("Scope Templates imported hierarchy", () => {
     fireEvent.load(iframe);
     const injected = Array.from(doc.querySelectorAll("script")).at(-1) as HTMLScriptElement;
     expect(injected?.textContent).toContain("importedHierarchy");
-    expect(() => win.eval(injected.textContent || "")).not.toThrow();
 
     const device = doc.getElementById("scopeEquipment") as HTMLSelectElement;
     const subdevice = doc.getElementById("scopeSubcomponent") as HTMLSelectElement;
     const scope = doc.getElementById("scopeSavedScope") as HTMLSelectElement;
+
+    // jsdom can execute an appended iframe script automatically. Only evaluate manually
+    // when the onLoad injection has not already populated the Device selector.
+    if (!values(device).includes("Vault")) {
+      expect(() => win.eval(injected.textContent || "")).not.toThrow();
+    }
 
     expect(values(device)).toEqual(expect.arrayContaining(["ATM", "Vault", "__custom__"]));
 
