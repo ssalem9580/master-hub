@@ -80,7 +80,7 @@ DATE: 2026-10-02
 VERSION: SCOPE-ISOLATION-RC
 AUTHORIZED BY: Project Owner exact grouping instruction
 RELATED FEATURE: FEAT-011 / FEAT-012
-RESULT: Scope isolation centralized and deployed at 965a2b2; stricter cross-group enforcement at de9d82b and regression test at d1b857d passed CI but are not yet verified in production.
+RESULT: Scope isolation centralized and deployed at 965a2b2; stricter cross-group enforcement at de9d82b and regression test at d1b857d passed CI but were awaiting production verification.
 
 ## CHANGE-013 — Controlled reconstruction refresh
 DATE: 2026-10-02
@@ -90,7 +90,7 @@ RELATED DECISION: DEC-012 and finalized governance authority
 RELATED FEATURE: FEAT-001 through FEAT-012 as applicable
 FILES AFFECTED: Current State, Operations Queue, Feature Register, Traceability Matrix, Changelog, Reconstruction Evidence Ledger
 REASON: Reconcile Git history, finalized releases, decisions, queue items and live/current routes without inventing unknown state.
-RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health, restricted-data containment, and un-deployed strict scope changes remain explicitly open.
+RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health, restricted-data containment, and then-un-deployed strict scope changes remained explicitly open.
 
 ## CHANGE-014 — Remediation Wave 1 finalized
 DATE: 2026-10-02
@@ -99,4 +99,14 @@ AUTHORIZED BY: Project Owner — explicit `yes` after Wave-1 review
 RELATED FEATURE: Project Control Center / Operations Queue
 FILES AFFECTED: `06_CURRENT_STATE.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `/project-control`, this changelog
 REASON: Finalize the first remediation wave that reconciled canonical project truth, corrected DEF-010 state drift, and source-bound Project Control operational status.
-RESULT: Wave-1 source/control scope is OWNER ACCEPTED / FINALIZED. GitHub Actions run `36951330664` passed install, lint, tests and production build. Current Vercel production remains at `965a2b2` because newer automatic deployments are blocked by build-rate limiting, so this entry is not a production-release claim. Strict scope production verification, restricted-data containment, duplicate Vercel cleanup, Recovery Value restoration and standalone-source recovery remain open.
+RESULT: Wave-1 source/control scope is OWNER ACCEPTED / FINALIZED. GitHub Actions run `36951330664` passed install, lint, tests and production build. Subsequent production deployment `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` verified the source-bound Project Control output live.
+
+## CHANGE-015 — Scope Isolation 1.0 verified and finalized
+DATE: 2026-10-02 UTC / 2026-10-01 CDT
+VERSION: SCOPE-ISOLATION-1.0
+AUTHORIZED BY: Project Owner — explicit `promote to verified/finalized`
+RELATED REQUIREMENT: REQ-018
+RELATED FEATURE: FEAT-012
+FILES AFFECTED: Scope Templates isolation implementation/test lineage, Feature Register, Current State, Operations Queue, Traceability Matrix, Release record, this changelog
+REASON: Promote strict Device → SubDevice → Scope grouping from tested/pending-production to verified/finalized after production evidence became available.
+RESULT: GitHub Actions `36949404777` passed install/lint/tests/build; Vercel production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` is READY at `1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5`; live `/scope-templates` and `/bw-dashboard.html` return HTTP 200; the production JavaScript artifact contains exact Device/SubDevice filtering and explicit cross-group attachment blocking logic. `SCOPE-ISOLATION-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. Restricted-data containment and other independent open items remain open.
