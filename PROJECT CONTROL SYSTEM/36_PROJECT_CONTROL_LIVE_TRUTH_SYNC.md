@@ -1,9 +1,9 @@
 # 36 — Project Control Live Truth Sync
 
 DATE: 2026-10-02
-STATUS: IN DEVELOPMENT / SOURCE IMPLEMENTED / PRODUCTION VERIFICATION PENDING
-VERSION: PROJECT-CONTROL-LIVE-TRUTH-RC1
-AUTHORITY: Project Owner explicit `yes` after review of Project Control Center staleness
+STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
+VERSION: PROJECT-CONTROL-LIVE-TRUTH-1.0
+AUTHORITY: Project Owner explicit `yes` in response to `Finalize this update?`
 RELATED: QUEUE-006 / CHANGE-022
 
 ## Purpose
@@ -14,7 +14,7 @@ The live Project Control Center was healthy (HTTP 200) but its build-time snapsh
 
 The page also hard-coded only records 01 through 22 even though later canonical Project Control evidence/checkpoint records exist.
 
-## Source implementation
+## Implemented behavior
 The Project Control Center now:
 - discovers all Markdown records in `PROJECT CONTROL SYSTEM` at build time instead of hard-coding only records 01–22;
 - groups core records, later evidence/checkpoints, and 00-series supporting evidence/plans separately;
@@ -28,8 +28,18 @@ The Project Control Center now:
 ## Runtime dependency
 The live repository-head check uses GitHub's public commit API for `ssalem9580/master-hub/main`. If that request is unavailable or rate-limited, the page reports `CURRENT MAIN CHECK UNAVAILABLE` instead of inventing a source status. Build-time canonical records remain visible.
 
+## Verification evidence
+- Implementation commit: `6223f506eea66c8a01a4ada2ab29d07270492d18`.
+- GitHub Actions: `36975666263` — completed successfully.
+- Vercel production deployment: `dpl_9TqmftuuGbn1d6cQq5P1Kj162rv2` — READY at the exact implementation commit.
+- Canonical alias: `https://master-hub-sigma.vercel.app`.
+- `/project-control`: HTTP 200 on the canonical alias.
+- Production output shows 40 discovered Project Control records and includes later evidence/checkpoint records 28, 29, 31, 32, 33, 34, 35 and this record 36.
+- Production JavaScript contains the runtime GitHub-main check and all three relationship states: source ahead, served build ahead of the last verified record, and fully aligned.
+- At verification time, current GitHub `main` and the served production revision matched `6223f506...`, while the build-time canonical snapshot still identified `e6470da8...` / `dpl_6fML...` as the last verified production record; the live checker correctly represents that distinction instead of collapsing the values.
+
 ## Safety boundary
-This change does not:
+This finalization does not:
 - change finalized product workflows;
 - alter restricted field-service data;
 - remove or expose additional restricted source;
@@ -37,13 +47,5 @@ This change does not:
 - promote Recovery Value Calculator to production;
 - rewrite Git history or retire deployments.
 
-## Verification gate
-Required before finalization:
-1. GitHub lint/test/build passes on the implementation commit.
-2. A Vercel production deployment containing this change reaches READY.
-3. `/project-control` returns HTTP 200 from the canonical alias.
-4. The live page reports the correct relationship among GitHub main, served revision, and last verified production record.
-5. The page shows later control records, including 28, 29, 31, 32, 33, 34, 35, and this record 36.
-
-## Current result
-SOURCE IMPLEMENTED. Production verification is pending and must not be claimed until a new production build succeeds. The known Vercel daily deployment-rate limit may delay that verification.
+## Final result
+`PROJECT-CONTROL-LIVE-TRUTH-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED. Independent security, restricted-data preservation, Recovery Value restoration, standalone-source recovery and Vercel cleanup work remain open under their own gates.
