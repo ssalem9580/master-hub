@@ -1,213 +1,113 @@
 # 06 — Current State
 
-DATE: 2026-10-01
+DATE: 2026-10-02
+STATUS: CONTROLLED RECONSTRUCTION SNAPSHOT — READY FOR REVIEW
 
-CURRENT PHASE: MASTERHUB RECONSTRUCTION & REALITY AUDIT — HARDENING WAVE 1 RELEASED
-GOVERNANCE BASELINE: CONTROL-BASELINE-1.0 — FINALIZED
-FROZEN GOVERNANCE REFERENCE: baseline/governance-control-1.0
-FROZEN HARDENING REFERENCE: baseline/security-quality-1.0
-FROZEN SECURITY-BOUNDARY REFERENCE: baseline/security-boundary-1.0
-CANONICAL REPOSITORY: ssalem9580/master-hub
-CANONICAL BRANCH: main
-AUDIT-START MAIN SHA: e8ca3dac4825cd8af0b3427678cd67b4854b61
-ACTIVE AUDIT BRANCH: audit/masterhub-reconstruction-reality-20260930
-ACTIVE HARDENING BRANCH: hardening/security-quality-20260930
-HARDENING PR: #2 — MERGED
+## Authority
+- Canonical repository: `ssalem9580/master-hub`
+- Canonical branch: `main`
+- Governance baseline: `CONTROL-BASELINE-1.0` — FINALIZED
+- Project Operations: `PROJECT-OPS-1.0` — FINALIZED / OWNER ACCEPTED
+- Security/quality baseline: `SECURITY-QUALITY-1.0` — VERIFIED / OWNER ACCEPTED / RELEASED
+- Restricted-content classification: `SECURITY-BOUNDARY-1.0` — FINALIZED CLASSIFICATION / CONTAINMENT OPEN
 
-CURRENT STEP:
-MASTER HUB — PROJECT OPERATIONS & QUEUE control mode is active. Current operational work is tracked in 22_PROJECT_OPERATIONS_QUEUE.md.
+## Reconstruction Basis
+This snapshot was reconstructed only from Git history, finalized release records, approved Decision Log entries, the canonical Operations Queue, the current app route tree, current GitHub CI evidence, and current Vercel/live-route evidence. Unsupported historical detail remains `UNKNOWN / NEEDS CONFIRMATION`.
 
-NEXT CONTROLLED ACTION:
-Live-retest the deployed Repair Package Part # auto-fill workflow, then deploy and verify the two pending Project Control operations commits when Vercel build capacity clears, while preserving the critical restricted-data containment gate.
+## Source Reality
+- Reconstructed product-code head before this documentation commit: `d1b857dc5c6fb6cf9239d3d68557a43077b2c097` — `Test strict scope grouping and attachment isolation`.
+- Parent implementation commits: `de9d82be08daa1f20f7e95ba5583a5a59977340b` — strict Device/SubDevice boundary enforcement; `965a2b2e6ea15b053e2d60ca4c76802bcd3d5755` — centralized Device/SubDevice scope isolation.
+- GitHub Actions run `36949404777` for `d1b857d` passed install, lint, tests, and production build.
+- `main` is currently not branch-protected; GitHub reports `protected=false` and required-status-check enforcement off.
 
-PRODUCT IDENTITY:
-Master Hub command center / application registry / project operating system.
+## Production Reality
+- Canonical Vercel project: `master-hub`
+- Canonical alias: `https://master-hub-sigma.vercel.app`
+- Observed production deployment: `dpl_2Mtpv99iSHbBfPtNsUFU43Z1R59z`
+- Observed production commit: `965a2b2e6ea15b053e2d60ca4c76802bcd3d5755`
+- Production state: `READY`
+- Product source is ahead of observed production by 2 commits: `de9d82b`, `d1b857d`.
+- Safe prior READY rollback candidate: `dpl_FQ56GB4NKryTiPUQQj1kSdEb35qg` at `7b851a60faaaf9fdfe53221f4c01d3b2da65db6c`.
 
-CURRENT MVP:
-Existing command center + key internal tools + external app registry + Project Control System.
+## Current Internal Routes
+Source-present and freshly verified HTTP 200 on the canonical production alias:
+- `/`
+- `/project-control`
+- `/field-resource-hub`
+- `/field-diagnostic-hub`
+- `/finances-command-center`
+- `/repair-packages`
+- `/scope-templates`
 
-IMPLEMENTED:
-- Master Hub dashboard/directory/actions
-- Project Control Center
-- Field Resource Hub
-- Field Diagnostic Hub route + static diagnostic asset
-- Finances Command Center
-- Repair Packages
-- Vercel build bridge/configuration
-- Project Control System
-- AI Idea Master Template governance operating system
+This supersedes older six-route snapshots. Scope Templates is now an established Master Hub section.
 
-SOURCE-VERIFIED ROUTES:
-- /
-- /project-control
-- /field-resource-hub
-- /field-diagnostic-hub
-- /finances-command-center
-- /repair-packages
+## Master Hub Root Reality
+The live root currently renders:
+- 10 workspace cards marked `Live`
+- 0 `Setup needed`
+- Project Operations marked `FINALIZED`
+- Field Diagnostic Hub marked `Live`
+- Scope Templates marked `Live`
 
-LIVE ROUTE AVAILABILITY:
-- All six internal canonical routes returned HTTP 200 on the canonical production alias.
+These UI labels are static registry metadata, not a complete health-monitoring system. Recovery Value Calculator is still displayed as `Live`, but its configured public URL was freshly verified HTTP 404 on 2026-10-02. Therefore global registry health remains PARTIAL and REQ-005 remains open.
 
-PERSISTENCE REALITY:
-- Master Hub actions: browser localStorage
-- Finances profile: browser localStorage
-- Repair Packages / Parts Library: browser localStorage
-- Project-wide server database: UNKNOWN / NEEDS CONFIRMATION for standalone/external tools
+## Repair Packages / DEF-010
+- `DEF-010` is `VERIFIED` in the canonical Defect Register.
+- Evidence includes automated interaction coverage for exact Part # `11066404000A` → expected name/cost → add → total → save → localStorage persistence/remount restore, CI success, a READY production deployment containing the stabilized component, and current `/repair-packages` HTTP 200 with the lookup UI.
+- The old Operations Queue and Project Control UI text saying DEF-010 still needs an end-to-end retest is stale and is superseded by this reconstruction plus the Defect Register.
+- Separate manual human browser click-through evidence is `UNKNOWN / NEEDS CONFIRMATION`; it is not required to downgrade the verified automated defect status.
+- Owner finalization of the Repair Package update is still separate from defect verification and remains NOT FINALIZED unless explicitly approved.
 
-BUILD / CI:
-- Canonical main uses Next.js 16.3.8 and eslint-config-next 16.3.8 with a regenerated lockfile.
-- GitHub Actions requires npm ci → npm run lint → npm test → npm run build.
-- Pre-merge verification passed on the hardening branch.
-- Post-merge GitHub Actions run 36811990043 passed install, lint, tests, and production build on merge commit f81fd436a8df50ac0da93ec3c93ec26d09e0badf.
-- Duplicate linked Vercel projects still produce separate rate-limit failures and remain an open cleanup issue.
+## Scope Templates / Device → SubDevice Isolation
+- `/scope-templates` is present in source and live HTTP 200.
+- Scope Templates was finalized as a Master Hub section in commit `7bf24652e55eb40b38197bc5fd87913d73e96ee2` and later expanded with imported Device/SubDevice hierarchy behavior.
+- Production currently contains the centralized isolation version at `965a2b2`.
+- Latest source adds stricter exact Device → SubDevice → Scope selection and cross-group attachment blocking in `de9d82b`, with regression coverage in `d1b857d`.
+- CI for latest source is PASS.
+- Strictest `de9d82b`/`d1b857d` behavior is NOT YET VERIFIED IN PRODUCTION because observed production is still at `965a2b2`.
 
-TEST REALITY:
-- Vitest suite is aligned to the current approved MasterHub UI.
-- hub-data tests pass.
-- current UI directory search, action capture, importance toggle, and delete flows pass.
-- Lint passes after correcting verified React/TypeScript violations in Finances, Repair Packages, and MasterHub.
-- Production build passes under Next.js 16.3.8.
+## Finalized Releases Preserved
+- `CONTROL-BASELINE-1.0` — finalized governance baseline; frozen reference `baseline/governance-control-1.0`.
+- `SECURITY-QUALITY-1.0` — released and owner accepted; Next.js 16.3.8 and lint/test/build CI gate activated.
+- `SECURITY-BOUNDARY-1.0` — classification finalized; physical containment explicitly remains open.
+- `PROJECT-OPS-1.0` — finalized / owner accepted.
 
-CANONICAL PRODUCTION:
-- Vercel project: master-hub
-- Canonical alias: master-hub-sigma.vercel.app
-- Current observed production deployment: dpl_8LG2LPLHUmbDjqaqe4N87tKDeo6R
-- Current observed production commit: 601b90def0eaa8935807f6fab200f68b9dc742c3
-- Production state: READY
-- Latest main commit: 9ae344be59153103accfcaf030aeba06c07c584d
-- Production is BEHIND main by 2 commits.
-- Repair Package master-parts source and Part # lookup code are now present in production; interactive end-to-end retest remains open.
-- Pending main commits are limited to Project Operations / Project Control updates e4b81c2 and 9ae344b.
-- Vercel currently reports build-rate limiting for the newest main state; those two pending commits are NOT VERIFIED IN PRODUCTION.
+## Security / Restricted Data
+- Master Hub is intentionally public/no-login under DEC-015.
+- All field-service operational material is RESTRICTED by default under DEC-016.
+- Existing restricted content on public source/routes/deployments remains `OPEN — CRITICAL` under DEF-009 / ISSUE-005.
+- Private canonical preservation has not been verified.
+- Public-history cleanup has not been completed.
+- No destructive containment, history rewrite, repository visibility change, or Vercel retirement is authorized by this reconstruction pass.
 
-VERCEL PROJECT REALITY:
-Nine connected projects exist. Duplicate/legacy candidates include:
-- master-hub-live
-- field-diagnostic-hub and field-diagnostic-hub-live overlap
-- job-quote-calculator and job-quote-calculator-live overlap
-No duplicates have been deleted or disconnected.
+## Known Open Issues Preserved
+- Historical reconstruction long tail remains incomplete beyond evidence reviewed in this pass.
+- Duplicate/cross-linked Vercel projects remain unresolved.
+- AI Idea Master Template remains incomplete at Part 29 after `Field definitions`.
+- Project Control Center is not source-bound and can display stale static text.
+- Recovery Value Calculator configured URL remains HTTP 404.
+- Standalone-tool canonical source/backup ownership remains incomplete.
+- Recovery Value recovered source remains stranded outside canonical main.
+- Main/baseline GitHub protection remains absent.
+- Restricted field-service public exposure remains Critical.
 
-REGISTRY REALITY:
-- 9 hard-coded entries
-- 8 labeled Live
-- 1 labeled Setup needed
-- Live status is static metadata, not a runtime health check
-- Recovery Value Calculator configured URL currently returns HTTP 404
-- NTE Quote, Billed Work Tracker, Sam Hub, Finances Command Center, and MasterHub root have positive live evidence
-- Private Client and Illinois Locksmith Exam Prep remain UNKNOWN / NEEDS CONFIRMATION in this audit
+## Persistence Reality
+Verified from current architecture/history:
+- Master Hub actions: browser `localStorage`.
+- Finances Command Center profile: browser `localStorage` with auto-save behavior.
+- Repair Package drafts / local overrides / saved packages: browser `localStorage`.
+- Cross-device synchronization for those browser-local stores: NOT ESTABLISHED.
+- Project-wide database ownership for standalone/external tools: `UNKNOWN / NEEDS CONFIRMATION` unless separately documented.
 
-PROJECT CONTROL CENTER REALITY:
-- Route is implemented.
-- UI is static and does not read canonical Markdown at runtime.
-- Its current-phase text can drift from canonical records.
+## Unknown / Needs Confirmation
+- Complete deep historical reconstruction before the Project Control System existed.
+- Current source ownership/backup location for every standalone external tool.
+- Current health of every external registry target other than those explicitly rechecked.
+- Whether a manual human-browser DEF-010 click-through has been separately recorded.
+- Full database/RLS/integration ownership for every standalone tool.
 
-REPOSITORY VISIBILITY:
-PUBLIC
-
-RUNTIME HEALTH:
-- No Vercel runtime error clusters observed in selected 7-day window.
-- Sampled production status grouping showed HTTP 200 only.
-
-DEPENDENCY SECURITY:
-- Canonical main/production: Next.js 16.3.8 / eslint-config-next 16.3.8.
-- September 2026 security baseline: SATISFIED.
-- Release state: VERIFIED IN PRODUCTION.
-
-ACCESS CONTROL:
-- Canonical app routes are intentionally publicly reachable.
-- Application login is NOT REQUIRED under DEC-015.
-- "Private" means private-use / local-data privacy, not access-controlled site visibility.
-- Sensitive personal values, credentials, secrets, or restricted data must not be exposed merely because the application is public.
-- Any future server-side sensitive/personal-data architecture requires a new security review.
-
-SECURITY / DATA CLASSIFICATION:
-- Under DEC-016, all field-service diagnostic, repair, parts, procedural, and related operational material is RESTRICTED by default.
-- Current public repository/public routes therefore conflict with the approved distribution boundary.
-- Specific material may become public only through explicit Project Owner reclassification.
-- Restricted content must not be sent to external AI providers or newly published to public systems unless explicitly authorized.
-- Containment/remediation architecture is the next security priority.
-
-KNOWN DEFECTS:
-See 11_DEFECT_REGISTER.md.
-
-KNOWN RISKS:
-See 12_RISK_REGISTER.md.
-
-SOURCE OWNERSHIP:
-- Canonical MasterHub source: GitHub ssalem9580/master-hub.
-- Field Diagnostic current source: present inside MasterHub.
-- Recovery Value Calculator source: RECOVERED on codex/recovered-standalone-apps at 751a73b17bef47c47a2a0b9467560a197fef8f0f; absent from current main.
-- NTE Quote, Billed Work Tracker, Sam Hub source: not present in MasterHub and no matching installed GitHub repos found; recovery location UNKNOWN.
-
-REPOSITORY ENFORCEMENT:
-- main protected: false
-- baseline/governance-control-1.0 protected: false
-- repository rulesets observed: none
-- baseline freeze is policy/SHA based, not technically enforced
-
-RECOVERY VALUE RECOVERY POINT:
-- branch: codex/recovered-standalone-apps
-- source commit: 751a73b17bef47c47a2a0b9467560a197fef8f0f
-- source path: standalone-apps/recovery-value-calculator/index.html
-- branch README documents standalone Vercel Root Directory mapping
-
-OPEN DECISIONS:
-- Which duplicate Vercel projects are canonical versus legacy.
-- Restricted field-service containment architecture and public-history remediation.
-- Correct replacement/fix for Recovery Value Calculator public URL.
-- Whether Project Control Center should become source-bound to canonical records.
-- Full MVP acceptance boundary.
-- Source recovery/canonical repository assignment for standalone external tools.
-- Production restoration of Recovery Value from recovered branch source.
-- GitHub branch/ruleset enforcement for main and governance baseline.
-
-AUDIT ARTIFACT:
-00_MASTERHUB_RECONSTRUCTION_REALITY_AUDIT.md
-
-AUDIT STATUS:
-IN PROGRESS
-
-AUDIT REMEDIATION MATRIX: 00_AUDIT_REMEDIATION_PRIORITY_MATRIX.md
-INITIAL REALITY-AUDIT PASS: COMPLETE ENOUGH TO BEGIN CONTROLLED REMEDIATION PLANNING
-PRODUCT CODE CHANGED BY AUDIT: NO
-
-
-HARDENING RELEASE:
-- Release: SECURITY-QUALITY-1.0
-- PR: #2 — MERGED
-- Merge commit: f81fd436a8df50ac0da93ec3c93ec26d09e0badf
-- Post-merge GitHub Actions run: 36811990043 — PASS
-- Production deployment: dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 — READY
-- Install: PASS
-- Lint: PASS
-- Vitest: PASS
-- Build: PASS
-- Six canonical routes: HTTP 200
-- Runtime errors in one-hour post-release scan: NONE
-- Owner acceptance: RECORDED
-- Release record: RELEASES/SECURITY-QUALITY-1.0.md
-- Backup record: BACKUPS/SECURITY-QUALITY-1.0.md
-- Frozen recovery reference: baseline/security-quality-1.0
-
-
-SECURITY-BOUNDARY RELEASE:
-- Release: SECURITY-BOUNDARY-1.0
-- Classification: FINALIZED
-- Containment: OPEN / CRITICAL
-- Exposure inventory: VERIFIED
-- Private canonical destination: NOT YET ESTABLISHED
-- Destructive removal/history rewrite: NOT AUTHORIZED UNTIL PRIVATE PRESERVATION IS VERIFIED
-
-
-PROJECT OPERATIONS & QUEUE:
-- Canonical operational queue: 22_PROJECT_OPERATIONS_QUEUE.md
-- Control areas: Queue; Build & Deployment; Bugs & Testing; Ideas & Improvements; Security & Restricted Data; Data & Integrations; UI / UX; Release History.
-- Current checkpoint state: FINALIZED / OWNER ACCEPTED on 2026-10-01. This finalizes the checkpoint record only; pending Project Control deployment and Repair Package interactive retest remain open queue items.
-
-
-PROJECT-OPS-1.0 — FINALIZED:
-- Owner acceptance: RECORDED 2026-10-01.
-- QUEUE-009: FINALIZED.
-- Accepted live production lineage: ae61f5d → 20fb4e5.
-- Master Hub production: READY.
-- Independent open bugs/security/governance items remain open.
+## Current Controlled Next Action
+1. Deploy latest product-code head containing `de9d82b` + `d1b857d` through the canonical Master Hub project.
+2. Verify strict Device → SubDevice → Scope and attachment isolation in production.
+3. Reconcile Project Control UI from canonical source instead of static duplicated text.
+4. Continue restricted-data containment only after verified private preservation and required owner approvals.

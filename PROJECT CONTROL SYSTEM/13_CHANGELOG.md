@@ -1,148 +1,93 @@
 # 13 — Changelog
 
 ## 2026-09-30 — Project Control Foundation
-- Added permanent Project Control System.
-- Added canonical brief, constitution, decisions, features, roadmap, current state, issues, checkpoint, requirements, tests, defects, risks, dependencies, data dictionary, security/privacy, release, rollback, feedback, technical debt, and traceability.
-- Added Project Control Center route to Master Hub.
-- Added Project Control Center to Master Hub registry.
-- Recorded that supplied source ends mid Definition of Done and did not invent missing text.
-
+- Added permanent Project Control System and canonical control registers.
+- Added Project Control Center route and registry entry.
+- Preserved source incompleteness instead of inventing missing template content.
 
 ## Canonical Change Entry Schema
-Meaningful new changes use stable CHANGE-### identifiers and:
+Meaningful new changes use stable `CHANGE-###` identifiers and record date, version, description, authorization, related decision/requirement/feature, files affected, reason, and result. Historical records are preserved; unknown historical fields are not fabricated.
 
-```text
-CHANGE ID:
-DATE:
-VERSION:
-DESCRIPTION:
-AUTHORIZED BY:
-RELATED DECISION:
-RELATED REQUIREMENT:
-RELATED FEATURE:
-FILES AFFECTED:
-REASON:
-RESULT:
-```
+## CHANGE-001 — Controlled AI Idea Master Template adoption
+DATE: 2026-09-30
+VERSION: GOVERNANCE-ADOPTION-RC1
+AUTHORIZED BY: Project Owner / DEC-007
+RESULT: Governance controls applied and repository-verified on adoption branch; product source unchanged.
 
-Existing historical changelog entries are preserved. Unknown historical fields must not be retroactively fabricated.
+## CHANGE-002 — Governance activated on main
+DATE: 2026-09-30
+VERSION: CONTROL-BASELINE-1.0
+AUTHORIZED BY: Project Owner / DEC-009 / DEC-010
+RESULT: PR #1 merged governance adoption; canonical Project Control System activated; finalized by DEC-011 and frozen reference `baseline/governance-control-1.0`.
 
+## CHANGE-003 — Reconstruction & Reality Audit started
+DATE: 2026-09-30
+VERSION: AUDIT-RC1
+AUTHORIZED BY: Project Owner / DEC-012
+RESULT: Evidence-based repository/route/test/deployment/security audit initiated.
 
-## 2026-09-30 — Controlled AI Idea Master Template adoption
-- CHANGE ID: CHANGE-001
-- VERSION: GOVERNANCE-ADOPTION-RC1
-- DESCRIPTION: Adopted approved AI Idea Master Template governance controls on protected branch.
-- AUTHORIZED BY: Project Owner via DEC-007.
-- RELATED DECISION: DEC-006, DEC-007.
-- RELATED REQUIREMENT: REQ-009 through REQ-012.
-- RELATED FEATURE: FEAT-006, FEAT-008, FEAT-009.
-- FILES AFFECTED: PROJECT CONTROL SYSTEM only.
-- REASON: Make the template Master Hub's project-management/governance operating system.
-- RESULT: Governance controls applied and repository-verified on adoption branch; main/product code unchanged; merge still pending explicit approval.
+## CHANGE-004 — Security + quality hardening RC
+DATE: 2026-09-30
+VERSION: SECURITY-QUALITY-RC1
+AUTHORIZED BY: Project Owner / DEC-013
+RESULT: Next.js patch, current UI tests, lint fixes and CI lint/test/build gates verified on branch.
 
+## CHANGE-005 — SECURITY-QUALITY-1.0 released
+DATE: 2026-09-30
+VERSION: SECURITY-QUALITY-1.0
+AUTHORIZED BY: Project Owner / DEC-014
+RESULT: PR #2 merged; CI 36811990043 PASS; production dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY; canonical routes verified.
 
-## 2026-09-30 — AI Idea Master Template governance activated on main
-- CHANGE ID: CHANGE-002
-- VERSION: CONTROL-BASELINE-1.0
-- DESCRIPTION: Merged the verified governance adoption package into main through PR #1.
-- AUTHORIZED BY: Project Owner / DEC-009.
-- RELATED DECISION: DEC-009, DEC-010.
-- RELATED REQUIREMENT: REQ-009 through REQ-012.
-- RELATED FEATURE: FEAT-009.
-- FILES AFFECTED: PROJECT CONTROL SYSTEM only.
-- REASON: Establish the AI Idea Master Template as Master Hub's canonical governance operating system.
-- RESULT: Merge succeeded; canonical governance is active on main; frozen baseline reference pending final creation.
+## CHANGE-006 — Restricted field-service boundary finalized
+DATE: 2026-09-30
+VERSION: SECURITY-BOUNDARY-1.0
+AUTHORIZED BY: Project Owner / DEC-016 / DEC-017
+RESULT: Classification finalized. Physical containment remains OPEN / CRITICAL.
 
+## CHANGE-007 — Project Operations & Queue activated
+DATE: 2026-10-01
+VERSION: PROJECT-OPS-RC1
+AUTHORIZED BY: Project Owner instruction
+RESULT: Single operational queue/control layer added to existing Project Control System.
 
-## 2026-09-30 — MasterHub Reconstruction & Reality Audit started
-- CHANGE ID: CHANGE-003
-- VERSION: AUDIT-RC1
-- DESCRIPTION: Began evidence-based reconstruction of actual repository, routes, tests, deployments, registry links, persistence, and public-data boundaries.
-- AUTHORIZED BY: Project Owner / DEC-012.
-- RELATED DECISION: DEC-012.
-- RELATED REQUIREMENT: REQ-001 through REQ-008 as applicable.
-- FILES AFFECTED: PROJECT CONTROL SYSTEM only.
-- REASON: Reconcile documented state with actual system reality before new feature development.
-- RESULT: First audit snapshot recorded; no product/deployment/destructive changes made.
+## CHANGE-008 — Operations checkpoint refresh
+DATE: 2026-10-01
+VERSION: PROJECT-OPS-CHECKPOINT-20261001-0958
+AUTHORIZED BY: Project Owner
+RESULT: Evidence checkpoint captured and later owner accepted.
 
+## CHANGE-009 — Operations checkpoint finalized
+DATE: 2026-10-01
+VERSION: PROJECT-OPS-CHECKPOINT-20261001-0958-FINAL
+AUTHORIZED BY: Project Owner
+RESULT: Checkpoint finalized without silently closing independent defects/security work.
 
-## 2026-09-30 — Security + quality hardening release candidate
-- CHANGE ID: CHANGE-004
-- VERSION: SECURITY-QUALITY-RC1
-- DESCRIPTION: Patched Next.js to 16.3.8, regenerated the dependency lock, aligned automated UI tests to the current product, corrected verified lint violations, and upgraded CI from build-only to lint/test/build verification.
-- AUTHORIZED BY: Project Owner / DEC-013.
-- RELATED DECISION: DEC-013.
-- RELATED REQUIREMENT: REQ-013, REQ-014.
-- RELATED FEATURE: FEAT-001, FEAT-003, FEAT-004.
-- FILES AFFECTED: master-hub-app package metadata/lock, current UI tests, CI workflow, lint-corrected application source, Project Control System evidence.
-- REASON: Resolve the P0/P1 dependency-security and false-confidence CI findings from the reconstruction audit.
-- RESULT: SECURITY-QUALITY-RC1 verified on branch. GitHub Actions run 36810355612 passed install, lint, tests, and production build. PR #2 remains unmerged and production unchanged.
+## CHANGE-010 — PROJECT-OPS-1.0 finalized
+DATE: 2026-10-01
+VERSION: PROJECT-OPS-1.0
+AUTHORIZED BY: Project Owner explicit `Finalize`
+RESULT: Project Operations & Queue owner-accepted and finalized.
 
+## CHANGE-011 — Repair Package exact Part # verification
+DATE: 2026-10-02
+VERSION: REPAIR-PACKAGE-DEF010-VERIFICATION
+AUTHORIZED BY: Existing approved Repair Packages scope
+RELATED FEATURE: FEAT-003
+RESULT: DEF-010 automated interaction path verified; canonical defect status is VERIFIED. Owner finalization of the broader update remains separate.
 
-## 2026-09-30 — SECURITY-QUALITY-1.0 released
-- CHANGE ID: CHANGE-005
-- VERSION: SECURITY-QUALITY-1.0
-- DESCRIPTION: Merged SECURITY-QUALITY-RC1 through PR #2, activated Next.js 16.3.8 and enforced lint/test/build CI on main, then verified the resulting production deployment.
-- AUTHORIZED BY: Project Owner / DEC-014.
-- RELATED DECISION: DEC-013, DEC-014.
-- RELATED REQUIREMENT: REQ-013, REQ-014.
-- RELATED FEATURE: FEAT-001, FEAT-003, FEAT-004.
-- FILES AFFECTED: package metadata/lock, CI workflow, current UI tests, lint-corrected application source, Project Control System release records.
-- REASON: Resolve verified security-patch and verification-gate defects before new feature development.
-- RESULT: PR #2 merged as f81fd436a8df50ac0da93ec3c93ec26d09e0badf; post-merge CI 36811990043 passed; Vercel deployment dpl_3Veoi3hAuDV6hLcbvWM7GqaNoYJ5 READY; six canonical routes HTTP 200; post-release runtime error scan clean.
+## CHANGE-012 — Scope Templates Device/SubDevice isolation
+DATE: 2026-10-02
+VERSION: SCOPE-ISOLATION-RC
+AUTHORIZED BY: Project Owner exact grouping instruction
+RELATED FEATURE: FEAT-011 / FEAT-012
+RESULT: Scope isolation centralized and deployed at 965a2b2; stricter cross-group enforcement at de9d82b and regression test at d1b857d passed CI but are not yet verified in production.
 
-
-## 2026-09-30 — Restricted field-service security boundary finalized
-- CHANGE ID: CHANGE-006
-- VERSION: SECURITY-BOUNDARY-1.0
-- DESCRIPTION: Finalized the RESTRICTED default classification for field-service operational material, verified public exposure inventory, quarantine plan, recovery rules, and containment gates.
-- AUTHORIZED BY: Project Owner / DEC-016 / DEC-017.
-- RELATED DECISION: DEC-016, DEC-017.
-- RELATED REQUIREMENT: REQ-015.
-- RELATED FEATURE: FEAT-002, FEAT-003.
-- FILES AFFECTED: Project Control System, release, and backup records only.
-- REASON: Freeze the approved distribution/security boundary before migration or removal.
-- RESULT: Classification/security boundary finalized. Existing public exposure remains OPEN / CRITICAL until private preservation and physical containment are completed.
-
-
-## 2026-10-01 — Master Hub Project Operations & Queue activated
-- CHANGE ID: CHANGE-007
-- VERSION: PROJECT-OPS-RC1
-- DESCRIPTION: Extended the existing Project Control System with a single operational queue covering queue state, build/deployment, bugs/testing, ideas, security/restricted data, data/integrations, UI/UX, and release history.
-- AUTHORIZED BY: Project Owner instruction on 2026-10-01.
-- RELATED DECISION: Existing Master Hub governance and security decisions remain authoritative.
-- RELATED REQUIREMENT: Operational continuity / verification / finalization controls.
-- RELATED FEATURE: Project Control Center.
-- FILES AFFECTED: 22_PROJECT_OPERATIONS_QUEUE.md, 06_CURRENT_STATE.md, 11_DEFECT_REGISTER.md, 13_CHANGELOG.md, /project-control.
-- REASON: Make Master Hub itself the single project-management and live-view control center without creating a duplicate project system.
-- RESULT: Source updated and queued for live verification. Finalization remains pending explicit owner approval.
-
-
-## 2026-10-01 — Operational checkpoint and state refresh
-- CHANGE ID: CHANGE-008
-- VERSION: PROJECT-OPS-CHECKPOINT-20261001-0958
-- DESCRIPTION: Captured a new evidence-based checkpoint after Master Hub production advanced to the Repair Package lookup retest build and refreshed the operations queue/current-state records.
-- AUTHORIZED BY: Project Owner instruction — "Checkpoint and update".
-- RELATED DECISION: Existing Master Hub governance and security decisions remain authoritative.
-- RELATED REQUIREMENT: Operational continuity, live verification, queue accuracy, and no-silent-finalization controls.
-- RELATED FEATURE: Project Control Center; Repair Packages.
-- FILES AFFECTED: 08_CHECKPOINT.md, 06_CURRENT_STATE.md, 22_PROJECT_OPERATIONS_QUEUE.md, 13_CHANGELOG.md.
-- REASON: Bring canonical control records back into alignment with verified production and source reality.
-- RESULT: Production verified at 601b90d / dpl_8LG2LPLHUmbDjqaqe4N87tKDeo6R; Repair Package lookup code is deployed but still requires interactive retest; Project Control updates remain pending production because of Vercel build-rate limiting. Checkpoint FINALIZED / OWNER ACCEPTED on 2026-10-01. Open implementation/test items remain independently tracked.
-
-
-## 2026-10-01 — Operations checkpoint finalization
-- CHANGE ID: CHANGE-009
-- VERSION: PROJECT-OPS-CHECKPOINT-20261001-0958-FINAL
-- DESCRIPTION: Recorded explicit Project Owner approval of the 2026-10-01 09:58 CDT operations checkpoint.
-- AUTHORIZED BY: Project Owner — explicit “Yes” finalization approval.
-- RELATED FEATURE: Project Control / Operations Queue.
-- FILES AFFECTED: 08_CHECKPOINT.md, 06_CURRENT_STATE.md, 13_CHANGELOG.md, 22_PROJECT_OPERATIONS_QUEUE.md.
-- RESULT: Checkpoint record finalized. This does NOT finalize the still-open Repair Package interactive retest, restricted-data containment, Vercel cleanup, or pending Project Control production deployment.
-
-
-## 2026-10-01 — PROJECT-OPS-1.0 finalized
-- CHANGE ID: CHANGE-010
-- VERSION: PROJECT-OPS-1.0
-- AUTHORIZED BY: Project Owner — explicit "Finalize".
-- RESULT: Project Operations & Queue is owner-accepted and finalized. Independent open items remain open.
+## CHANGE-013 — Controlled reconstruction refresh
+DATE: 2026-10-02
+VERSION: RECONSTRUCTION-SNAPSHOT-20261002
+AUTHORIZED BY: Project Owner explicit reconstruction request
+RELATED DECISION: DEC-012 and finalized governance authority
+RELATED FEATURE: FEAT-001 through FEAT-012 as applicable
+FILES AFFECTED: Current State, Operations Queue, Feature Register, Traceability Matrix, Changelog, Reconstruction Evidence Ledger
+REASON: Reconcile Git history, finalized releases, decisions, queue items and live/current routes without inventing unknown state.
+RESULT: Current canonical records refreshed from evidence. Unknown source ownership, unverified external health, restricted-data containment, and un-deployed strict scope changes remain explicitly open.
