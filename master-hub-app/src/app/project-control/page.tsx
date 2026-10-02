@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 
 const items=[
@@ -25,10 +27,48 @@ const items=[
 ["22","Project Operations & Queue","Operational queue, deployments, bugs, ideas, restricted data, integrations, UX and release state."],
 ];
 
+function readControlFile(name:string){
+ const roots=[path.resolve(process.cwd(),"..","PROJECT CONTROL SYSTEM"),path.resolve(process.cwd(),"PROJECT CONTROL SYSTEM")];
+ for(const root of roots){
+  const file=path.join(root,name);
+  try{if(fs.existsSync(file))return fs.readFileSync(file,"utf8")}catch{}
+ }
+ return "";
+}
+
+function field(source:string,label:string,fallback="UNKNOWN"){
+ const safe=label.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+ const match=source.match(new RegExp(`^${safe}:\\s*(.+)$`,"mi"));
+ return match?.[1]?.trim()||fallback;
+}
+
+function rowStatus(source:string,id:string,statusIndex:number){
+ const row=source.split(/\r?\n/).find(line=>line.trim().startsWith(`| ${id} |`));
+ if(!row)return "UNKNOWN";
+ const cells=row.split("|").map(cell=>cell.trim()).filter(Boolean);
+ return cells[statusIndex]||"UNKNOWN";
+}
+
+function queueCount(source:string){return source.split(/\r?\n/).filter(line=>/^\|\s*QUEUE-\d+\s*\|/.test(line)).length}
+
 export default function ProjectControlPage(){
+ const current=readControlFile("06_CURRENT_STATE.md");
+ const queue=readControlFile("22_PROJECT_OPERATIONS_QUEUE.md");
+ const defects=readControlFile("11_DEFECT_REGISTER.md");
+ const productionCommit=field(current,"CURRENT_PRODUCTION_COMMIT");
+ const deployment=field(current,"CURRENT_DEPLOYMENT");
+ const buildStatus=field(current,"BUILD_STATUS");
+ const securityStatus=field(current,"SECURITY_STATUS");
+ const scopeStatus=field(current,"SCOPE_ISOLATION_STATUS");
+ const repairStatus=rowStatus(defects,"DEF-010",3);
+ const scopeQueue=rowStatus(queue,"QUEUE-010",4);
+ const repairQueue=rowStatus(queue,"QUEUE-002",4);
+ const tracked=queueCount(queue);
+ const deployedRevision=process.env.VERCEL_GIT_COMMIT_SHA||productionCommit;
+
  return <main style={{minHeight:"100vh",background:"#080b12",color:"#f4f4f7",fontFamily:"Arial,sans-serif",padding:24}}>
   <div style={{maxWidth:1180,margin:"0 auto",display:"grid",gap:18}}>
-   <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>MASTER HUB · PROJECT OPERATIONS</div><h1 style={{margin:"7px 0",fontSize:30}}>Project Control Center</h1><p style={{margin:0,color:"#8c94a5",maxWidth:820,lineHeight:1.55}}>Single control center for queue, build/deployment, bugs/testing, ideas, restricted data, integrations, UI/UX, releases and canonical governance.</p></header>
+   <header><div style={{fontSize:11,letterSpacing:".14em",color:"#7d8596",fontWeight:800}}>MASTER HUB · PROJECT OPERATIONS</div><h1 style={{margin:"7px 0",fontSize:30}}>Project Control Center</h1><p style={{margin:0,color:"#8c94a5",maxWidth:840,lineHeight:1.55}}>Live status below is generated from the canonical Current State, Operations Queue and Defect Register at build time. Static status duplication has been removed.</p></header>
    <section style={{padding:16,border:"1px solid #283142",borderRadius:12,background:"#10151f",display:"grid",gap:8}}>
     <strong style={{fontSize:13}}>Operating rule</strong>
     <span style={{fontSize:12,color:"#aeb5c3",lineHeight:1.55}}>Evidence over assumption · Reality over intended state · Approval over silent change · Verification over generated output · Traceability over memory.</span>
@@ -37,14 +77,14 @@ export default function ProjectControlPage(){
     {items.map(([id,name,description])=><div key={id} style={{padding:15,border:"1px solid #283142",borderRadius:10,background:"#10151f",display:"grid",gap:6}}><span style={{fontSize:11,color:"#8c94a5",fontWeight:800}}>{id}</span><strong>{name}</strong><span style={{fontSize:12,color:"#8c94a5",lineHeight:1.45}}>{description}</span></div>)}
    </section>
    <section style={{padding:16,border:"1px solid #283142",borderRadius:12,background:"#10151f",display:"grid",gap:12}}>
-    <div><strong style={{fontSize:13}}>Live operations snapshot</strong><p style={{margin:"8px 0 0",fontSize:12,color:"#8c94a5",lineHeight:1.55}}>Project Operations 1.0 is finalized and the finalization build is live in production. Repair Package Part # auto-fill is deployed, but its interactive end-to-end retest remains open. Restricted-data containment also remains independently open and critical.</p></div>
+    <div><strong style={{fontSize:13}}>Live operations snapshot</strong><p style={{margin:"8px 0 0",fontSize:12,color:"#8c94a5",lineHeight:1.55}}>Production {deployment} · deployed revision {deployedRevision}. Repair Package defect status: {repairStatus}. Scope-isolation queue status: {scopeQueue}. Restricted-data containment remains independently governed by the canonical security record.</p></div>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(190px,1fr))",gap:8}}>
      {[
-      ["Queue","9 tracked items"],
-      ["Build","READY · production"],
-      ["Bugs","1 ready for retest"],
-      ["Security","CRITICAL containment open"],
-      ["Release","FINALIZED · PROJECT-OPS-1.0"],
+      ["Queue",`${tracked} tracked items`],
+      ["Build",buildStatus],
+      ["Repair Packages",`${repairStatus} · ${repairQueue}`],
+      ["Scope Isolation",`${scopeStatus} · ${scopeQueue}`],
+      ["Security",securityStatus],
      ].map(([k,v])=><div key={k} style={{border:"1px solid #283142",borderRadius:9,padding:11,background:"#0c111a"}}><span style={{display:"block",fontSize:10,color:"#7d8596",letterSpacing:".08em",fontWeight:800}}>{k.toUpperCase()}</span><strong style={{display:"block",marginTop:5,fontSize:13}}>{v}</strong></div>)}
     </div>
    </section>
