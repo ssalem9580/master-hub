@@ -51,7 +51,7 @@ Rules:
 | TEST-013 | REQ-009–REQ-012 | Verify adoption branch contains no product-code/config changes versus main | PASS | GitHub compare shows changes only under PROJECT CONTROL SYSTEM/ | 2026-09-30 |
 
 
-| TEST-014 | REQ-001 | Verify current main GitHub Actions production build | PASS | Master Hub CI run 36806742233 succeeded for e8ca3dac4825cd8af0b3427678cd67b4854b61 | 2026-09-30 |
+| TEST-014 | REQ-001 | Verify current main GitHub Actions production build | PASS | Master Hub CI run 36806742233 succeeded for e8ca3dac4825cd8afab0b3427678cd67b4854b61 | 2026-09-30 |
 | TEST-015 | REQ-005 | Verify registry Live URLs against actual HTTP/deployment evidence | FAIL / PARTIAL | Recovery Value Calculator returns HTTP 404; several others return 200; two chatgpt.site targets remain unverified | 2026-09-30 |
 | TEST-016 | REQ-001 | Verify canonical MasterHub production root | PASS | master-hub-sigma.vercel.app HTTP 200; dpl_EJF5Hh9sswrUTMKiPGcjy8fDdH3n READY | 2026-09-30 |
 | TEST-017 | REQ-001 | Compare current UI tests against current MasterHub component surface | FAIL | Test expects Quick Capture/Capture action/older controls absent from current component source | 2026-09-30 |
@@ -74,3 +74,7 @@ Rules:
 | TEST-031 | REQ-001 / REQ-002 / REQ-003 / REQ-004 / REQ-007 | Verify all six canonical production routes after hardening release | PASS | /, /project-control, /field-resource-hub, /field-diagnostic-hub, /finances-command-center, /repair-packages all HTTP 200 | 2026-09-30 |
 | TEST-032 | Security | Scan Vercel runtime errors after SECURITY-QUALITY-1.0 deployment | PASS | No runtime errors found in selected one-hour post-release window | 2026-09-30 |
 | TEST-033 | REQ-018 | Verify exact Device → SubDevice → Scope grouping and prevent cross-group selection/attachment | PASS | Regression commit `d1b857d`; GitHub Actions `36949404777` PASS; production `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf` READY; live `/scope-templates` and `/bw-dashboard.html` HTTP 200; production JS contains exact `scopeCompatible` filtering and incompatible-attachment blocking | 2026-10-02 |
+| TEST-034 | REQ-015 / Recovery | Verify private restricted preservation destination exists and is not shared | PASS | Google Drive folder `Master Hub Restricted Field Service — Private Preservation`; metadata `shared=false`, owner-only permission observed | 2026-10-02 |
+| TEST-035 | REQ-015 / Recovery | Revalidate restricted repository preservation set against current main after SCOPE-ISOLATION-1.0 | PASS | Current `main` `88419705...` tree matches recorded blob IDs/byte counts in `32_SECURITY_PRESERVATION_SOURCE_HASHES.md` for the 12 repository-backed preservation objects | 2026-10-02 |
+| TEST-036 | REQ-015 / Recovery | Verify Billed Work Supabase persistence dependency without reading operational payload contents | PASS | Project ACTIVE_HEALTHY; `billed_work_state` and `billed_work_scope_state` RLS enabled with owner-scoped authenticated policies; row counts/payload sizes/non-content fingerprints recorded | 2026-10-02 |
+| TEST-037 | REQ-015 / Security | Verify whether restricted public surfaces are still reachable | FAIL / OPEN EXPOSURE | `/field-resource-hub`, `/scope-templates`, `/bw-dashboard.html` all HTTP 200 on 2026-10-02; containment cannot close until verified private copy exists and public exposure is removed under approval | 2026-10-02 |
