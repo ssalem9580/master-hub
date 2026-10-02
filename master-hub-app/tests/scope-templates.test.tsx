@@ -14,6 +14,7 @@ describe("Scope Templates imported hierarchy", () => {
 
     const iframe = screen.getByTitle("Master Hub Scope Templates") as HTMLIFrameElement;
     const win = iframe.contentWindow!;
+    const evaluate = (win as unknown as { eval: (code:string) => unknown }).eval.bind(win);
     const doc = iframe.contentDocument!;
     if (!doc.documentElement) doc.appendChild(doc.createElement("html"));
     if (!doc.body) doc.documentElement.appendChild(doc.createElement("body"));
@@ -37,7 +38,7 @@ describe("Scope Templates imported hierarchy", () => {
       <div id="manualTemplateList"></div>
     `;
 
-    win.eval(`
+    evaluate(`
       var state = {
         workOrders: [
           {customer:'Bank A', device:'Vault', subdevice:'Door', scope:'Vault door will not close'},
@@ -76,7 +77,7 @@ describe("Scope Templates imported hierarchy", () => {
     // jsdom can execute an appended iframe script automatically. Only evaluate manually
     // when the onLoad injection has not already populated the Device selector.
     if (!values(device).includes("Vault")) {
-      expect(() => win.eval(injected.textContent || "")).not.toThrow();
+      expect(() => evaluate(injected.textContent || "")).not.toThrow();
     }
 
     expect(values(device)).toEqual(expect.arrayContaining(["ATM", "Vault", "__custom__"]));
