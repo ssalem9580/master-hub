@@ -1,7 +1,7 @@
 # 06 — Current State
 
 DATE: 2026-10-02
-STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SECURITY CONTAINMENT PREPARATION ACTIVE
+STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SECURITY CONTAINMENT PREPARATION FINALIZED / PRIVATE DESTINATION APPROVED
 
 ## Authority
 - Canonical repository: `ssalem9580/master-hub`
@@ -10,13 +10,14 @@ STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SE
 - Project Operations: `PROJECT-OPS-1.0` — FINALIZED / OWNER ACCEPTED
 - Security/quality baseline: `SECURITY-QUALITY-1.0` — VERIFIED / OWNER ACCEPTED / RELEASED
 - Restricted-content classification: `SECURITY-BOUNDARY-1.0` — FINALIZED CLASSIFICATION / PHYSICAL CONTAINMENT OPEN
+- Security containment preparation: `SECURITY-CONTAINMENT-PREP-1.0` — FINALIZED / OWNER ACCEPTED
 - Scope isolation release: `SCOPE-ISOLATION-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED
 
 ## Machine-readable operations snapshot
 CURRENT_PRODUCTION_COMMIT: 1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5
 CURRENT_DEPLOYMENT: dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf
-BUILD_STATUS: READY — verified production contains Wave-1 source-binding and strict scope isolation; later record/preparation commits may be ahead of production
-SECURITY_STATUS: CRITICAL — containment preparation active; private canonical destination is not yet approved/created; destructive cleanup remains blocked until verified private preservation
+BUILD_STATUS: READY — verified production contains Wave-1 source-binding and strict scope isolation; later control/preparation commits may be ahead of production
+SECURITY_STATUS: CRITICAL — preparation finalized and private canonical destination establishment approved; destination is not yet created/verified and destructive cleanup remains blocked until verified private preservation
 SCOPE_ISOLATION_STATUS: VERIFIED / FINALIZED — exact Device → SubDevice → Scope selection, manual filtering, compatible-lead filtering and cross-group attachment blocking are present in verified production
 REPAIR_PACKAGE_STATUS: VERIFIED — DEF-010 automated Part # → Name → Cost → Add → Total → Save → persistence regression is complete; owner finalization remains separate
 PROJECT_CONTROL_STATUS: SOURCE-BOUND / CI VERIFIED / OWNER ACCEPTED / PRODUCTION VERIFIED
@@ -33,6 +34,7 @@ WAVE1_STATUS: FINALIZED
 - Live Scope Templates client artifact contains exact Device/SubDevice hierarchy generation, exact template compatibility checks, manual scope filtering, compatible-lead attachment filtering, and explicit cross-group attachment blocking.
 - Scope isolation CI evidence: GitHub Actions `36949404777` PASS.
 - Wave-1 source-binding CI evidence: GitHub Actions `36951330664` PASS.
+- Security-containment preparation CI evidence: GitHub Actions `36958317975` PASS (install / lint / test / build).
 - Safe prior scope rollback: `dpl_2Mtpv99iSHbBfPtNsUFU43Z1R59z` at `965a2b2e6ea15b053e2d60ca4c76802bcd3d5755`.
 
 ## Scope Templates / Device → SubDevice isolation
@@ -59,12 +61,12 @@ WAVE1_STATUS: FINALIZED
 - Master Hub remains public/no-login under the established decision record.
 - Field-service operational material remains RESTRICTED by default.
 - Existing restricted public exposure remains `OPEN / CRITICAL` under DEF-009.
-- Controlled containment preparation is ACTIVE.
-- Exposure inventory has been refreshed through current public source/routes and observed Vercel project surfaces.
-- Preservation manifest exists at `PROJECT CONTROL SYSTEM/00_RESTRICTED_FIELD_SERVICE_PRESERVATION_MANIFEST.md`.
-- Proposed private canonical destination is NOT YET APPROVED or created.
+- Controlled containment preparation is FINALIZED / OWNER ACCEPTED as `SECURITY-CONTAINMENT-PREP-1.0`.
+- Project Owner has approved establishment/migration of a separate private canonical destination for restricted field-service source.
+- The connected GitHub control surface currently exposes only the public `ssalem9580/master-hub` repository and does not provide repository creation; therefore the approved private destination is NOT YET CREATED or verified private.
+- Exact current-main repository paths, blob IDs and byte counts for the restricted repository-backed preservation set are recorded in `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md`.
 - Verified private preservation copy is NOT COMPLETE.
-- No public route/source removal, Git-history rewrite, repository visibility change, project disconnection, deployment retirement, or deletion is authorized by the preparation step.
+- No public route/source removal, Git-history rewrite, repository visibility change, project disconnection, deployment retirement, or deletion is authorized by preparation finalization.
 
 ## Current Vercel ownership map relevant to containment
 - `master-hub` — `prj_TaNYVBn6sk81Q82yIJYLphj9YyZV`
@@ -98,11 +100,12 @@ This map is evidence for preparation only and does not authorize project retirem
 - `PROJECT-OPS-1.0`
 - `REMEDIATION-WAVE1-1.0`
 - `SCOPE-ISOLATION-1.0`
+- `SECURITY-CONTAINMENT-PREP-1.0`
 
 ## Current controlled next action
-1. Obtain explicit Project Owner approval to establish/migrate to the private canonical restricted field-service destination.
+1. Create the approved private canonical restricted field-service destination through an authorized GitHub/admin path.
 2. Verify that destination is private before copying restricted content.
-3. Preserve restricted source/data dependencies using the Preservation Manifest and verify completeness/recovery.
+3. Preserve restricted source/data dependencies using the Preservation Manifest and exact source-hash record, then verify completeness/recovery.
 4. Only after verified preservation, request approval for public-surface/source containment.
 5. Treat Git-history rewrite and Vercel retirement/disconnection as separate explicit approval gates.
 

@@ -1,8 +1,8 @@
 # 00 — Restricted Field-Service Preservation Manifest
 
-STATUS: PREPARATION ACTIVE — NO DESTRUCTIVE ACTION AUTHORIZED
+STATUS: PREPARATION FINALIZED / PRIVATE DESTINATION APPROVED / CREATION PENDING — NO DESTRUCTIVE ACTION AUTHORIZED
 DATE: 2026-10-02 UTC / 2026-10-01 CDT
-AUTHORITY: DEC-016 / Project Owner instruction to move into controlled security-containment preparation
+AUTHORITY: DEC-016 / Project Owner explicit `finalize and action next task`
 CLASSIFICATION: RESTRICTED
 
 ## Purpose
@@ -22,6 +22,8 @@ At minimum preserve the restricted source currently identified in public Master 
 - Billed Work / Scope Templates operational source and state dependencies where classified restricted
 - NTE / quote operational source where classified restricted
 
+Exact current-main blob IDs and byte counts for repository-backed restricted source are recorded in `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md`.
+
 ## Current Vercel Project Map
 Observed team projects relevant to containment/recovery:
 - `master-hub` — `prj_TaNYVBn6sk81Q82yIJYLphj9YyZV`
@@ -36,19 +38,26 @@ Observed team projects relevant to containment/recovery:
 
 This map records observed project ownership only. It does not authorize disconnection, deletion, retirement, or migration.
 
-## Proposed Private Canonical Destination
-Recommended architecture remains a separate PRIVATE GitHub repository/store for restricted field-service material.
+## Private Canonical Destination
+Architecture approval: APPROVED by Project Owner.
 
-STATUS: NOT CREATED / NOT APPROVED FOR OWNERSHIP MIGRATION.
+Required destination: a separate PRIVATE GitHub repository/store for restricted field-service material, with an explicit backup/recovery record.
 
-Creating or migrating to that destination changes canonical source ownership and therefore remains an explicit owner-approval gate.
+Current execution state:
+- Owner approval to establish/migrate: APPROVED.
+- Destination repository/store: NOT YET CREATED.
+- Privacy verification: NOT YET POSSIBLE because no destination exists.
+- Connected GitHub control surface currently exposes only the public `ssalem9580/master-hub` repository and does not provide a repository-creation action.
+
+No restricted content may be copied to an unverified destination. Repository/store creation must occur through an authorized GitHub/admin path; once it exists and is verified private, preservation may proceed immediately from the exact source manifest.
 
 ## Preservation Verification Checklist
 Before public-surface containment:
-- [ ] Private destination explicitly approved.
+- [x] Private destination explicitly approved.
+- [ ] Private destination created through an authorized admin path.
 - [ ] Destination verified private before restricted content is copied.
 - [ ] Restricted source files copied from existing source rather than reconstructed from memory.
-- [ ] Source paths and originating commit/blob identifiers recorded.
+- [x] Source paths and current originating blob identifiers/byte counts recorded for repository-backed items.
 - [ ] Required configuration references documented without copying secrets into public records.
 - [ ] Tool-specific operational data/export dependencies identified and preserved where applicable.
 - [ ] File/path manifest compared against the public-source inventory.
@@ -58,7 +67,7 @@ Before public-surface containment:
 - [ ] Only after all above: request approval for public route/source removal.
 
 ## Destructive Gates Still Closed
-The following are NOT authorized by this preparation step:
+The following are NOT authorized by this preparation/finalization step:
 - deleting restricted public source
 - removing public routes
 - rewriting Git history
@@ -68,4 +77,4 @@ The following are NOT authorized by this preparation step:
 - deploying restricted material behind a new authentication system
 
 ## Next Gate
-Project Owner approval to establish/migrate to the private canonical restricted field-service destination. After that approval, perform preservation and verify completeness before any destructive containment.
+Create the approved private canonical destination through an authorized admin path, verify it is private, then copy and verify the restricted source/data against the exact preservation manifest. Public-surface cleanup remains separately approval-gated.

@@ -1,7 +1,7 @@
 # 22 — Master Hub Project Operations & Queue
 
 DATE: 2026-10-02
-STATUS: ACTIVE — REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION FINALIZED / SECURITY CONTAINMENT PREPARATION ACTIVE
+STATUS: ACTIVE — REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION FINALIZED / SECURITY CONTAINMENT PREPARATION FINALIZED / PRIVATE DESTINATION APPROVED
 
 This is the canonical operational queue for the existing Master Hub. It does not create a second project-management system.
 
@@ -15,6 +15,7 @@ Built is not deployed. Deployed is not verified. Verified is not finalized until
 ## Current Build & Deployment Snapshot
 - Strict scope regression CI: GitHub Actions `36949404777` — PASS (install / lint / test / build).
 - Wave-1 reconciliation/source-binding CI: GitHub Actions `36951330664` — PASS (install / lint / test / build).
+- Security-containment preparation CI: GitHub Actions `36958317975` — PASS (install / lint / test / build).
 - Canonical production alias: `https://master-hub-sigma.vercel.app`
 - Verified production deployment for strict scope + source-bound Project Control: `dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf`
 - Verified production commit: `1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5`
@@ -26,7 +27,7 @@ Built is not deployed. Deployed is not verified. Verified is not finalized until
 ## Operational Queue
 | Queue ID | Title | Area / Tool | Priority | Status | Approval | Dependencies / Blockers | Related Evidence | Next Action | Finalization |
 |---|---|---|---|---|---|---|---|---|---|
-| QUEUE-001 | Contain restricted field-service material | Security & Restricted Data | CRITICAL | IN DEVELOPMENT | Preparation APPROVED by current owner instruction; destructive containment NOT authorized | Private canonical destination creation/migration requires explicit approval; verified preservation + recovery checkpoint required before removal | DEC-016, DEC-017, DEF-009, SECURITY-BOUNDARY-1.0, refreshed exposure inventory, preservation manifest | Obtain approval for private canonical destination; preserve and verify completeness; then request public-containment approval | NOT FINALIZED |
+| QUEUE-001 | Contain restricted field-service material | Security & Restricted Data | CRITICAL | IN DEVELOPMENT | Preparation FINALIZED / OWNER ACCEPTED; private canonical destination establishment APPROVED; destructive containment NOT authorized | Approved private destination must be created and verified private; verified preservation + recovery checkpoint required before removal | DEC-016, DEC-017, DEF-009, SECURITY-BOUNDARY-1.0, SECURITY-CONTAINMENT-PREP-1.0, preservation manifest, source-hash record | Create private destination through authorized admin path; verify privacy; preserve and verify completeness; then request public-containment approval | PREPARATION FINALIZED / PHYSICAL CONTAINMENT NOT FINALIZED |
 | QUEUE-002 | Repair Package Part # auto-fill source | Repair Packages | HIGH | READY FOR REVIEW | APPROVED / BUILT / DEPLOYED / VERIFIED | Owner finalization only | DEF-010 VERIFIED; CI 36947000535; live /repair-packages 200 | Present verified behavior for owner review | NOT FINALIZED |
 | QUEUE-003 | Repair Package cost-update regression verification | Bugs & Testing | HIGH | READY FOR REVIEW | APPROVED / VERIFIED | None known | DEF-010 automated Part # → name → cost → add → total → persistence PASS | Retain regression coverage; close/finalize only with owner approval | NOT FINALIZED |
 | QUEUE-004 | Reduce duplicate Vercel project build fan-out | Build & Deployment | HIGH | WAITING / BLOCKED | OWNER DECISION REQUIRED for disconnect/retire | Destructive project changes require approval | ISSUE-002 / RISK-001 / TD-009 | Reconfirm canonical project map, then present exact non-destructive + destructive cleanup plan | NOT FINALIZED |
@@ -39,7 +40,7 @@ Built is not deployed. Deployed is not verified. Verified is not finalized until
 | QUEUE-011 | Controlled reconstruction / canonical truth pass | Project Control | HIGH | FINALIZED | OWNER ACCEPTED | None | Commit `cf1c79d`; reconciled Current State / queue; Wave-1 CI PASS; source-bound production verified | Maintain canonical truth during later remediation waves | FINALIZED |
 
 ## Bugs & Testing
-- DEF-009 — restricted field-service public exposure: `OPEN / CRITICAL`; containment preparation is active but exposure is not yet removed.
+- DEF-009 — restricted field-service public exposure: `OPEN / CRITICAL`; preparation is finalized but physical containment has not occurred.
 - DEF-010 — Repair Package Part # / cost auto-fill: `VERIFIED`. Owner finalization remains separate.
 - Strict Device → SubDevice → Scope isolation: `VERIFIED / FINALIZED`; automated regression PASS and strict enforcement is present in verified production.
 - Project Control source-binding: `VERIFIED / FINALIZED / PRODUCTION VERIFIED`.
@@ -57,7 +58,7 @@ Established canonical internal routes:
 ## Security & Restricted Data
 Field-service diagnostics, repair procedures, parts, billed-work operational data, scope wording, quoting workflows, customer-operational information and related proprietary material remain RESTRICTED by default.
 
-Preparation is now active: inventory refreshed, Vercel project map captured, and preservation manifest created. No destructive containment, history rewrite, visibility change, project disconnection, deployment retirement, route removal, or public source deletion is authorized yet.
+`SECURITY-CONTAINMENT-PREP-1.0` is FINALIZED / OWNER ACCEPTED. Owner approval to establish/migrate a private canonical destination has been granted. Exact repository-backed preservation metadata is recorded. The private destination does not yet exist because the connected GitHub control surface has no repository-creation action. No destructive containment, history rewrite, visibility change, project disconnection, deployment retirement, route removal, or public source deletion is authorized yet.
 
 ## Data & Integrations
 Known browser-local persistence remains:
@@ -81,5 +82,6 @@ Finalized/accepted releases preserved:
 - SECURITY-BOUNDARY-1.0 classification baseline (containment still open)
 - PROJECT-OPS-1.0
 - SCOPE-ISOLATION-1.0
+- SECURITY-CONTAINMENT-PREP-1.0
 
 Repair Package owner finalization, physical restricted-data containment, duplicate Vercel cleanup, Recovery Value restoration, standalone-source recovery and repository protection remain separately open.

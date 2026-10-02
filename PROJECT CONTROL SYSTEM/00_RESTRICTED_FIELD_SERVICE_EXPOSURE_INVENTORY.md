@@ -1,8 +1,8 @@
 # 00 — Restricted Field-Service Exposure Inventory
 
-Status: VERIFIED INVENTORY — PREPARATION ACTIVE / CONTAINMENT PENDING
+Status: VERIFIED INVENTORY — PREPARATION FINALIZED / PRIVATE DESTINATION APPROVED / CONTAINMENT PENDING
 Date: 2026-10-02 UTC / 2026-10-01 CDT
-Authority: DEC-016
+Authority: DEC-016 / Project Owner explicit `finalize and action next task`
 Classification: RESTRICTED
 
 ## Purpose
@@ -44,6 +44,8 @@ Identify current public source, public routes, registry links, and deployment su
    - exposes other field-service workspaces
 
 The registry/navigation file itself is not automatically restricted in full, but entries that expose restricted field-service tools must be handled as part of containment.
+
+Exact current-main Git blob IDs and byte counts for the repository-backed set above are recorded in `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md`.
 
 ## Public MasterHub Routes in Restricted Scope
 - `/field-resource-hub`
@@ -91,11 +93,13 @@ Field-service operational material above remains RESTRICTED by default until the
 ## Current Containment State
 - Classification: FINALIZED
 - New-publication freeze: ACTIVE
-- Preparation phase: ACTIVE
+- Preparation phase: FINALIZED / OWNER ACCEPTED as `SECURITY-CONTAINMENT-PREP-1.0`
 - Existing public exposure: CONFIRMED
 - Source/deployment inventory: REFRESHED
-- Preservation manifest: CREATED
-- Private canonical destination: NOT YET APPROVED / NOT YET ESTABLISHED
+- Preservation manifest: CREATED / ACTIVE
+- Exact repository source metadata: RECORDED
+- Private canonical destination establishment/migration: APPROVED
+- Private canonical destination: NOT YET CREATED / NOT YET VERIFIED PRIVATE
 - Verified private preservation copy: NOT COMPLETE
 - Recovery checkpoint for migrated restricted source: NOT COMPLETE
 - Public route removal: NOT AUTHORIZED / NOT COMPLETE
@@ -103,8 +107,11 @@ Field-service operational material above remains RESTRICTED by default until the
 - Public Git-history remediation: NOT STARTED
 - Vercel restricted-deployment retirement: NOT AUTHORIZED / NOT STARTED
 
+## Execution Constraint
+The connected GitHub control surface currently exposes only the public `ssalem9580/master-hub` repository and does not provide a repository-creation action. The approved private destination must therefore be created through an authorized GitHub/admin path before preservation can proceed.
+
 ## Non-Destructive Rule
 Do not delete, rewrite, retire, disconnect, or remove restricted source/deployments until a verified recoverable private copy exists and the applicable owner approval gate is satisfied.
 
 ## Required Next Gate
-Explicit Project Owner approval to establish/migrate to the private canonical restricted field-service destination. Then verify preservation completeness and recovery before requesting any destructive public-surface containment.
+Create the approved private canonical restricted field-service destination, verify it is private, then verify preservation completeness and recovery before requesting any destructive public-surface containment.

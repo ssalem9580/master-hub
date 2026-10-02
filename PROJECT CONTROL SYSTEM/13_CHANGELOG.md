@@ -114,3 +114,13 @@ RELATED DEFECT: DEF-009
 FILES AFFECTED: Restricted exposure inventory, quarantine plan, preservation manifest, Current State, Operations Queue, this changelog
 REASON: Begin the safe non-destructive preparation stage required before any public route/source removal, history rewrite, repository visibility change, or Vercel retirement.
 RESULT: Exposure inventory refreshed, Vercel project ownership map recorded, private-preservation checklist created, QUEUE-001 moved into active preparation, and all destructive gates remain closed. No restricted source/routes, Git history, repositories, projects or deployments were deleted, disconnected, rewritten or retired.
+
+## CHANGE-017 — Security containment preparation finalized; private destination approved
+DATE: 2026-10-02 UTC / 2026-10-01 CDT
+VERSION: SECURITY-CONTAINMENT-PREP-1.0
+AUTHORIZED BY: Project Owner explicit `finalize and action next task`
+RELATED DECISION: DEC-016 / DEC-017
+RELATED DEFECT: DEF-009
+FILES AFFECTED: Quarantine Plan, Preservation Manifest, source-hash preservation record, Current State, Operations Queue, release/backup/finalization records, this changelog
+REASON: Finalize the non-destructive containment-preparation architecture and authorize the next preservation gate without authorizing physical cleanup.
+RESULT: `SECURITY-CONTAINMENT-PREP-1.0` is OWNER ACCEPTED / FINALIZED. Private canonical destination establishment/migration is APPROVED. Exact current-main repository-backed restricted source blob IDs and byte counts are recorded for preservation. The connected GitHub control surface exposes only the public `ssalem9580/master-hub` repository and has no repository-creation action, so the approved private destination is not yet created or privacy-verified. Physical containment, public route/source removal, Git-history rewrite, visibility changes and Vercel retirement/disconnection remain separately gated; DEF-009 remains OPEN / CRITICAL.

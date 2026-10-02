@@ -1,8 +1,8 @@
 # 00 — Restricted Field-Service Quarantine Plan
 
-Status: PREPARATION ACTIVE — PRIVATE PRESERVATION GATE
+Status: PREPARATION ARCHITECTURE FINALIZED / PRIVATE PRESERVATION APPROVED / PHYSICAL CONTAINMENT OPEN
 Date: 2026-10-02 UTC / 2026-10-01 CDT
-Authority: DEC-016 / Project Owner instruction to move into controlled security-containment preparation
+Authority: DEC-016 / Project Owner explicit `finalize and action next task`
 
 ## Objective
 Bring MasterHub into compliance with DEC-016 while preserving the approved public/no-login MasterHub shell under DEC-015.
@@ -33,7 +33,7 @@ Restricted material is currently present in:
 6. Do not claim containment complete while restricted material remains recoverable from public Git history.
 7. Do not reclassify material as public without explicit Project Owner approval.
 
-## Recommended Architecture
+## Approved Architecture
 
 ### Public MasterHub
 Keep:
@@ -41,9 +41,9 @@ Keep:
 - non-sensitive navigation
 - Project Control
 - non-sensitive public utilities
-- generic Field Service placeholder/status only after containment is approved and executed
+- generic Field Service placeholder/status only after containment is separately approved and executed
 
-Do not keep publicly after preservation/containment approval:
+Do not keep publicly after preservation and separate containment approval:
 - diagnostic procedures
 - repair steps
 - restricted parts/operational datasets
@@ -52,29 +52,30 @@ Do not keep publicly after preservation/containment approval:
 - restricted billed-work, scope and quoting operational content
 
 ### Restricted Field-Service Source
-Recommended:
+Approved direction:
 - separate PRIVATE GitHub repository/store
 - private canonical source for restricted field-service material
 - explicit backup/recovery record
 - separate deployment only if a future access-control method is separately approved
 
-Current status: private canonical destination is NOT YET CREATED OR APPROVED for ownership migration.
+Current status: owner approval to establish/migrate is GRANTED. The private destination does not yet exist and therefore cannot yet be verified private.
 
 ## Controlled Sequence
 
-### Stage 1 — Inventory — ACTIVE / REFRESHED
-- identify every restricted file/path in current main
-- identify restricted content in historical branches
-- identify Vercel projects serving restricted content
-- record exact source ownership
-- maintain `00_RESTRICTED_FIELD_SERVICE_EXPOSURE_INVENTORY.md`
+### Stage 1 — Inventory — COMPLETE FOR CURRENT REPOSITORY SURFACE / ONGOING FOR EXTERNAL OWNERSHIP GAPS
+- current restricted public repository paths identified
+- current Vercel project map recorded
+- exact current-main Git blob IDs and byte counts recorded in `32_SECURITY_PRESERVATION_SOURCE_HASHES.md`
+- historical/external source ownership remains subject to evidence-based discovery
 
-### Stage 2 — Private Preservation — BLOCKED ON OWNER GATE
-- obtain explicit approval to establish/migrate to the private canonical destination
+### Stage 2 — Private Preservation — APPROVED / BLOCKED ON DESTINATION CREATION
+- create the approved private canonical destination through an authorized GitHub/admin path
 - verify destination is private before copying restricted content
 - copy restricted source from existing evidence rather than memory
-- verify preservation using the Preservation Manifest
+- verify preservation using the Preservation Manifest and source-hash record
 - create recovery checkpoint
+
+The connected GitHub control surface currently exposes only `ssalem9580/master-hub` and does not provide a repository-creation action, so destination creation itself cannot be completed through this control path.
 
 ### Stage 3 — Public Surface Containment — NOT AUTHORIZED
 - remove restricted content from current public MasterHub routes/assets
@@ -100,25 +101,20 @@ Current status: private canonical destination is NOT YET CREATED OR APPROVED for
 - retain only documented canonical deployments
 
 ## Owner-Approval Gates
-Explicit approval is required before:
-- creating/migrating to a private canonical repository/store if it changes source ownership
-- changing repository visibility
-- rewriting public Git history
-- deleting/retiring/disconnecting Vercel projects
-- deploying restricted material behind any new access-control system
+Current gate state:
+- establish/migrate to a private canonical repository/store: APPROVED
+- change public repository visibility: NOT AUTHORIZED
+- rewrite public Git history: NOT AUTHORIZED
+- delete/retire/disconnect Vercel projects: NOT AUTHORIZED
+- deploy restricted material behind a new access-control system: NOT AUTHORIZED
+- remove restricted public routes/source: NOT AUTHORIZED until private preservation is verified and a separate containment approval is given
 
-## Immediate Safe Actions — ACTIVE
-Already authorized and now in progress:
-- classify material as RESTRICTED
-- stop treating prior public availability as approval
-- block intentional new publication of restricted field-service material
-- maintain/refine the exposure inventory
-- maintain the preservation manifest
-- map source/deployment ownership
-- prepare the private-preservation migration sequence
+## Preparation Finalization
+`SECURITY-CONTAINMENT-PREP-1.0` is owner accepted/finalized as a preparation/control release. Finalizing preparation does not finalize physical containment and does not close DEF-009.
 
 ## Preservation Control
-Canonical preparation checklist: `PROJECT CONTROL SYSTEM/00_RESTRICTED_FIELD_SERVICE_PRESERVATION_MANIFEST.md`.
+Canonical checklist: `PROJECT CONTROL SYSTEM/00_RESTRICTED_FIELD_SERVICE_PRESERVATION_MANIFEST.md`.
+Exact repository source metadata: `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md`.
 
-## Next Decision
-Approve establishment/migration of a separate private canonical destination for restricted field-service source. That approval permits preservation work only; destructive public cleanup remains gated until preservation is verified.
+## Next Action
+Create the approved private canonical destination through an authorized admin path, verify privacy, then preserve and verify the restricted source/data. Only after that verification may public-surface containment be presented for approval.
