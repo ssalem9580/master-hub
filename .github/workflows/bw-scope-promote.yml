@@ -1,0 +1,41 @@
+name: Promote verified BW scope preview
+
+on:
+  push:
+    branches:
+      - release/bw-lead-scope-promote
+
+permissions:
+  contents: write
+
+jobs:
+  promote:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v4
+        with:
+          ref: release/bw-lead-scope-promote
+      - name: Verify Vercel credential exists
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN is not configured in GitHub Actions."
+            exit 2
+          fi
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+      - name: Promote already-verified preview to production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel promote master-8pktnigh7-ssalem0319-3166.vercel.app --yes --scope ssalem0319-3166 --token="$VERCEL_TOKEN"
+      - name: Remove temporary promotion workflow
+        run: |
+          rm .github/workflows/bw-scope-promote.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Remove temporary BW scope promotion workflow"
+          git push origin HEAD:release/bw-lead-scope-promote
