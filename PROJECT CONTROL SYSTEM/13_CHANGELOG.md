@@ -133,4 +133,14 @@ RELATED QUEUE: QUEUE-004
 RELATED ISSUE/RISK/DEBT: ISSUE-002 / RISK-001 / TD-009
 FILES AFFECTED: `PROJECT CONTROL SYSTEM/33_VERCEL_BUILD_FANOUT_AUDIT.md`, release and recovery-checkpoint records, this changelog
 REASON: Preserve the verified cross-project deployment evidence and accepted cleanup boundary before any Vercel configuration changes.
-RESULT: `VERCEL-FANOUT-AUDIT-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. The audit confirms `master-hub` is canonical while the same repository commits also trigger `field-diagnostic-hub` and `recovery-value-calculator`. CI `36964223310` passed install/lint/test/build and deployment `dpl_EHgESvVSgSZszHtgVt9fQy8Wa9PR` reached READY. No Git integration was disconnected and no Vercel project was retired or deleted; actual fan-out cleanup remains separately approval-gated.
+RESULT: `VERCEL-FANOUT-AUDIT-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED. The audit confirms `master-hub` is canonical while the same repository commits also trigger `field-diagnostic-hub` and `recovery-value-calculator`. CI `36964223310` passed install/lint/test/build and the accepted release deployment reached READY. No Git integration was disconnected and no Vercel project was retired or deleted; actual fan-out cleanup remains separately approval-gated.
+
+## CHANGE-019 — Standalone source ownership validated
+DATE: 2026-10-02 UTC / 2026-10-02 CDT
+VERSION: STANDALONE-SOURCE-OWNERSHIP-RC1
+AUTHORIZED BY: Project Owner command `next`
+RELATED QUEUE: QUEUE-004 / QUEUE-005 / QUEUE-007
+RELATED ISSUE/RISK/DEBT: ISSUE-008 / ISSUE-011 / ISSUE-012 / RISK-012 / RISK-013 / TD-011 / TD-012
+FILES AFFECTED: `PROJECT CONTROL SYSTEM/34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`, Current State, Operations Queue, this changelog
+REASON: Determine exact source/project ownership for Recovery Value Calculator and Field Diagnostic Hub before any reversible Vercel Git-integration cleanup or Recovery Value production repair.
+RESULT: Recovery Value source commit `751a73b` and its matching Vercel project were validated using READY recovered-source deployments. The recovered source is not present on current `main`, so canonicalization and production restoration remain open. Historical Field Diagnostic standalone source commit `3c8ea7c` and matching Vercel project were also validated, but the active canonical Field Diagnostic source is now the evolved integrated Master Hub `main` route/static asset. No Git integration was disconnected, no project was retired, no restricted source was duplicated back into public `main`, and no production promotion was performed. Status: READY FOR OWNER REVIEW / NOT FINALIZED.
