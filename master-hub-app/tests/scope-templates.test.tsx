@@ -15,8 +15,11 @@ describe("Scope Templates imported hierarchy", () => {
     const iframe = screen.getByTitle("Master Hub Scope Templates") as HTMLIFrameElement;
     const win = iframe.contentWindow!;
     const doc = iframe.contentDocument!;
+    if (!doc.documentElement) doc.appendChild(doc.createElement("html"));
+    if (!doc.body) doc.documentElement.appendChild(doc.createElement("body"));
+    const body = doc.body!;
 
-    doc.body.innerHTML = `
+    body.innerHTML = `
       <button>Scope Templates</button>
       <div id="scopeView"><div class="panel"><div class="hint"></div></div></div>
       <select id="scopeCustomer"></select>
