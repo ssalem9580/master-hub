@@ -42,6 +42,11 @@ export default function ScopeTemplatesPage() {
         function subDeviceNames(device){var h=importedHierarchy();return device&&h[device]?sorted(Object.keys(h[device])):[]}
         function scopeNames(device,subdevice){var h=importedHierarchy();return device&&subdevice&&h[device]&&h[device][subdevice]?sorted(h[device][subdevice]):[]}
         function keepValue(select,value){if(value&&Array.from(select.options).some(function(o){return o.value===value}))select.value=value}
+        function stableRecordId(r){
+          var raw=text(r.record_uid);
+          if(raw)return raw.replace(/^lead_/i,'BW-').toUpperCase();
+          return 'BW-'+String((Number(r._sourceIndex)||0)+1).padStart(4,'0');
+        }
 
         var baseFieldChanged=scopeFieldChanged;
         renderScopeForm=function(){
@@ -118,16 +123,40 @@ export default function ScopeTemplatesPage() {
           document.getElementById('manualTemplateList').innerHTML=list.length?list.map(function(t){return '<div class="lead-row"><div><b>'+escapeHtml(t.subcomponent||'Scope')+'</b><small>'+escapeHtml(t.customer)+' → '+escapeHtml(t.equipment_type)+' → '+escapeHtml(t.subcomponent)+'</small><small>'+escapeHtml(t.scope_phrase)+'</small>'+(t.comments?'<small>Comments: '+escapeHtml(t.comments)+'</small>':'')+'</div><button class="btn small primary" onclick="addTemplateToManualById(\\''+t.id+'\\')">Use</button></div>'}).join(''):'<div class="action">No scope templates match this Device / SubDevice.</div>';
         };
 
+        function renderScopeSourceRecords(){
+          var view=document.getElementById('scopeView');if(!view)return;
+          var panel=document.getElementById('scopeSourceRecords');
+          if(!panel){
+            panel=document.createElement('div');panel.id='scopeSourceRecords';panel.className='panel';
+            panel.innerHTML='<h2>Scope Records</h2><div class="table-note">Use the ID to reference the exact billed-work record if a copied scope later needs payout follow-up. Only the approved columns are shown here.</div><div class="tablewrap"><table style="min-width:900px"><thead><tr><th>ID</th><th>Attachments</th><th>Payout Amount</th><th>Scope</th><th>Comments</th><th>Customer</th><th>Labor $</th><th>Parts $</th></tr></thead><tbody id="scopeSourceBody"></tbody></table></div>';
+            view.appendChild(panel);
+          }
+          var rows=(state.reconciled||[]).filter(function(r){return text(r.scope||r.description)});
+          var body=document.getElementById('scopeSourceBody');if(!body)return;
+          body.innerHTML=rows.length?rows.map(function(r){
+            return '<tr><td><code style="white-space:nowrap">'+escapeHtml(stableRecordId(r))+'</code></td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'attachments\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+escapeHtml(r.attachments)+'</td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'payout_amount\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+tableMoney(r.payout_amount!=null?r.payout_amount:r.amount_paid)+'</td>'+
+              '<td>'+templateBadge(r)+'<div class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'scope\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+escapeHtml(r.scope||r.description)+'</div></td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'comments\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+escapeHtml(r.comments||r.notes)+'</td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'customer\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+escapeHtml(r.customer||r.client)+'</td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'labor_amount\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+tableMoney(r.labor_amount)+'</td>'+
+              '<td class="editcell" contenteditable="true" onblur="updateRecordField('+r._sourceIndex+',\\'parts_amount\\',this.textContent);setTimeout(renderScopeSourceRecords,0)">'+tableMoney(r.parts_amount)+'</td></tr>';
+          }).join(''):'<tr><td colspan="8">No scope records are available yet.</td></tr>';
+        }
+
+        var baseRenderScopeLibrary=renderScopeLibrary;
+        renderScopeLibrary=function(){baseRenderScopeLibrary();renderScopeSourceRecords()};
         var baseLoadCloud=loadCloud;
-        loadCloud=async function(){await baseLoadCloud();renderScopeForm();renderScopeFilters();renderManualReferences()};
+        loadCloud=async function(){await baseLoadCloud();renderScopeForm();renderScopeFilters();renderManualReferences();renderScopeSourceRecords()};
         var hint=document.querySelector('#scopeView .panel .hint');
         if(hint)hint.innerHTML='Customer → Device → SubDevice → Scope. Device, SubDevice, and Scope choices come from the exact combinations already imported or saved. A scope observed under one SubDevice is not offered under another.';
-        renderScopeForm();renderScopeFilters();renderManualReferences();renderScopeLibrary();
+        renderScopeForm();renderScopeFilters();renderManualReferences();renderScopeLibrary();renderScopeSourceRecords();
       })();`;
       doc.body.appendChild(script);
       const controls=Array.from(doc.querySelectorAll<HTMLElement>("button,[role='tab'],a"));
       const target=controls.find(el=>el.textContent?.trim()==="Scope Templates");
-      if(target){target.click();setStatus("Scope Templates · imported Device → SubDevice → Scope mapping active")}else setStatus("BW Dashboard loaded — choose Scope Templates");
+      if(target){target.click();setStatus("Scope Templates · simplified Scope Records active")}else setStatus("BW Dashboard loaded — choose Scope Templates");
     }catch{setStatus("BW Dashboard loaded")}
   };
 
