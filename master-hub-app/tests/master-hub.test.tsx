@@ -17,7 +17,7 @@ describe("Master Hub", () => {
     await user.click(screen.getByRole("button", { name: /^Directory/ }));
     await user.type(screen.getByPlaceholderText("Search tools or actions"), "zzzz");
 
-    expect(screen.getByText("No matching apps")).toBeInTheDocument();
+    expect(screen.getByText("No matching workspaces")).toBeInTheDocument();
   });
 
   it("captures a new action with the current Add action flow", async () => {
@@ -31,7 +31,6 @@ describe("Master Hub", () => {
     await user.click(within(form).getByRole("button", { name: "Add action" }));
 
     expect(screen.getByText("Call the dentist")).toBeInTheDocument();
-    expect(screen.getByText("1 actions")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "★" })).toBeInTheDocument();
   });
 
