@@ -144,3 +144,14 @@ RELATED ISSUE/RISK/DEBT: ISSUE-008 / ISSUE-011 / ISSUE-012 / RISK-012 / RISK-013
 FILES AFFECTED: `PROJECT CONTROL SYSTEM/34_STANDALONE_SOURCE_OWNERSHIP_VALIDATION.md`, Current State, Operations Queue, this changelog
 REASON: Determine exact source/project ownership for Recovery Value Calculator and Field Diagnostic Hub before any reversible Vercel Git-integration cleanup or Recovery Value production repair.
 RESULT: Recovery Value source commit `751a73b` and its matching Vercel project were validated using READY recovered-source deployments. The recovered source is not present on current `main`, so canonicalization and production restoration remain open. Historical Field Diagnostic standalone source commit `3c8ea7c` and matching Vercel project were also validated, but the active canonical Field Diagnostic source is now the evolved integrated Master Hub `main` route/static asset. No Git integration was disconnected, no project was retired, no restricted source was duplicated back into public `main`, and no production promotion was performed. Status: READY FOR OWNER REVIEW / NOT FINALIZED.
+
+## CHANGE-020 — Restricted private preservation store established
+DATE: 2026-10-02
+VERSION: RESTRICTED-PRESERVATION-RC1
+AUTHORIZED BY: Existing DEC-016 / DEC-017 containment authority and approved private-destination establishment
+RELATED QUEUE: QUEUE-001
+RELATED REQUIREMENT: REQ-015
+RELATED DEFECT: DEF-009
+FILES AFFECTED: `06_CURRENT_STATE.md`, `10_TEST_REGISTER.md`, `11_DEFECT_REGISTER.md`, `21_REQUIREMENTS_TRACEABILITY_MATRIX.md`, `22_PROJECT_OPERATIONS_QUEUE.md`, `35_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md`, this changelog
+REASON: Advance the Critical restricted-content remediation without changing finalized product behavior or destructively removing public source before recovery exists.
+RESULT: An owner-only, `shared=false` private Google Drive preservation store was created and verified. Private checkpoint/evidence metadata was stored there. The restricted repository-backed source lineage still matches the exact blob/byte preservation manifest after `SCOPE-ISOLATION-1.0`. Supabase Billed Work state was mapped non-destructively with RLS/policy verification and non-content recovery fingerprints. Exact restricted source-byte transfer and Supabase operational payload backup/recovery remain incomplete; DEF-009 stays OPEN / CRITICAL and no public source/routes/deployments were removed, rewritten, disconnected or retired. Status: READY FOR REVIEW / NOT FINALIZED.
