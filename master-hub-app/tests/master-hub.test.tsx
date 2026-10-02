@@ -14,8 +14,8 @@ describe("Master Hub", () => {
     const user = userEvent.setup();
     render(<MasterHub />);
 
-    await user.click(screen.getByRole("button", { name: "Directory" }));
-    await user.type(screen.getByPlaceholderText("Search apps or actions"), "zzzz");
+    await user.click(screen.getByRole("button", { name: /^Directory/ }));
+    await user.type(screen.getByPlaceholderText("Search tools or actions"), "zzzz");
 
     expect(screen.getByText("No matching apps")).toBeInTheDocument();
   });
@@ -24,7 +24,7 @@ describe("Master Hub", () => {
     const user = userEvent.setup();
     render(<MasterHub />);
 
-    await user.click(screen.getByRole("button", { name: "Add action" }));
+    await user.click(screen.getAllByRole("button", { name: "Add action" })[0]);
     await user.type(screen.getByLabelText("Action"), "Call the dentist");
     await user.click(screen.getByLabelText("Important"));
     const form = screen.getByLabelText("Action").closest("form")!;
@@ -39,7 +39,7 @@ describe("Master Hub", () => {
     const user = userEvent.setup();
     render(<MasterHub />);
 
-    await user.click(screen.getByRole("button", { name: "Add action" }));
+    await user.click(screen.getAllByRole("button", { name: "Add action" })[0]);
     await user.type(screen.getByLabelText("Action"), "Review estimate");
     const form = screen.getByLabelText("Action").closest("form")!;
     await user.click(within(form).getByRole("button", { name: "Add action" }));
