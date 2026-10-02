@@ -12,7 +12,7 @@ STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SE
 - Restricted-content classification: `SECURITY-BOUNDARY-1.0` — FINALIZED CLASSIFICATION / PHYSICAL CONTAINMENT OPEN
 - Security containment preparation: `SECURITY-CONTAINMENT-PREP-1.0` — FINALIZED / OWNER ACCEPTED
 - Scope isolation release: `SCOPE-ISOLATION-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED
-- BW Lead Scope release: `BW-LEAD-SCOPE-1.0` — OWNER FINALIZED / SOURCE+PREVIEW VERIFIED / PRODUCTION PROMOTION BLOCKED
+- BW Lead Scope release: `BW-LEAD-SCOPE-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 - Vercel fan-out audit: `VERCEL-FANOUT-AUDIT-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED
 - Standalone source ownership: `STANDALONE-SOURCE-OWNERSHIP-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED
 
@@ -21,7 +21,7 @@ CURRENT_PRODUCTION_COMMIT: e6470da8e7407bc2978573eb9de6ba907767cda3
 CURRENT_DEPLOYMENT: dpl_6fML2omJ4CYitTrXXVE7tp2ZTHwG
 BUILD_STATUS: READY — accepted Vercel fan-out audit release is live; standalone-source finalization and later preservation-control records may be ahead of production because Vercel has rejected newer deployments at the account daily deployment limit
 SECURITY_STATUS: CRITICAL — private preservation store now exists and is verified owner-only/not shared; restricted repository source lineage and Supabase recovery fingerprints are verified; exact restricted source-byte copy and operational-data backup remain incomplete, so destructive containment remains blocked
-BW_LEAD_SCOPE_STATUS: OWNER FINALIZED / MAIN+CI+READY PREVIEW VERIFIED / CANONICAL PRODUCTION PROMOTION BLOCKED BY VERCEL BUILD RATE LIMIT
+BW_LEAD_SCOPE_STATUS: VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 SCOPE_ISOLATION_STATUS: VERIFIED / FINALIZED — exact Device → SubDevice → Scope selection, manual filtering, compatible-lead filtering and cross-group attachment blocking are present in verified production
 REPAIR_PACKAGE_STATUS: VERIFIED — DEF-010 automated Part # → Name → Cost → Add → Total → Save → persistence regression is complete; owner finalization remains separate
 PROJECT_CONTROL_STATUS: SOURCE-BOUND / CI VERIFIED / OWNER ACCEPTED / PRODUCTION VERIFIED
@@ -70,7 +70,17 @@ WAVE1_STATUS: FINALIZED
 - PR CI `36981871706`: PASS.
 - Post-merge main CI `36981972545`: PASS.
 - READY preview `dpl_F1GwuqFCS28xQTVkryZ8CmDiAZhP`: live verification PASS.
-- Canonical production activation: BLOCKED by Vercel account build-rate limit; do not call this release production-verified until the canonical alias serves the loader.
+- Canonical production activation: VERIFIED. Production deployment `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` is READY at `b6d075ed9656d52bec59059b3cf8e076933d8f7f`; canonical `/api/scope-isolation`, `/bw-dashboard.html`, and `/scope-templates` are HTTP 200; runtime error scan is clean.
+
+## BW Lead Scope 1.0 production verification
+- Canonical production deployment: `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` — READY.
+- Canonical production commit: `b6d075ed9656d52bec59059b3cf8e076933d8f7f`.
+- Final main CI: `36983083671` — install/lint/tests/build PASS.
+- `/api/scope-isolation`: HTTP 200, serves centralized isolation engine.
+- `/bw-dashboard.html`: HTTP 200, contains `<script src="/api/scope-isolation"></script>`.
+- `/scope-templates`: HTTP 200.
+- One-hour runtime error scan for these routes: CLEAN.
+- Status: VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED.
 
 ## Repair Packages / DEF-010
 - DEF-010 is `VERIFIED`.
@@ -156,7 +166,7 @@ This map is evidence for preparation only and does not authorize project retirem
 - `PROJECT-OPS-1.0`
 - `REMEDIATION-WAVE1-1.0`
 - `SCOPE-ISOLATION-1.0`
-- `BW-LEAD-SCOPE-1.0` — OWNER FINALIZED / SOURCE+PREVIEW VERIFIED / PRODUCTION ACTIVATION PENDING
+- `BW-LEAD-SCOPE-1.0` — VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED
 - `SECURITY-CONTAINMENT-PREP-1.0`
 - `VERCEL-FANOUT-AUDIT-1.0`
 - `STANDALONE-SOURCE-OWNERSHIP-1.0`

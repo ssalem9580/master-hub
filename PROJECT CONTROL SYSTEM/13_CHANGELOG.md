@@ -175,3 +175,11 @@ RELATED DEFECT: DEF-011
 FILES AFFECTED: `master-hub-app/public/bw-dashboard.html`, `master-hub-app/src/app/api/scope-isolation/route.ts`, `master-hub-app/tests/bw-dashboard-scope-isolation.test.ts`, release/control records.
 REASON: Finalize Scope inside the BW Lead tool without weakening or duplicating SCOPE-ISOLATION-1.0.
 RESULT: Direct BW dashboard now consumes the same centralized finalized isolation engine as `/scope-templates`. PR #15 and post-merge CI passed install/lint/tests/build; READY preview live verification passed. Owner accepted/finalized the behavior. Canonical production promotion remains explicitly BLOCKED by Vercel build-rate limit; no false production-verification claim is made.
+
+## CHANGE-023 — BW-LEAD-SCOPE-1.0 production verified
+DATE: 2026-10-02
+VERSION: BW-LEAD-SCOPE-1.0
+AUTHORIZED BY: Project Owner final approval / DEC-018
+RELATED REQUIREMENT: REQ-018 / REQ-019
+RELATED DEFECT: DEF-011
+RESULT: Canonical Master Hub deployment `dpl_7x3L3kGvNn2fntDrNnzz2sFKotps` reached READY at `b6d075ed9656d52bec59059b3cf8e076933d8f7f`. Canonical `/api/scope-isolation`, `/bw-dashboard.html`, and `/scope-templates` returned HTTP 200; the direct dashboard contains the centralized scope-isolation loader and the API serves the finalized engine. Post-release runtime error scan was clean. Final main CI `36983083671` passed install/lint/tests/build. `BW-LEAD-SCOPE-1.0` is VERIFIED / FINALIZED / OWNER ACCEPTED / PRODUCTION VERIFIED.
