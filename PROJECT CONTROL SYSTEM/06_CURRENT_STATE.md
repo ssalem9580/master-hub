@@ -1,7 +1,7 @@
 # 06 — Current State
 
 DATE: 2026-10-02
-STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SECURITY CONTAINMENT PREPARATION FINALIZED / PRIVATE DESTINATION APPROVED
+STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SECURITY CONTAINMENT PREPARATION FINALIZED / PRIVATE PRESERVATION STORE VERIFIED / SOURCE COPY INCOMPLETE
 
 ## Authority
 - Canonical repository: `ssalem9580/master-hub`
@@ -17,7 +17,7 @@ STATUS: REMEDIATION WAVE 1 FINALIZED / SCOPE ISOLATION VERIFIED & FINALIZED / SE
 CURRENT_PRODUCTION_COMMIT: 1b5d4e78f164fc4c68f9322aa6348d90cca2c7c5
 CURRENT_DEPLOYMENT: dpl_9k5EKov9oJM7jKwvEFgmeNUjPtjf
 BUILD_STATUS: READY — verified production contains Wave-1 source-binding and strict scope isolation; later control/preparation commits may be ahead of production
-SECURITY_STATUS: CRITICAL — preparation finalized and private canonical destination establishment approved; destination is not yet created/verified and destructive cleanup remains blocked until verified private preservation
+SECURITY_STATUS: CRITICAL — private preservation store now exists and is verified owner-only/not shared; repository source lineage and Supabase recovery fingerprints are verified; exact restricted source-byte copy and operational-data backup remain incomplete, so destructive containment remains blocked
 SCOPE_ISOLATION_STATUS: VERIFIED / FINALIZED — exact Device → SubDevice → Scope selection, manual filtering, compatible-lead filtering and cross-group attachment blocking are present in verified production
 REPAIR_PACKAGE_STATUS: VERIFIED — DEF-010 automated Part # → Name → Cost → Add → Total → Save → persistence regression is complete; owner finalization remains separate
 PROJECT_CONTROL_STATUS: SOURCE-BOUND / CI VERIFIED / OWNER ACCEPTED / PRODUCTION VERIFIED
@@ -62,11 +62,14 @@ WAVE1_STATUS: FINALIZED
 - Field-service operational material remains RESTRICTED by default.
 - Existing restricted public exposure remains `OPEN / CRITICAL` under DEF-009.
 - Controlled containment preparation is FINALIZED / OWNER ACCEPTED as `SECURITY-CONTAINMENT-PREP-1.0`.
-- Project Owner has approved establishment/migration of a separate private canonical destination for restricted field-service source.
-- The connected GitHub control surface currently exposes only the public `ssalem9580/master-hub` repository and does not provide repository creation; therefore the approved private destination is NOT YET CREATED or verified private.
-- Exact current-main repository paths, blob IDs and byte counts for the restricted repository-backed preservation set are recorded in `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md`.
-- Verified private preservation copy is NOT COMPLETE.
-- No public route/source removal, Git-history rewrite, repository visibility change, project disconnection, deployment retirement, or deletion is authorized by preparation finalization.
+- Project Owner approved establishment/migration of a separate private canonical destination/store for restricted field-service source.
+- A Google Drive preservation store named `Master Hub Restricted Field Service — Private Preservation` now exists and was verified `shared=false` with owner-only permission metadata before preservation use.
+- Private checkpoint/evidence metadata has been stored there and independently verified not shared.
+- Exact repository-backed restricted source blob IDs and byte counts from `PROJECT CONTROL SYSTEM/32_SECURITY_PRESERVATION_SOURCE_HASHES.md` still match current `main` at `88419705fa4aa2a29161509683f2cf6c960ef214`, including finalized Scope Isolation source.
+- Supabase Billed Work persistence dependency was verified as ACTIVE_HEALTHY; `billed_work_state` and `billed_work_scope_state` both have RLS enabled with owner-scoped authenticated CRUD policies. Non-content payload sizes/fingerprints were recorded without retrieving ledger/customer payloads.
+- Verified private preservation COPY is NOT COMPLETE: exact restricted source bytes and Supabase operational payload backup have not yet been transferred/recovery-tested in the private store.
+- `PROJECT CONTROL SYSTEM/34_RESTRICTED_PRIVATE_PRESERVATION_CHECKPOINT.md` records the current evidence and gate state.
+- No public route/source removal, Git-history rewrite, repository visibility change, project disconnection, deployment retirement, or deletion is authorized yet.
 
 ## Current Vercel ownership map relevant to containment
 - `master-hub` — `prj_TaNYVBn6sk81Q82yIJYLphj9YyZV`
@@ -92,6 +95,7 @@ This map is evidence for preparation only and does not authorize project retirem
 - Finances Command Center: browser `localStorage`.
 - Repair Package drafts / local overrides / saved packages: browser `localStorage`.
 - Billed Work / Scope Templates include existing local state plus existing Supabase-backed tracker behavior exposed by `bw-dashboard.html`.
+- Billed Work Supabase persistence currently uses owner-scoped JSONB rows in `billed_work_state` and `billed_work_scope_state`; RLS is enabled on both.
 
 ## Finalized releases preserved
 - `CONTROL-BASELINE-1.0`
@@ -103,11 +107,12 @@ This map is evidence for preparation only and does not authorize project retirem
 - `SECURITY-CONTAINMENT-PREP-1.0`
 
 ## Current controlled next action
-1. Create the approved private canonical restricted field-service destination through an authorized GitHub/admin path.
-2. Verify that destination is private before copying restricted content.
-3. Preserve restricted source/data dependencies using the Preservation Manifest and exact source-hash record, then verify completeness/recovery.
-4. Only after verified preservation, request approval for public-surface/source containment.
-5. Treat Git-history rewrite and Vercel retirement/disconnection as separate explicit approval gates.
+1. Transfer the exact current restricted source bytes into the verified private preservation store through a supported secure transfer path.
+2. Verify file completeness against the recorded Git blob IDs/byte counts or equivalent cryptographic evidence.
+3. Preserve/export the Supabase Billed Work operational payload through an approved recovery-safe method and verify recovery completeness without overwriting live data.
+4. Resolve/preserve standalone NTE/quote and related restricted tool source ownership.
+5. Only after verified preservation is complete, request approval for public-surface/source containment.
+6. Treat Git-history rewrite and Vercel retirement/disconnection as separate explicit approval gates.
 
 KNOWN DEFECTS: See `11_DEFECT_REGISTER.md`.
 KNOWN RISKS: See `12_RISK_REGISTER.md`.
